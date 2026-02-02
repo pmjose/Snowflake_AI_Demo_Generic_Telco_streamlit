@@ -34,5 +34,8 @@ venv/
 # Logs
 *.log
 
+# Testing credentials - NEVER commit
+testing_org.txt
+
 # Jupyter
 .ipynb_checkpoints/

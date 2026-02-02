@@ -112,32 +112,40 @@ SNOWFLAKE_CSS = """
         transition: left 0.5s ease;
     }
     
-    section[data-testid="stSidebar"] .stRadio > div > label:hover::before {
+    section[data-testid="stSidebar"] .stRadio > div > label:hover:not(:has(input:checked))::before {
         left: 100%;
     }
     
-    section[data-testid="stSidebar"] .stRadio > div > label:hover {
-        background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%) !important;
-        border-color: #29B5E8 !important;
-        color: #29B5E8 !important;
-        transform: translateX(6px) scale(1.02) !important;
-        box-shadow: 0 4px 15px rgba(41, 181, 232, 0.2) !important;
+    /* Hover state - only for NON-selected items */
+    section[data-testid="stSidebar"] .stRadio > div > label:hover:not(:has(input:checked)) {
+        background: #F8FAFC !important;
+        border-color: #CBD5E1 !important;
+        color: #1B2A4E !important;
+        transform: translateX(4px) !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
     }
     
-    section[data-testid="stSidebar"] .stRadio > div > label[data-checked="true"],
+    /* Default: ALL checked radio items look like normal (non-selected) items */
     section[data-testid="stSidebar"] .stRadio > div > label:has(input:checked) {
+        background: white !important;
+        border-color: #E2E8F0 !important;
+        color: #1B2A4E !important;
+        animation: none !important;
+        transform: none !important;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04) !important;
+    }
+    
+    section[data-testid="stSidebar"] .stRadio > div > label:has(input:checked)::before {
+        display: none !important;
+    }
+    
+    /* The ACTUAL selected page gets highlighted via dynamic CSS injected below */
+    .current-page-highlight {
         background: linear-gradient(135deg, #29B5E8 0%, #1A8BC4 100%) !important;
         border-color: #29B5E8 !important;
         color: white !important;
-        animation: menu-item-glow 2s ease-in-out infinite !important;
+        box-shadow: 0 2px 8px rgba(41, 181, 232, 0.3) !important;
         transform: translateX(4px) !important;
-    }
-    
-    section[data-testid="stSidebar"] .stRadio > div > label[data-checked="true"]::before,
-    section[data-testid="stSidebar"] .stRadio > div > label:has(input:checked)::before {
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        animation: menu-shimmer 2s linear infinite;
-        left: 0;
     }
     
     .main-header {
@@ -24898,6 +24906,20 @@ def main():
         if 'selected_page' not in st.session_state:
             st.session_state.selected_page = "Executive_Summary"
         
+        # Callback functions to handle section switching
+        def on_exec_change():
+            st.session_state.selected_page = st.session_state.nav_exec
+            # Clear other section selections by storing which section is active
+            st.session_state.active_section = 'exec'
+        
+        def on_vp_change():
+            st.session_state.selected_page = st.session_state.nav_vp
+            st.session_state.active_section = 'vp'
+        
+        def on_tools_change():
+            st.session_state.selected_page = st.session_state.nav_tools
+            st.session_state.active_section = 'tools'
+        
         # Determine which section the current selection is in
         current_page = st.session_state.selected_page
         current_in_exec = current_page in c_suite
@@ -24912,17 +24934,16 @@ def main():
         ''', unsafe_allow_html=True)
         
         if filtered_csuite:
-            exec_index = filtered_csuite.index(current_page) if current_in_exec and current_page in filtered_csuite else None
+            exec_index = filtered_csuite.index(current_page) if current_in_exec and current_page in filtered_csuite else 0
             selected_exec = st.radio(
                 "Executive",
                 filtered_csuite,
                 format_func=lambda x: page_labels.get(x, x),
                 label_visibility="collapsed",
                 key="nav_exec",
-                index=exec_index
+                index=exec_index if current_in_exec else 0,
+                on_change=on_exec_change
             )
-            if selected_exec and current_in_exec:
-                st.session_state.selected_page = selected_exec
         
         # Section 2: VP Operations
         st.markdown('''
@@ -24932,17 +24953,16 @@ def main():
         ''', unsafe_allow_html=True)
         
         if filtered_vp:
-            vp_index = filtered_vp.index(current_page) if current_in_vp and current_page in filtered_vp else None
+            vp_index = filtered_vp.index(current_page) if current_in_vp and current_page in filtered_vp else 0
             selected_vp = st.radio(
                 "VP Level",
                 filtered_vp,
                 format_func=lambda x: page_labels.get(x, x),
                 label_visibility="collapsed",
                 key="nav_vp",
-                index=vp_index
+                index=vp_index if current_in_vp else 0,
+                on_change=on_vp_change
             )
-            if selected_vp and current_in_vp:
-                st.session_state.selected_page = selected_vp
         
         # Section 3: Tools & Analytics
         st.markdown('''
@@ -24952,28 +24972,51 @@ def main():
         ''', unsafe_allow_html=True)
         
         if filtered_tools:
-            tools_index = filtered_tools.index(current_page) if current_in_tools and current_page in filtered_tools else None
+            tools_index = filtered_tools.index(current_page) if current_in_tools and current_page in filtered_tools else 0
             selected_tools = st.radio(
                 "Tools",
                 filtered_tools,
                 format_func=lambda x: page_labels.get(x, x),
                 label_visibility="collapsed",
                 key="nav_tools",
-                index=tools_index
+                index=tools_index if current_in_tools else 0,
+                on_change=on_tools_change
             )
-            if selected_tools and current_in_tools:
-                st.session_state.selected_page = selected_tools
         
-        # Handle selection changes across sections
-        if 'nav_exec' in st.session_state and st.session_state.nav_exec and st.session_state.nav_exec in c_suite:
-            if not current_in_exec or st.session_state.nav_exec != current_page:
-                st.session_state.selected_page = st.session_state.nav_exec
-        if 'nav_vp' in st.session_state and st.session_state.nav_vp and st.session_state.nav_vp in vp_level:
-            if not current_in_vp or st.session_state.nav_vp != current_page:
-                st.session_state.selected_page = st.session_state.nav_vp
-        if 'nav_tools' in st.session_state and st.session_state.nav_tools and st.session_state.nav_tools in tools_section:
-            if not current_in_tools or st.session_state.nav_tools != current_page:
-                st.session_state.selected_page = st.session_state.nav_tools
+        # Inject JavaScript to highlight only the actual current page
+        current_page_label = page_labels.get(current_page, current_page)
+        components.html(f'''
+        <script>
+            function highlightCurrentPage() {{
+                // Reset all labels to default state
+                const allLabels = parent.document.querySelectorAll('section[data-testid="stSidebar"] .stRadio label');
+                allLabels.forEach(label => {{
+                    label.style.background = 'white';
+                    label.style.borderColor = '#E2E8F0';
+                    label.style.color = '#1B2A4E';
+                    label.style.boxShadow = '0 1px 2px rgba(0,0,0,0.04)';
+                    label.style.transform = 'none';
+                }});
+                
+                // Find and highlight the current page
+                allLabels.forEach(label => {{
+                    const labelText = label.innerText.trim();
+                    if (labelText === "{current_page_label}") {{
+                        label.style.background = 'linear-gradient(135deg, #29B5E8 0%, #1A8BC4 100%)';
+                        label.style.borderColor = '#29B5E8';
+                        label.style.color = 'white';
+                        label.style.boxShadow = '0 2px 8px rgba(41, 181, 232, 0.3)';
+                        label.style.transform = 'translateX(4px)';
+                    }}
+                }});
+            }}
+            
+            // Run after a short delay to ensure DOM is ready
+            setTimeout(highlightCurrentPage, 50);
+            setTimeout(highlightCurrentPage, 200);
+            setTimeout(highlightCurrentPage, 500);
+        </script>
+        ''', height=0)
         
         selected_page = st.session_state.selected_page
         

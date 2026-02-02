@@ -6,6 +6,39 @@ You are a testing agent responsible for validating SnowTelco's Snowflake Intelli
 
 ---
 
+## IMPORTANT: Testing Must Be Done in the Browser UI
+
+**All testing MUST be performed through the Snowflake Intelligence web interface (Snowsight).**
+
+- Navigate to [Snowsight](https://app.snowflake.com) and access **Snowflake Intelligence**
+- Do NOT test via API calls, CLI, or programmatic methods
+- The browser UI is required to:
+  - Evaluate chart/visualization generation
+  - Test the actual user experience
+  - Verify response formatting and presentation
+  - Capture suggested follow-up questions from the agent
+
+**Testing URL:** Access Snowflake Intelligence through Snowsight > AI & ML > Snowflake Intelligence
+
+---
+
+## MFA Bypass for Automated Testing
+
+If MFA is enabled on the test account, you may need to temporarily bypass it for automated testing:
+
+```sql
+-- Run this as ACCOUNTADMIN to bypass MFA for 60 minutes
+ALTER USER <username> SET MINS_TO_BYPASS_MFA = 60;
+```
+
+**Important Notes:**
+- This grants a 60-minute window where MFA is not required
+- Re-run the command if testing exceeds 60 minutes
+- Only use for automated testing accounts, not production users
+- The setting automatically expires after the specified time
+
+---
+
 ## Quick Reference
 
 | Resource | File | Purpose |
