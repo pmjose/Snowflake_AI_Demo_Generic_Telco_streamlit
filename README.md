@@ -11,6 +11,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Snowflake Intelligence](#snowflake-intelligence)
 - [Key Features](#key-features)
 - [About SnowTelco](#about-snowtelco)
 - [Demo Scripts](#demo-scripts)
@@ -39,6 +40,146 @@ With Snowflake Intelligence, executives can simply ask:
 > *"What's our churn rate this quarter, and which customer segments are most at risk?"*
 
 Within seconds, the AI agent queries millions of records, analyzes patterns, and delivers actionable insights.
+
+---
+
+## Snowflake Intelligence
+
+**Snowflake Intelligence** is the core technology powering this demo. It's Snowflake's enterprise AI platform that enables natural language conversations with your data.
+
+### What is Snowflake Intelligence?
+
+Snowflake Intelligence combines three powerful AI capabilities into a unified conversational interface:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        SNOWFLAKE INTELLIGENCE                               │
+│                    "Ask questions, get answers"                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   ┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐          │
+│   │ CORTEX ANALYST  │   │ CORTEX SEARCH   │   │ CORTEX AGENT    │          │
+│   │                 │   │                 │   │                 │          │
+│   │ Text-to-SQL     │   │ Document Search │   │ Orchestration   │          │
+│   │ Semantic Views  │   │ RAG Pipeline    │   │ Multi-Tool      │          │
+│   │ Structured Data │   │ Unstructured    │   │ Reasoning       │          │
+│   └─────────────────┘   └─────────────────┘   └─────────────────┘          │
+│           │                     │                     │                     │
+│           └─────────────────────┼─────────────────────┘                     │
+│                                 ▼                                           │
+│                    ┌─────────────────────────┐                              │
+│                    │   UNIFIED EXPERIENCE    │                              │
+│                    │   Natural Language UI   │                              │
+│                    └─────────────────────────┘                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Core Components
+
+| Component | Purpose | In This Demo |
+|-----------|---------|--------------|
+| **Cortex Analyst** | Converts natural language to SQL using semantic models | 38 semantic views covering all business domains |
+| **Cortex Search** | Retrieves relevant documents for context-aware answers | 6 search services with 66 policy documents |
+| **Cortex Agent** | Orchestrates tools, maintains conversation context | SnowTelco Executive Agent with multi-domain reasoning |
+
+### How It Works
+
+1. **User asks a question** → *"What's our churn rate by customer segment?"*
+
+2. **Agent determines intent** → Identifies this as a structured data query
+
+3. **Cortex Analyst generates SQL** → Uses MOBILE semantic view to write optimized query
+
+4. **Results returned** → Agent formats response with insights and recommendations
+
+5. **Follow-up questions** → Agent maintains context for conversational flow
+
+### Accessing Snowflake Intelligence
+
+After running the installation scripts, access the demo:
+
+1. **Navigate to Snowflake Intelligence**
+   - Log into Snowsight
+   - Go to **AI & ML** → **Snowflake Intelligence**
+   - Or direct URL: `https://app.snowflake.com/<account>/intelligence`
+
+2. **Open the Agent**
+   - Find **SnowTelco_Executive_Agent** in the list
+   - Click to open the conversational interface
+
+3. **Start Asking Questions**
+   ```
+   Example questions to try:
+   
+   📊 "Give me an executive summary of SnowTelco's performance"
+   💰 "What's our revenue breakdown by customer type?"
+   📉 "Which customers are at highest risk of churning?"
+   🌐 "How is our network performing across different cities?"
+   📋 "What does our retention policy say about discount limits?"
+   ```
+
+### Semantic Views - The Foundation
+
+Semantic views are the "secret sauce" that enables accurate text-to-SQL. They provide:
+
+| Feature | Benefit |
+|---------|---------|
+| **Business Context** | Column descriptions, synonyms, and relationships |
+| **Guardrails** | Prevents incorrect joins and aggregations |
+| **Optimization** | Pre-defined metrics and calculations |
+| **Consistency** | Same definitions across all users |
+
+Example semantic view structure:
+```yaml
+MOBILE_SEMANTIC_VIEW:
+  - SUBSCRIBER_KEY (Primary Key)
+  - CUSTOMER_TYPE: "Consumer, SMB, or Enterprise"
+  - CUSTOMER_SEGMENT: "Budget, Standard, Premium, VIP"
+  - MONTHLY_REVENUE: "Sum of usage charges"
+  - CHURN_RISK: "Propensity score 0-100"
+```
+
+### Document Search - Grounded Answers
+
+Cortex Search enables the agent to answer questions about policies, procedures, and reports:
+
+| Search Service | Documents | Use Case |
+|----------------|-----------|----------|
+| `POLICY_SEARCH` | Retention policies, SLA definitions | "What discount can we offer?" |
+| `NETWORK_SEARCH` | Coverage maps, capacity plans | "What's our 5G rollout status?" |
+| `COMPLIANCE_SEARCH` | Ofcom requirements, GDPR | "What are our regulatory obligations?" |
+| `HR_SEARCH` | Talent strategy, engagement | "What's our hiring plan?" |
+| `STRATEGY_SEARCH` | Digital roadmap, AI strategy | "What are our 2026 priorities?" |
+| `CORPORATE_SEARCH` | Annual reports, contracts | "What are our vendor terms?" |
+
+### Multi-Turn Conversations
+
+Snowflake Intelligence maintains context across questions:
+
+```
+User: "What's our churn rate?"
+Agent: "Your overall churn rate is 1.5% monthly..."
+
+User: "Break that down by segment"           ← Agent remembers "churn rate"
+Agent: "Here's churn by segment: VIP 0.8%, Premium 1.2%..."
+
+User: "Which customers in Premium are at risk?"  ← Agent remembers "Premium segment"
+Agent: "I found 245 Premium customers with churn risk >70%..."
+
+User: "What retention offers can we make?"   ← Agent searches policy documents
+Agent: "According to your retention policy, Premium customers 
+        can receive up to 20% discount for 6 months..."
+```
+
+### Why This Matters for Executives
+
+| Traditional Approach | With Snowflake Intelligence |
+|---------------------|----------------------------|
+| Request report from analyst | Ask question directly |
+| Wait hours/days | Get answer in seconds |
+| Static PDF report | Interactive conversation |
+| Single data source | Cross-domain analysis |
+| No document context | Policy-aware recommendations |
 
 ---
 
@@ -116,9 +257,55 @@ The dashboard will open at `http://localhost:8501`
 
 ## Demo Scripts
 
+> **Location:** `demo_scripts/` folder
+
 ### 28 Ready-to-Run Executive Conversations
 
 Each script provides a **10-minute guided demo** with talking points, sample questions, expected insights, and follow-up exploration.
+
+### Folder Contents
+
+```
+demo_scripts/
+├── 00_WOW_Executive_Showcase.md    # 🌟 Flagship demo - START HERE
+├── 01_CEO_Strategic.md             # C-Suite scripts (01-10)
+├── 02_CFO_Finance.md
+├── 03_CMO_Marketing.md
+├── 04_CTO_Technology.md
+├── 05_COO_Operations.md
+├── 06_CCO_Commercial.md
+├── 07_CXO_Customer_Experience.md
+├── 08_CNO_Network_QoE.md
+├── 09_CDO_Data_Science.md
+├── 10_CSO_Sustainability.md
+├── 11_VP_Customer_Service.md       # VP/Director scripts (11-27)
+├── 12_VP_Network_Operations.md
+├── 13_Head_of_Partners.md
+├── 14_VP_Billing_Revenue.md
+├── 15_VP_IT_Digital.md
+├── 16_VP_Field_Operations.md
+├── 17_VP_Strategy.md
+├── 18_VP_Communications.md
+├── 19_Regulatory_Compliance.md
+├── 20_VP_Security.md
+├── 21_VP_Enterprise_Sales.md
+├── 22_VP_Wholesale.md
+├── 23_VP_Retail.md
+├── 24_CHRO_People.md
+├── 25_VP_Legal.md
+├── 26_VP_Product.md
+├── 27_VP_Procurement.md
+├── ALL_TEST_QUESTIONS.md           # 📋 All 182 questions for testing
+├── TESTING_PROMPT.md               # 🧪 Testing procedures
+└── README.md                       # Folder documentation
+```
+
+### Testing Resources
+
+| File | Purpose |
+|------|---------|
+| `ALL_TEST_QUESTIONS.md` | **182 questions** extracted from all scripts - copy/paste for systematic testing |
+| `TESTING_PROMPT.md` | Testing procedures, evaluation criteria, report templates |
 
 #### Flagship Demo (Start Here)
 
