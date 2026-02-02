@@ -53,7 +53,7 @@ Within seconds, the AI agent queries millions of records, analyzes patterns, and
 | **66 Policy Documents** | AI-grounded responses for procedures and compliance |
 | **182 Test Questions** | Documented questions with expected insights |
 | **TM Forum ODA Aligned** | Industry-standard telecommunications data model |
-| **Multi-Year Data** | Historical data (2020-2026) for trend analysis |
+| **Multi-Year Data** | Historical data (2024-2026) for trend analysis |
 
 ---
 
@@ -407,8 +407,8 @@ Load additional years for year-over-year trend analysis:
 
 | Attribute | Value |
 |-----------|-------|
-| **Primary Date Range** | January 2025 – February 2026 |
-| **Historical Data** | Customer tenure from 2020 |
+| **Primary Date Range** | January 2026 – February 2026 (base data) |
+| **Historical Data** | 2024 and 2025 data available for YoY analysis |
 | **Currency** | GBP (£) |
 | **Geography** | UK regions and cities |
 | **Industry Standard** | TM Forum ODA aligned |
@@ -492,7 +492,10 @@ Snowflake_AI_Demo_Generic_Telco_streamlit/
 ├── demo_data/                      # CSV data files (~1.5 GB)
 │   ├── mobile_subscriber_dim.csv   # Subscriber dimension
 │   ├── legal_matter_fact.csv       # Legal matters & disputes
-│   └── ...                         # 100+ CSV files
+│   ├── ...                         # 100+ CSV files (base 2026 data)
+│   └── additional_data/            # Historical data for YoY analysis
+│       ├── 2024/csv/               # 24 CSV files (2024 historical)
+│       └── 2025/csv/               # 24 CSV files (2025 historical)
 │
 ├── demo_scripts/                   # Demo guides (28 scripts)
 │   ├── 00_WOW_Executive_Showcase.md # Flagship demo
