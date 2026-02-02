@@ -12,12 +12,12 @@ USE ROLE ACCOUNTADMIN;
 -- =====================================================
 
 CREATE USER IF NOT EXISTS PEDRO_JOSE
-    LOGIN_NAME = 'PEDRO_JOSE'
-    DISPLAY_NAME = 'Pedro Jose'
+    LOGIN_NAME = 'XXXXXX'
+    DISPLAY_NAME = 'xxxxxxx'
     FIRST_NAME = 'Pedro'
     LAST_NAME = 'Jose'
-    EMAIL = 'pmjose@gmail.com'
-    PASSWORD = 'snowflake2026'
+    EMAIL = 'xxxxxxxx'
+    PASSWORD = 'xxxxxxxxxx'
     DEFAULT_ROLE = SNOWTELCO_V2_DEMO
     DEFAULT_WAREHOUSE = SNOWTELCO_V2_DEMO_WH
     MUST_CHANGE_PASSWORD = FALSE
