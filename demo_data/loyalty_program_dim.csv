@@ -1,6 +1,0 @@
-program_key,tier_name,points_threshold,benefits,earn_rate,status
-1,Bronze,0,"Basic rewards, birthday bonus",1.0,Active
-2,Silver,5000,"10% discount on accessories, priority support",1.25,Active
-3,Gold,15000,"15% discount, free device protection, lounge access",1.5,Active
-4,Platinum,30000,"20% discount, concierge service, annual gift",1.75,Active
-5,Diamond,50000,"25% discount, dedicated manager, exclusive events",2.0,Active

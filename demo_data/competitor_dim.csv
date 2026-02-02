@@ -1,9 +1,0 @@
-competitor_id,competitor_name,competitor_type,headquarters,founded_year,website,is_snowtelco
-1,Vodafone UK,MNO,London,2005,www.vodafoneuk.co.uk,False
-2,EE,MNO,London,1988,www.ee.co.uk,False
-3,Three UK,MNO,London,1985,www.threeuk.co.uk,False
-4,O2 UK,MNO,London,2008,www.o2uk.co.uk,False
-5,SnowTelco,MNO,London,1993,www.snowtelco.co.uk,True
-6,Tesco Mobile,MVNO,London,1992,www.tescomobile.co.uk,False
-7,giffgaff,MVNO,London,2008,www.giffgaff.co.uk,False
-8,Sky Mobile,MVNO,London,2006,www.skymobile.co.uk,False
