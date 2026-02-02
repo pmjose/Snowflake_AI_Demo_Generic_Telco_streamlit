@@ -7,19 +7,14 @@ __pycache__/
 *.egg-info/
 .eggs/
 
-# Data folders to ignore
-demo_data/
-sql_scripts_gitlab/
-
 # Backup files
 *_backup_*.py
 
-# OS files
+# Folders to ignore
+sql_scripts_gitlab/
+
+# macOS
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
 
 # IDE
 .idea/
@@ -27,11 +22,7 @@ sql_scripts_gitlab/
 *.swp
 *.swo
 
-# Logs
-*.log
-
 # Environment
 .env
 .venv/
 venv/
-ENV/
