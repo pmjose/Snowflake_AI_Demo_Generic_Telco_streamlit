@@ -130,7 +130,7 @@ $$
 import requests
 
 def test_connection(session):
-    test_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco/main/README.md"
+    test_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/README.md"
     try:
         response = requests.get(test_url, timeout=30)
         if response.status_code == 200:

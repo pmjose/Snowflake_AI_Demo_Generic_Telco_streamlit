@@ -28,7 +28,7 @@ import requests
 from io import BytesIO
 
 def download_file(session, github_path, stage_path):
-    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco/main/"
+    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/"
     url = base_url + github_path
     
     try:
@@ -64,7 +64,7 @@ from io import BytesIO
 from snowflake.snowpark.types import StructType, StructField, StringType
 
 def download_all(session):
-    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco/main/demo_data/"
+    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/demo_data/"
     
     # List of all CSV files to download (~100 files)
     csv_files = [
@@ -167,7 +167,7 @@ from io import BytesIO
 from snowflake.snowpark.types import StructType, StructField, StringType
 
 def download_docs(session):
-    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco/main/unstructured_docs/"
+    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/unstructured_docs/"
     
     docs = [
         # Finance documents
@@ -184,15 +184,16 @@ def download_docs(session):
         "finance/vendor_contracts/Sample_Return_Policies_Summary.md",
         # HR documents
         "hr/Employee_Handbook_2025.md", "hr/Performance_Review_Guidelines.md",
+        "hr/Employee_Engagement_Report_Q4_2025.md", "hr/Talent_Strategy_2026.md",
         # Marketing documents
         "marketing/2025_Marketing_Strategy.md",
         "marketing/Campaign_ROI_Analysis_2024.md", "marketing/NPS_Customer_Satisfaction_Report.md",
-        "marketing/Campaign_Performance_Report.md",
+        "marketing/Campaign_Performance_Report.md", "marketing/Crisis_Communications_Playbook.md",
         # Sales documents
         "sales/Customer_Service_Playbook.md", "sales/Device_Lifecycle_Management.md",
         "sales/Churn_Reduction_Playbook.md", "sales/Customer_Success_Stories.md",
         "sales/Retail_Store_Performance_Playbook.md", "sales/Sales_Playbook_2025.md",
-        "sales/Customer_Experience_Report_Q4_2024.md",
+        "sales/Customer_Experience_Report_Q4_2024.md", "sales/MVNO_Partnership_Guide.md",
         # Strategy documents
         "strategy/Cloud_Strategy.md", "strategy/Spectrum_License_Summary.md",
         "strategy/Board_Presentation_Q4_2024.md", "strategy/Market_Position_Analysis_2025.md",
@@ -201,11 +202,14 @@ def download_docs(session):
         "strategy/Investor_Relations_FAQ.md",
         "strategy/Board_Presentation_Q3_FY2026.md", "strategy/Market_Position_Analysis_2026.md",
         "strategy/Subscriber_Growth_Report_Q3_FY2026.md",
+        "strategy/AI_ML_Strategy_2026.md", "strategy/Digital_Transformation_Roadmap_2026.md",
+        "strategy/Operational_Excellence_Playbook.md",
         # Network documents
         "network/5G_Network_Strategy_2025.md", "network/Network_Coverage_Analysis_2025.md",
         "network/Network_Operations_Playbook.md", "network/Incident_Management_Process.md",
         "network/Change_Management_Process.md", "network/Disaster_Recovery_Plan.md",
         "network/Network_Security_Policy.md", "network/IT_Service_Catalog.md",
+        "network/Field_Operations_Handbook.md", "network/IT_Architecture_Overview.md",
         # Demo documents
         "demo/Demo_Script_CEO.md", "demo/Demo_Script_CFO.md", "demo/Demo_Script_CMO.md",
         "demo/Demo_Script_Full_30min.md", "demo/SnowTelco_Key_Facts.md"

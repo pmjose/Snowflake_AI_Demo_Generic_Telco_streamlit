@@ -1,6 +1,6 @@
-# Additional data folders - not needed in repo
-additional_data/
-demo_data/additional_data/
+# Additional data folders - selectively tracked
+# Ignore 2024 data but allow 2025 data
+demo_data/additional_data/2024/
 
 # GitLab scripts folder - disregarded
 sql_scripts_gitlab/

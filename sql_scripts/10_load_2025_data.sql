@@ -35,7 +35,7 @@ from io import BytesIO
 from snowflake.snowpark.types import StructType, StructField, StringType
 
 def download_all(session):
-    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco/main/demo_data/additional_data/2025/csv/"
+    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/demo_data/additional_data/2025/csv/"
     
     # List of 2025 CSV files to download
     csv_files = [
@@ -337,7 +337,7 @@ from io import BytesIO
 from snowflake.snowpark.types import StructType, StructField, StringType
 
 def download_docs(session):
-    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco/main/demo_data/additional_data/2025/unstructured_docs/"
+    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/demo_data/additional_data/2025/unstructured_docs/"
     
     docs = [
         "Annual_Report_FY2025.md",

@@ -539,7 +539,7 @@ Snowflake_AI_Demo_Generic_Telco_streamlit/
 
 | Resource | Link |
 |----------|------|
-| **Repository** | [github.com/pmjose/Snowflake_AI_Demo_Generic_Telco](https://github.com/pmjose/Snowflake_AI_Demo_Generic_Telco) |
+| **Repository** | [github.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit](https://github.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit) |
 | **Snowflake Intelligence Docs** | [docs.snowflake.com](https://docs.snowflake.com) |
 | **TM Forum ODA** | [tmforum.org](https://www.tmforum.org/oda/) |
 

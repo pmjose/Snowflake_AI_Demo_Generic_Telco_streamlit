@@ -34,7 +34,7 @@ from io import BytesIO
 from snowflake.snowpark.types import StructType, StructField, StringType
 
 def download_all(session):
-    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco/main/demo_data/additional_data/2024/csv/"
+    base_url = "https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/demo_data/additional_data/2024/csv/"
     
     csv_files = [
         "invoice_fact_2024.csv",
