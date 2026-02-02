@@ -1,0 +1,501 @@
+agent_key,agent_id,agent_name,team,skill_group,hire_date,status,supervisor,location,languages
+1,AGT0001,Emma Clarke,Sales,Voice,2020-09-16,Active,Thomas Taylor,Manchester,English
+2,AGT0002,Alice Clarke,Technical Support,Email,2025-01-26,Active,Samuel Smith,Manchester,"English, Hindi"
+3,AGT0003,Benjamin Jones,Technical Support,Voice,2022-12-03,Active,Matthew Walker,Glasgow,"English, Hindi"
+4,AGT0004,Mia Hall,Consumer Support,Social,2022-10-12,Leave,Charlotte Robinson,Belfast,"English, Spanish"
+5,AGT0005,Joseph Edwards,Retention,Chat,2024-04-01,Active,Oscar Robinson,Glasgow,"English, French"
+6,AGT0006,Daniel Edwards,Sales,Voice,2021-09-09,Active,Olivia Martin,Manchester,"English, Welsh"
+7,AGT0007,Oscar Green,Technical Support,Voice,2021-11-14,Active,Harper Johnson,Belfast,English
+8,AGT0008,Ava Smith,B2B Support,Chat,2021-11-24,Active,Lucas Patel,Belfast,English
+9,AGT0009,Lily Robinson,Partner Support,Voice,2019-11-23,Active,Ruby Wilson,Belfast,English
+10,AGT0010,Lucas Williams,Retention,Voice,2024-07-26,Leave,Amelia Wood,Belfast,"English, Spanish"
+11,AGT0011,Harry Williams,Billing,Multi-Channel,2025-04-20,Active,Emily Brown,Remote,"English, French"
+12,AGT0012,William Jones,Technical Support,Multi-Channel,2019-06-02,Active,Oscar Williams,London,"English, Welsh"
+13,AGT0013,Jessica Walker,Retention,Email,2024-10-07,Active,Thomas Hall,Manchester,"English, Spanish"
+14,AGT0014,Benjamin Smith,B2B Support,Voice,2024-12-20,Terminated,Freya Evans,Belfast,"English, Hindi"
+15,AGT0015,Alice Wilson,Partner Support,Multi-Channel,2021-05-15,Leave,Benjamin Cooper,Remote,"English, Hindi"
+16,AGT0016,Alexander Green,Consumer Support,Social,2022-01-25,Active,Sophia Brown,Manchester,"English, Hindi"
+17,AGT0017,Thomas Smith,Retention,Social,2023-01-20,Leave,Charlotte Clarke,Manchester,"English, Welsh"
+18,AGT0018,Evelyn Thomas,Technical Support,Email,2024-02-16,Active,Noah Hughes,Glasgow,"English, Hindi"
+19,AGT0019,Grace Cooper,Technical Support,Multi-Channel,2023-07-14,Active,Alice Smith,London,"English, French"
+20,AGT0020,Oliver Patel,Technical Support,Chat,2021-12-12,Active,Sophie Clarke,Glasgow,"English, French"
+21,AGT0021,Freya Roberts,Retention,Chat,2021-04-02,Active,Jessica Robinson,Glasgow,"English, Spanish"
+22,AGT0022,Olivia Brown,Consumer Support,Voice,2019-06-16,Active,Ella White,Manchester,"English, Spanish"
+23,AGT0023,Lucas Thomas,Partner Support,Voice,2021-04-24,Active,Olivia Taylor,Belfast,"English, Welsh"
+24,AGT0024,Jack Davies,Billing,Multi-Channel,2020-10-04,Active,Oliver Johnson,Manchester,"English, French"
+25,AGT0025,Sophie Jones,Consumer Support,Social,2021-06-27,Active,Harry Patel,Belfast,English
+26,AGT0026,Harry Harris,Retention,Social,2021-01-30,Active,Henry Robinson,Remote,English
+27,AGT0027,Oliver Thompson,Partner Support,Voice,2018-04-23,Active,Freya Wilson,Manchester,"English, Spanish"
+28,AGT0028,Evelyn Edwards,Technical Support,Social,2020-05-30,Active,Alice Wood,Remote,"English, Hindi"
+29,AGT0029,Lily Thomas,Technical Support,Multi-Channel,2021-04-08,Active,Emma Jones,Belfast,"English, Hindi"
+30,AGT0030,Daniel Green,Partner Support,Voice,2024-11-10,Active,Lily White,Belfast,English
+31,AGT0031,Oliver Robinson,Sales,Chat,2023-03-11,Active,Oscar Patel,London,"English, Spanish"
+32,AGT0032,Grace Wood,Retention,Voice,2024-03-17,Active,Jack Wood,Belfast,"English, Spanish"
+33,AGT0033,Oscar Williams,Partner Support,Multi-Channel,2020-10-28,Active,Mia Williams,Manchester,"English, French"
+34,AGT0034,Ava Clarke,Partner Support,Email,2020-08-20,Active,Mia Turner,London,"English, French"
+35,AGT0035,Leo Clarke,Consumer Support,Voice,2019-11-23,Active,Harry Thomas,London,"English, French"
+36,AGT0036,Sophie Wright,Billing,Voice,2020-04-26,Active,Matthew Green,Belfast,"English, Hindi"
+37,AGT0037,Olivia Harris,Partner Support,Social,2018-03-20,Active,Leo Roberts,Glasgow,"English, Hindi"
+38,AGT0038,Matthew Davies,B2B Support,Voice,2024-10-17,Active,Charlotte Walker,Remote,"English, Spanish"
+39,AGT0039,George Hill,Retention,Multi-Channel,2019-03-13,Active,Alice Johnson,London,"English, Hindi"
+40,AGT0040,Jack Cooper,Consumer Support,Multi-Channel,2024-09-21,Active,Alice Davies,London,"English, Spanish"
+41,AGT0041,Harry Jackson,Retention,Email,2021-03-14,Training,Ruby Clarke,Remote,English
+42,AGT0042,Lucas Robinson,Sales,Email,2018-10-24,Leave,Jessica Hughes,Remote,"English, French"
+43,AGT0043,Harper Davies,Consumer Support,Social,2020-04-19,Terminated,Oliver Roberts,Remote,"English, Spanish"
+44,AGT0044,James Martin,Sales,Chat,2024-12-30,Active,Emily White,Glasgow,"English, Spanish"
+45,AGT0045,Emily Jackson,Partner Support,Multi-Channel,2020-07-03,Training,Jack White,Remote,"English, Spanish"
+46,AGT0046,Daniel Edwards,Retention,Social,2019-12-18,Active,Amelia Wood,Manchester,"English, Hindi"
+47,AGT0047,Henry Smith,Sales,Voice,2018-11-21,Active,Sophia White,Remote,English
+48,AGT0048,David Thompson,Partner Support,Chat,2022-07-13,Active,Lucas Hughes,Glasgow,English
+49,AGT0049,Alexander Wilson,Retention,Social,2020-05-01,Terminated,Ava Wright,Remote,English
+50,AGT0050,Daniel Thompson,Retention,Multi-Channel,2018-01-15,Active,Ruby Edwards,Glasgow,"English, French"
+51,AGT0051,Isabella Smith,Sales,Social,2021-06-25,Training,Evelyn Evans,Belfast,English
+52,AGT0052,George Cooper,Billing,Multi-Channel,2025-02-21,Active,Alexander Roberts,Manchester,"English, Welsh"
+53,AGT0053,Jack Hughes,Sales,Chat,2020-06-16,Active,Jessica Harris,London,"English, Hindi"
+54,AGT0054,Ella Robinson,Consumer Support,Voice,2024-08-05,Active,Freya Williams,Manchester,"English, French"
+55,AGT0055,Emma Edwards,Technical Support,Chat,2020-11-19,Active,Benjamin Martin,Remote,"English, French"
+56,AGT0056,David Patel,Sales,Chat,2021-12-17,Leave,Oliver Johnson,London,English
+57,AGT0057,Joseph Smith,Sales,Email,2023-12-20,Active,Lily Edwards,Manchester,"English, Spanish"
+58,AGT0058,Henry White,Sales,Voice,2019-12-01,Leave,Isabella Wood,Belfast,"English, Welsh"
+59,AGT0059,Emma Wood,Retention,Email,2024-02-02,Active,Ava Harris,Glasgow,"English, French"
+60,AGT0060,Grace Green,Billing,Multi-Channel,2021-03-23,Training,Charlotte Davies,Glasgow,English
+61,AGT0061,Emily Jackson,Partner Support,Multi-Channel,2024-09-05,Active,Grace Smith,London,"English, Spanish"
+62,AGT0062,Ella Robinson,Sales,Email,2021-02-17,Leave,George Brown,Remote,"English, Welsh"
+63,AGT0063,Jessica Robinson,Partner Support,Voice,2018-07-07,Active,James Hughes,Glasgow,"English, Spanish"
+64,AGT0064,Leo Jackson,Sales,Social,2025-01-21,Active,Lucas Walker,Remote,English
+65,AGT0065,Lily Cooper,Partner Support,Chat,2023-08-15,Active,Jessica Hughes,Manchester,"English, Spanish"
+66,AGT0066,Isabella Edwards,Partner Support,Chat,2018-05-15,Active,Lucas Turner,Belfast,English
+67,AGT0067,Olivia Taylor,B2B Support,Email,2020-03-10,Active,Freya Brown,Remote,"English, Spanish"
+68,AGT0068,Sophia Hill,Partner Support,Social,2020-03-27,Active,Grace Robinson,Manchester,"English, Spanish"
+69,AGT0069,Grace Patel,Billing,Email,2019-08-21,Active,Emma White,London,"English, Hindi"
+70,AGT0070,Lucas Cooper,Sales,Voice,2021-09-28,Active,Emily Cooper,Manchester,"English, Welsh"
+71,AGT0071,Ava Jackson,Sales,Email,2023-10-27,Active,Noah Roberts,London,"English, Spanish"
+72,AGT0072,Thomas Roberts,Sales,Email,2020-08-16,Active,Emma Patel,Glasgow,"English, French"
+73,AGT0073,Chloe Green,Technical Support,Multi-Channel,2020-03-24,Active,Sophie Davies,London,"English, French"
+74,AGT0074,Sophia Walker,Billing,Voice,2018-12-23,Active,William Thomas,Manchester,"English, Welsh"
+75,AGT0075,Evelyn White,Sales,Social,2020-03-09,Active,Emma Turner,Glasgow,English
+76,AGT0076,Isabella Edwards,Retention,Chat,2023-01-15,Active,Oliver Hill,Manchester,"English, Hindi"
+77,AGT0077,Sophie Robinson,Technical Support,Social,2025-06-26,Active,Grace Patel,Belfast,"English, Spanish"
+78,AGT0078,Sophie Taylor,Partner Support,Social,2020-07-02,Active,Noah Robinson,Manchester,"English, Spanish"
+79,AGT0079,Sophia Davies,Technical Support,Multi-Channel,2022-05-03,Active,Ava Cooper,Manchester,English
+80,AGT0080,David Turner,Retention,Email,2025-04-05,Leave,James Taylor,Manchester,"English, French"
+81,AGT0081,Oliver Roberts,Consumer Support,Voice,2019-03-04,Training,Emma Wilson,London,"English, Spanish"
+82,AGT0082,Lily Thompson,B2B Support,Multi-Channel,2024-10-07,Active,James Walker,Remote,"English, French"
+83,AGT0083,Matthew Hall,Partner Support,Email,2024-12-02,Active,Lucas Evans,London,"English, Spanish"
+84,AGT0084,Thomas Edwards,Sales,Multi-Channel,2018-09-09,Active,Sophia Cooper,Manchester,English
+85,AGT0085,Noah Clarke,Technical Support,Voice,2024-02-19,Leave,Oscar Edwards,Glasgow,English
+86,AGT0086,Jessica Wilson,Partner Support,Multi-Channel,2018-09-01,Active,Sophie Davies,Glasgow,"English, Hindi"
+87,AGT0087,Alexander Wilson,Retention,Social,2024-08-23,Leave,Harry Harris,Glasgow,"English, French"
+88,AGT0088,Leo Hughes,Retention,Social,2023-08-12,Active,Benjamin Wood,Belfast,"English, Spanish"
+89,AGT0089,Thomas Davies,Partner Support,Multi-Channel,2018-03-09,Active,Freya Johnson,Glasgow,"English, French"
+90,AGT0090,Chloe Smith,Technical Support,Chat,2021-09-07,Active,Emily Martin,Manchester,"English, Spanish"
+91,AGT0091,David Green,Partner Support,Email,2023-03-16,Active,Grace Jackson,Belfast,"English, French"
+92,AGT0092,Thomas Patel,Partner Support,Voice,2021-05-18,Active,Leo White,Remote,"English, Spanish"
+93,AGT0093,Joseph Brown,Technical Support,Chat,2022-08-08,Leave,Evelyn Hill,Remote,English
+94,AGT0094,Grace Martin,Retention,Chat,2021-04-07,Active,Henry Jackson,Remote,"English, Hindi"
+95,AGT0095,Thomas White,Sales,Social,2024-09-11,Active,Jack Hughes,London,"English, Spanish"
+96,AGT0096,Oscar Patel,Consumer Support,Multi-Channel,2018-09-29,Active,Oscar Lewis,Belfast,"English, French"
+97,AGT0097,Amelia Jackson,Technical Support,Email,2023-02-11,Active,Emily Hughes,Remote,"English, Spanish"
+98,AGT0098,Harry Cooper,Billing,Multi-Channel,2021-07-11,Active,Charlotte Williams,Remote,"English, Spanish"
+99,AGT0099,Ella Wilson,B2B Support,Multi-Channel,2020-12-07,Active,Matthew Thompson,London,"English, Welsh"
+100,AGT0100,Charlie Roberts,Partner Support,Social,2025-06-12,Training,Mia Harris,London,English
+101,AGT0101,Sophie Johnson,Sales,Social,2018-04-17,Active,Amelia Taylor,Belfast,"English, Welsh"
+102,AGT0102,George Taylor,Partner Support,Multi-Channel,2020-04-05,Leave,Mia Wilson,London,English
+103,AGT0103,Jessica Martin,Consumer Support,Social,2020-12-10,Active,Lily Martin,London,"English, Hindi"
+104,AGT0104,Benjamin Roberts,Technical Support,Social,2018-11-27,Active,Sophia Roberts,Glasgow,"English, Hindi"
+105,AGT0105,Isabella Evans,Partner Support,Social,2023-07-21,Active,Alexander Wilson,London,"English, Hindi"
+106,AGT0106,Olivia Harris,Sales,Email,2021-02-27,Active,Joseph Williams,Manchester,"English, Spanish"
+107,AGT0107,Oscar Turner,Billing,Social,2022-07-17,Active,Freya Johnson,London,English
+108,AGT0108,Leo Green,Partner Support,Voice,2023-10-11,Active,Ava Thompson,Glasgow,"English, Welsh"
+109,AGT0109,Benjamin Green,Retention,Chat,2019-10-08,Active,Benjamin Brown,Glasgow,"English, Spanish"
+110,AGT0110,Lucas Patel,Billing,Chat,2021-06-05,Active,Harper Wood,London,"English, Welsh"
+111,AGT0111,Matthew Edwards,Billing,Multi-Channel,2021-02-26,Active,Alice Thomas,Remote,"English, Welsh"
+112,AGT0112,Chloe Edwards,B2B Support,Multi-Channel,2021-10-06,Active,Evelyn Clarke,London,"English, Welsh"
+113,AGT0113,Benjamin Thompson,Billing,Email,2022-08-18,Active,James Harris,London,"English, Spanish"
+114,AGT0114,Evelyn Lewis,Billing,Multi-Channel,2021-04-08,Active,Oscar Clarke,Glasgow,"English, French"
+115,AGT0115,Evelyn Hill,Technical Support,Chat,2024-09-01,Active,Henry Robinson,Belfast,English
+116,AGT0116,Charlotte Thompson,Technical Support,Multi-Channel,2019-01-26,Active,Isabella Patel,Glasgow,"English, Hindi"
+117,AGT0117,Charlotte Martin,Billing,Voice,2024-10-10,Active,Jessica Wood,Remote,English
+118,AGT0118,Oliver Walker,Consumer Support,Multi-Channel,2023-12-06,Active,Ruby Green,London,English
+119,AGT0119,Benjamin Brown,Retention,Email,2019-02-12,Active,Alice Edwards,Belfast,"English, French"
+120,AGT0120,Jack Jones,Partner Support,Social,2018-11-28,Active,Benjamin Turner,Manchester,"English, French"
+121,AGT0121,Grace Wright,Retention,Chat,2018-06-16,Active,William Harris,Remote,"English, Spanish"
+122,AGT0122,Grace Thompson,Billing,Email,2024-04-21,Active,Ella Thompson,Belfast,"English, Hindi"
+123,AGT0123,Thomas Martin,Sales,Chat,2022-01-06,Active,James Roberts,Manchester,English
+124,AGT0124,Amelia Williams,B2B Support,Social,2020-09-03,Active,Charlotte Wright,Manchester,"English, Hindi"
+125,AGT0125,Harry White,Billing,Social,2024-11-06,Active,Lucas Hughes,Remote,"English, Spanish"
+126,AGT0126,Leo Brown,B2B Support,Multi-Channel,2018-04-02,Active,William Martin,London,"English, Welsh"
+127,AGT0127,George Martin,Consumer Support,Voice,2024-03-16,Active,Sophie Jones,Belfast,English
+128,AGT0128,Noah Davies,Technical Support,Voice,2021-02-19,Active,Oliver Thompson,Manchester,English
+129,AGT0129,Jessica Cooper,Billing,Multi-Channel,2021-05-07,Active,Ava Green,Glasgow,"English, Spanish"
+130,AGT0130,Jessica Harris,Billing,Chat,2022-01-16,Active,Grace Patel,London,"English, Hindi"
+131,AGT0131,Joseph Patel,Billing,Social,2023-02-21,Active,Lucas Williams,Glasgow,"English, Spanish"
+132,AGT0132,Mia Evans,Sales,Social,2024-12-14,Active,Ruby Clarke,Remote,"English, French"
+133,AGT0133,Freya Davies,B2B Support,Social,2023-02-04,Training,Jack Green,Belfast,"English, Welsh"
+134,AGT0134,Benjamin Harris,Billing,Social,2022-11-15,Active,Isabella Harris,Glasgow,"English, French"
+135,AGT0135,Ava Cooper,Sales,Social,2020-10-26,Active,Benjamin Davies,London,"English, French"
+136,AGT0136,George Robinson,Retention,Voice,2023-06-10,Active,Grace Wright,Belfast,"English, Spanish"
+137,AGT0137,Samuel Davies,Retention,Chat,2019-04-20,Terminated,Jessica Harris,Glasgow,English
+138,AGT0138,George Jackson,B2B Support,Multi-Channel,2020-05-20,Active,Isabella Hill,Belfast,"English, Spanish"
+139,AGT0139,Samuel Roberts,Consumer Support,Email,2020-05-07,Active,Amelia Thomas,Manchester,"English, Hindi"
+140,AGT0140,Ruby Hughes,Consumer Support,Voice,2024-08-30,Leave,Harper Clarke,Manchester,"English, Spanish"
+141,AGT0141,Thomas Brown,Consumer Support,Voice,2022-11-25,Active,Sophie Hill,London,"English, French"
+142,AGT0142,Oliver Thompson,Billing,Voice,2023-06-03,Active,Leo Patel,Remote,"English, Welsh"
+143,AGT0143,Henry Williams,Retention,Voice,2020-04-27,Active,Leo Thompson,Belfast,"English, Hindi"
+144,AGT0144,Evelyn Jackson,Partner Support,Social,2025-04-23,Training,Freya Turner,Belfast,English
+145,AGT0145,Olivia Wood,B2B Support,Chat,2024-03-07,Active,Olivia Wright,London,"English, Spanish"
+146,AGT0146,Ruby Davies,Sales,Chat,2019-10-31,Active,Ella Thompson,Remote,"English, Welsh"
+147,AGT0147,Grace Clarke,Sales,Chat,2020-04-19,Active,Charlotte Martin,Remote,"English, Welsh"
+148,AGT0148,Charlie Green,Billing,Email,2023-09-11,Active,Benjamin Thomas,Manchester,"English, Hindi"
+149,AGT0149,Emma Davies,Retention,Multi-Channel,2024-10-03,Active,Alexander Taylor,Manchester,"English, French"
+150,AGT0150,Jessica Turner,Technical Support,Voice,2018-05-10,Active,Ella Taylor,Manchester,"English, Welsh"
+151,AGT0151,Lily Davies,Consumer Support,Chat,2022-06-26,Active,Leo Smith,London,"English, Spanish"
+152,AGT0152,Ella Davies,Retention,Chat,2023-11-15,Active,Lily Evans,Belfast,"English, French"
+153,AGT0153,Henry Jackson,Consumer Support,Chat,2021-07-16,Active,Isabella Green,Glasgow,English
+154,AGT0154,Leo Edwards,Billing,Social,2022-04-08,Active,Chloe Smith,Remote,"English, French"
+155,AGT0155,Oscar Martin,Technical Support,Email,2019-07-04,Active,Charlie Evans,Remote,"English, Spanish"
+156,AGT0156,Noah Wood,Billing,Chat,2022-11-18,Active,Emma Wood,Remote,"English, Hindi"
+157,AGT0157,Daniel Smith,Technical Support,Social,2023-02-15,Active,Ella Hill,Remote,English
+158,AGT0158,Emma White,Retention,Voice,2024-12-04,Active,Harry Martin,Manchester,"English, French"
+159,AGT0159,Thomas Jones,Billing,Chat,2025-03-18,Active,Isabella Walker,Glasgow,"English, French"
+160,AGT0160,Charlie Robinson,Technical Support,Chat,2018-10-31,Active,Lucas Wright,Manchester,"English, Hindi"
+161,AGT0161,Emily Clarke,Sales,Social,2020-12-19,Training,Grace Williams,Remote,"English, Hindi"
+162,AGT0162,James Thomas,B2B Support,Social,2021-06-10,Active,Grace Williams,London,"English, French"
+163,AGT0163,Sophie Thompson,Technical Support,Chat,2020-12-25,Training,Charlie Edwards,Glasgow,English
+164,AGT0164,Joseph Green,Sales,Social,2023-03-26,Active,Sophie Harris,London,"English, French"
+165,AGT0165,Benjamin Jackson,Retention,Voice,2019-01-09,Active,William Williams,Manchester,English
+166,AGT0166,Emily Wood,Retention,Voice,2022-08-18,Terminated,James Hill,Manchester,"English, Welsh"
+167,AGT0167,Daniel Thomas,Sales,Multi-Channel,2024-07-16,Leave,Grace Green,Remote,"English, Spanish"
+168,AGT0168,Charlie Johnson,Consumer Support,Voice,2022-03-10,Active,Jack Brown,Remote,"English, Hindi"
+169,AGT0169,Charlotte Hughes,Sales,Multi-Channel,2025-04-03,Active,Oscar Turner,Remote,"English, Welsh"
+170,AGT0170,Olivia Hall,B2B Support,Multi-Channel,2022-10-14,Active,Samuel Green,Glasgow,"English, Welsh"
+171,AGT0171,Emily Patel,B2B Support,Social,2018-10-06,Leave,Amelia Clarke,London,"English, French"
+172,AGT0172,Oliver Martin,Sales,Voice,2018-11-26,Active,Henry Evans,Remote,"English, French"
+173,AGT0173,David Turner,B2B Support,Social,2019-07-07,Active,Ruby Lewis,London,"English, Hindi"
+174,AGT0174,Sophia Wilson,Partner Support,Chat,2018-01-14,Active,Oscar Lewis,Belfast,"English, Welsh"
+175,AGT0175,Joseph Thomas,Retention,Email,2021-11-17,Active,Amelia Wright,Glasgow,"English, Hindi"
+176,AGT0176,Oscar Taylor,Billing,Multi-Channel,2024-04-12,Active,Isabella Brown,Belfast,"English, Welsh"
+177,AGT0177,Jack Harris,B2B Support,Voice,2022-07-14,Active,Ella Johnson,Glasgow,"English, Welsh"
+178,AGT0178,Ruby Johnson,Partner Support,Social,2024-05-07,Active,Harper Taylor,Manchester,"English, Hindi"
+179,AGT0179,Sophia Jones,Retention,Multi-Channel,2019-06-24,Active,Jessica Taylor,Glasgow,"English, Welsh"
+180,AGT0180,Benjamin Thomas,Partner Support,Email,2023-07-27,Active,Noah Walker,Glasgow,"English, French"
+181,AGT0181,Matthew Cooper,Consumer Support,Social,2020-12-08,Active,George Green,Glasgow,"English, Spanish"
+182,AGT0182,Alexander Davies,Partner Support,Voice,2025-04-11,Active,Charlotte Harris,Belfast,English
+183,AGT0183,Oscar Evans,Retention,Voice,2024-11-22,Active,Sophie Thomas,London,"English, Hindi"
+184,AGT0184,Evelyn Harris,Consumer Support,Chat,2023-04-12,Active,David Wright,Glasgow,"English, Spanish"
+185,AGT0185,George Brown,Billing,Social,2018-06-16,Active,Samuel Brown,London,"English, Spanish"
+186,AGT0186,Jessica Wilson,Billing,Email,2025-03-20,Active,William Davies,Glasgow,"English, Welsh"
+187,AGT0187,Jack Turner,Sales,Email,2022-06-25,Active,Mia Hall,Remote,English
+188,AGT0188,Leo Edwards,Consumer Support,Social,2021-07-24,Active,Harper Martin,Glasgow,"English, Hindi"
+189,AGT0189,Samuel Thompson,Consumer Support,Email,2020-10-08,Active,Ella Davies,Manchester,"English, Welsh"
+190,AGT0190,Ruby Johnson,Retention,Social,2018-06-27,Active,Joseph Robinson,Belfast,"English, French"
+191,AGT0191,Ella Taylor,Billing,Email,2024-02-19,Active,Oscar Williams,Belfast,"English, French"
+192,AGT0192,George Harris,Technical Support,Multi-Channel,2019-09-30,Active,Thomas Lewis,Remote,English
+193,AGT0193,Harper Brown,B2B Support,Chat,2024-10-13,Active,Joseph Turner,Manchester,English
+194,AGT0194,David White,Retention,Multi-Channel,2023-09-11,Active,Charlie Jackson,Manchester,"English, Hindi"
+195,AGT0195,Leo Wright,Retention,Voice,2022-11-26,Active,Charlotte Brown,Remote,"English, Spanish"
+196,AGT0196,Harry Brown,B2B Support,Multi-Channel,2022-01-09,Leave,Jack Hill,London,"English, Spanish"
+197,AGT0197,Sophia Smith,Consumer Support,Chat,2025-04-23,Active,Sophia Martin,Glasgow,"English, Hindi"
+198,AGT0198,Matthew Robinson,Consumer Support,Email,2019-09-08,Active,Alice Evans,Remote,English
+199,AGT0199,Benjamin Cooper,Sales,Email,2018-07-12,Active,Harry Wright,Manchester,"English, Spanish"
+200,AGT0200,Mia Harris,Retention,Social,2025-02-07,Active,Evelyn Jones,London,English
+201,AGT0201,Charlotte Smith,Sales,Email,2020-03-05,Active,Evelyn Williams,Glasgow,"English, Spanish"
+202,AGT0202,Harper Patel,B2B Support,Email,2024-06-02,Active,William Harris,London,"English, Welsh"
+203,AGT0203,George Hill,Sales,Multi-Channel,2022-04-23,Active,Ava Wright,London,"English, Welsh"
+204,AGT0204,Jack Martin,Retention,Email,2023-04-16,Active,Alice Johnson,London,"English, Hindi"
+205,AGT0205,Ella Harris,Retention,Voice,2021-07-07,Active,Thomas Evans,Belfast,"English, Welsh"
+206,AGT0206,Daniel Johnson,Retention,Social,2022-05-27,Active,Oscar Smith,Glasgow,"English, Hindi"
+207,AGT0207,Charlie Wood,B2B Support,Voice,2023-01-28,Active,Ruby Jackson,Glasgow,"English, Hindi"
+208,AGT0208,Thomas Wilson,Consumer Support,Social,2020-04-06,Terminated,Noah Hughes,Glasgow,"English, French"
+209,AGT0209,Isabella Wilson,Billing,Chat,2020-12-16,Active,Leo White,Remote,"English, Spanish"
+210,AGT0210,Noah Robinson,Sales,Voice,2022-01-04,Training,Harry Hill,Remote,"English, Hindi"
+211,AGT0211,Leo Jones,Sales,Multi-Channel,2025-05-17,Active,Henry Hill,London,"English, Welsh"
+212,AGT0212,Emily Patel,Sales,Social,2023-06-17,Active,Grace Johnson,Belfast,"English, Spanish"
+213,AGT0213,William Taylor,Retention,Social,2020-03-06,Active,Emily Lewis,Manchester,"English, Welsh"
+214,AGT0214,Chloe Wright,Technical Support,Voice,2018-06-02,Active,Sophia Robinson,Glasgow,"English, Spanish"
+215,AGT0215,Sophie Taylor,B2B Support,Multi-Channel,2025-06-12,Active,Olivia Cooper,Belfast,"English, Spanish"
+216,AGT0216,Sophie Robinson,Billing,Multi-Channel,2023-08-03,Training,Thomas Thompson,Glasgow,"English, French"
+217,AGT0217,Oscar Thompson,Technical Support,Chat,2023-09-07,Training,Noah Patel,Remote,"English, Spanish"
+218,AGT0218,Isabella Williams,Technical Support,Voice,2019-09-28,Active,Harry Walker,Manchester,"English, Hindi"
+219,AGT0219,Grace Roberts,Consumer Support,Social,2023-09-23,Terminated,Charlie Evans,Belfast,"English, Spanish"
+220,AGT0220,Henry Brown,Partner Support,Social,2023-08-31,Active,Harry Clarke,Remote,"English, Welsh"
+221,AGT0221,Evelyn Lewis,Consumer Support,Email,2023-07-18,Terminated,Jack Thompson,Belfast,"English, Spanish"
+222,AGT0222,Matthew Roberts,B2B Support,Social,2019-06-10,Active,Mia Williams,Remote,"English, Welsh"
+223,AGT0223,Sophia Edwards,Retention,Email,2024-01-14,Leave,Jack Hughes,Glasgow,"English, French"
+224,AGT0224,Noah White,Retention,Email,2023-09-12,Active,Lucas Green,Glasgow,English
+225,AGT0225,Joseph Brown,Billing,Social,2025-05-12,Active,Emily Jones,Glasgow,"English, Welsh"
+226,AGT0226,Sophie Robinson,Partner Support,Social,2022-02-14,Active,James Clarke,Remote,"English, Spanish"
+227,AGT0227,Jessica Wright,Billing,Social,2025-03-29,Active,Oliver Taylor,London,English
+228,AGT0228,Jack Roberts,Partner Support,Social,2024-07-03,Training,Lucas Martin,London,"English, Hindi"
+229,AGT0229,Noah Edwards,Technical Support,Voice,2019-02-28,Active,Mia Evans,Belfast,"English, Hindi"
+230,AGT0230,Jack Williams,Sales,Voice,2021-04-21,Training,Matthew Lewis,Belfast,"English, Hindi"
+231,AGT0231,Sophia Hall,Consumer Support,Voice,2025-06-11,Terminated,Henry Thomas,Remote,"English, Hindi"
+232,AGT0232,Evelyn Wilson,Technical Support,Social,2023-06-27,Active,William Wright,Belfast,English
+233,AGT0233,Joseph Wright,Technical Support,Chat,2024-02-29,Active,Lucas Jones,Belfast,"English, Hindi"
+234,AGT0234,Thomas Clarke,Consumer Support,Email,2022-12-18,Active,Benjamin Turner,Glasgow,English
+235,AGT0235,Daniel Harris,Partner Support,Voice,2023-05-19,Active,Leo Patel,Remote,"English, Spanish"
+236,AGT0236,Benjamin Wood,Retention,Social,2025-01-18,Active,George Wood,Belfast,"English, Welsh"
+237,AGT0237,Benjamin Brown,B2B Support,Chat,2022-10-21,Leave,Alexander Smith,Belfast,"English, Welsh"
+238,AGT0238,Ruby Lewis,Consumer Support,Multi-Channel,2023-10-31,Active,Evelyn Edwards,Glasgow,"English, Welsh"
+239,AGT0239,Matthew Thomas,Partner Support,Voice,2019-11-07,Active,Evelyn Hill,Belfast,"English, Spanish"
+240,AGT0240,Mia Taylor,Retention,Social,2024-01-30,Active,Isabella White,Remote,"English, Welsh"
+241,AGT0241,Sophie White,Retention,Multi-Channel,2018-12-30,Active,Samuel Walker,Glasgow,English
+242,AGT0242,Sophia Brown,Sales,Chat,2021-10-01,Active,Chloe Green,Remote,"English, French"
+243,AGT0243,Sophie Turner,B2B Support,Email,2025-03-05,Active,Chloe Williams,London,English
+244,AGT0244,Lily Wood,Consumer Support,Chat,2020-12-29,Active,Jack Hill,Remote,"English, Welsh"
+245,AGT0245,Evelyn Johnson,Consumer Support,Email,2025-03-19,Active,Lily Smith,London,"English, Spanish"
+246,AGT0246,Matthew Wright,Consumer Support,Chat,2018-06-23,Active,Matthew Thompson,Belfast,"English, Welsh"
+247,AGT0247,Thomas Patel,Retention,Social,2019-11-06,Active,Alice Brown,Belfast,English
+248,AGT0248,Alice Roberts,Partner Support,Voice,2023-02-05,Active,Evelyn Roberts,London,English
+249,AGT0249,James Davies,Consumer Support,Email,2019-07-23,Active,Emily Cooper,Belfast,"English, Spanish"
+250,AGT0250,Lily Jackson,Consumer Support,Social,2019-02-17,Terminated,Lucas Taylor,Manchester,"English, Spanish"
+251,AGT0251,Sophie Johnson,Billing,Multi-Channel,2021-09-09,Active,Grace Roberts,Glasgow,"English, French"
+252,AGT0252,Freya Johnson,B2B Support,Chat,2021-01-22,Active,Harry Thomas,Belfast,"English, Welsh"
+253,AGT0253,Sophie Martin,B2B Support,Email,2025-01-23,Active,Isabella Patel,Manchester,"English, Hindi"
+254,AGT0254,Olivia Smith,Partner Support,Chat,2024-12-23,Active,William Roberts,Glasgow,"English, Welsh"
+255,AGT0255,Lucas Jackson,Partner Support,Multi-Channel,2020-09-09,Active,Charlie Johnson,Glasgow,"English, Welsh"
+256,AGT0256,Charlotte Evans,Sales,Chat,2018-03-09,Active,George Wilson,Belfast,English
+257,AGT0257,Lily Davies,Technical Support,Chat,2018-07-29,Active,Charlotte Patel,London,English
+258,AGT0258,Sophia Wood,Consumer Support,Multi-Channel,2024-04-02,Active,William Jackson,Remote,English
+259,AGT0259,Chloe Jackson,Technical Support,Voice,2021-08-30,Terminated,George Johnson,Manchester,English
+260,AGT0260,Thomas Taylor,B2B Support,Multi-Channel,2018-11-23,Active,George Thomas,London,"English, French"
+261,AGT0261,Harry Wright,Technical Support,Voice,2024-05-19,Active,Evelyn Hall,Manchester,"English, Welsh"
+262,AGT0262,Emily Lewis,Retention,Social,2019-10-13,Terminated,Harper Brown,London,"English, Welsh"
+263,AGT0263,Ava Thompson,Billing,Chat,2021-11-29,Active,Freya Smith,Remote,English
+264,AGT0264,Freya Clarke,B2B Support,Chat,2024-02-10,Active,Joseph Turner,Manchester,"English, French"
+265,AGT0265,Harry Patel,Retention,Chat,2024-09-05,Active,Charlotte Roberts,Belfast,"English, Spanish"
+266,AGT0266,Grace Martin,B2B Support,Social,2022-12-13,Active,Daniel Davies,Remote,English
+267,AGT0267,David Patel,Retention,Social,2019-02-06,Active,Alexander Evans,Glasgow,"English, Welsh"
+268,AGT0268,Lucas Cooper,Billing,Multi-Channel,2018-04-01,Terminated,Ava Turner,London,"English, Hindi"
+269,AGT0269,Charlie Turner,Retention,Social,2022-10-01,Active,Jack Thompson,London,"English, Hindi"
+270,AGT0270,Oliver Turner,B2B Support,Chat,2018-03-26,Active,Amelia Cooper,Glasgow,"English, Welsh"
+271,AGT0271,Benjamin Wilson,Sales,Email,2019-05-18,Active,Benjamin Roberts,London,"English, Spanish"
+272,AGT0272,Evelyn White,Consumer Support,Chat,2022-04-11,Active,Joseph Smith,London,"English, Welsh"
+273,AGT0273,Harper Johnson,Partner Support,Voice,2022-07-15,Active,Freya Thomas,Glasgow,"English, Welsh"
+274,AGT0274,Jack Taylor,Partner Support,Social,2019-01-18,Active,Lily Edwards,Manchester,"English, Hindi"
+275,AGT0275,Harry Thomas,Billing,Email,2024-04-22,Active,Grace Patel,Manchester,English
+276,AGT0276,Daniel Roberts,Retention,Chat,2023-04-30,Active,Emma Robinson,Manchester,"English, French"
+277,AGT0277,Charlotte Turner,B2B Support,Email,2023-08-22,Leave,Lily Wood,Remote,"English, Spanish"
+278,AGT0278,Emily Hughes,Consumer Support,Multi-Channel,2023-02-25,Active,Chloe White,Belfast,English
+279,AGT0279,Freya Clarke,Retention,Email,2025-06-30,Active,Noah Jones,London,"English, Hindi"
+280,AGT0280,Leo Evans,Billing,Chat,2018-05-16,Active,Alice Brown,London,"English, Welsh"
+281,AGT0281,Jessica Smith,Partner Support,Chat,2018-01-25,Training,Oscar Williams,London,"English, French"
+282,AGT0282,Lucas Evans,Billing,Email,2020-10-26,Active,Ruby Roberts,Glasgow,"English, Hindi"
+283,AGT0283,Daniel Walker,Retention,Voice,2021-01-01,Training,Samuel Patel,Manchester,"English, Hindi"
+284,AGT0284,Harry Wilson,Retention,Chat,2019-11-23,Active,Ruby Hall,Belfast,English
+285,AGT0285,Oliver Thompson,Billing,Email,2023-05-30,Active,Emma Harris,Remote,English
+286,AGT0286,Olivia Clarke,Consumer Support,Multi-Channel,2025-04-03,Active,David Smith,Glasgow,"English, Hindi"
+287,AGT0287,Grace Hill,Partner Support,Voice,2018-11-08,Active,Charlie Turner,Manchester,English
+288,AGT0288,Samuel Wood,Technical Support,Email,2023-02-14,Active,Harper Hughes,Remote,"English, Hindi"
+289,AGT0289,Grace Wright,B2B Support,Chat,2020-05-05,Active,Harper Jones,Remote,"English, French"
+290,AGT0290,Ruby Lewis,B2B Support,Social,2018-06-26,Active,Jessica Hill,Manchester,"English, Spanish"
+291,AGT0291,Leo Davies,Technical Support,Email,2020-10-01,Terminated,Chloe Thompson,Remote,"English, French"
+292,AGT0292,Noah Turner,Retention,Voice,2023-12-07,Active,Jack Cooper,London,English
+293,AGT0293,Daniel Patel,Billing,Social,2022-09-29,Active,James Clarke,Manchester,English
+294,AGT0294,Oliver Roberts,B2B Support,Voice,2025-01-07,Active,Joseph Turner,Belfast,"English, Welsh"
+295,AGT0295,Leo Robinson,Retention,Chat,2022-11-21,Active,David Evans,Remote,"English, French"
+296,AGT0296,George Clarke,Billing,Voice,2019-08-10,Active,Oscar Thompson,Belfast,"English, Spanish"
+297,AGT0297,David Davies,Technical Support,Multi-Channel,2024-09-02,Active,Henry Wright,Remote,"English, Hindi"
+298,AGT0298,Henry White,Technical Support,Chat,2019-10-22,Leave,James Hughes,Belfast,"English, Spanish"
+299,AGT0299,Matthew Jones,B2B Support,Voice,2025-03-10,Training,Alexander Edwards,Belfast,"English, Spanish"
+300,AGT0300,Evelyn Walker,B2B Support,Voice,2021-08-05,Active,Harper Brown,Remote,"English, Spanish"
+301,AGT0301,Jessica Johnson,Retention,Voice,2018-10-12,Training,Joseph Cooper,Glasgow,"English, French"
+302,AGT0302,Emma Walker,Sales,Voice,2019-01-03,Active,Daniel Turner,London,"English, Hindi"
+303,AGT0303,Thomas Hill,Billing,Chat,2022-09-22,Active,Oscar Williams,Glasgow,English
+304,AGT0304,Lucas Hughes,Consumer Support,Social,2023-06-16,Active,Alexander Thomas,Glasgow,"English, Welsh"
+305,AGT0305,Lily Roberts,Retention,Social,2022-11-17,Active,Sophie White,Belfast,English
+306,AGT0306,Harry Hill,Consumer Support,Voice,2019-12-07,Active,Isabella Cooper,Belfast,"English, Hindi"
+307,AGT0307,Emily Davies,Consumer Support,Multi-Channel,2023-09-22,Active,Samuel Martin,Belfast,"English, Hindi"
+308,AGT0308,Jack Patel,Partner Support,Social,2023-12-22,Terminated,Joseph Roberts,Manchester,English
+309,AGT0309,Ella Smith,Billing,Email,2021-02-25,Active,Sophie Smith,Belfast,English
+310,AGT0310,Oscar Walker,Technical Support,Social,2022-05-23,Active,Harry Wilson,London,"English, Spanish"
+311,AGT0311,Mia Hughes,Partner Support,Email,2021-02-06,Active,Evelyn Harris,London,"English, Spanish"
+312,AGT0312,Evelyn Robinson,B2B Support,Voice,2019-02-28,Active,Leo Davies,Belfast,"English, Spanish"
+313,AGT0313,Alexander Wright,B2B Support,Social,2020-03-31,Active,Jack Hughes,London,"English, Hindi"
+314,AGT0314,Charlie Jackson,Consumer Support,Voice,2020-09-25,Terminated,George Jones,London,English
+315,AGT0315,Oliver Hughes,Partner Support,Voice,2023-02-22,Active,Isabella Hughes,Manchester,English
+316,AGT0316,Harper Edwards,Billing,Chat,2024-06-08,Active,Benjamin Harris,Manchester,English
+317,AGT0317,Grace Edwards,Technical Support,Social,2019-01-28,Active,George White,London,"English, French"
+318,AGT0318,Sophia Williams,Sales,Email,2022-07-21,Active,Jack Wright,Belfast,"English, Spanish"
+319,AGT0319,Benjamin Walker,Retention,Email,2024-07-16,Active,Emma Lewis,Glasgow,English
+320,AGT0320,Sophia Johnson,Consumer Support,Email,2023-09-15,Active,Samuel Patel,Belfast,"English, Welsh"
+321,AGT0321,Emma Wright,Retention,Voice,2022-07-31,Active,Thomas Evans,Manchester,"English, Welsh"
+322,AGT0322,Matthew Williams,Billing,Social,2023-02-07,Active,David Turner,Remote,"English, Welsh"
+323,AGT0323,Charlotte Hughes,Sales,Voice,2019-02-21,Active,Charlotte Roberts,Glasgow,English
+324,AGT0324,Matthew Brown,Sales,Voice,2024-10-26,Active,Benjamin Robinson,London,"English, French"
+325,AGT0325,Grace Walker,Consumer Support,Multi-Channel,2022-08-06,Active,Olivia Johnson,Belfast,English
+326,AGT0326,Harry Jones,Technical Support,Multi-Channel,2020-03-13,Leave,Ava Evans,Remote,"English, French"
+327,AGT0327,Olivia Roberts,Retention,Email,2023-01-02,Active,Sophia Clarke,Glasgow,"English, French"
+328,AGT0328,Jack Green,Billing,Chat,2024-04-10,Active,Olivia Thompson,Manchester,English
+329,AGT0329,Benjamin Hall,Consumer Support,Voice,2019-10-01,Active,Jack Davies,Belfast,"English, Welsh"
+330,AGT0330,Evelyn Hill,Billing,Email,2022-11-01,Terminated,Amelia Wood,Manchester,"English, Hindi"
+331,AGT0331,Alice Walker,Retention,Social,2023-09-21,Active,Emily Wood,Manchester,"English, Spanish"
+332,AGT0332,Lucas Thomas,B2B Support,Multi-Channel,2025-04-09,Active,George Hill,Remote,"English, Hindi"
+333,AGT0333,Daniel Roberts,Consumer Support,Chat,2020-01-07,Active,Freya Lewis,Glasgow,"English, Spanish"
+334,AGT0334,David Jones,B2B Support,Social,2018-02-28,Active,Jack Roberts,London,"English, Welsh"
+335,AGT0335,Samuel Martin,Partner Support,Multi-Channel,2023-05-21,Active,Lily Jackson,London,"English, Welsh"
+336,AGT0336,Henry Brown,Consumer Support,Email,2023-03-28,Training,Sophie Robinson,Glasgow,"English, French"
+337,AGT0337,George Walker,Consumer Support,Chat,2022-08-28,Active,Mia Cooper,London,English
+338,AGT0338,Joseph Clarke,Retention,Chat,2018-02-08,Active,William Jackson,Belfast,"English, French"
+339,AGT0339,Alexander Wood,B2B Support,Multi-Channel,2022-07-23,Active,Charlotte Walker,London,English
+340,AGT0340,Oliver Jones,Retention,Email,2021-08-26,Active,Evelyn Johnson,Manchester,English
+341,AGT0341,Mia Lewis,Technical Support,Social,2019-06-02,Leave,Joseph Jackson,Glasgow,"English, Welsh"
+342,AGT0342,Henry Jackson,Retention,Chat,2020-08-19,Active,Freya Davies,Manchester,"English, Spanish"
+343,AGT0343,Freya Hill,Sales,Chat,2020-10-31,Active,Freya Martin,Manchester,English
+344,AGT0344,Lucas Robinson,Consumer Support,Email,2020-12-08,Active,Charlie Brown,Belfast,"English, Spanish"
+345,AGT0345,Sophia Hill,B2B Support,Voice,2023-12-01,Terminated,Joseph Wilson,Belfast,English
+346,AGT0346,Emma Jones,B2B Support,Social,2024-06-21,Active,Evelyn Wood,Remote,"English, Hindi"
+347,AGT0347,Charlotte White,Retention,Email,2023-09-03,Active,George White,London,"English, Welsh"
+348,AGT0348,Lily Taylor,Retention,Email,2024-03-19,Active,Lucas Jackson,Belfast,English
+349,AGT0349,Samuel Roberts,Consumer Support,Voice,2021-02-13,Active,Leo Walker,Manchester,"English, Spanish"
+350,AGT0350,Ava Taylor,Consumer Support,Voice,2023-12-16,Active,Olivia Brown,Belfast,"English, Welsh"
+351,AGT0351,Mia Thompson,Retention,Multi-Channel,2018-09-06,Active,Oliver Hughes,London,English
+352,AGT0352,Ella Taylor,Technical Support,Social,2022-07-28,Active,Lucas Williams,Manchester,"English, French"
+353,AGT0353,William Hill,Consumer Support,Voice,2022-05-26,Active,Samuel Smith,Remote,English
+354,AGT0354,Charlie Hill,Consumer Support,Voice,2023-11-02,Active,Alice White,Manchester,"English, French"
+355,AGT0355,Harry Smith,Consumer Support,Voice,2020-07-20,Active,Ava Thomas,Belfast,English
+356,AGT0356,Ava Lewis,Technical Support,Social,2020-03-11,Active,Grace Jackson,London,English
+357,AGT0357,Emily Wood,Sales,Email,2019-05-11,Terminated,Ava Lewis,Belfast,"English, Hindi"
+358,AGT0358,Charlotte Walker,Retention,Voice,2024-10-31,Active,Mia Hall,Manchester,"English, French"
+359,AGT0359,Matthew Jones,B2B Support,Social,2021-11-08,Active,Emma Edwards,Remote,English
+360,AGT0360,Henry Martin,Partner Support,Voice,2022-05-07,Active,Oscar Roberts,Glasgow,English
+361,AGT0361,Harper Jones,Sales,Voice,2021-04-24,Active,Freya Edwards,London,"English, French"
+362,AGT0362,Olivia Wilson,B2B Support,Multi-Channel,2018-01-15,Active,Mia Edwards,Manchester,"English, Welsh"
+363,AGT0363,Jessica Robinson,B2B Support,Voice,2021-08-22,Active,Charlie Smith,London,"English, Welsh"
+364,AGT0364,George Davies,Retention,Email,2024-10-05,Active,Thomas Clarke,Remote,"English, Welsh"
+365,AGT0365,Lily Evans,Sales,Voice,2021-01-28,Active,Emily Cooper,Remote,"English, Welsh"
+366,AGT0366,Lucas Hughes,Partner Support,Voice,2024-03-29,Active,Henry Evans,Remote,"English, Welsh"
+367,AGT0367,Jack Hall,B2B Support,Chat,2018-06-26,Active,Lily Green,Manchester,"English, Hindi"
+368,AGT0368,William Cooper,B2B Support,Email,2024-11-16,Active,Daniel Jackson,Remote,English
+369,AGT0369,Lucas Turner,Retention,Multi-Channel,2020-07-27,Active,Harry Evans,Remote,"English, French"
+370,AGT0370,Emma Brown,Retention,Chat,2020-09-05,Leave,Daniel Smith,Glasgow,"English, Hindi"
+371,AGT0371,Charlotte Thomas,Retention,Voice,2019-12-02,Active,Charlie Williams,Manchester,"English, Spanish"
+372,AGT0372,James Clarke,Partner Support,Email,2020-06-09,Active,William Patel,Belfast,"English, Welsh"
+373,AGT0373,Emily Jackson,Sales,Multi-Channel,2020-04-26,Active,Alice Wright,Glasgow,"English, Welsh"
+374,AGT0374,Joseph Clarke,B2B Support,Chat,2019-11-30,Active,Henry Harris,Glasgow,"English, Spanish"
+375,AGT0375,Emma Hill,Partner Support,Social,2019-04-04,Active,Charlotte Johnson,Glasgow,"English, Spanish"
+376,AGT0376,Matthew Hall,B2B Support,Multi-Channel,2023-09-24,Active,Chloe Edwards,Manchester,English
+377,AGT0377,Sophie Lewis,Billing,Social,2018-07-14,Active,Benjamin Thompson,Remote,"English, Hindi"
+378,AGT0378,David Brown,B2B Support,Email,2019-03-27,Leave,Mia Turner,Glasgow,"English, Spanish"
+379,AGT0379,Harper Turner,B2B Support,Multi-Channel,2021-01-30,Active,Oscar Wood,Remote,English
+380,AGT0380,Evelyn White,Sales,Social,2018-09-24,Active,Amelia Jackson,Manchester,"English, Spanish"
+381,AGT0381,Daniel Cooper,Billing,Social,2022-05-18,Active,Samuel Thomas,Glasgow,English
+382,AGT0382,Alexander Hughes,Retention,Voice,2020-10-08,Terminated,Charlie Clarke,Glasgow,English
+383,AGT0383,William Smith,Technical Support,Email,2022-04-02,Active,Sophie Robinson,Manchester,"English, Hindi"
+384,AGT0384,Leo Jones,Consumer Support,Multi-Channel,2024-12-12,Active,Freya Robinson,Belfast,"English, Welsh"
+385,AGT0385,Sophia Jones,Sales,Email,2021-06-11,Active,Benjamin Jones,London,English
+386,AGT0386,Henry Patel,B2B Support,Chat,2023-07-04,Terminated,Samuel Walker,London,"English, French"
+387,AGT0387,James Lewis,Technical Support,Chat,2022-02-01,Active,Ruby Patel,London,"English, Spanish"
+388,AGT0388,Ella Patel,Technical Support,Email,2024-04-16,Active,Leo Thompson,Remote,English
+389,AGT0389,Sophie White,Retention,Social,2023-02-22,Active,Mia Thompson,Belfast,"English, French"
+390,AGT0390,Harper Hill,Partner Support,Email,2018-12-23,Terminated,Jessica Jackson,Manchester,English
+391,AGT0391,Matthew Johnson,Billing,Email,2020-07-16,Active,Benjamin Green,Remote,"English, Spanish"
+392,AGT0392,David Robinson,Consumer Support,Multi-Channel,2019-09-23,Active,Thomas Taylor,London,English
+393,AGT0393,Olivia Roberts,B2B Support,Voice,2024-04-13,Active,Sophie Davies,Manchester,"English, Spanish"
+394,AGT0394,Daniel Robinson,Sales,Chat,2018-05-23,Active,Olivia Thomas,Remote,English
+395,AGT0395,William Clarke,Retention,Multi-Channel,2021-06-15,Active,James Walker,Belfast,"English, Spanish"
+396,AGT0396,Alexander Martin,Retention,Voice,2020-01-11,Leave,Alexander Hill,London,"English, Welsh"
+397,AGT0397,Oscar Thompson,Technical Support,Social,2024-03-28,Active,Samuel Wood,London,"English, Spanish"
+398,AGT0398,Ruby Cooper,Technical Support,Multi-Channel,2020-04-24,Active,Jessica Harris,Glasgow,English
+399,AGT0399,Oscar Johnson,Technical Support,Chat,2022-06-18,Terminated,Freya Johnson,Remote,"English, Welsh"
+400,AGT0400,Joseph Williams,B2B Support,Social,2020-01-26,Active,Mia Patel,Glasgow,"English, Spanish"
+401,AGT0401,Oliver Jones,Technical Support,Multi-Channel,2019-04-25,Active,Charlie Davies,Glasgow,"English, Spanish"
+402,AGT0402,Olivia Turner,Consumer Support,Voice,2020-09-03,Active,Oliver Thomas,Manchester,"English, Hindi"
+403,AGT0403,David Johnson,Technical Support,Social,2023-08-21,Active,Benjamin Thomas,Remote,English
+404,AGT0404,Grace Green,Sales,Email,2021-05-23,Active,Samuel Green,Manchester,English
+405,AGT0405,Leo Robinson,Technical Support,Email,2025-03-03,Active,Oscar Johnson,Belfast,English
+406,AGT0406,Grace Johnson,Partner Support,Voice,2020-03-10,Active,Mia Johnson,London,"English, French"
+407,AGT0407,Ava Davies,Technical Support,Voice,2018-05-15,Active,Ella Hall,Manchester,"English, Hindi"
+408,AGT0408,Charlie Harris,Retention,Email,2021-03-05,Leave,Sophia Hill,Manchester,"English, Hindi"
+409,AGT0409,Sophie Taylor,Technical Support,Social,2020-12-13,Terminated,Mia Patel,Remote,"English, French"
+410,AGT0410,Lily Green,Retention,Social,2018-07-24,Active,Joseph Davies,London,"English, French"
+411,AGT0411,Harry Green,Retention,Voice,2024-03-14,Active,Noah Smith,Remote,"English, Welsh"
+412,AGT0412,Ava Turner,Billing,Multi-Channel,2019-05-13,Training,Ruby Cooper,Manchester,"English, French"
+413,AGT0413,Sophia Thomas,B2B Support,Multi-Channel,2023-06-03,Active,Daniel Robinson,Remote,"English, French"
+414,AGT0414,Samuel Brown,Retention,Email,2022-01-05,Active,William Edwards,Glasgow,English
+415,AGT0415,Olivia Cooper,Partner Support,Multi-Channel,2021-06-27,Training,Jack Cooper,Glasgow,"English, Welsh"
+416,AGT0416,Chloe Martin,Retention,Voice,2018-12-11,Active,Oliver Edwards,Remote,"English, Welsh"
+417,AGT0417,Daniel Evans,Sales,Social,2025-06-12,Active,Sophia Roberts,Glasgow,"English, Hindi"
+418,AGT0418,Lucas Johnson,Retention,Chat,2025-03-08,Active,Joseph Brown,Remote,English
+419,AGT0419,Oscar Clarke,Partner Support,Social,2020-06-27,Active,Leo Lewis,London,"English, Welsh"
+420,AGT0420,Charlie Thompson,Consumer Support,Voice,2023-03-02,Active,Benjamin Hall,Manchester,"English, Hindi"
+421,AGT0421,Sophie Jones,Sales,Voice,2019-11-30,Active,Jack Davies,London,"English, French"
+422,AGT0422,Harper Brown,Sales,Social,2025-06-02,Active,Charlotte Thompson,Remote,"English, Welsh"
+423,AGT0423,Oliver Wilson,Billing,Multi-Channel,2022-10-15,Training,Matthew Brown,Remote,"English, French"
+424,AGT0424,Benjamin Hill,Technical Support,Voice,2025-02-01,Training,Alice Edwards,Manchester,English
+425,AGT0425,Jessica Green,Partner Support,Email,2019-01-29,Training,Alice White,Remote,"English, Spanish"
+426,AGT0426,Sophie Hall,Billing,Email,2024-07-24,Active,Charlie Williams,Manchester,English
+427,AGT0427,Daniel Johnson,Billing,Chat,2024-04-22,Active,Alice Wilson,Remote,"English, Spanish"
+428,AGT0428,Ava Wright,B2B Support,Social,2021-12-13,Training,Harry Wilson,London,"English, Spanish"
+429,AGT0429,Evelyn Walker,Consumer Support,Social,2024-08-27,Active,William Davies,Manchester,"English, French"
+430,AGT0430,Olivia Thomas,B2B Support,Voice,2022-08-05,Active,William Taylor,Remote,English
+431,AGT0431,Alice Davies,Billing,Email,2023-10-10,Active,Lily Wilson,Belfast,"English, Welsh"
+432,AGT0432,James Davies,Technical Support,Multi-Channel,2024-11-22,Active,James Green,London,"English, French"
+433,AGT0433,Henry Thomas,Consumer Support,Chat,2022-10-26,Active,Joseph Cooper,Glasgow,"English, Spanish"
+434,AGT0434,Emily Martin,Partner Support,Chat,2021-04-17,Leave,Charlotte Evans,Glasgow,English
+435,AGT0435,Sophia Smith,Technical Support,Email,2019-02-21,Active,Noah Wright,Belfast,English
+436,AGT0436,Jack Johnson,Retention,Chat,2018-02-01,Active,Charlotte Jackson,London,"English, Spanish"
+437,AGT0437,Mia Hall,Partner Support,Voice,2022-11-02,Active,Sophie Smith,Manchester,English
+438,AGT0438,Alexander Patel,B2B Support,Email,2023-03-13,Active,Freya Wood,Belfast,"English, French"
+439,AGT0439,Daniel Hall,Technical Support,Chat,2021-12-09,Training,Chloe Johnson,Belfast,"English, Welsh"
+440,AGT0440,Alice Martin,Partner Support,Email,2018-04-26,Active,Isabella Jones,Belfast,"English, Hindi"
+441,AGT0441,Harry Harris,Consumer Support,Social,2021-03-05,Active,Grace Wood,Remote,"English, French"
+442,AGT0442,Benjamin Jackson,Technical Support,Email,2020-05-02,Leave,Daniel Evans,London,"English, French"
+443,AGT0443,Henry Wood,B2B Support,Email,2018-04-28,Active,David Jones,Manchester,English
+444,AGT0444,Ava Wright,Billing,Multi-Channel,2022-08-01,Leave,Harper Lewis,London,"English, Spanish"
+445,AGT0445,Oliver Turner,Consumer Support,Email,2022-03-27,Active,Ella Thomas,Manchester,"English, Hindi"
+446,AGT0446,Harper Patel,Sales,Voice,2021-03-29,Active,Samuel Clarke,Remote,English
+447,AGT0447,Sophie Lewis,Sales,Chat,2024-07-13,Active,Evelyn Davies,Belfast,"English, Welsh"
+448,AGT0448,Olivia Hill,B2B Support,Email,2021-04-16,Active,David Martin,Belfast,"English, Welsh"
+449,AGT0449,Thomas Hill,Retention,Chat,2018-05-07,Active,Emily Lewis,Glasgow,"English, Spanish"
+450,AGT0450,Harry Thomas,Sales,Chat,2021-09-03,Active,Charlotte Jones,Manchester,"English, Hindi"
+451,AGT0451,Charlie Hall,Technical Support,Email,2022-12-26,Active,Ava Hughes,Glasgow,"English, Spanish"
+452,AGT0452,Isabella Thompson,Technical Support,Social,2020-01-03,Terminated,Matthew Jackson,London,"English, Spanish"
+453,AGT0453,Charlotte Clarke,B2B Support,Voice,2018-03-28,Active,Chloe Hughes,Manchester,English
+454,AGT0454,Oscar Harris,Consumer Support,Multi-Channel,2023-05-27,Active,Emily Davies,Remote,"English, Hindi"
+455,AGT0455,Alice Wilson,Technical Support,Social,2021-07-03,Training,Charlotte Walker,London,"English, Spanish"
+456,AGT0456,Ruby Johnson,Sales,Email,2022-12-28,Active,Ava Hall,Remote,English
+457,AGT0457,Charlie Green,Sales,Multi-Channel,2024-02-25,Active,David Hill,Manchester,"English, French"
+458,AGT0458,Amelia Robinson,Partner Support,Multi-Channel,2018-07-11,Active,Thomas Wright,Belfast,"English, Welsh"
+459,AGT0459,Grace Robinson,Retention,Email,2019-07-09,Active,Oliver Thompson,Manchester,"English, Hindi"
+460,AGT0460,Benjamin Thompson,Consumer Support,Voice,2022-09-02,Active,Henry Taylor,Belfast,"English, Welsh"
+461,AGT0461,Alice Smith,Retention,Voice,2019-09-20,Active,Sophia Jackson,Remote,"English, Hindi"
+462,AGT0462,William Martin,Consumer Support,Chat,2019-06-03,Leave,George Williams,Remote,"English, Spanish"
+463,AGT0463,Alice Thompson,Billing,Email,2021-12-04,Active,Alice Edwards,Manchester,English
+464,AGT0464,Emma Harris,Sales,Email,2024-01-16,Active,Isabella Martin,Remote,"English, Hindi"
+465,AGT0465,Lucas Thompson,B2B Support,Social,2020-11-22,Active,Harry Hughes,Belfast,"English, Spanish"
+466,AGT0466,Henry Evans,B2B Support,Multi-Channel,2018-07-10,Active,David Hughes,Manchester,"English, Hindi"
+467,AGT0467,Ruby Hill,Billing,Social,2018-03-31,Active,Oscar Clarke,Remote,"English, Spanish"
+468,AGT0468,Ella Harris,Retention,Email,2022-10-24,Active,Freya Cooper,Manchester,"English, Spanish"
+469,AGT0469,Leo Thompson,Retention,Multi-Channel,2023-12-04,Active,Sophie Taylor,Manchester,"English, French"
+470,AGT0470,George Hill,Retention,Social,2023-04-11,Active,Jack Clarke,Manchester,"English, Spanish"
+471,AGT0471,Lucas Evans,Sales,Social,2020-12-16,Active,Oliver Brown,Glasgow,"English, Spanish"
+472,AGT0472,Sophie Johnson,Sales,Social,2024-03-12,Active,Harper Roberts,Manchester,"English, Spanish"
+473,AGT0473,Matthew Wilson,Technical Support,Email,2024-06-02,Active,Charlie Hall,Belfast,English
+474,AGT0474,Grace Edwards,Technical Support,Social,2018-06-30,Active,Charlie Lewis,Belfast,"English, Hindi"
+475,AGT0475,Sophie White,Retention,Email,2023-04-17,Active,Lucas Jones,London,"English, Hindi"
+476,AGT0476,Henry Roberts,Consumer Support,Multi-Channel,2024-10-22,Active,Harper Wood,Manchester,"English, Welsh"
+477,AGT0477,Isabella Hall,Billing,Voice,2021-06-27,Active,Henry Robinson,Belfast,"English, French"
+478,AGT0478,Ruby Brown,Billing,Social,2020-11-16,Active,Ella Jones,Belfast,English
+479,AGT0479,Jessica Evans,Partner Support,Multi-Channel,2023-11-28,Active,Harry Patel,Glasgow,"English, Spanish"
+480,AGT0480,Sophie Hall,Billing,Voice,2023-10-22,Training,Emma Patel,London,English
+481,AGT0481,Alexander Thomas,Consumer Support,Email,2024-06-25,Terminated,Mia Martin,London,"English, Hindi"
+482,AGT0482,Jack Hall,Sales,Social,2022-11-14,Active,William Wilson,Glasgow,English
+483,AGT0483,Alexander Hill,Technical Support,Chat,2019-07-28,Active,Mia White,Glasgow,"English, Hindi"
+484,AGT0484,William Davies,Retention,Social,2021-04-21,Active,Jack Jackson,Glasgow,English
+485,AGT0485,Jessica Lewis,Consumer Support,Email,2020-07-20,Active,Jack Edwards,Remote,"English, Welsh"
+486,AGT0486,Matthew Edwards,Partner Support,Multi-Channel,2020-04-01,Training,Charlie Thompson,London,"English, Hindi"
+487,AGT0487,Sophia Clarke,Partner Support,Social,2023-09-24,Active,Ella Walker,Belfast,English
+488,AGT0488,Evelyn White,Sales,Voice,2019-07-03,Leave,James Taylor,Remote,"English, Welsh"
+489,AGT0489,Chloe Hill,B2B Support,Voice,2021-09-02,Active,David Williams,Belfast,"English, Spanish"
+490,AGT0490,Isabella Thompson,Consumer Support,Multi-Channel,2025-02-23,Training,Jessica Walker,Remote,"English, French"
+491,AGT0491,Freya Edwards,Partner Support,Chat,2020-04-24,Active,Harper Martin,Glasgow,"English, Welsh"
+492,AGT0492,Matthew Thomas,Partner Support,Social,2020-02-05,Active,Charlotte Johnson,Belfast,"English, French"
+493,AGT0493,Charlotte Davies,Consumer Support,Email,2021-04-12,Active,Sophie Wilson,Belfast,"English, Welsh"
+494,AGT0494,Charlie Green,Partner Support,Email,2021-04-21,Leave,Isabella Green,Remote,"English, Welsh"
+495,AGT0495,Harry White,Partner Support,Social,2019-01-13,Active,Grace Jones,London,"English, Welsh"
+496,AGT0496,James Jones,Consumer Support,Voice,2023-03-03,Active,Alice Turner,Manchester,"English, French"
+497,AGT0497,Noah Harris,Partner Support,Chat,2020-12-10,Active,Noah Jones,London,"English, Spanish"
+498,AGT0498,Thomas Johnson,Consumer Support,Email,2019-04-06,Active,Evelyn Clarke,Glasgow,"English, French"
+499,AGT0499,Thomas Hughes,Partner Support,Chat,2019-01-24,Active,Alice Taylor,Remote,"English, Hindi"
+500,AGT0500,Charlie Turner,Retention,Voice,2019-01-30,Active,Evelyn Martin,London,"English, Hindi"

@@ -1,0 +1,101 @@
+roaming_partner_key,partner_name,country,region,agreement_type,effective_date,data_rate_per_mb,voice_rate_per_min,status
+1,Finland Mobile Omega,Finland,EU,MVNO,2017-01-24,0,0,Active
+2,Netherlands Mobile Gamma,Netherlands,EU,MVNO,2019-07-20,0,0,Active
+3,Hong Kong Mobile Gamma,Hong Kong,International,MVNO,2019-02-07,0.136,0.597,Active
+4,Belgium Mobile Gamma,Belgium,EU,MVNO,2022-09-20,0,0,Active
+5,Australia Mobile Gamma,Australia,International,Bilateral,2021-01-18,0.351,0.837,Active
+6,Japan Mobile Omega,Japan,International,Hub,2023-05-06,0.221,0.815,Active
+7,Belgium Mobile Alpha,Belgium,EU,MVNO,2023-02-23,0,0,Active
+8,Netherlands Mobile Alpha,Netherlands,EU,Hub,2018-07-10,0,0,Active
+9,Japan Mobile Beta,Japan,International,Bilateral,2015-07-26,0.482,0.515,Active
+10,France Mobile Delta,France,EU,Hub,2020-09-12,0,0,Active
+11,India Mobile Gamma,India,International,Bilateral,2023-04-24,0.191,0.258,Active
+12,Spain Mobile Gamma,Spain,EU,MVNO,2023-02-17,0,0,Active
+13,China Mobile Beta,China,International,Hub,2018-11-22,0.166,0.372,Active
+14,Japan Mobile Delta,Japan,International,Bilateral,2016-02-18,0.019,0.104,Active
+15,Mexico Mobile Delta,Mexico,International,Hub,2021-05-04,0.332,0.803,Active
+16,Germany Mobile Beta,Germany,EU,Bilateral,2021-12-26,0,0,Active
+17,Sweden Mobile Beta,Sweden,EU,Hub,2019-07-07,0,0,Active
+18,Germany Mobile Gamma,Germany,EU,Hub,2015-08-21,0,0,Active
+19,Germany Mobile Alpha,Germany,EU,Bilateral,2018-12-07,0,0,Active
+20,Australia Mobile Beta,Australia,International,Hub,2018-05-16,0.456,0.562,Active
+21,India Mobile Delta,India,International,Hub,2018-05-24,0.064,0.861,Active
+22,Czech Republic Mobile Gamma,Czech Republic,EU,Bilateral,2021-02-20,0,0,Active
+23,Italy Mobile Omega,Italy,EU,Hub,2020-08-29,0,0,Active
+24,USA Mobile Delta,USA,International,Bilateral,2021-08-06,0.191,0.816,Active
+25,Greece Mobile Delta,Greece,EU,Hub,2015-08-14,0,0,Active
+26,Germany Mobile Delta,Germany,EU,Hub,2015-01-18,0,0,Active
+27,Mexico Mobile Delta,Mexico,International,Bilateral,2023-04-18,0.147,0.777,Active
+28,Portugal Mobile Alpha,Portugal,EU,Hub,2015-10-31,0,0,Active
+29,Spain Mobile Delta,Spain,EU,MVNO,2016-05-04,0,0,Active
+30,Denmark Mobile Gamma,Denmark,EU,MVNO,2022-09-25,0,0,Active
+31,Netherlands Mobile Gamma,Netherlands,EU,MVNO,2023-04-13,0,0,Active
+32,USA Mobile Delta,USA,International,Bilateral,2022-01-07,0.099,0.241,Active
+33,Spain Mobile Omega,Spain,EU,Bilateral,2022-09-29,0,0,Active
+34,China Mobile Beta,China,International,MVNO,2019-03-05,0.283,0.507,Active
+35,China Mobile Omega,China,International,MVNO,2022-08-22,0.483,0.083,Active
+36,Portugal Mobile Omega,Portugal,EU,MVNO,2019-06-22,0,0,Active
+37,Portugal Mobile Omega,Portugal,EU,MVNO,2018-02-07,0,0,Active
+38,Poland Mobile Omega,Poland,EU,Bilateral,2023-02-24,0,0,Active
+39,Finland Mobile Beta,Finland,EU,Bilateral,2016-10-10,0,0,Active
+40,Brazil Mobile Alpha,Brazil,International,Hub,2021-11-11,0.43,0.497,Active
+41,Sweden Mobile Delta,Sweden,EU,MVNO,2015-05-23,0,0,Active
+42,Italy Mobile Delta,Italy,EU,Bilateral,2022-08-27,0,0,Active
+43,Denmark Mobile Beta,Denmark,EU,Hub,2021-05-03,0,0,Active
+44,China Mobile Delta,China,International,Hub,2016-02-17,0.211,0.596,Active
+45,UAE Mobile Gamma,UAE,International,Bilateral,2021-12-07,0.199,0.42,Active
+46,Denmark Mobile Gamma,Denmark,EU,MVNO,2022-04-17,0,0,Active
+47,Ireland Mobile Gamma,Ireland,EU,MVNO,2020-10-31,0,0,Active
+48,Czech Republic Mobile Alpha,Czech Republic,EU,MVNO,2018-01-30,0,0,Active
+49,Hong Kong Mobile Alpha,Hong Kong,International,Hub,2015-11-09,0.261,0.321,Active
+50,Mexico Mobile Beta,Mexico,International,Bilateral,2022-12-06,0.17,0.518,Active
+51,South Africa Mobile Beta,South Africa,International,Hub,2015-12-07,0.388,0.773,Active
+52,South Africa Mobile Alpha,South Africa,International,MVNO,2015-08-07,0.401,0.856,Active
+53,Portugal Mobile Gamma,Portugal,EU,MVNO,2016-05-31,0,0,Active
+54,Hong Kong Mobile Omega,Hong Kong,International,Bilateral,2023-09-19,0.308,0.656,Active
+55,Greece Mobile Alpha,Greece,EU,Bilateral,2022-01-20,0,0,Active
+56,Austria Mobile Omega,Austria,EU,Hub,2020-05-19,0,0,Active
+57,Australia Mobile Alpha,Australia,International,Bilateral,2018-01-01,0.039,0.17,Active
+58,USA Mobile Delta,USA,International,MVNO,2022-04-25,0.386,0.215,Active
+59,Austria Mobile Delta,Austria,EU,MVNO,2015-10-02,0,0,Active
+60,UAE Mobile Delta,UAE,International,MVNO,2023-10-06,0.049,0.863,Active
+61,Singapore Mobile Delta,Singapore,International,Hub,2020-03-24,0.227,0.151,Active
+62,Portugal Mobile Gamma,Portugal,EU,Bilateral,2020-08-13,0,0,Active
+63,Italy Mobile Delta,Italy,EU,Bilateral,2017-07-22,0,0,Active
+64,Portugal Mobile Gamma,Portugal,EU,Bilateral,2017-05-19,0,0,Active
+65,France Mobile Omega,France,EU,Bilateral,2016-04-30,0,0,Active
+66,Singapore Mobile Omega,Singapore,International,MVNO,2023-01-27,0.363,0.423,Active
+67,Spain Mobile Omega,Spain,EU,Hub,2021-02-08,0,0,Active
+68,Italy Mobile Omega,Italy,EU,MVNO,2017-03-07,0,0,Active
+69,Hong Kong Mobile Delta,Hong Kong,International,Bilateral,2016-04-05,0.219,0.558,Active
+70,UAE Mobile Omega,UAE,International,Hub,2019-02-21,0.496,0.335,Active
+71,Portugal Mobile Alpha,Portugal,EU,MVNO,2019-11-05,0,0,Active
+72,Netherlands Mobile Delta,Netherlands,EU,MVNO,2015-08-02,0,0,Active
+73,Hong Kong Mobile Delta,Hong Kong,International,Hub,2017-07-30,0.296,0.55,Active
+74,South Africa Mobile Alpha,South Africa,International,Hub,2015-07-02,0.063,0.565,Active
+75,Denmark Mobile Alpha,Denmark,EU,Bilateral,2018-02-25,0,0,Active
+76,Austria Mobile Beta,Austria,EU,Bilateral,2015-07-05,0,0,Active
+77,China Mobile Beta,China,International,Hub,2015-07-29,0.261,0.426,Active
+78,Canada Mobile Omega,Canada,International,Bilateral,2021-07-19,0.427,0.29,Active
+79,Denmark Mobile Beta,Denmark,EU,MVNO,2020-08-12,0,0,Active
+80,Sweden Mobile Delta,Sweden,EU,Bilateral,2018-04-22,0,0,Active
+81,Australia Mobile Alpha,Australia,International,Hub,2017-11-10,0.259,0.713,Active
+82,South Africa Mobile Alpha,South Africa,International,MVNO,2018-01-02,0.46,0.75,Active
+83,France Mobile Beta,France,EU,Hub,2018-12-08,0,0,Active
+84,Hungary Mobile Alpha,Hungary,EU,Hub,2020-12-07,0,0,Active
+85,Belgium Mobile Gamma,Belgium,EU,Bilateral,2023-01-14,0,0,Active
+86,Poland Mobile Beta,Poland,EU,Bilateral,2021-03-01,0,0,Active
+87,Ireland Mobile Alpha,Ireland,EU,MVNO,2015-05-02,0,0,Active
+88,Denmark Mobile Alpha,Denmark,EU,MVNO,2017-02-10,0,0,Active
+89,Czech Republic Mobile Gamma,Czech Republic,EU,Bilateral,2016-10-17,0,0,Active
+90,Czech Republic Mobile Delta,Czech Republic,EU,Hub,2022-05-29,0,0,Active
+91,USA Mobile Alpha,USA,International,MVNO,2021-05-05,0.032,0.084,Active
+92,Hong Kong Mobile Gamma,Hong Kong,International,MVNO,2019-08-24,0.284,0.087,Active
+93,Brazil Mobile Alpha,Brazil,International,MVNO,2020-11-19,0.167,0.379,Active
+94,Germany Mobile Omega,Germany,EU,Hub,2022-12-24,0,0,Active
+95,Netherlands Mobile Beta,Netherlands,EU,Hub,2017-05-28,0,0,Active
+96,Canada Mobile Beta,Canada,International,Hub,2015-08-12,0.087,0.699,Active
+97,Brazil Mobile Beta,Brazil,International,Bilateral,2023-01-19,0.015,0.654,Active
+98,Poland Mobile Delta,Poland,EU,Bilateral,2016-12-10,0,0,Active
+99,Greece Mobile Gamma,Greece,EU,MVNO,2021-09-19,0,0,Active
+100,Spain Mobile Delta,Spain,EU,Bilateral,2015-02-14,0,0,Active

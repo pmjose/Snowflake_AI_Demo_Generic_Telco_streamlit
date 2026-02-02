@@ -1,0 +1,437 @@
+partner_key,partner_name,partner_type,tier,city,county,region_key,status,onboard_date,account_manager,commission_rate,credit_limit
+1,Turner Tech Ltd,Wholesale,Bronze,London,Greater London,402,Active,2020-11-07,Ella Roberts,8.1,25000
+2,Turner Networks Ltd,Reseller,Gold,Leicester,Leicestershire,403,Active,2017-01-19,Olivia Clarke,15.1,25000
+3,Green IT Ltd,Reseller,Standard,Glasgow,Scotland,407,Active,2020-10-03,Sophia Wood,17.4,250000
+4,Hall IT Ltd,Agent,Gold,Leicester,Leicestershire,406,Active,2021-07-27,William Williams,6.6,250000
+5,Turner Tech Ltd,IT Provider,Bronze,Oxford,Oxfordshire,403,Inactive,2017-11-10,Charlotte Evans,21.8,10000
+6,Green Solutions Ltd,MSP,Standard,Bristol,Avon,409,Active,2022-01-30,Isabella Harris,13.2,50000
+7,Harris Solutions Ltd,Agent,Standard,Southampton,Hampshire,401,Active,2024-03-22,Freya Thomas,8.3,250000
+8,Roberts IT Ltd,MSP,Standard,Nottingham,Nottinghamshire,408,Active,2016-04-29,George Cooper,16.2,250000
+9,Smith IT Ltd,Agent,Gold,Coventry,West Midlands,409,Active,2022-06-28,Jessica Harris,12.9,10000
+10,Wright Solutions Ltd,Agent,Gold,Bristol,Avon,409,Active,2020-10-23,Daniel Robinson,14.0,100000
+11,Brown Tech Ltd,Wholesale,Bronze,Brighton,East Sussex,411,Active,2019-08-29,Henry Green,15.8,250000
+12,Taylor Group Ltd,Referral,Platinum,London,Greater London,401,Active,2018-12-11,Sophia Hall,11.5,50000
+13,Roberts Networks Ltd,Agent,Standard,Newcastle,Tyne and Wear,408,Active,2017-05-06,Leo Evans,16.5,100000
+14,Wilson Solutions Ltd,Telecom Reseller,Gold,Leicester,Leicestershire,405,Active,2015-01-04,Jessica Wood,10.6,10000
+15,Green IT Ltd,Reseller,Standard,London,Greater London,402,Active,2015-05-25,Jessica Harris,22.5,10000
+16,White Group Ltd,IT Provider,Standard,London,Greater London,409,Active,2024-01-07,Daniel Wright,7.1,250000
+17,Thomas Telecom Ltd,Wholesale,Standard,Bristol,Avon,404,Active,2024-05-01,Henry Wood,9.5,100000
+18,Edwards IT Ltd,Referral,Silver,Oxford,Oxfordshire,410,Active,2015-07-18,Jessica Brown,9.3,50000
+19,Wood Solutions Ltd,Reseller,Standard,Oxford,Oxfordshire,402,Active,2015-05-10,Emily Taylor,23.4,50000
+20,Hall IT Ltd,Telecom Reseller,Standard,Southampton,Hampshire,402,Active,2021-03-06,Harper Evans,8.0,100000
+21,Hill Solutions Ltd,IT Provider,Standard,Cardiff,Wales,411,Active,2020-03-17,Oscar Robinson,23.6,25000
+22,Walker Solutions Ltd,Telecom Reseller,Gold,Belfast,Northern Ireland,409,Active,2018-03-11,Emma Smith,14.8,250000
+23,Robinson Networks Ltd,Telecom Reseller,Silver,Cambridge,Cambridgeshire,402,Active,2023-06-27,Leo Evans,12.9,50000
+24,Clarke Networks Ltd,Referral,Platinum,Manchester,Greater Manchester,401,Active,2015-08-08,Ava Harris,15.0,50000
+25,Brown Solutions Ltd,Referral,Standard,Reading,Berkshire,411,Active,2017-03-22,Samuel Edwards,20.8,25000
+26,Martin IT Ltd,MSP,Silver,Glasgow,Scotland,403,Suspended,2018-02-12,Henry Hall,14.8,250000
+27,Green IT Ltd,Agent,Silver,Leeds,West Yorkshire,405,Active,2022-04-30,Lily Davies,7.3,10000
+28,Jackson Communications Ltd,IT Provider,Silver,Brighton,East Sussex,404,Active,2023-10-29,Lucas Taylor,9.0,100000
+29,Jackson IT Ltd,IT Provider,Bronze,Leicester,Leicestershire,411,Active,2021-06-10,Olivia Williams,22.4,100000
+30,Jones Solutions Ltd,Agent,Gold,Bristol,Avon,401,Active,2024-02-13,Emily Davies,11.9,50000
+31,Martin Solutions Ltd,Wholesale,Standard,Leicester,Leicestershire,406,Active,2015-08-26,Lucas Turner,21.5,25000
+32,Edwards Telecom Ltd,Reseller,Bronze,Edinburgh,Scotland,405,Active,2021-05-08,James Williams,23.0,100000
+33,Cooper Networks Ltd,IT Provider,Standard,Newcastle,Tyne and Wear,406,Active,2022-01-07,Sophie Martin,10.2,25000
+34,Wilson Communications Ltd,Agent,Bronze,Leicester,Leicestershire,403,Active,2015-03-21,Amelia Thompson,15.4,25000
+35,Patel Communications Ltd,MSP,Silver,Birmingham,West Midlands,402,Active,2021-03-11,Ruby Thomas,10.3,50000
+36,Williams IT Ltd,Referral,Standard,Reading,Berkshire,403,Active,2019-03-31,James Wood,7.0,10000
+37,Wilson Networks Ltd,Wholesale,Silver,Glasgow,Scotland,407,Active,2016-06-18,Samuel Jones,11.0,100000
+38,Cooper Communications Ltd,Reseller,Silver,Liverpool,Merseyside,409,Active,2017-11-09,Sophia Thompson,10.7,250000
+39,Edwards Tech Ltd,Wholesale,Platinum,Bristol,Avon,411,Active,2021-04-20,Sophia Patel,16.8,25000
+40,Wood Tech Ltd,IT Provider,Standard,Nottingham,Nottinghamshire,407,Active,2021-06-16,Freya Johnson,15.8,10000
+41,Hughes Networks Ltd,MSP,Bronze,Reading,Berkshire,401,Suspended,2018-10-20,Joseph Wright,5.2,25000
+42,Robinson Networks Ltd,Agent,Bronze,Glasgow,Scotland,406,Active,2020-09-19,Evelyn Johnson,16.0,25000
+43,Brown Group Ltd,Telecom Reseller,Silver,Bristol,Avon,410,Active,2020-09-01,James Brown,14.2,250000
+44,Johnson Networks Ltd,Agent,Bronze,Cardiff,Wales,400,Active,2017-12-23,Sophia Turner,23.0,10000
+45,Cooper IT Ltd,IT Provider,Silver,Cardiff,Wales,401,Active,2018-02-19,Freya Jones,21.9,100000
+46,Clarke Telecom Ltd,IT Provider,Bronze,Glasgow,Scotland,404,Inactive,2017-03-03,William Roberts,18.5,100000
+47,Taylor IT Ltd,MSP,Standard,Newcastle,Tyne and Wear,407,Active,2022-06-03,Ava Jones,22.3,10000
+48,Roberts Communications Ltd,IT Provider,Platinum,Sheffield,South Yorkshire,400,Inactive,2020-01-04,Ava Lewis,19.2,100000
+49,Wood Networks Ltd,IT Provider,Gold,Leicester,Leicestershire,409,Active,2016-12-06,Olivia Wood,24.9,10000
+50,Lewis Communications Ltd,Wholesale,Silver,Oxford,Oxfordshire,410,Active,2015-10-11,Benjamin Walker,16.4,250000
+51,Harris IT Ltd,Agent,Gold,Southampton,Hampshire,408,Inactive,2019-09-27,Charlie Wright,14.0,100000
+52,Hughes Group Ltd,Reseller,Standard,Manchester,Greater Manchester,409,Active,2021-09-19,Ava Edwards,24.4,50000
+53,Thompson Group Ltd,Agent,Standard,Edinburgh,Scotland,401,Inactive,2022-10-06,Emily Jackson,19.7,10000
+54,Johnson Group Ltd,Wholesale,Silver,Nottingham,Nottinghamshire,407,Active,2020-03-30,Charlie Williams,6.2,10000
+55,Roberts Communications Ltd,IT Provider,Standard,London,Greater London,404,Active,2016-11-14,Matthew Hughes,21.2,250000
+56,Jones Communications Ltd,Reseller,Bronze,Southampton,Hampshire,402,Active,2018-02-19,Ella Walker,23.3,10000
+57,Williams IT Ltd,Wholesale,Silver,Leeds,West Yorkshire,409,Active,2018-08-11,Jessica Cooper,11.2,10000
+58,Evans Communications Ltd,Telecom Reseller,Bronze,London,Greater London,401,Active,2019-03-27,Oliver Wilson,23.7,25000
+59,Robinson Solutions Ltd,Referral,Bronze,Manchester,Greater Manchester,411,Active,2024-04-14,Daniel Smith,24.6,250000
+60,Patel Solutions Ltd,Wholesale,Bronze,Newcastle,Tyne and Wear,406,Active,2019-01-03,Samuel Edwards,7.3,100000
+61,Martin Tech Ltd,MSP,Silver,Coventry,West Midlands,403,Active,2020-09-23,Matthew Brown,24.3,50000
+62,Taylor IT Ltd,MSP,Bronze,Cambridge,Cambridgeshire,407,Inactive,2018-05-01,Alice Brown,8.3,25000
+63,Thompson Solutions Ltd,Wholesale,Gold,Southampton,Hampshire,410,Inactive,2023-07-11,Olivia Roberts,11.0,10000
+64,Brown Networks Ltd,MSP,Gold,Bristol,Avon,403,Active,2024-04-14,Alexander Davies,17.0,100000
+65,Taylor Group Ltd,IT Provider,Bronze,Belfast,Northern Ireland,401,Active,2017-04-05,Mia Edwards,6.9,10000
+66,Thompson Telecom Ltd,Reseller,Silver,Leeds,West Yorkshire,410,Active,2023-08-13,Samuel Clarke,14.2,50000
+67,Hill IT Ltd,Telecom Reseller,Gold,Liverpool,Merseyside,401,Active,2023-05-28,William Walker,16.7,50000
+68,Hughes Communications Ltd,Wholesale,Standard,Leeds,West Yorkshire,400,Active,2023-10-24,Ava Davies,23.1,100000
+69,Edwards Solutions Ltd,IT Provider,Standard,Leicester,Leicestershire,408,Inactive,2019-02-04,Oliver Wood,17.3,25000
+70,Wright Group Ltd,Referral,Standard,Birmingham,West Midlands,402,Active,2019-07-11,Emma Evans,24.2,25000
+71,Williams IT Ltd,Wholesale,Standard,Nottingham,Nottinghamshire,405,Active,2019-11-02,Oscar Lewis,13.6,100000
+72,Walker Tech Ltd,Wholesale,Silver,Leeds,West Yorkshire,401,Active,2024-11-12,Lucas Turner,6.3,10000
+73,Edwards Communications Ltd,Reseller,Silver,Cardiff,Wales,411,Active,2021-09-19,Henry Lewis,8.0,50000
+74,Roberts Communications Ltd,IT Provider,Standard,Bristol,Avon,411,Active,2018-11-12,Henry Green,23.1,50000
+75,Wilson Networks Ltd,Telecom Reseller,Gold,Glasgow,Scotland,410,Active,2022-04-08,Lily Clarke,11.5,100000
+76,Robinson Networks Ltd,Telecom Reseller,Gold,Cardiff,Wales,400,Active,2015-04-01,Benjamin Hall,17.7,50000
+77,Clarke Solutions Ltd,MSP,Silver,Glasgow,Scotland,409,Active,2020-12-12,Grace Williams,24.6,25000
+78,Smith Communications Ltd,Referral,Bronze,Belfast,Northern Ireland,402,Active,2018-05-21,Samuel Hill,7.8,10000
+79,Davies Group Ltd,Telecom Reseller,Silver,Newcastle,Tyne and Wear,410,Active,2016-07-01,Ruby Wright,14.8,100000
+80,Wright Tech Ltd,Wholesale,Silver,Brighton,East Sussex,405,Active,2018-03-07,Alexander Edwards,16.3,25000
+81,Thomas Group Ltd,Referral,Bronze,Nottingham,Nottinghamshire,411,Active,2024-06-19,Grace Evans,10.9,100000
+82,Edwards IT Ltd,Agent,Standard,Nottingham,Nottinghamshire,407,Active,2018-05-04,George Walker,7.2,25000
+83,Johnson Solutions Ltd,IT Provider,Standard,Liverpool,Merseyside,407,Active,2020-06-09,William Clarke,10.2,50000
+84,Wright Networks Ltd,Agent,Bronze,Leicester,Leicestershire,410,Active,2021-02-14,Charlie Hill,17.8,50000
+85,Turner Group Ltd,Wholesale,Gold,Brighton,East Sussex,400,Suspended,2020-11-09,Amelia Lewis,22.2,10000
+86,Brown Tech Ltd,MSP,Platinum,Belfast,Northern Ireland,403,Active,2016-04-09,Ruby Johnson,20.5,100000
+87,Johnson Solutions Ltd,IT Provider,Bronze,Bristol,Avon,408,Active,2016-12-29,Olivia Roberts,20.7,25000
+88,Wright Communications Ltd,Agent,Bronze,London,Greater London,411,Active,2024-12-15,James Wilson,20.7,25000
+89,Wright Group Ltd,Wholesale,Gold,Cardiff,Wales,410,Active,2023-07-24,Olivia Harris,22.3,250000
+90,Harris Tech Ltd,Telecom Reseller,Gold,Brighton,East Sussex,407,Active,2018-02-14,Mia Roberts,16.8,100000
+91,Thompson Networks Ltd,Agent,Standard,Glasgow,Scotland,411,Active,2015-06-28,Ava Clarke,8.4,50000
+92,Evans Networks Ltd,MSP,Bronze,Leicester,Leicestershire,409,Active,2023-05-29,Mia Green,5.6,50000
+93,Jones Tech Ltd,Referral,Standard,Edinburgh,Scotland,403,Inactive,2019-05-15,Grace Cooper,14.2,10000
+94,Walker Solutions Ltd,Referral,Standard,Brighton,East Sussex,411,Active,2022-01-19,Olivia Cooper,5.8,10000
+95,Jones Telecom Ltd,IT Provider,Standard,Oxford,Oxfordshire,405,Active,2024-08-11,Ruby Jones,23.6,50000
+96,Hill Networks Ltd,Referral,Bronze,Leeds,West Yorkshire,403,Active,2017-12-29,Sophie Turner,5.7,10000
+97,Jones Group Ltd,Agent,Standard,Glasgow,Scotland,404,Inactive,2017-11-18,Noah Walker,7.6,10000
+98,Lewis Group Ltd,Reseller,Gold,Reading,Berkshire,411,Inactive,2023-10-24,Oscar Wright,14.4,50000
+99,Edwards IT Ltd,Reseller,Bronze,London,Greater London,404,Active,2023-03-01,Chloe Harris,10.0,25000
+100,Lewis Telecom Ltd,Agent,Silver,Liverpool,Merseyside,401,Active,2020-11-29,Harry Roberts,6.5,250000
+101,Hall Group Ltd,Wholesale,Gold,Newcastle,Tyne and Wear,410,Active,2016-05-26,Oliver Williams,22.4,100000
+102,Cooper Networks Ltd,Agent,Standard,Bristol,Avon,401,Active,2016-06-16,Noah Hall,5.9,10000
+103,Turner Telecom Ltd,Telecom Reseller,Bronze,Leicester,Leicestershire,408,Active,2015-02-05,Thomas Wright,9.8,25000
+104,Lewis IT Ltd,MSP,Silver,Manchester,Greater Manchester,405,Active,2018-07-14,Harper Taylor,14.5,50000
+105,Clarke Group Ltd,IT Provider,Silver,Glasgow,Scotland,403,Active,2016-11-09,Alice Wright,14.7,25000
+106,Wright Communications Ltd,Telecom Reseller,Bronze,Birmingham,West Midlands,404,Active,2018-07-05,Joseph Johnson,14.2,250000
+107,Hill Communications Ltd,Telecom Reseller,Silver,Coventry,West Midlands,404,Active,2018-04-12,Ava Wright,16.6,100000
+108,Hill Telecom Ltd,MSP,Standard,Birmingham,West Midlands,402,Active,2024-04-16,Leo Thompson,17.2,10000
+109,Green Communications Ltd,Telecom Reseller,Gold,Southampton,Hampshire,403,Active,2024-07-27,Sophia Harris,14.9,10000
+110,Taylor IT Ltd,IT Provider,Platinum,Glasgow,Scotland,410,Active,2020-08-14,Isabella Smith,13.4,50000
+111,Davies Group Ltd,Wholesale,Bronze,Birmingham,West Midlands,411,Suspended,2024-11-05,Charlie Martin,7.3,10000
+112,Jones Telecom Ltd,IT Provider,Bronze,Belfast,Northern Ireland,408,Active,2018-07-09,Emily Davies,7.1,25000
+113,Hill Tech Ltd,Agent,Gold,Cardiff,Wales,411,Active,2019-08-17,Harry Patel,13.5,100000
+114,Clarke Solutions Ltd,Telecom Reseller,Gold,Leicester,Leicestershire,401,Active,2022-01-29,Daniel Cooper,16.6,100000
+115,Turner IT Ltd,Referral,Silver,Oxford,Oxfordshire,409,Active,2023-07-03,Thomas Roberts,21.4,25000
+116,Jackson Communications Ltd,Reseller,Gold,Coventry,West Midlands,410,Active,2015-08-26,Grace White,17.1,250000
+117,Harris Telecom Ltd,Reseller,Standard,Leicester,Leicestershire,406,Active,2021-05-01,Harper Wright,5.9,100000
+118,Lewis IT Ltd,MSP,Bronze,Leeds,West Yorkshire,411,Active,2020-03-29,Emily Clarke,9.1,25000
+119,Robinson Networks Ltd,Agent,Silver,Brighton,East Sussex,405,Active,2023-07-08,Jack Hill,10.9,250000
+120,Edwards Networks Ltd,Telecom Reseller,Standard,Edinburgh,Scotland,409,Active,2021-10-31,Alice White,11.0,50000
+121,Thompson Tech Ltd,Telecom Reseller,Gold,Glasgow,Scotland,402,Active,2022-10-18,Mia Wilson,20.6,10000
+122,Williams Communications Ltd,IT Provider,Silver,Reading,Berkshire,407,Active,2022-11-11,Grace Wilson,6.9,10000
+123,Hall Telecom Ltd,Agent,Bronze,Brighton,East Sussex,404,Active,2021-02-09,Isabella Lewis,10.5,100000
+124,Roberts Solutions Ltd,Telecom Reseller,Bronze,Reading,Berkshire,406,Active,2024-06-03,Chloe Martin,11.6,25000
+125,Patel Communications Ltd,Referral,Standard,Liverpool,Merseyside,411,Active,2020-09-17,Ella Hughes,15.9,50000
+126,Hall Tech Ltd,Referral,Silver,Nottingham,Nottinghamshire,405,Active,2022-08-20,Amelia Hill,24.9,50000
+127,Walker Networks Ltd,MSP,Platinum,Newcastle,Tyne and Wear,411,Active,2022-07-07,Freya Jackson,15.2,10000
+128,White Networks Ltd,Wholesale,Gold,Manchester,Greater Manchester,410,Active,2022-07-27,Thomas Roberts,19.1,100000
+129,Davies Communications Ltd,Wholesale,Silver,Leicester,Leicestershire,405,Active,2020-12-17,Lily Evans,15.7,10000
+130,Johnson IT Ltd,Reseller,Standard,Newcastle,Tyne and Wear,403,Active,2018-03-01,Noah Robinson,17.0,50000
+131,Hill Communications Ltd,Reseller,Silver,Reading,Berkshire,408,Inactive,2018-07-25,Sophie Brown,21.4,10000
+132,Wright Group Ltd,Wholesale,Bronze,Southampton,Hampshire,400,Active,2024-11-08,Harry Jones,23.1,10000
+133,Green Communications Ltd,MSP,Bronze,Manchester,Greater Manchester,408,Inactive,2020-06-27,Freya Evans,11.6,250000
+134,Clarke IT Ltd,Agent,Silver,Cardiff,Wales,403,Active,2019-09-12,Oliver Smith,22.3,250000
+135,Edwards Communications Ltd,Reseller,Bronze,Cardiff,Wales,408,Inactive,2019-10-16,Sophia Clarke,7.7,10000
+136,Thompson Telecom Ltd,IT Provider,Standard,Cambridge,Cambridgeshire,406,Active,2019-04-28,Jessica Hall,5.3,50000
+137,Evans Solutions Ltd,Referral,Standard,Coventry,West Midlands,406,Active,2024-06-28,Harper Roberts,21.6,250000
+138,Wood Solutions Ltd,IT Provider,Platinum,Coventry,West Midlands,407,Active,2019-09-21,James Harris,12.7,50000
+139,Jones Tech Ltd,Telecom Reseller,Gold,Sheffield,South Yorkshire,406,Active,2016-05-27,Jessica Hall,7.6,50000
+140,Thomas Networks Ltd,Agent,Silver,Leeds,West Yorkshire,409,Inactive,2018-12-31,Sophie Roberts,12.5,10000
+141,Hall Group Ltd,Agent,Standard,Edinburgh,Scotland,407,Active,2018-06-09,Charlie Robinson,7.3,100000
+142,Davies IT Ltd,Wholesale,Gold,Oxford,Oxfordshire,404,Inactive,2021-08-29,Noah Turner,21.1,10000
+143,Lewis Communications Ltd,MSP,Gold,Southampton,Hampshire,400,Active,2024-06-06,Ruby Brown,11.3,250000
+144,Patel Group Ltd,Referral,Silver,Leicester,Leicestershire,403,Inactive,2019-10-01,Alexander Thomas,14.6,100000
+145,Jackson Telecom Ltd,Referral,Bronze,Sheffield,South Yorkshire,400,Active,2018-10-22,Daniel Davies,10.2,50000
+146,Evans Tech Ltd,IT Provider,Silver,Edinburgh,Scotland,401,Active,2016-10-07,Benjamin Jones,11.8,25000
+147,Taylor Group Ltd,Telecom Reseller,Standard,Cardiff,Wales,401,Active,2017-01-22,Chloe Patel,13.4,250000
+148,Roberts Tech Ltd,MSP,Silver,Cardiff,Wales,411,Active,2024-06-16,Emily Hall,17.2,10000
+149,Hill Tech Ltd,MSP,Standard,Edinburgh,Scotland,410,Active,2016-08-15,Ella Turner,21.3,25000
+150,Cooper Telecom Ltd,Telecom Reseller,Bronze,Leeds,West Yorkshire,407,Active,2016-12-02,James Cooper,17.9,100000
+151,Martin IT Ltd,MSP,Silver,Bristol,Avon,406,Active,2016-12-20,Harry Thomas,11.6,50000
+152,Lewis IT Ltd,Wholesale,Gold,Cambridge,Cambridgeshire,402,Active,2016-04-23,Benjamin Green,7.2,100000
+153,Hill Communications Ltd,MSP,Bronze,London,Greater London,402,Active,2015-05-05,Benjamin Wood,15.7,50000
+154,Clarke Tech Ltd,Agent,Bronze,Cambridge,Cambridgeshire,400,Active,2021-05-07,Chloe Thomas,18.3,250000
+155,Patel Group Ltd,Referral,Silver,Liverpool,Merseyside,405,Active,2024-07-28,Grace Wilson,20.9,100000
+156,Jones Communications Ltd,Referral,Silver,Southampton,Hampshire,405,Inactive,2017-03-19,Ava Hall,16.4,100000
+157,Jones Solutions Ltd,MSP,Standard,Manchester,Greater Manchester,408,Active,2021-05-09,Ava Green,9.8,50000
+158,White IT Ltd,MSP,Bronze,Bristol,Avon,401,Inactive,2017-04-13,Samuel Wood,14.5,100000
+159,Johnson Telecom Ltd,Referral,Silver,Reading,Berkshire,408,Active,2024-11-07,Oscar Hall,22.8,10000
+160,Roberts IT Ltd,IT Provider,Standard,Bristol,Avon,410,Inactive,2023-11-05,Jessica Turner,6.0,100000
+161,Davies Group Ltd,Referral,Bronze,Liverpool,Merseyside,408,Active,2017-09-17,Alice Clarke,12.6,250000
+162,Jackson IT Ltd,Referral,Bronze,Brighton,East Sussex,400,Active,2022-12-12,Grace Brown,13.0,10000
+163,Martin Communications Ltd,MSP,Gold,Reading,Berkshire,406,Inactive,2022-06-09,Samuel Hill,21.2,100000
+164,Lewis IT Ltd,Reseller,Bronze,Reading,Berkshire,405,Active,2022-03-12,Samuel White,6.4,100000
+165,Evans IT Ltd,IT Provider,Standard,Sheffield,South Yorkshire,404,Active,2015-07-03,Alice Patel,20.5,100000
+166,Johnson Telecom Ltd,Reseller,Standard,Leicester,Leicestershire,406,Active,2019-01-27,Harper Harris,17.8,10000
+167,Edwards Communications Ltd,Agent,Gold,Coventry,West Midlands,405,Active,2020-06-23,Harper Hughes,6.2,10000
+168,Robinson IT Ltd,Telecom Reseller,Bronze,London,Greater London,409,Active,2021-08-05,Jack Turner,19.6,100000
+169,Williams Communications Ltd,IT Provider,Platinum,Southampton,Hampshire,402,Active,2020-07-31,Amelia Edwards,19.0,10000
+170,Hall Telecom Ltd,Telecom Reseller,Bronze,Manchester,Greater Manchester,403,Active,2024-12-21,Chloe Brown,12.6,50000
+171,Johnson Telecom Ltd,IT Provider,Standard,Birmingham,West Midlands,406,Active,2024-01-14,Ava Roberts,16.5,10000
+172,Lewis Tech Ltd,Wholesale,Silver,Manchester,Greater Manchester,407,Active,2016-05-22,Oscar Hill,14.5,10000
+173,Roberts Networks Ltd,Agent,Standard,Leicester,Leicestershire,408,Active,2016-02-18,Oscar Jackson,23.8,100000
+174,Lewis Networks Ltd,Referral,Standard,Cambridge,Cambridgeshire,410,Active,2020-12-27,Henry White,8.8,250000
+175,Roberts Telecom Ltd,Referral,Silver,Bristol,Avon,400,Active,2022-08-25,Olivia Brown,20.2,100000
+176,Davies Group Ltd,Agent,Standard,Reading,Berkshire,400,Active,2019-10-18,Noah Smith,6.8,100000
+177,Evans Solutions Ltd,Referral,Standard,Cardiff,Wales,407,Active,2018-04-25,Daniel Roberts,6.6,10000
+178,Turner Group Ltd,Referral,Standard,Oxford,Oxfordshire,401,Active,2020-05-08,Harry Cooper,20.4,50000
+179,Cooper Solutions Ltd,Telecom Reseller,Gold,Reading,Berkshire,406,Active,2017-09-12,Oscar Wood,9.1,250000
+180,Patel Networks Ltd,Referral,Standard,Leicester,Leicestershire,402,Active,2022-11-22,Amelia Jackson,15.5,100000
+181,Hall Networks Ltd,IT Provider,Silver,Cardiff,Wales,409,Active,2016-11-09,Ava Robinson,14.1,250000
+182,Thompson Solutions Ltd,Telecom Reseller,Bronze,Leicester,Leicestershire,400,Active,2024-09-23,James Harris,24.1,50000
+183,Wright Networks Ltd,Wholesale,Bronze,Glasgow,Scotland,406,Suspended,2022-11-07,Mia Harris,16.9,250000
+184,Lewis Communications Ltd,Agent,Silver,London,Greater London,409,Active,2016-08-29,James Turner,8.3,10000
+185,Edwards Communications Ltd,Referral,Bronze,Reading,Berkshire,405,Active,2021-03-29,Jack Thomas,12.1,50000
+186,Jackson Group Ltd,IT Provider,Silver,Bristol,Avon,410,Active,2021-02-06,Jessica Clarke,14.5,250000
+187,Hall Tech Ltd,Referral,Standard,Newcastle,Tyne and Wear,411,Active,2020-06-25,Thomas Harris,24.0,250000
+188,Johnson IT Ltd,Wholesale,Platinum,Sheffield,South Yorkshire,410,Active,2021-03-05,Samuel Turner,12.8,100000
+189,Thomas Solutions Ltd,Wholesale,Bronze,Coventry,West Midlands,409,Active,2021-04-04,Samuel Green,7.3,250000
+190,Thomas Networks Ltd,Wholesale,Standard,Leicester,Leicestershire,410,Inactive,2023-09-27,Harper Thomas,9.9,250000
+191,Hall Solutions Ltd,Referral,Silver,Coventry,West Midlands,404,Active,2019-01-10,Matthew Thomas,18.6,250000
+192,Davies Group Ltd,Referral,Silver,Coventry,West Midlands,405,Active,2016-12-17,Emma Roberts,11.0,50000
+193,Jones IT Ltd,MSP,Silver,Liverpool,Merseyside,401,Active,2024-09-25,Leo Walker,21.5,100000
+194,Wilson IT Ltd,MSP,Standard,Nottingham,Nottinghamshire,407,Active,2024-07-20,Joseph Taylor,7.5,100000
+195,Jones Networks Ltd,Referral,Standard,Nottingham,Nottinghamshire,400,Inactive,2015-01-08,Jack Walker,24.4,25000
+196,Davies Networks Ltd,Reseller,Gold,Reading,Berkshire,401,Active,2021-12-26,Alexander Walker,8.9,10000
+197,Edwards Telecom Ltd,Wholesale,Bronze,Bristol,Avon,403,Active,2018-05-28,David Hughes,14.9,25000
+198,Turner Solutions Ltd,MSP,Standard,Southampton,Hampshire,406,Active,2017-01-07,Emily Hughes,11.1,10000
+199,Harris Networks Ltd,Agent,Silver,Liverpool,Merseyside,409,Active,2021-07-23,Emma Cooper,15.8,100000
+200,Green IT Ltd,MSP,Silver,London,Greater London,410,Active,2020-01-01,Jack Davies,20.8,10000
+201,Martin Group Ltd,MSP,Bronze,Brighton,East Sussex,406,Active,2018-01-19,Amelia Lewis,12.7,25000
+202,Jones Telecom Ltd,MSP,Bronze,Liverpool,Merseyside,408,Active,2015-05-10,Lily Roberts,5.3,50000
+203,Wilson Networks Ltd,Reseller,Silver,Oxford,Oxfordshire,403,Active,2020-01-26,Charlotte Johnson,8.0,250000
+204,Robinson Tech Ltd,Telecom Reseller,Silver,Bristol,Avon,408,Active,2021-08-25,Ruby Edwards,11.5,100000
+205,Harris IT Ltd,MSP,Bronze,Bristol,Avon,400,Active,2021-07-22,Oscar Walker,22.8,100000
+206,Wilson Telecom Ltd,MSP,Bronze,Sheffield,South Yorkshire,401,Active,2021-04-22,David Evans,14.3,25000
+207,Thomas Networks Ltd,Agent,Bronze,Edinburgh,Scotland,410,Active,2020-06-22,Charlie Wood,24.8,50000
+208,Turner Solutions Ltd,Wholesale,Platinum,Liverpool,Merseyside,409,Active,2021-07-31,Isabella Cooper,11.8,25000
+209,Williams IT Ltd,Agent,Platinum,Edinburgh,Scotland,411,Active,2022-07-18,Leo Hughes,14.9,25000
+210,Thompson Communications Ltd,Referral,Silver,Nottingham,Nottinghamshire,404,Active,2017-09-07,Daniel Martin,18.1,100000
+211,Walker Tech Ltd,Referral,Standard,Leicester,Leicestershire,411,Active,2015-05-25,Amelia Hall,14.4,25000
+212,Wilson Telecom Ltd,IT Provider,Bronze,Leicester,Leicestershire,411,Active,2023-09-21,Freya Wright,14.5,100000
+213,Wood Tech Ltd,MSP,Bronze,Cardiff,Wales,400,Active,2019-01-06,Sophie Wright,11.5,250000
+214,Green Solutions Ltd,Wholesale,Silver,Liverpool,Merseyside,405,Active,2024-08-09,Mia Jackson,18.3,100000
+215,Jackson Telecom Ltd,Reseller,Gold,Southampton,Hampshire,404,Active,2022-07-25,Jack Wright,23.2,25000
+216,Clarke Group Ltd,Referral,Silver,Edinburgh,Scotland,409,Active,2023-07-27,David Cooper,12.0,100000
+217,Roberts Communications Ltd,Telecom Reseller,Standard,Brighton,East Sussex,402,Active,2024-01-15,Sophia Hall,14.4,25000
+218,Johnson IT Ltd,Wholesale,Silver,Birmingham,West Midlands,404,Active,2016-08-31,James Robinson,9.2,100000
+219,Taylor Communications Ltd,Referral,Bronze,Cardiff,Wales,410,Inactive,2019-10-06,Emily Hill,22.2,10000
+220,Harris Tech Ltd,Reseller,Standard,London,Greater London,404,Active,2015-08-04,Jessica Thompson,23.2,100000
+221,Smith Networks Ltd,Referral,Standard,Coventry,West Midlands,404,Active,2017-08-03,Henry Harris,10.0,10000
+222,Roberts Telecom Ltd,Reseller,Standard,Sheffield,South Yorkshire,400,Active,2018-12-09,Alexander Edwards,15.2,50000
+223,Davies Communications Ltd,Wholesale,Bronze,Cambridge,Cambridgeshire,410,Active,2024-01-23,William Hill,8.3,10000
+224,Evans IT Ltd,MSP,Gold,Bristol,Avon,405,Active,2022-06-23,Oliver Wood,21.1,100000
+225,Wood Networks Ltd,MSP,Silver,Cardiff,Wales,404,Active,2023-10-28,Harry Wilson,7.4,50000
+226,Roberts Tech Ltd,MSP,Platinum,Sheffield,South Yorkshire,403,Active,2018-08-03,Charlie Hughes,14.5,25000
+227,Walker Tech Ltd,IT Provider,Bronze,Liverpool,Merseyside,408,Active,2015-04-11,Evelyn Jones,21.9,250000
+228,Hill IT Ltd,Referral,Standard,Oxford,Oxfordshire,411,Inactive,2024-07-23,Ava Green,21.5,50000
+229,Wright Telecom Ltd,Agent,Standard,London,Greater London,401,Active,2024-04-25,William Wilson,25.0,100000
+230,Thomas Networks Ltd,Telecom Reseller,Platinum,Belfast,Northern Ireland,405,Active,2020-06-23,Oscar Davies,11.9,10000
+231,Walker Networks Ltd,MSP,Silver,Bristol,Avon,409,Active,2017-05-03,Jessica Green,16.8,250000
+232,Thomas IT Ltd,Wholesale,Bronze,Bristol,Avon,405,Active,2020-04-13,Charlotte Wright,14.4,50000
+233,Hughes IT Ltd,Referral,Standard,Nottingham,Nottinghamshire,402,Active,2024-09-11,Ella Patel,20.2,10000
+234,White Solutions Ltd,Reseller,Bronze,Cardiff,Wales,409,Suspended,2021-05-10,David Edwards,7.1,25000
+235,Turner IT Ltd,Telecom Reseller,Silver,Newcastle,Tyne and Wear,411,Active,2020-06-28,Olivia Wilson,22.3,50000
+236,Hall Networks Ltd,Telecom Reseller,Standard,Liverpool,Merseyside,406,Active,2018-05-19,Ava Martin,11.3,10000
+237,Walker Telecom Ltd,MSP,Bronze,Manchester,Greater Manchester,407,Active,2024-07-23,Daniel Cooper,17.6,25000
+238,Harris Networks Ltd,Reseller,Bronze,Liverpool,Merseyside,406,Active,2017-12-25,Alice Green,18.3,10000
+239,Turner Networks Ltd,MSP,Silver,Cambridge,Cambridgeshire,410,Active,2020-09-16,Jessica White,18.4,250000
+240,White Tech Ltd,Referral,Gold,Leicester,Leicestershire,403,Active,2016-02-03,Harper Davies,23.6,10000
+241,Davies Networks Ltd,Referral,Bronze,Oxford,Oxfordshire,402,Active,2022-01-08,Thomas Jackson,23.2,10000
+242,Thomas Telecom Ltd,IT Provider,Standard,Edinburgh,Scotland,405,Active,2019-03-03,Daniel Johnson,24.3,50000
+243,Johnson Group Ltd,Agent,Standard,Leeds,West Yorkshire,400,Suspended,2017-02-23,Chloe Evans,11.0,50000
+244,Hughes Group Ltd,Reseller,Silver,Brighton,East Sussex,404,Inactive,2023-02-09,David Evans,15.4,50000
+245,Robinson Networks Ltd,IT Provider,Gold,Cardiff,Wales,400,Active,2021-06-29,Matthew Wilson,21.5,250000
+246,Evans Solutions Ltd,MSP,Gold,Oxford,Oxfordshire,405,Active,2015-05-13,James Wilson,17.1,50000
+247,Davies Networks Ltd,Wholesale,Standard,Bristol,Avon,404,Active,2018-02-25,Lucas Robinson,15.4,10000
+248,Davies Communications Ltd,Agent,Silver,Oxford,Oxfordshire,404,Active,2023-08-02,Charlie Wright,18.5,50000
+249,Thomas Networks Ltd,Agent,Silver,Oxford,Oxfordshire,408,Active,2020-02-05,Lily Thomas,20.0,25000
+250,Evans Tech Ltd,Referral,Silver,Sheffield,South Yorkshire,403,Active,2016-11-21,Ruby Hill,10.7,50000
+251,Hill IT Ltd,Referral,Bronze,Manchester,Greater Manchester,409,Active,2016-02-20,Lily Roberts,6.2,10000
+252,Harris Networks Ltd,Wholesale,Bronze,Bristol,Avon,404,Active,2022-05-05,Ruby Roberts,9.4,50000
+253,Green Telecom Ltd,MSP,Standard,Southampton,Hampshire,409,Active,2020-07-02,Harper Edwards,6.4,50000
+254,Martin Solutions Ltd,Referral,Bronze,Liverpool,Merseyside,408,Inactive,2023-12-02,William Harris,5.2,250000
+255,Thomas Telecom Ltd,Agent,Gold,Liverpool,Merseyside,410,Inactive,2020-04-24,Ruby Evans,18.7,10000
+256,Cooper Networks Ltd,Reseller,Gold,Reading,Berkshire,403,Active,2016-10-21,Joseph Jackson,9.4,50000
+257,Lewis Telecom Ltd,Agent,Platinum,Glasgow,Scotland,409,Active,2018-06-01,Noah Evans,7.1,250000
+258,Smith Telecom Ltd,Reseller,Gold,Cambridge,Cambridgeshire,410,Active,2020-09-18,Ruby Wright,11.6,10000
+259,Roberts Tech Ltd,Telecom Reseller,Standard,Southampton,Hampshire,401,Active,2015-04-28,Leo Thomas,19.2,10000
+260,Smith Group Ltd,Wholesale,Bronze,London,Greater London,404,Active,2022-03-01,Emma Smith,5.6,100000
+261,Jackson Group Ltd,Telecom Reseller,Silver,Newcastle,Tyne and Wear,400,Active,2018-02-27,James Walker,11.3,10000
+262,White IT Ltd,IT Provider,Silver,Bristol,Avon,410,Active,2016-10-13,Benjamin Patel,11.5,25000
+263,Thompson Tech Ltd,IT Provider,Silver,Sheffield,South Yorkshire,409,Active,2019-01-28,Amelia Lewis,20.2,10000
+264,Davies Communications Ltd,Referral,Bronze,Reading,Berkshire,407,Active,2015-11-23,Olivia Jones,5.1,100000
+265,White Networks Ltd,Agent,Silver,Manchester,Greater Manchester,401,Active,2023-05-17,Jessica Wilson,5.9,10000
+266,Hill Communications Ltd,Telecom Reseller,Bronze,Nottingham,Nottinghamshire,402,Active,2016-10-12,Chloe Turner,12.6,10000
+267,Smith Communications Ltd,MSP,Standard,Brighton,East Sussex,410,Active,2020-02-25,Mia Evans,20.9,100000
+268,Clarke IT Ltd,Telecom Reseller,Bronze,Brighton,East Sussex,404,Active,2015-06-06,Sophie Hall,22.6,10000
+269,Johnson IT Ltd,Referral,Platinum,Liverpool,Merseyside,407,Active,2016-09-22,Charlie Brown,5.2,250000
+270,Roberts Networks Ltd,IT Provider,Gold,London,Greater London,402,Inactive,2020-02-23,Grace Wright,14.1,10000
+271,Martin IT Ltd,MSP,Standard,Newcastle,Tyne and Wear,403,Active,2022-09-10,Chloe White,17.4,50000
+272,Wilson Communications Ltd,Wholesale,Bronze,Liverpool,Merseyside,411,Active,2018-03-10,Oscar Jones,20.9,25000
+273,Martin Tech Ltd,MSP,Gold,London,Greater London,401,Active,2021-02-25,Amelia Jackson,14.0,25000
+274,Wright Communications Ltd,Agent,Bronze,Southampton,Hampshire,401,Active,2020-07-21,Sophia Johnson,22.0,250000
+275,Davies Telecom Ltd,IT Provider,Gold,Bristol,Avon,403,Active,2023-05-09,Jack Smith,6.6,100000
+276,Martin Tech Ltd,Agent,Silver,Brighton,East Sussex,411,Active,2020-10-03,Ruby Turner,11.3,250000
+277,Edwards Telecom Ltd,Telecom Reseller,Bronze,Newcastle,Tyne and Wear,408,Active,2016-06-13,Noah Wilson,11.9,50000
+278,Lewis Solutions Ltd,Reseller,Standard,Birmingham,West Midlands,403,Active,2022-07-30,Ava Johnson,20.1,10000
+279,Wood Telecom Ltd,IT Provider,Bronze,Coventry,West Midlands,402,Active,2024-06-14,Noah Hall,24.7,10000
+280,Evans IT Ltd,MSP,Silver,Manchester,Greater Manchester,405,Active,2024-08-27,Jack Martin,13.9,250000
+281,Johnson Group Ltd,Agent,Gold,Cambridge,Cambridgeshire,405,Active,2020-07-02,Oscar Thomas,12.6,10000
+282,Jackson Networks Ltd,Telecom Reseller,Standard,Southampton,Hampshire,403,Suspended,2015-03-29,Charlie Wilson,9.7,10000
+283,Green IT Ltd,Telecom Reseller,Bronze,Edinburgh,Scotland,400,Active,2017-08-01,Ruby Thompson,17.8,50000
+284,Williams Tech Ltd,Wholesale,Platinum,Birmingham,West Midlands,400,Active,2019-02-14,Ava Hughes,18.9,50000
+285,Martin Tech Ltd,MSP,Bronze,Leicester,Leicestershire,400,Inactive,2016-07-21,Grace Smith,20.2,100000
+286,Roberts IT Ltd,Reseller,Standard,Brighton,East Sussex,404,Active,2024-09-23,Oscar Thompson,22.4,50000
+287,White IT Ltd,Telecom Reseller,Standard,Leeds,West Yorkshire,403,Active,2018-03-22,Alice Patel,12.1,25000
+288,Williams Telecom Ltd,Telecom Reseller,Gold,Cambridge,Cambridgeshire,403,Active,2015-10-14,Oscar Clarke,14.7,25000
+289,Green Telecom Ltd,Wholesale,Platinum,Sheffield,South Yorkshire,404,Suspended,2023-11-02,Evelyn Wood,13.3,100000
+290,Brown Solutions Ltd,Wholesale,Gold,Coventry,West Midlands,410,Active,2022-03-10,Matthew Green,10.6,250000
+291,Hall IT Ltd,Agent,Silver,Glasgow,Scotland,408,Active,2023-08-01,Isabella Cooper,18.0,250000
+292,Cooper Solutions Ltd,IT Provider,Standard,Southampton,Hampshire,400,Active,2016-08-12,Matthew Hughes,11.5,100000
+293,Evans Group Ltd,Agent,Platinum,Liverpool,Merseyside,410,Active,2024-10-26,Emily Wilson,6.5,50000
+294,Roberts Communications Ltd,Reseller,Gold,Leicester,Leicestershire,403,Active,2015-06-04,Isabella Jones,8.6,250000
+295,Green IT Ltd,Reseller,Gold,Reading,Berkshire,408,Active,2023-04-24,Emily Harris,21.9,50000
+296,Wood Solutions Ltd,IT Provider,Bronze,Southampton,Hampshire,407,Active,2019-03-05,Sophie White,16.8,250000
+297,Wood Telecom Ltd,Reseller,Gold,Bristol,Avon,401,Active,2024-10-07,Isabella Hill,15.3,50000
+298,Wright Solutions Ltd,Agent,Bronze,Nottingham,Nottinghamshire,410,Active,2024-08-03,Isabella Davies,17.7,10000
+299,Hughes Communications Ltd,Referral,Gold,Oxford,Oxfordshire,405,Active,2020-11-06,Alice Wood,21.4,50000
+300,Walker IT Ltd,IT Provider,Bronze,Cardiff,Wales,403,Active,2021-02-21,Grace Taylor,14.7,25000
+301,Wilson Networks Ltd,Referral,Silver,Edinburgh,Scotland,407,Active,2023-11-14,Alice Clarke,20.2,50000
+302,Jones IT Ltd,IT Provider,Bronze,Cardiff,Wales,407,Active,2016-03-26,Joseph Wood,19.1,100000
+303,Smith Communications Ltd,Reseller,Gold,Glasgow,Scotland,405,Active,2020-12-10,Henry Taylor,24.2,100000
+304,Martin Networks Ltd,MSP,Silver,Oxford,Oxfordshire,411,Inactive,2015-09-14,Evelyn White,5.6,50000
+305,Davies Communications Ltd,Reseller,Gold,Bristol,Avon,411,Active,2017-05-12,William Hall,22.6,250000
+306,Martin Group Ltd,Referral,Standard,Belfast,Northern Ireland,405,Active,2024-07-03,Lucas Hall,17.8,50000
+307,Lewis Telecom Ltd,IT Provider,Gold,Manchester,Greater Manchester,407,Active,2015-02-09,Grace Smith,16.2,25000
+308,Johnson Group Ltd,Reseller,Silver,Belfast,Northern Ireland,403,Active,2018-06-18,James Johnson,5.9,100000
+309,Roberts Telecom Ltd,Wholesale,Standard,Reading,Berkshire,410,Active,2015-02-05,Harry Evans,15.4,250000
+310,Jackson Networks Ltd,Wholesale,Platinum,Belfast,Northern Ireland,406,Active,2021-11-12,Lucas Davies,7.0,10000
+311,Brown IT Ltd,Reseller,Silver,Newcastle,Tyne and Wear,408,Active,2020-03-16,Freya Thomas,21.4,25000
+312,Lewis Solutions Ltd,Agent,Silver,Leicester,Leicestershire,409,Active,2024-06-12,William Evans,5.5,100000
+313,Wright Communications Ltd,IT Provider,Gold,Newcastle,Tyne and Wear,405,Active,2020-09-27,Oliver Wood,11.8,10000
+314,Lewis IT Ltd,Wholesale,Platinum,Newcastle,Tyne and Wear,408,Active,2023-08-09,Isabella Wilson,15.8,25000
+315,Taylor Group Ltd,Referral,Bronze,Brighton,East Sussex,403,Active,2017-09-15,Henry Wright,9.4,100000
+316,Hall Networks Ltd,Wholesale,Silver,Southampton,Hampshire,410,Active,2019-12-15,Joseph Evans,5.4,25000
+317,Hill Communications Ltd,Referral,Bronze,London,Greater London,401,Active,2018-09-18,Benjamin Wilson,22.5,250000
+318,Turner Networks Ltd,Reseller,Silver,Reading,Berkshire,407,Active,2015-10-27,Oliver Walker,9.7,25000
+319,Williams Tech Ltd,MSP,Bronze,Nottingham,Nottinghamshire,409,Active,2022-10-13,Jessica Evans,16.4,50000
+320,Smith Tech Ltd,Reseller,Standard,Newcastle,Tyne and Wear,408,Active,2015-04-13,Alexander Patel,18.6,250000
+321,Patel IT Ltd,Referral,Standard,Belfast,Northern Ireland,406,Active,2018-09-29,Jack Patel,6.4,25000
+322,Jones Group Ltd,Wholesale,Bronze,Reading,Berkshire,404,Active,2020-07-16,Ava Evans,21.1,250000
+323,Lewis IT Ltd,Agent,Gold,Cardiff,Wales,401,Active,2020-07-22,Samuel Wood,13.9,10000
+324,Harris Telecom Ltd,Reseller,Bronze,Cambridge,Cambridgeshire,401,Active,2020-08-17,Joseph Hill,16.0,50000
+325,Taylor Solutions Ltd,MSP,Standard,Birmingham,West Midlands,403,Active,2024-09-28,Mia Hill,11.6,100000
+326,Cooper IT Ltd,IT Provider,Standard,Cambridge,Cambridgeshire,405,Active,2019-07-03,Ruby Johnson,23.1,250000
+327,Clarke Communications Ltd,Agent,Bronze,Leicester,Leicestershire,410,Active,2015-03-19,Emma Taylor,22.1,100000
+328,Thomas IT Ltd,IT Provider,Standard,Coventry,West Midlands,406,Active,2018-11-03,Freya Evans,18.1,25000
+329,Brown IT Ltd,Agent,Silver,Brighton,East Sussex,409,Active,2021-11-01,Oscar Harris,14.9,250000
+330,Lewis Tech Ltd,Referral,Standard,Liverpool,Merseyside,401,Active,2022-11-09,Charlotte Thompson,12.4,10000
+331,Evans Group Ltd,Reseller,Standard,Cambridge,Cambridgeshire,403,Active,2021-02-06,Joseph Johnson,22.1,50000
+332,Smith IT Ltd,Telecom Reseller,Bronze,Newcastle,Tyne and Wear,408,Active,2019-01-08,Sophia Lewis,23.0,25000
+333,Davies Communications Ltd,Referral,Bronze,Newcastle,Tyne and Wear,408,Active,2021-12-11,Harry Clarke,18.4,100000
+334,Roberts Networks Ltd,IT Provider,Silver,Leeds,West Yorkshire,408,Active,2016-07-01,Benjamin Hall,7.6,25000
+335,Johnson Solutions Ltd,Wholesale,Silver,Cambridge,Cambridgeshire,411,Active,2019-10-09,Matthew Wood,9.8,50000
+336,Edwards Solutions Ltd,MSP,Bronze,Southampton,Hampshire,411,Inactive,2024-08-29,Sophie Wilson,5.4,10000
+337,Walker Tech Ltd,Reseller,Bronze,Leicester,Leicestershire,408,Active,2018-10-18,Chloe Turner,21.1,250000
+338,Wright Networks Ltd,Reseller,Standard,Coventry,West Midlands,403,Active,2021-08-05,Samuel Brown,13.1,25000
+339,Hill Networks Ltd,Reseller,Bronze,Liverpool,Merseyside,408,Active,2020-07-19,Ava Walker,8.9,100000
+340,Smith Telecom Ltd,Referral,Gold,Sheffield,South Yorkshire,401,Active,2020-09-28,Ava Williams,24.3,25000
+341,Wood IT Ltd,Reseller,Standard,London,Greater London,405,Active,2018-01-05,Joseph Patel,19.6,50000
+342,Hill Group Ltd,Reseller,Silver,Cardiff,Wales,403,Active,2023-04-03,Emily Williams,17.6,10000
+343,Smith IT Ltd,Referral,Bronze,Leeds,West Yorkshire,406,Active,2017-02-16,Alice Wilson,11.6,100000
+344,Edwards Solutions Ltd,Telecom Reseller,Gold,Liverpool,Merseyside,404,Active,2016-09-24,Oliver Robinson,10.2,50000
+345,Jones Group Ltd,Telecom Reseller,Gold,Brighton,East Sussex,409,Active,2023-07-17,Jack Roberts,16.9,25000
+346,Martin IT Ltd,Wholesale,Silver,Oxford,Oxfordshire,404,Suspended,2018-05-15,Isabella Robinson,7.2,10000
+347,Cooper Communications Ltd,Referral,Silver,Glasgow,Scotland,403,Active,2024-02-03,Ruby Jones,18.6,50000
+348,Edwards IT Ltd,Agent,Silver,Nottingham,Nottinghamshire,404,Active,2017-01-12,Isabella Harris,21.9,25000
+349,Jones Tech Ltd,Telecom Reseller,Bronze,Bristol,Avon,411,Active,2021-05-04,Evelyn Wright,8.0,100000
+350,Taylor Communications Ltd,Wholesale,Silver,Glasgow,Scotland,402,Inactive,2019-03-06,Alice Robinson,19.0,25000
+351,Gamma Telecom Ltd,Wholesale,Platinum,Liverpool,Merseyside,406,Active,2025-01-27,Harry Thompson,7.1,100000
+352,Apex Tech Ltd,Reseller,Silver,Glasgow,Scotland,405,Active,2025-01-20,Oliver Davis,22.1,250000
+353,Delta Systems UK,Reseller,Standard,Bristol,Avon,407,Active,2025-11-20,Harry Thompson,14.6,100000
+354,Summit Tech Partners,MSP,Bronze,Leeds,West Yorkshire,404,Active,2025-01-22,George Clark,14.0,100000
+355,Apex Networks Group,MSP,Bronze,Manchester,Greater Manchester,403,Active,2025-06-16,Isabella Harris,18.1,250000
+356,Summit Systems UK,IT Provider,Standard,Bristol,Avon,407,Active,2025-05-03,Sophie Brown,16.6,25000
+357,Nova Cloud Ltd,Referral,Bronze,Manchester,Greater Manchester,403,Active,2025-02-08,Charlotte Evans,16.8,25000
+358,Quantum Solutions Ltd,MSP,Standard,Newcastle,Tyne and Wear,410,Active,2025-01-02,Amelia Roberts,23.9,100000
+359,Orion Tech Ltd,IT Provider,Bronze,Bristol,Avon,407,Active,2025-12-20,James Taylor,16.7,100000
+360,Titan Tech Ltd,Telecom Reseller,Standard,Nottingham,Nottinghamshire,412,Active,2025-10-29,Isabella Harris,17.8,50000
+361,Summit IT Ltd,MSP,Silver,Nottingham,Nottinghamshire,412,Active,2025-06-28,William Moore,23.0,250000
+362,Nova Tech Group,Reseller,Standard,Leeds,West Yorkshire,404,Active,2025-02-06,Sophie Brown,21.1,50000
+363,Quantum IT UK,Telecom Reseller,Standard,Nottingham,Nottinghamshire,412,Active,2025-05-02,Emma Wilson,15.4,50000
+364,Nova Tech Group,Referral,Silver,London,Greater London,401,Inactive,2025-02-11,Harry Thompson,13.2,25000
+365,Eclipse Systems Partners,Telecom Reseller,Standard,London,Greater London,401,Active,2025-09-24,Oliver Davis,13.9,50000
+366,Delta Cloud Partners,MSP,Standard,Nottingham,Nottinghamshire,412,Active,2025-04-16,George Clark,9.6,250000
+367,Phoenix Cloud Ltd,IT Provider,Standard,Birmingham,West Midlands,402,Active,2025-10-05,William Moore,7.8,250000
+368,Nova Cloud Partners,Reseller,Gold,Birmingham,West Midlands,402,Active,2025-02-10,William Moore,8.4,50000
+369,Summit Tech Group,MSP,Standard,Birmingham,West Midlands,402,Active,2025-05-13,William Moore,6.1,25000
+370,Stellar Telecom Group,MSP,Platinum,Sheffield,South Yorkshire,408,Active,2025-11-17,Sophie Brown,10.3,10000
+371,Atlas Digital Ltd,MSP,Gold,Manchester,Greater Manchester,403,Active,2025-12-26,Sophie Brown,17.0,250000
+372,Delta Telecom Ltd,MSP,Bronze,Birmingham,West Midlands,402,Active,2025-01-22,Amelia Roberts,20.7,25000
+373,Alpha Digital UK,IT Provider,Bronze,Edinburgh,Scotland,409,Inactive,2025-04-20,Sophie Brown,6.3,10000
+374,Apex Cloud UK,Reseller,Bronze,Leeds,West Yorkshire,404,Active,2025-08-11,George Clark,8.7,25000
+375,Nexus IT Partners,Referral,Silver,Leeds,West Yorkshire,404,Active,2025-10-16,George Clark,5.0,25000
+376,Nexus Solutions Partners,Reseller,Bronze,Glasgow,Scotland,405,Inactive,2025-01-20,James Taylor,12.8,10000
+377,Atlas Telecom Partners,MSP,Silver,Manchester,Greater Manchester,403,Active,2025-03-17,Emma Wilson,23.0,10000
+378,Phoenix Systems Ltd,Agent,Gold,Bristol,Avon,407,Active,2025-03-05,George Clark,19.9,100000
+379,Beta Solutions Ltd,IT Provider,Silver,Cardiff,Wales,411,Active,2025-09-16,James Taylor,6.8,10000
+380,Stellar Tech Ltd,Wholesale,Bronze,Birmingham,West Midlands,402,Active,2025-11-16,Harry Thompson,24.3,25000
+381,Quantum Digital UK,Reseller,Silver,Edinburgh,Scotland,409,Active,2025-09-01,James Taylor,12.5,50000
+382,Delta Communications Ltd,IT Provider,Silver,Birmingham,West Midlands,402,Active,2025-04-04,Charlotte Evans,6.9,100000
+383,Nova Solutions Ltd,Agent,Bronze,Birmingham,West Midlands,402,Inactive,2025-11-05,Emma Wilson,11.8,25000
+384,Alpha Communications Partners,Referral,Platinum,Birmingham,West Midlands,402,Active,2025-07-06,George Clark,13.5,10000
+385,Quantum IT UK,Wholesale,Standard,Newcastle,Tyne and Wear,410,Active,2025-07-19,Oliver Davis,24.9,25000
+386,Summit Cloud Ltd,MSP,Standard,Birmingham,West Midlands,402,Active,2025-07-18,James Taylor,21.8,50000
+387,Stellar Tech Ltd,MSP,Silver,Edinburgh,Scotland,409,Active,2025-10-10,Amelia Roberts,6.6,100000
+388,Summit Cloud UK,MSP,Standard,London,Greater London,401,Active,2025-11-27,George Clark,13.2,50000
+389,Vertex Tech Partners,IT Provider,Bronze,Birmingham,West Midlands,402,Active,2025-04-28,James Taylor,13.0,25000
+390,Beta Networks Partners,Wholesale,Bronze,Liverpool,Merseyside,406,Active,2025-02-27,Charlotte Evans,16.3,25000
+391,Orion Systems Partners,Referral,Platinum,Leeds,West Yorkshire,404,Active,2025-06-23,Oliver Davis,7.5,10000
+392,Eclipse Tech Ltd,IT Provider,Bronze,Edinburgh,Scotland,409,Active,2025-10-06,Amelia Roberts,17.5,10000
+393,Horizon Connect Group,Telecom Reseller,Standard,Bristol,Avon,407,Active,2025-05-07,Emma Wilson,5.4,250000
+394,Alpha Networks Group,Reseller,Gold,Glasgow,Scotland,405,Active,2025-06-28,Isabella Harris,6.7,25000
+395,Nova IT Partners,Telecom Reseller,Platinum,Newcastle,Tyne and Wear,410,Active,2025-07-28,Harry Thompson,9.4,10000
+396,Alpha Systems Ltd,Wholesale,Standard,Birmingham,West Midlands,402,Active,2025-10-29,Harry Thompson,15.7,25000
+397,Eclipse Systems Partners,IT Provider,Silver,Cardiff,Wales,411,Active,2025-11-19,Isabella Harris,7.2,25000
+398,Delta Networks Ltd,Wholesale,Bronze,Edinburgh,Scotland,409,Active,2026-02-14,Oliver Davis,7.4,25000
+399,Horizon Connect UK,Telecom Reseller,Standard,Bristol,Avon,407,Active,2026-02-21,Isabella Harris,10.4,250000
+400,Alpha Telecom Partners,Agent,Gold,Nottingham,Nottinghamshire,412,Active,2026-02-21,Emma Wilson,20.7,10000
+401,Eclipse Telecom Ltd,Agent,Standard,London,Greater London,401,Active,2026-02-20,Emma Wilson,9.2,50000
+402,Nexus Networks Ltd,Wholesale,Standard,Nottingham,Nottinghamshire,412,Active,2026-02-21,Oliver Davis,22.0,50000
+403,Beta Networks Partners,Referral,Gold,Edinburgh,Scotland,409,Active,2026-02-10,James Taylor,14.2,100000
+404,Orion Digital Group,Telecom Reseller,Gold,London,Greater London,401,Active,2026-01-06,Emma Wilson,15.5,250000
+405,Alpha Tech Partners,MSP,Platinum,London,Greater London,401,Active,2026-02-09,George Clark,12.3,250000
+406,Horizon Connect UK,MSP,Bronze,Edinburgh,Scotland,409,Active,2026-02-24,Emma Wilson,18.4,250000
+407,Atlas Communications Ltd,MSP,Standard,Bristol,Avon,407,Active,2026-01-01,George Clark,21.0,100000
+408,Phoenix IT Group,Agent,Bronze,Birmingham,West Midlands,402,Active,2026-01-03,George Clark,15.5,50000
+409,Nova Digital Ltd,Referral,Standard,Glasgow,Scotland,405,Active,2026-02-16,James Taylor,18.3,25000
+410,Zenith Solutions Partners,MSP,Standard,Liverpool,Merseyside,406,Active,2026-01-28,William Moore,22.1,100000
+411,Vertex Cloud Partners,MSP,Bronze,Edinburgh,Scotland,409,Active,2026-01-24,Isabella Harris,5.2,50000
+412,Prime Telecom UK,IT Provider,Bronze,Birmingham,West Midlands,402,Active,2026-02-17,William Moore,9.6,50000
+413,Beta Tech Group,IT Provider,Bronze,Bristol,Avon,407,Active,2026-01-26,George Clark,8.6,50000
+414,Vertex Solutions Ltd,MSP,Standard,Glasgow,Scotland,405,Active,2026-01-11,Harry Thompson,21.6,10000
+415,Vertex IT UK,Referral,Platinum,Newcastle,Tyne and Wear,410,Active,2026-02-28,George Clark,21.0,100000
+416,Titan Connect Ltd,Telecom Reseller,Standard,Nottingham,Nottinghamshire,412,Active,2026-01-13,Amelia Roberts,14.1,250000
+417,Beta Digital Ltd,Referral,Bronze,Leeds,West Yorkshire,404,Active,2026-02-22,Sophie Brown,5.5,100000
+418,Phoenix Systems Ltd,Reseller,Bronze,Newcastle,Tyne and Wear,410,Active,2026-01-30,Isabella Harris,18.1,25000
+419,Gamma Solutions Partners,Referral,Gold,Edinburgh,Scotland,409,Active,2026-01-26,Amelia Roberts,19.1,10000
+420,Quantum Systems UK,Telecom Reseller,Silver,Glasgow,Scotland,405,Active,2026-02-09,Amelia Roberts,9.3,10000
+421,Nova Cloud UK,Wholesale,Standard,Edinburgh,Scotland,409,Active,2026-02-08,Oliver Davis,19.0,100000
+422,Eclipse Communications UK,Wholesale,Bronze,Glasgow,Scotland,405,Active,2026-01-10,Emma Wilson,24.7,250000
+423,Summit Cloud Ltd,IT Provider,Bronze,Birmingham,West Midlands,402,Active,2026-01-05,George Clark,13.5,100000
+424,Delta Systems Partners,Telecom Reseller,Silver,Manchester,Greater Manchester,403,Active,2026-01-20,Harry Thompson,22.1,50000
+425,Prime Digital Ltd,Agent,Silver,Sheffield,South Yorkshire,408,Active,2026-01-27,Oliver Davis,8.2,50000
+426,Phoenix Telecom Ltd,Reseller,Standard,Nottingham,Nottinghamshire,412,Active,2026-01-24,Oliver Davis,9.8,100000
+427,Stellar IT Group,Reseller,Standard,Newcastle,Tyne and Wear,410,Active,2026-01-14,Harry Thompson,6.8,10000
+428,Alpha Solutions Ltd,IT Provider,Silver,Glasgow,Scotland,405,Active,2026-01-26,George Clark,9.7,50000
+429,Vertex Digital Partners,Wholesale,Standard,Manchester,Greater Manchester,403,Active,2026-02-05,Amelia Roberts,8.3,50000
+430,Summit IT Group,Wholesale,Platinum,Newcastle,Tyne and Wear,410,Active,2026-01-08,James Taylor,19.0,25000
+431,Prime Digital Ltd,Reseller,Platinum,Birmingham,West Midlands,402,Active,2026-01-25,Harry Thompson,10.2,10000
+432,Beta IT Ltd,Referral,Platinum,Edinburgh,Scotland,409,Active,2026-01-01,Sophie Brown,16.0,25000
+433,Phoenix IT Partners,Agent,Platinum,Leeds,West Yorkshire,404,Active,2026-01-04,Amelia Roberts,16.5,100000
+434,Apex Tech Ltd,MSP,Standard,Glasgow,Scotland,405,Active,2026-02-13,Sophie Brown,13.2,250000
+435,Stellar Digital Group,Telecom Reseller,Bronze,Liverpool,Merseyside,406,Active,2026-02-28,Emma Wilson,11.9,250000
+436,Eclipse Tech Group,IT Provider,Gold,Edinburgh,Scotland,409,Active,2026-02-18,Isabella Harris,19.6,10000

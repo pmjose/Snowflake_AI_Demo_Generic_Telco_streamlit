@@ -1,0 +1,13 @@
+fraud_type_id,fraud_type,category,severity,description
+1,SIM Swap Fraud,Identity,Critical,Unauthorized SIM swap to take over account
+2,Subscription Fraud,Identity,High,Fake identity used to open accounts
+3,International Revenue Share Fraud,Traffic,Critical,Artificially inflated calls to premium numbers
+4,Wangiri Fraud,Traffic,Medium,One-ring scam to premium numbers
+5,Roaming Fraud,Traffic,High,Unauthorized roaming usage
+6,Device Fraud,Device,Medium,Stolen or cloned devices
+7,Internal Fraud,Internal,Critical,Employee-assisted fraud
+8,PBX Hacking,Traffic,High,Compromised business phone systems
+9,Dealer Fraud,Channel,High,Fraudulent dealer activations
+10,Credit Muling,Identity,Medium,Third party opens accounts for fraudsters
+11,Account Takeover,Identity,Critical,Unauthorized access to customer accounts
+12,Bypass Fraud,Traffic,High,SIM boxes routing international calls as local

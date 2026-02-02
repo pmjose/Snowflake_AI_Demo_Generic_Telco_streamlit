@@ -1,0 +1,171 @@
+store_id,store_name,store_code,store_type,store_format,city,region,postcode,latitude,longitude,opening_date,store_sqft,staff_count,manager_name,status,has_repair_centre,has_business_area
+1,SnowTelco London Flagship,ST0001,Flagship,High Street,London,London,LO5 4HE,55.89177,-0.263104,2014-12-05,3102,10,Sarah Wilson,Active,True,True
+2,SnowTelco London Shopping 2,ST0002,Standard,Shopping Centre,London,London,LO9 4YW,55.6106,-2.063361,2016-03-28,1554,5,Lucy Taylor,Active,True,False
+3,SnowTelco London Shopping 3,ST0003,Standard,Shopping Centre,London,London,LO5 3GL,50.817682,-2.340509,2013-06-29,2196,7,Sophie Davies,Active,False,False
+4,SnowTelco London Airport 4,ST0004,Standard,Airport,London,London,LO2 9KW,54.948158,1.031948,2016-11-28,2275,7,Emma Jones,Active,True,False
+5,SnowTelco London Retail 5,ST0005,Standard,Retail Park,London,London,LO7 5QW,56.672883,-3.861421,2023-10-02,1706,5,Sophie Brown,Active,False,False
+6,SnowTelco London High 6,ST0006,Standard,High Street,London,London,LO9 4FQ,53.035644,1.926663,2015-03-12,1850,6,Emma Davies,Active,False,False
+7,SnowTelco London Shopping 7,ST0007,Standard,Shopping Centre,London,London,LO7 5CG,57.305089,-1.02974,2012-01-16,2146,7,Sophie Brown,Active,False,False
+8,SnowTelco London Airport 8,ST0008,Standard,Airport,London,London,LO4 9TJ,55.97611,-2.000963,2022-09-16,1785,5,Daniel Davies,Active,False,False
+9,SnowTelco London Train 9,ST0009,Standard,Train Station,London,London,LO2 3WF,56.336635,-2.04488,2017-12-15,1596,5,Sarah Wilson,Active,False,False
+10,SnowTelco London Train 10,ST0010,Standard,Train Station,London,London,LO2 9JW,52.721404,-2.945499,2020-04-21,1523,5,Michael Evans,Active,False,False
+11,SnowTelco London Retail 11,ST0011,Standard,Retail Park,London,London,LO2 5WS,54.871762,-3.930125,2016-10-31,2539,8,Michael Smith,Active,False,False
+12,SnowTelco London High 12,ST0012,Standard,High Street,London,London,LO4 1HU,57.575596,-4.400426,2010-07-31,2129,7,Lucy Jones,Refurbishment,False,False
+13,SnowTelco London Shopping 13,ST0013,Standard,Shopping Centre,London,London,LO9 3JS,56.979464,-2.038034,2022-02-26,2473,8,Emma Brown,Active,False,False
+14,SnowTelco London Retail 14,ST0014,Standard,Retail Park,London,London,LO2 4HC,52.704684,-0.881839,2017-05-11,2424,8,Emma Brown,Active,False,False
+15,SnowTelco London Shopping 15,ST0015,Standard,Shopping Centre,London,London,LO2 9HJ,55.351822,-3.500342,2024-01-13,2176,7,Michael Evans,Active,False,False
+16,SnowTelco London Shopping 16,ST0016,Express,Shopping Centre,London,London,LO7 6PP,53.736197,0.103531,2023-12-11,1474,4,Sarah Smith,Active,False,False
+17,SnowTelco London High 17,ST0017,Express,High Street,London,London,LO9 8EP,51.467904,-1.761604,2021-10-23,994,3,Sarah Evans,Active,False,False
+18,SnowTelco London High 18,ST0018,Standard,High Street,London,London,LO2 4FP,53.885129,-3.503769,2014-04-30,1530,5,Daniel Smith,Active,True,False
+19,SnowTelco London Retail 19,ST0019,Express,Retail Park,London,London,LO7 9XY,53.893371,-3.670715,2010-06-14,1092,3,Emma Smith,Active,False,False
+20,SnowTelco London Retail 20,ST0020,Standard,Retail Park,London,London,LO8 9SF,50.455037,-1.445201,2025-01-03,2696,8,Michael Jones,Active,False,False
+21,SnowTelco London Airport 21,ST0021,Standard,Airport,London,London,LO1 2PX,54.669378,-1.340521,2023-04-13,2004,6,David Brown,Active,False,False
+22,SnowTelco London Airport 22,ST0022,Express,Airport,London,London,LO5 8LC,50.074524,-0.651885,2022-02-20,1460,4,Sarah Jones,Active,False,False
+23,SnowTelco London Shopping 23,ST0023,Express,Shopping Centre,London,London,LO4 6KF,53.505477,-1.197474,2010-08-07,870,2,David Smith,Active,False,False
+24,SnowTelco London High 24,ST0024,Express,High Street,London,London,LO2 2ZT,51.243583,-3.027706,2010-11-25,1070,3,Emma Davies,Active,False,False
+25,SnowTelco London Train 25,ST0025,Express,Train Station,London,London,LO2 7JB,50.028366,0.397835,2017-09-24,852,2,David Williams,Active,False,False
+26,SnowTelco London Train 26,ST0026,Express,Train Station,London,London,LO3 9BM,54.660077,-3.963344,2024-12-02,877,2,Michael Smith,Active,False,False
+27,SnowTelco London Retail 27,ST0027,Standard,Retail Park,London,London,LO2 6TP,57.790696,0.246343,2021-02-14,2011,6,Emma Williams,Refurbishment,False,False
+28,SnowTelco London Shopping 28,ST0028,Kiosk,Shopping Centre,London,London,LO4 5FY,50.864765,1.105167,2022-08-12,310,2,Lucy Brown,Active,False,False
+29,SnowTelco London Airport 29,ST0029,Kiosk,Airport,London,London,LO1 4NL,52.228824,-4.514055,2020-10-05,214,2,David Davies,Active,False,False
+30,SnowTelco London Train 30,ST0030,Kiosk,Train Station,London,London,LO1 2JF,54.644718,1.884854,2011-05-03,269,2,James Jones,Active,False,False
+31,SnowTelco London Train 31,ST0031,Kiosk,Train Station,London,London,LO9 2NU,51.52063,-4.689294,2012-08-24,323,2,Daniel Smith,Active,False,False
+32,SnowTelco London Shopping 32,ST0032,Partner Store,Shopping Centre,London,London,LO6 6XD,55.758034,-2.897744,2019-06-24,571,2,David Wilson,Active,False,False
+33,SnowTelco London Retail 33,ST0033,Partner Store,Retail Park,London,London,LO7 7XZ,57.222444,-0.691396,2016-11-26,696,2,David Wilson,Active,False,False
+34,SnowTelco London Retail 34,ST0034,Express,Retail Park,London,London,LO6 8QQ,55.405018,-1.421782,2020-10-14,1240,4,Michael Jones,Active,False,False
+35,SnowTelco London Train 35,ST0035,Partner Store,Train Station,London,London,LO5 4GE,50.195403,-3.286102,2019-12-14,740,2,Lucy Jones,Active,False,False
+36,SnowTelco London Train 36,ST0036,Partner Store,Train Station,London,London,LO8 7HE,55.248464,-4.961186,2021-02-07,893,2,Sarah Wilson,Active,False,False
+37,SnowTelco London Train 37,ST0037,Partner Store,Train Station,London,London,LO4 2QE,56.411333,-0.326956,2018-01-05,1070,3,Sophie Evans,Active,False,False
+38,SnowTelco London Train 38,ST0038,Partner Store,Train Station,London,London,LO3 8QJ,56.014214,0.87904,2018-04-25,956,3,David Evans,Active,False,False
+39,SnowTelco London Airport 39,ST0039,Kiosk,Airport,London,London,LO5 6LT,50.644621,-3.944185,2023-09-05,220,2,Daniel Williams,Active,False,False
+40,SnowTelco London Airport 40,ST0040,Express,Airport,London,London,LO8 7BG,56.663129,-2.273662,2018-08-14,1355,4,James Wilson,Active,False,False
+41,SnowTelco London Airport 41,ST0041,Kiosk,Airport,London,London,LO9 9VH,53.905836,-3.089453,2012-07-16,314,2,Lucy Smith,Active,False,False
+42,SnowTelco London Airport 42,ST0042,Partner Store,Airport,London,London,LO3 9AN,54.735142,-0.359002,2013-11-08,978,3,Sarah Wilson,Active,False,False
+43,SnowTelco London Shopping 43,ST0043,Kiosk,Shopping Centre,London,London,LO6 4QL,52.700004,1.15748,2024-09-17,294,2,David Wilson,Active,False,False
+44,SnowTelco London Airport 44,ST0044,Express,Airport,London,London,LO6 4WC,56.249864,-0.437717,2024-04-27,853,2,James Brown,Active,False,False
+45,SnowTelco London Train 45,ST0045,Express,Train Station,London,London,LO8 2UG,53.720272,-3.206294,2022-09-29,929,3,Sophie Williams,Active,False,False
+46,SnowTelco Birmingham Flagship,ST0046,Flagship,High Street,Birmingham,West Midlands,BI5 2UA,57.431097,-0.969423,2013-12-04,3670,12,Daniel Wilson,Active,True,True
+47,SnowTelco Birmingham Train 2,ST0047,Standard,Train Station,Birmingham,West Midlands,BI2 5XV,56.444224,0.573591,2013-03-16,1997,6,James Davies,Active,False,False
+48,SnowTelco Birmingham High 3,ST0048,Standard,High Street,Birmingham,West Midlands,BI1 7RD,53.468187,-2.464684,2016-03-05,2198,7,Lucy Williams,Active,False,False
+49,SnowTelco Birmingham Retail 4,ST0049,Standard,Retail Park,Birmingham,West Midlands,BI8 7ZU,52.147164,0.961992,2015-05-01,2490,8,Sarah Taylor,Active,True,False
+50,SnowTelco Birmingham Train 5,ST0050,Express,Train Station,Birmingham,West Midlands,BI6 1RL,51.454719,-3.515161,2015-02-23,1188,3,David Davies,Active,False,False
+51,SnowTelco Birmingham Train 6,ST0051,Express,Train Station,Birmingham,West Midlands,BI2 4ZP,53.908623,0.307153,2024-05-09,995,3,Lucy Evans,Active,False,False
+52,SnowTelco Birmingham High 7,ST0052,Standard,High Street,Birmingham,West Midlands,BI4 5XU,52.952164,-1.125689,2020-10-08,2328,7,Sophie Wilson,Closing,False,False
+53,SnowTelco Birmingham Airport 8,ST0053,Express,Airport,Birmingham,West Midlands,BI4 2ZG,52.524384,0.200167,2020-08-26,1057,3,Michael Brown,Active,False,False
+54,SnowTelco Birmingham Airport 9,ST0054,Kiosk,Airport,Birmingham,West Midlands,BI5 2GK,51.819865,-3.743909,2013-04-05,368,2,James Williams,Active,False,False
+55,SnowTelco Birmingham Train 10,ST0055,Express,Train Station,Birmingham,West Midlands,BI8 2AU,52.274715,-1.649001,2020-02-07,929,3,Sophie Williams,Refurbishment,False,False
+56,SnowTelco Birmingham Airport 11,ST0056,Kiosk,Airport,Birmingham,West Midlands,BI8 2UW,55.491608,-3.937911,2023-12-27,305,2,David Jones,Closing,False,False
+57,SnowTelco Birmingham Train 12,ST0057,Express,Train Station,Birmingham,West Midlands,BI4 9NQ,57.268035,-2.918528,2012-07-02,1420,4,Daniel Taylor,Active,False,False
+58,SnowTelco Manchester Flagship,ST0058,Flagship,High Street,Manchester,North West,MA4 4JX,50.6495,-3.320944,2024-03-22,3406,11,Sarah Williams,Active,False,True
+59,SnowTelco Manchester Train 2,ST0059,Standard,Train Station,Manchester,North West,MA4 5YK,55.6239,-1.821781,2017-09-03,1566,5,Emma Taylor,Active,False,False
+60,SnowTelco Manchester Shopping 3,ST0060,Standard,Shopping Centre,Manchester,North West,MA4 3JE,50.571279,-3.83854,2018-12-03,2615,8,David Taylor,Active,False,False
+61,SnowTelco Manchester Airport 4,ST0061,Express,Airport,Manchester,North West,MA8 8CV,50.318886,-1.975799,2020-05-18,1352,4,Sophie Taylor,Active,False,False
+62,SnowTelco Manchester Train 5,ST0062,Standard,Train Station,Manchester,North West,MA5 1FR,54.151711,-1.904394,2016-01-21,2876,9,David Williams,Closing,False,False
+63,SnowTelco Manchester High 6,ST0063,Express,High Street,Manchester,North West,MA6 6XD,56.861865,-2.691374,2017-08-05,1218,4,Lucy Taylor,Active,False,False
+64,SnowTelco Manchester Train 7,ST0064,Kiosk,Train Station,Manchester,North West,MA6 5LD,57.761478,-2.170775,2024-06-10,145,2,James Evans,Active,False,False
+65,SnowTelco Manchester Train 8,ST0065,Express,Train Station,Manchester,North West,MA8 1GJ,54.393757,1.493709,2019-03-18,1310,4,Lucy Evans,Active,False,False
+66,SnowTelco Manchester Train 9,ST0066,Partner Store,Train Station,Manchester,North West,MA5 9AT,53.263925,-3.427095,2012-10-01,662,2,Sarah Evans,Active,False,False
+67,SnowTelco Manchester Shopping 10,ST0067,Partner Store,Shopping Centre,Manchester,North West,MA5 7RR,51.949847,-1.141144,2017-09-03,1021,3,Daniel Brown,Active,False,False
+68,SnowTelco Leeds Flagship,ST0068,Flagship,High Street,Leeds,Yorkshire,LE5 7LS,52.137381,-4.982043,2016-11-22,3285,10,David Evans,Active,False,True
+69,SnowTelco Leeds Airport 2,ST0069,Standard,Airport,Leeds,Yorkshire,LE9 7QL,56.956813,1.865422,2019-08-13,2630,8,Emma Wilson,Active,False,False
+70,SnowTelco Leeds High 3,ST0070,Standard,High Street,Leeds,Yorkshire,LE7 7XW,57.846545,-1.532699,2019-06-02,2944,9,James Williams,Active,False,False
+71,SnowTelco Leeds Airport 4,ST0071,Standard,Airport,Leeds,Yorkshire,LE1 3PW,57.759654,-4.476202,2023-05-05,2435,8,David Davies,Active,False,False
+72,SnowTelco Leeds Retail 5,ST0072,Standard,Retail Park,Leeds,Yorkshire,LE7 6WY,57.099509,-1.584368,2011-02-21,2592,8,James Jones,Active,False,False
+73,SnowTelco Leeds Shopping 6,ST0073,Kiosk,Shopping Centre,Leeds,Yorkshire,LE2 2QF,55.552009,1.323968,2013-12-16,322,2,James Davies,Active,False,False
+74,SnowTelco Leeds Airport 7,ST0074,Kiosk,Airport,Leeds,Yorkshire,LE4 9PU,55.454403,-3.739602,2019-06-24,174,2,Michael Jones,Active,False,False
+75,SnowTelco Leeds Train 8,ST0075,Kiosk,Train Station,Leeds,Yorkshire,LE3 4QW,52.031819,-3.212713,2014-09-30,354,2,James Evans,Active,False,False
+76,SnowTelco Glasgow Flagship,ST0076,Flagship,High Street,Glasgow,Scotland,GL2 8MU,52.393234,1.734204,2014-04-27,3647,12,David Evans,Active,True,True
+77,SnowTelco Glasgow Airport 2,ST0077,Standard,Airport,Glasgow,Scotland,GL4 7UM,54.598495,1.948844,2011-05-30,1718,5,David Smith,Refurbishment,False,False
+78,SnowTelco Glasgow Retail 3,ST0078,Standard,Retail Park,Glasgow,Scotland,GL1 8KH,54.85652,-2.533753,2024-04-14,2904,9,Emma Taylor,Active,False,False
+79,SnowTelco Glasgow High 4,ST0079,Standard,High Street,Glasgow,Scotland,GL1 5QB,54.63659,0.126518,2010-03-17,2823,9,Sarah Taylor,Active,False,False
+80,SnowTelco Glasgow Shopping 5,ST0080,Standard,Shopping Centre,Glasgow,Scotland,GL9 9JF,52.055761,0.772829,2012-04-30,2249,7,Lucy Taylor,Active,False,False
+81,SnowTelco Glasgow Airport 6,ST0081,Express,Airport,Glasgow,Scotland,GL7 9MC,56.325456,-4.902569,2023-11-18,1031,3,Sarah Evans,Active,False,False
+82,SnowTelco Glasgow Retail 7,ST0082,Partner Store,Retail Park,Glasgow,Scotland,GL6 2XH,53.771815,-0.663172,2015-07-20,1153,3,Sophie Brown,Active,False,False
+83,SnowTelco Glasgow Airport 8,ST0083,Partner Store,Airport,Glasgow,Scotland,GL7 2EB,57.570092,-2.869448,2010-02-08,809,2,Lucy Jones,Active,False,False
+84,SnowTelco Liverpool Flagship,ST0084,Flagship,High Street,Liverpool,North West,LI7 8MX,57.595046,-0.124612,2010-05-02,3555,11,Daniel Williams,Active,False,True
+85,SnowTelco Liverpool Airport 2,ST0085,Standard,Airport,Liverpool,North West,LI1 6GQ,53.557567,-3.347212,2015-07-07,2072,6,Sophie Jones,Closing,False,False
+86,SnowTelco Liverpool Retail 3,ST0086,Standard,Retail Park,Liverpool,North West,LI4 2QC,55.30215,-0.508069,2024-07-09,2065,6,James Smith,Active,True,False
+87,SnowTelco Liverpool Train 4,ST0087,Standard,Train Station,Liverpool,North West,LI4 4HL,56.194949,0.520506,2021-12-25,2635,8,James Taylor,Active,True,False
+88,SnowTelco Liverpool Train 5,ST0088,Standard,Train Station,Liverpool,North West,LI1 3AM,56.319877,-3.334479,2020-11-01,1725,5,Sophie Smith,Active,True,False
+89,SnowTelco Liverpool Airport 6,ST0089,Partner Store,Airport,Liverpool,North West,LI8 8MS,54.749328,-1.835962,2016-12-03,565,2,Emma Smith,Active,False,False
+90,SnowTelco Liverpool Train 7,ST0090,Partner Store,Train Station,Liverpool,North West,LI1 1RN,53.410189,-4.244267,2020-06-09,1158,3,Lucy Jones,Active,False,False
+91,SnowTelco Bristol Flagship,ST0091,Flagship,High Street,Bristol,South West,BR2 3JV,55.064614,-1.161505,2019-03-25,3607,12,Sophie Wilson,Closing,False,True
+92,SnowTelco Bristol Airport 2,ST0092,Standard,Airport,Bristol,South West,BR2 2WW,57.02165,-1.140653,2016-03-27,2381,7,Emma Wilson,Active,True,False
+93,SnowTelco Bristol Airport 3,ST0093,Express,Airport,Bristol,South West,BR6 7LX,52.039118,1.675148,2018-07-02,897,2,Lucy Jones,Active,False,False
+94,SnowTelco Bristol High 4,ST0094,Standard,High Street,Bristol,South West,BR3 9BU,57.652997,-1.068216,2018-12-12,2263,7,Sarah Wilson,Active,False,False
+95,SnowTelco Bristol Train 5,ST0095,Kiosk,Train Station,Bristol,South West,BR6 2US,51.70191,-0.402846,2024-09-03,259,2,Emma Jones,Active,False,False
+96,SnowTelco Bristol Retail 6,ST0096,Partner Store,Retail Park,Bristol,South West,BR4 7TV,54.908586,-0.501106,2023-09-09,1087,3,James Taylor,Active,False,False
+97,SnowTelco Sheffield Flagship,ST0097,Flagship,High Street,Sheffield,Yorkshire,SH6 6AF,56.958902,-1.035752,2020-02-05,4265,14,Daniel Jones,Active,False,True
+98,SnowTelco Sheffield High 2,ST0098,Standard,High Street,Sheffield,Yorkshire,SH7 7QL,51.259274,-2.818538,2023-05-03,1940,6,Sophie Jones,Active,True,False
+99,SnowTelco Sheffield High 3,ST0099,Standard,High Street,Sheffield,Yorkshire,SH7 8VQ,53.31347,-3.491017,2020-06-17,2855,9,Sarah Davies,Active,True,False
+100,SnowTelco Sheffield Train 4,ST0100,Express,Train Station,Sheffield,Yorkshire,SH4 7VB,50.061497,-2.890064,2014-08-27,846,2,Emma Williams,Active,False,False
+101,SnowTelco Sheffield Airport 5,ST0101,Kiosk,Airport,Sheffield,Yorkshire,SH7 3EN,54.260659,-3.389225,2024-01-26,354,2,Sophie Jones,Active,False,False
+102,SnowTelco Sheffield High 6,ST0102,Partner Store,High Street,Sheffield,Yorkshire,SH2 6UP,54.587197,-0.033507,2019-01-21,970,3,Daniel Taylor,Active,False,False
+103,SnowTelco Edinburgh Flagship,ST0103,Flagship,High Street,Edinburgh,Scotland,ED8 6CP,56.755875,-3.296785,2024-08-15,3703,12,Daniel Jones,Active,False,True
+104,SnowTelco Edinburgh Retail 2,ST0104,Standard,Retail Park,Edinburgh,Scotland,ED2 9WD,54.244839,-3.642674,2021-08-12,1844,6,Sophie Davies,Active,False,False
+105,SnowTelco Edinburgh Shopping 3,ST0105,Standard,Shopping Centre,Edinburgh,Scotland,ED4 3VE,56.081722,-0.411437,2023-11-16,2024,6,Michael Evans,Active,False,False
+106,SnowTelco Edinburgh Train 4,ST0106,Express,Train Station,Edinburgh,Scotland,ED6 6EQ,50.54629,-1.904544,2014-03-12,1439,4,David Taylor,Active,False,False
+107,SnowTelco Edinburgh Train 5,ST0107,Kiosk,Train Station,Edinburgh,Scotland,ED8 1BM,56.653573,-4.462883,2023-08-24,336,2,Sarah Wilson,Active,False,False
+108,SnowTelco Edinburgh High 6,ST0108,Partner Store,High Street,Edinburgh,Scotland,ED4 6VR,54.010938,1.704057,2017-04-13,1167,3,Lucy Jones,Active,False,False
+109,SnowTelco Cardiff Flagship,ST0109,Flagship,High Street,Cardiff,Wales,CA2 9WF,50.313137,-0.046648,2011-08-10,5925,19,Lucy Williams,Active,False,True
+110,SnowTelco Cardiff Airport 2,ST0110,Standard,Airport,Cardiff,Wales,CA1 6CL,50.756048,-0.251345,2018-08-10,2890,9,David Taylor,Active,False,False
+111,SnowTelco Cardiff Retail 3,ST0111,Standard,Retail Park,Cardiff,Wales,CA3 6KW,55.58784,-2.256294,2023-04-06,2859,9,Sarah Taylor,Active,False,False
+112,SnowTelco Cardiff Shopping 4,ST0112,Kiosk,Shopping Centre,Cardiff,Wales,CA2 7SM,50.145844,-2.837938,2014-02-06,369,2,Emma Davies,Active,False,False
+113,SnowTelco Cardiff Shopping 5,ST0113,Kiosk,Shopping Centre,Cardiff,Wales,CA2 5DS,56.166998,0.845839,2021-11-20,179,2,James Davies,Active,False,False
+114,SnowTelco Newcastle Flagship,ST0114,Flagship,High Street,Newcastle,North East,NE7 3FF,56.65076,0.397685,2015-11-25,5446,18,Michael Evans,Active,False,True
+115,SnowTelco Newcastle Shopping 2,ST0115,Standard,Shopping Centre,Newcastle,North East,NE8 4TH,52.475743,0.660367,2017-03-24,2083,6,Lucy Brown,Active,False,False
+116,SnowTelco Newcastle Airport 3,ST0116,Express,Airport,Newcastle,North East,NE9 9PF,56.53513,0.608815,2012-09-09,1191,3,Michael Taylor,Active,False,False
+117,SnowTelco Newcastle Airport 4,ST0117,Kiosk,Airport,Newcastle,North East,NE2 5CF,52.18233,1.337143,2016-12-09,364,2,Michael Wilson,Active,False,False
+118,SnowTelco Newcastle Airport 5,ST0118,Express,Airport,Newcastle,North East,NE7 1NS,52.991692,-2.296837,2010-08-07,827,2,Sarah Davies,Active,False,False
+119,SnowTelco Nottingham Flagship,ST0119,Flagship,High Street,Nottingham,East Midlands,NO6 3EB,52.295035,0.808331,2019-12-11,5927,19,Michael Evans,Active,True,True
+120,SnowTelco Nottingham High 2,ST0120,Standard,High Street,Nottingham,East Midlands,NO3 9ZV,54.222172,-4.221692,2024-09-19,1941,6,David Brown,Active,True,False
+121,SnowTelco Nottingham Train 3,ST0121,Express,Train Station,Nottingham,East Midlands,NO8 9AW,54.123006,-3.306433,2017-12-29,913,3,Michael Taylor,Active,False,False
+122,SnowTelco Nottingham Retail 4,ST0122,Partner Store,Retail Park,Nottingham,East Midlands,NO3 2SM,50.541435,-1.317584,2021-04-12,926,3,James Wilson,Active,False,False
+123,SnowTelco Nottingham Airport 5,ST0123,Express,Airport,Nottingham,East Midlands,NO6 2MH,55.863528,-0.602201,2019-09-23,816,2,Sophie Williams,Active,False,False
+124,SnowTelco Leicester Standard,ST0124,Standard,Train Station,Leicester,East Midlands,LE8 8WF,56.491981,-4.558296,2019-03-07,1858,6,Lucy Smith,Active,True,False
+125,SnowTelco Leicester Shopping 2,ST0125,Standard,Shopping Centre,Leicester,East Midlands,LE5 9NT,53.787198,-4.743655,2011-01-11,2146,7,Emma Taylor,Active,False,False
+126,SnowTelco Leicester Retail 3,ST0126,Express,Retail Park,Leicester,East Midlands,LE7 8NL,57.789789,-1.526577,2023-07-25,1247,4,Lucy Davies,Active,False,False
+127,SnowTelco Leicester Retail 4,ST0127,Partner Store,Retail Park,Leicester,East Midlands,LE2 7VF,54.363795,-2.75152,2012-12-20,934,3,Sarah Davies,Active,False,False
+128,SnowTelco Southampton Standard,ST0128,Standard,Retail Park,Southampton,South East,SO7 3YQ,52.812376,-4.703514,2017-03-28,2969,9,Sophie Wilson,Active,False,False
+129,SnowTelco Southampton High 2,ST0129,Standard,High Street,Southampton,South East,SO7 6SZ,55.435285,1.669526,2023-02-20,2805,9,Michael Evans,Active,True,False
+130,SnowTelco Southampton Retail 3,ST0130,Express,Retail Park,Southampton,South East,SO3 8MM,53.551514,-4.461802,2018-04-15,833,2,Michael Davies,Active,False,False
+131,SnowTelco Southampton Retail 4,ST0131,Partner Store,Retail Park,Southampton,South East,SO3 8SN,57.30834,-4.175673,2021-12-02,526,2,David Evans,Active,False,False
+132,SnowTelco Brighton Standard,ST0132,Standard,Train Station,Brighton,South East,BR4 2EC,53.616341,1.290753,2020-02-09,2505,8,Lucy Jones,Active,False,False
+133,SnowTelco Brighton Retail 2,ST0133,Standard,Retail Park,Brighton,South East,BR2 9TK,57.130653,0.959534,2014-08-07,2953,9,Michael Davies,Active,True,False
+134,SnowTelco Brighton Shopping 3,ST0134,Standard,Shopping Centre,Brighton,South East,BR6 9UM,53.739247,1.881084,2021-05-22,1553,5,Michael Jones,Active,False,False
+135,SnowTelco Brighton Airport 4,ST0135,Partner Store,Airport,Brighton,South East,BR2 3LW,50.59332,-1.739168,2016-07-04,919,3,Sophie Williams,Active,False,False
+136,SnowTelco Reading Standard,ST0136,Standard,Train Station,Reading,South East,RE3 7SB,56.651126,-1.373285,2014-04-06,1872,6,David Williams,Active,False,False
+137,SnowTelco Reading Retail 2,ST0137,Standard,Retail Park,Reading,South East,RE5 4WT,52.195608,-0.624843,2016-09-07,1661,5,Sarah Williams,Active,False,False
+138,SnowTelco Reading Train 3,ST0138,Express,Train Station,Reading,South East,RE1 1CB,57.588375,0.397157,2013-03-28,1145,3,David Brown,Active,False,False
+139,SnowTelco Aberdeen Standard,ST0139,Standard,Airport,Aberdeen,Scotland,AB8 9KW,57.653201,-1.619386,2015-03-10,1562,5,Daniel Taylor,Active,False,False
+140,SnowTelco Aberdeen Airport 2,ST0140,Standard,Airport,Aberdeen,Scotland,AB4 6VE,52.50066,0.02854,2018-05-28,2451,8,Sophie Wilson,Active,False,False
+141,SnowTelco Aberdeen High 3,ST0141,Partner Store,High Street,Aberdeen,Scotland,AB2 5QH,51.127021,-4.645763,2019-09-29,977,3,Daniel Wilson,Active,False,False
+142,SnowTelco Belfast Standard,ST0142,Standard,Shopping Centre,Belfast,Northern Ireland,BE6 4FR,57.967755,-1.732294,2011-08-18,2683,8,David Evans,Active,False,False
+143,SnowTelco Belfast Train 2,ST0143,Standard,Train Station,Belfast,Northern Ireland,BE6 1BK,53.959154,1.176376,2017-09-29,1940,6,Lucy Taylor,Active,False,False
+144,SnowTelco Belfast Shopping 3,ST0144,Express,Shopping Centre,Belfast,Northern Ireland,BE7 6BN,50.409261,-1.067282,2010-09-19,1174,3,Sophie Taylor,Active,False,False
+145,SnowTelco Belfast Airport 4,ST0145,Partner Store,Airport,Belfast,Northern Ireland,BE2 3DN,52.985587,1.907514,2012-04-25,786,2,Sophie Williams,Active,False,False
+146,SnowTelco Coventry Standard,ST0146,Standard,Train Station,Coventry,West Midlands,CO1 1EY,52.664326,-1.683791,2018-05-19,1582,5,Lucy Williams,Active,False,False
+147,SnowTelco Coventry Train 2,ST0147,Express,Train Station,Coventry,West Midlands,CO5 6SS,54.258719,-0.038821,2019-11-08,1202,4,David Evans,Active,False,False
+148,SnowTelco Coventry Airport 3,ST0148,Kiosk,Airport,Coventry,West Midlands,CO5 1VR,52.124243,-0.410863,2014-12-06,313,2,Emma Smith,Active,False,False
+149,SnowTelco Plymouth Standard,ST0149,Standard,Shopping Centre,Plymouth,South West,PL7 3XH,50.252564,1.637436,2016-03-14,2976,9,Sarah Brown,Active,False,False
+150,SnowTelco Plymouth Airport 2,ST0150,Standard,Airport,Plymouth,South West,PL9 8ZZ,50.49825,-4.033423,2013-10-19,2340,7,Emma Davies,Closing,False,False
+151,SnowTelco Plymouth Airport 3,ST0151,Kiosk,Airport,Plymouth,South West,PL6 9MX,56.175918,0.046472,2022-06-08,372,2,David Evans,Active,False,False
+152,SnowTelco Stoke Standard,ST0152,Standard,Shopping Centre,Stoke,West Midlands,ST4 5KY,51.658222,-0.065082,2020-04-19,2111,7,Sophie Evans,Active,False,False
+153,SnowTelco Stoke Retail 2,ST0153,Express,Retail Park,Stoke,West Midlands,ST9 7NM,57.636871,0.632311,2023-04-11,1492,4,David Smith,Active,False,False
+154,SnowTelco Wolverhampton Standard,ST0154,Standard,High Street,Wolverhampton,West Midlands,WO5 8GG,56.623614,-3.102071,2019-06-18,2843,9,David Williams,Active,False,False
+155,SnowTelco Wolverhampton Shopping 2,ST0155,Standard,Shopping Centre,Wolverhampton,West Midlands,WO4 4BD,53.306411,0.021506,2024-02-21,2587,8,Sarah Williams,Active,False,False
+156,SnowTelco Derby Standard,ST0156,Standard,Shopping Centre,Derby,East Midlands,DE8 4KL,52.283323,-4.585862,2018-03-02,2474,8,Sarah Brown,Active,False,False
+157,SnowTelco Derby Shopping 2,ST0157,Standard,Shopping Centre,Derby,East Midlands,DE7 8FZ,57.697051,1.482278,2018-11-01,1574,5,James Smith,Active,False,False
+158,SnowTelco Swansea Standard,ST0158,Standard,Retail Park,Swansea,Wales,SW9 9RE,56.808478,-1.723855,2020-06-11,2813,9,Emma Jones,Active,False,False
+159,SnowTelco Swansea Shopping 2,ST0159,Express,Shopping Centre,Swansea,Wales,SW4 3VW,57.176342,0.788929,2024-08-09,1102,3,Sophie Jones,Active,False,False
+160,SnowTelco Milton Keynes Standard,ST0160,Standard,High Street,Milton Keynes,South East,MI6 4AJ,53.068595,-1.872851,2022-11-19,2477,8,David Davies,Active,False,False
+161,SnowTelco Milton Keynes Retail 2,ST0161,Standard,Retail Park,Milton Keynes,South East,MI4 1XD,53.72316,-3.881982,2014-07-31,2918,9,David Jones,Active,False,False
+162,SnowTelco Cambridge Standard,ST0162,Standard,Retail Park,Cambridge,East,CA3 8EQ,55.981879,-0.759827,2015-10-10,1948,6,Daniel Evans,Active,False,False
+163,SnowTelco Cambridge Shopping 2,ST0163,Standard,Shopping Centre,Cambridge,East,CA9 8SY,52.894279,1.420713,2014-04-01,1667,5,Sarah Smith,Active,False,False
+164,SnowTelco Oxford Standard,ST0164,Standard,Shopping Centre,Oxford,South East,OX3 6SQ,50.92992,-3.56219,2015-05-02,1806,6,Lucy Jones,Active,False,False
+165,SnowTelco Oxford Airport 2,ST0165,Standard,Airport,Oxford,South East,OX8 1TQ,55.382142,-2.842813,2022-05-12,2350,7,James Wilson,Active,True,False
+166,SnowTelco York Standard,ST0166,Standard,Shopping Centre,York,Yorkshire,YO7 6YC,54.329308,-4.578211,2015-12-25,1592,5,Sarah Evans,Active,False,False
+167,SnowTelco York Airport 2,ST0167,Standard,Airport,York,Yorkshire,YO7 7CX,57.713155,1.121876,2019-07-19,2418,8,Michael Davies,Active,False,False
+168,SnowTelco Norwich Standard,ST0168,Standard,Airport,Norwich,East,NO4 1AK,53.704031,0.033658,2016-11-26,2990,9,Daniel Wilson,Active,True,False
+169,SnowTelco Norwich Shopping 2,ST0169,Express,Shopping Centre,Norwich,East,NO1 7VA,51.92533,-4.528964,2020-10-25,915,3,James Evans,Active,False,False
+170,SnowTelco Exeter Standard,ST0170,Standard,High Street,Exeter,South West,EX8 4TG,56.035086,0.432445,2022-01-07,2323,7,Michael Taylor,Active,False,False

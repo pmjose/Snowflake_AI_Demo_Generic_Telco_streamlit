@@ -1,0 +1,65 @@
+product_key,product_name,category_key,category_name,vertical
+1,Horizon Cloud Phone System,1,SnowTelco Connect,Enterprise
+2,Horizon Collaborate,1,SnowTelco Connect,Enterprise
+3,Microsoft Teams Phone,1,SnowTelco Connect,Enterprise
+4,Webex for SnowTelco,1,SnowTelco Connect,Enterprise
+5,CircleLoop,1,SnowTelco Connect,SMB
+6,iPECS Cloud,1,SnowTelco Connect,Enterprise
+7,Horizon Desktop App,1,SnowTelco Connect,All
+8,Horizon Mobile App,1,SnowTelco Connect,All
+9,Horizon Contact Centre,2,SnowTelco Experience,Enterprise
+10,Cirrus Contact Centre,2,SnowTelco Experience,Enterprise
+11,Amazon Connect Managed,2,SnowTelco Experience,Enterprise
+12,Secure Payments PCI,2,SnowTelco Experience,Enterprise
+13,SnowTelco Contact for Partners,2,SnowTelco Experience,Partner
+14,CX Analytics Suite,2,SnowTelco Experience,Enterprise
+15,Workforce Management,2,SnowTelco Experience,Enterprise
+16,SIP Trunks Standard,3,SnowTelco Enable,All
+17,SIP Trunks Enterprise,3,SnowTelco Enable,Enterprise
+18,Inbound Services,3,SnowTelco Enable,All
+19,Phoneline+,3,SnowTelco Enable,SMB
+20,FUSION IoT,3,SnowTelco Enable,Enterprise
+21,Cloud Connect Webex Calling,3,SnowTelco Enable,Enterprise
+22,Number Porting Services,3,SnowTelco Enable,All
+23,International Calling,3,SnowTelco Enable,All
+24,SnowTelco MDR,4,SnowTelco Secure,Enterprise
+25,Managed SOC,4,SnowTelco Secure,Enterprise
+26,SafeWeb Cyber Security,4,SnowTelco Secure,SMB
+27,Vulnerability Management,4,SnowTelco Secure,Enterprise
+28,Security Awareness Training,4,SnowTelco Secure,All
+29,Cyber Maturity Assessment,4,SnowTelco Secure,Enterprise
+30,Endpoint Detection Response,4,SnowTelco Secure,Enterprise
+31,Enterprise Managed Solutions,5,SnowTelco Solutions,Enterprise
+32,Managed Networks,5,SnowTelco Solutions,Enterprise
+33,SD-WAN Solution,5,SnowTelco Solutions,Enterprise
+34,Clearing as a Service,5,SnowTelco Solutions,Public Sector
+35,SnowTelcoUCX,5,SnowTelco Solutions,Enterprise
+36,Migration Services,5,SnowTelco Solutions,Enterprise
+37,Business Broadband,6,Connectivity,SMB
+38,Ethernet First Mile,6,Connectivity,Enterprise
+39,Dedicated Ethernet,6,Connectivity,Enterprise
+40,FTTP Business,6,Connectivity,All
+41,4G/5G Backup,6,Connectivity,All
+42,SnowTelco Mobile,6,Connectivity,All
+43,Technical Onboarding,7,Professional Services,All
+44,Implementation Services,7,Professional Services,Enterprise
+45,Training and Certification,7,Professional Services,Partner
+46,Solution Design,7,Professional Services,Enterprise
+47,Project Management,7,Professional Services,Enterprise
+48,Device Protection Plus,8,Add-Ons,All
+49,Call Recording,8,Add-Ons,All
+50,Wallboards,8,Add-Ons,Enterprise
+51,CRM Integration,8,Add-Ons,Enterprise
+52,Microsoft 365 Integration,8,Add-Ons,All
+53,API Access,8,Add-Ons,Enterprise
+54,Partner Portal Access,9,Channel Partner Services,Partner
+55,Partner Training Programme,9,Channel Partner Services,Partner
+56,Marketing Development Funds,9,Channel Partner Services,Partner
+57,Partner Technical Support,9,Channel Partner Services,Partner
+58,White Label Services,9,Channel Partner Services,Partner
+59,Dealer Programme,9,Channel Partner Services,Partner
+60,Public Sector Horizon,10,Public Sector Solutions,Enterprise
+61,NHS Compliant Solutions,10,Public Sector Solutions,Enterprise
+62,Education Cloud Communications,10,Public Sector Solutions,Enterprise
+63,Local Government Suite,10,Public Sector Solutions,Enterprise
+64,Central Government Secure,10,Public Sector Solutions,Enterprise

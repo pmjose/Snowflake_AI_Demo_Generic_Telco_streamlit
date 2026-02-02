@@ -1,0 +1,11 @@
+method_key,method_name,method_type,is_recurring
+1,Direct Debit,Bank,TRUE
+2,Credit Card,Card,TRUE
+3,Debit Card,Card,TRUE
+4,Bank Transfer,Bank,FALSE
+5,Cheque,Manual,FALSE
+6,PayPal,Digital,TRUE
+7,Apple Pay,Digital,TRUE
+8,Google Pay,Digital,TRUE
+9,Cash,Manual,FALSE
+10,Credit Note,Internal,FALSE

@@ -1,0 +1,31 @@
+plan_key,plan_name,plan_type,monthly_price,data_allowance_gb,minutes_allowance,sms_allowance,contract_length_months,5g_included,roaming_included,family_eligible,launch_date,network_generation
+1,Essential 5GB,Pay Monthly,12.99,5,500,Unlimited,12,False,False,True,2021-01-01,3G
+2,Essential 15GB,Pay Monthly,17.99,15,Unlimited,Unlimited,12,False,False,True,2021-01-01,4G
+3,Essential 30GB,Pay Monthly,22.99,30,Unlimited,Unlimited,12,False,True,True,2021-06-01,4G
+4,Unlimited Lite,Pay Monthly,27.99,Unlimited,Unlimited,Unlimited,12,False,True,True,2021-01-01,4G
+5,Unlimited Max,Pay Monthly,34.99,Unlimited,Unlimited,Unlimited,24,True,True,True,2022-03-01,5G
+6,Unlimited Pro,Pay Monthly,44.99,Unlimited,Unlimited,Unlimited,24,True,True,True,2022-03-01,5G
+7,5G Essential,Pay Monthly,29.99,50,Unlimited,Unlimited,12,True,True,True,2022-06-01,5G
+8,5G Unlimited,Pay Monthly,39.99,Unlimited,Unlimited,Unlimited,24,True,True,True,2022-06-01,5G
+9,5G Ultra,Pay Monthly,54.99,Unlimited,Unlimited,Unlimited,24,True,True,True,2023-01-01,5G
+10,SIM Only 10GB,SIM Only,9.99,10,Unlimited,Unlimited,1,False,False,True,2021-01-01,3G
+11,SIM Only 30GB,SIM Only,14.99,30,Unlimited,Unlimited,1,False,True,True,2021-01-01,3G
+12,SIM Only Unlimited,SIM Only,19.99,Unlimited,Unlimited,Unlimited,1,False,True,True,2021-06-01,4G
+13,SIM Only 5G,SIM Only,24.99,Unlimited,Unlimited,Unlimited,1,True,True,True,2022-06-01,5G
+14,Pay As You Go Basic,PAYG,0.0,0,0,0,0,False,False,False,2020-01-01,3G
+15,Pay As You Go Bundle,PAYG,10.0,3,300,300,0,False,False,False,2020-01-01,3G
+16,Pay As You Go Max,PAYG,20.0,10,Unlimited,Unlimited,0,False,False,False,2021-01-01,4G
+17,Family Plan 2-Line,Family,49.99,30,Unlimited,Unlimited,24,True,True,True,2022-01-01,5G
+18,Family Plan 4-Line,Family,89.99,50,Unlimited,Unlimited,24,True,True,True,2022-01-01,5G
+19,Family Plan Unlimited,Family,119.99,Unlimited,Unlimited,Unlimited,24,True,True,True,2022-06-01,5G
+20,Student Essential,Pay Monthly,14.99,25,Unlimited,Unlimited,12,False,True,True,2021-09-01,3G
+21,Student Unlimited,Pay Monthly,24.99,Unlimited,Unlimited,Unlimited,12,True,True,True,2022-09-01,5G
+22,Senior Simple,Pay Monthly,9.99,2,200,Unlimited,1,False,False,False,2021-01-01,3G
+23,Senior Connect,Pay Monthly,14.99,10,Unlimited,Unlimited,1,False,False,True,2022-01-01,3G
+24,Business Mobile Starter,Business,19.99,20,Unlimited,Unlimited,24,False,True,True,2021-01-01,4G
+25,Business Mobile Pro,Business,34.99,50,Unlimited,Unlimited,24,True,True,True,2022-01-01,5G
+26,Business Mobile Enterprise,Business,49.99,Unlimited,Unlimited,Unlimited,24,True,True,True,2022-06-01,5G
+27,Kids Safe,Pay Monthly,7.99,2,100,100,12,False,False,False,2022-01-01,3G
+28,Tablet Data 10GB,Data Only,12.99,10,0,0,12,False,False,False,2021-01-01,3G
+29,Tablet Data Unlimited,Data Only,24.99,Unlimited,0,0,12,True,False,False,2022-06-01,5G
+30,Mobile Broadband 50GB,Data Only,19.99,50,0,0,1,True,False,False,2022-01-01,5G

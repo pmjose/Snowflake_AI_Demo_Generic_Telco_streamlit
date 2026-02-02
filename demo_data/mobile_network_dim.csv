@@ -1,0 +1,51 @@
+network_site_key,site_name,site_type,address,city,county,postcode,latitude,longitude,technology,capacity_mbps,coverage_radius_km,status,install_date
+1,London City Tower,Macro Cell,1 Poultry,London,Greater London,EC2R 8AH,51.5134,-0.0936,5G,1000,2.5,Active,2022-03-15
+2,Birmingham Central,Macro Cell,Victoria Square,Birmingham,West Midlands,B1 1BB,52.4799,-1.9035,5G,1000,2.8,Active,2022-04-20
+3,Manchester Piccadilly,Macro Cell,Piccadilly Gardens,Manchester,Greater Manchester,M1 1RG,53.4808,-2.2369,5G,1000,2.5,Active,2022-05-10
+4,Leeds Station,Macro Cell,City Square,Leeds,West Yorkshire,LS1 1PL,53.7960,-1.5474,5G,800,2.2,Active,2022-06-01
+5,Liverpool ONE,Macro Cell,Paradise Street,Liverpool,Merseyside,L1 8JF,53.4034,-2.9879,5G,800,2.4,Active,2022-07-15
+6,Bristol Harbourside,Macro Cell,Anchor Road,Bristol,Avon,BS1 5DB,51.4490,-2.5991,5G,800,2.0,Active,2022-08-20
+7,Edinburgh Castle View,Macro Cell,Royal Mile,Edinburgh,Scotland,EH1 2PB,55.9496,-3.1913,5G,800,2.3,Active,2022-09-10
+8,Glasgow Central,Macro Cell,Gordon Street,Glasgow,Scotland,G1 3SL,55.8590,-4.2577,5G,800,2.5,Active,2022-10-05
+9,Cardiff Bay,Macro Cell,Bute Place,Cardiff,West Glamorgan,CF10 5AL,51.4657,-3.1634,5G,600,2.0,Active,2022-11-15
+10,Belfast City Hall,Macro Cell,Donegall Square,Belfast,Northern Ireland,BT1 5GS,54.5969,-5.9306,5G,600,2.2,Active,2022-12-01
+11,Sheffield Meadowhall,Macro Cell,Meadowhall Way,Sheffield,South Yorkshire,S9 1EP,53.4143,-1.4117,5G,600,2.5,Active,2023-01-20
+12,Newcastle Quayside,Macro Cell,Quayside,Newcastle,Tyne and Wear,NE1 3DX,54.9697,-1.6045,5G,600,2.0,Active,2023-02-15
+13,Nottingham Market,Macro Cell,Old Market Square,Nottingham,Nottinghamshire,NG1 2BY,52.9534,-1.1470,5G,600,2.2,Active,2023-03-10
+14,Southampton Docks,Macro Cell,Ocean Village,Southampton,Hampshire,SO14 3QT,50.8983,-1.3977,5G,500,2.0,Active,2023-04-05
+15,Cambridge Science Park,Macro Cell,Milton Road,Cambridge,Cambridgeshire,CB4 0GA,52.2331,0.1468,5G,500,2.5,Active,2023-05-20
+16,Oxford City Centre,Macro Cell,Queen Street,Oxford,Oxfordshire,OX1 1ET,51.7537,-1.2578,5G,500,2.0,Active,2023-06-15
+17,Canary Wharf Tower,Macro Cell,One Canada Square,London,Greater London,E14 5AB,51.5049,-0.0187,5G,1200,3.0,Active,2021-06-01
+18,London Bridge,Macro Cell,Tooley Street,London,Greater London,SE1 2QF,51.5046,-0.0851,5G,1000,2.5,Active,2021-09-15
+19,Stratford Westfield,Macro Cell,Montfichet Road,London,Greater London,E20 1EJ,51.5430,-0.0080,5G,900,2.8,Active,2022-01-10
+20,Heathrow T5,Macro Cell,Terminal 5,London,Greater London,TW6 2GA,51.4700,-0.4893,5G,800,3.0,Active,2022-02-20
+21,London Euston,Small Cell,Euston Road,London,Greater London,NW1 2DU,51.5284,-0.1337,4G/5G,400,0.5,Active,2023-07-01
+22,Manchester Airport,Macro Cell,Ringway Road,Manchester,Greater Manchester,M90 1QX,53.3537,-2.2750,5G,700,2.5,Active,2023-01-15
+23,Birmingham NEC,Macro Cell,North Avenue,Birmingham,West Midlands,B40 1NT,52.4539,-1.7199,5G,700,3.0,Active,2023-02-28
+24,Edinburgh Airport,Macro Cell,Edinburgh Airport,Edinburgh,Scotland,EH12 9DN,55.9508,-3.3615,5G,500,2.5,Active,2023-08-10
+25,London O2 Arena,Macro Cell,Peninsula Square,London,Greater London,SE10 0DX,51.5025,0.0034,5G,900,2.0,Active,2022-06-15
+26,Wembley Stadium,Macro Cell,Olympic Way,London,Greater London,HA9 0WS,51.5560,-0.2795,5G,1000,2.5,Active,2022-03-01
+27,Old Trafford,Macro Cell,Sir Matt Busby Way,Manchester,Greater Manchester,M16 0RA,53.4631,-2.2913,5G,800,2.0,Active,2022-08-15
+28,Anfield,Macro Cell,Anfield Road,Liverpool,Merseyside,L4 0TH,53.4308,-2.9608,5G,700,2.0,Active,2023-04-20
+29,Cornwall Rural 1,Rural Macro,Bodmin Moor,Bodmin,Cornwall,PL15 7TS,50.5500,-4.6000,4G,200,5.0,Active,2023-09-01
+30,Welsh Valleys 1,Rural Macro,Brecon Beacons,Brecon,Powys,LD3 8EP,51.8833,-3.4333,4G,200,6.0,Active,2023-10-15
+31,Scottish Highlands 1,Rural Macro,Fort William,Fort William,Highland,PH33 6AN,56.8198,-5.1052,4G,150,8.0,Active,2023-11-20
+32,Lake District 1,Rural Macro,Windermere,Windermere,Cumbria,LA23 1AD,54.3805,-2.9085,4G,200,5.5,Active,2024-01-10
+33,Yorkshire Dales 1,Rural Macro,Hawes,Hawes,North Yorkshire,DL8 3QT,54.3040,-2.1972,4G,180,6.0,Active,2024-02-15
+34,London Metro Small 1,Small Cell,Oxford Street,London,Greater London,W1C 2JA,51.5152,-0.1418,5G,300,0.3,Active,2024-03-01
+35,London Metro Small 2,Small Cell,Regent Street,London,Greater London,W1B 5AH,51.5107,-0.1396,5G,300,0.3,Active,2024-03-15
+36,London Metro Small 3,Small Cell,Covent Garden,London,Greater London,WC2E 8RF,51.5117,-0.1240,5G,300,0.3,Active,2024-04-01
+37,London Metro Small 4,Small Cell,Leicester Square,London,Greater London,WC2H 7LU,51.5103,-0.1303,5G,300,0.3,Active,2024-04-15
+38,Manchester Metro Small 1,Small Cell,Deansgate,Manchester,Greater Manchester,M3 2BW,53.4786,-2.2506,5G,250,0.3,Active,2024-05-01
+39,Birmingham Metro Small 1,Small Cell,Bullring,Birmingham,West Midlands,B5 4BP,52.4774,-1.8936,5G,250,0.3,Active,2024-05-15
+40,M1 Corridor 1,Motorway,Junction 25,Nottingham,Nottinghamshire,NG9 3GJ,52.9269,-1.2539,4G/5G,400,3.0,Active,2022-11-01
+41,M25 Corridor 1,Motorway,Junction 10,Cobham,Surrey,KT11 1AA,51.3247,-0.4078,4G/5G,500,3.5,Active,2022-12-15
+42,M6 Corridor 1,Motorway,Junction 6,Birmingham,West Midlands,B24 0QY,52.5167,-1.8167,4G/5G,400,3.0,Active,2023-01-20
+43,A1(M) Corridor 1,Motorway,Junction 6,Welwyn,Hertfordshire,AL6 9FY,51.8167,-0.2000,4G/5G,350,3.0,Active,2023-03-01
+44,M4 Corridor 1,Motorway,Junction 4,Heathrow,Greater London,TW5 9QB,51.4833,-0.4167,4G/5G,450,3.5,Active,2023-04-15
+45,Kings Cross Indoor,Indoor DAS,Kings Cross Station,London,Greater London,N1C 4TB,51.5308,-0.1238,4G/5G,200,0.2,Active,2023-06-01
+46,Paddington Indoor,Indoor DAS,Paddington Station,London,Greater London,W2 1HQ,51.5154,-0.1755,4G/5G,200,0.2,Active,2023-07-15
+47,Victoria Indoor,Indoor DAS,Victoria Station,London,Greater London,SW1V 1JU,51.4952,-0.1439,4G/5G,200,0.2,Active,2023-08-01
+48,Waterloo Indoor,Indoor DAS,Waterloo Station,London,Greater London,SE1 8SW,51.5031,-0.1132,4G/5G,250,0.2,Active,2023-09-15
+49,Liverpool St Indoor,Indoor DAS,Liverpool Street Station,London,Greater London,EC2M 7QH,51.5178,-0.0823,4G/5G,200,0.2,Active,2023-10-01
+50,Gatwick Airport,Macro Cell,South Terminal,Crawley,West Sussex,RH6 0NP,51.1481,-0.1903,5G,600,2.5,Active,2024-01-15
