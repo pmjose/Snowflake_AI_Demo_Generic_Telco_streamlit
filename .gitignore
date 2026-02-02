@@ -1,6 +1,5 @@
-# Additional data folders - selectively tracked
-# Ignore 2024 data but allow 2025 data
-demo_data/additional_data/2024/
+# Additional data folders - historical data tracked
+# Both 2024 and 2025 data are included for historical analysis
 
 # GitLab scripts folder - disregarded
 sql_scripts_gitlab/

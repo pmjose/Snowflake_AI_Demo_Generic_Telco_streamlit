@@ -72,6 +72,8 @@ This repository includes a **Streamlit-powered interactive dashboard** (`demo_da
 | **Real-time Alerts Ticker** | Live scrolling alerts in the sidebar |
 | **Snowflake Integration** | Click-to-ask questions that open Snowflake Intelligence |
 
+> **Note:** This dashboard is designed exclusively for **live demonstration purposes**. It uses pre-computed sample data embedded within the application rather than querying a database connection. This architecture ensures **instant load times and zero latency** during live presentations, trade shows, and customer events—delivering a seamless, reliable demo experience without external dependencies.
+
 ### Running the Dashboard
 
 ```bash
