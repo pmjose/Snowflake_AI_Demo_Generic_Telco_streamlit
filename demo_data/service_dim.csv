@@ -1,0 +1,48 @@
+service_key,service_name,service_type,category,monthly_price,setup_fee,billing_frequency,status
+1,Horizon Cloud Phone - Basic,UCaaS,Voice,8.99,0,Monthly,Active
+2,Horizon Cloud Phone - Professional,UCaaS,Voice,14.99,29.98,Monthly,Active
+3,Horizon Cloud Phone - Enterprise,UCaaS,Voice,24.99,49.98,Monthly,Active
+4,Microsoft Teams Phone - Standard,UCaaS,Voice,12.0,24.0,Monthly,Active
+5,Microsoft Teams Phone - Premium,UCaaS,Voice,18.0,36.0,Monthly,Active
+6,Webex Calling - Basic,UCaaS,Voice,10.0,0,Monthly,Active
+7,Webex Calling - Professional,UCaaS,Voice,16.0,32.0,Monthly,Active
+8,SIP Trunk - Standard,Voice,Connectivity,4.99,0,Monthly,Active
+9,SIP Trunk - Enterprise,Voice,Connectivity,2.99,0,Monthly,Active
+10,Inbound Services - 0800,Voice,Connectivity,0.05,0,Monthly,Active
+11,Inbound Services - 0333,Voice,Connectivity,0.03,0,Monthly,Active
+12,Horizon Contact Centre - Basic,CCaaS,Contact Centre,49.99,99.98,Monthly,Active
+13,Horizon Contact Centre - Professional,CCaaS,Contact Centre,89.99,179.98,Monthly,Active
+14,Horizon Contact Centre - Enterprise,CCaaS,Contact Centre,149.99,299.98,Monthly,Active
+15,Cirrus Contact Centre,CCaaS,Contact Centre,79.99,159.98,Monthly,Active
+16,Amazon Connect Managed,CCaaS,Contact Centre,99.99,199.98,Monthly,Active
+17,CX Analytics Suite,CCaaS,Analytics,29.99,59.98,Monthly,Active
+18,Workforce Management,CCaaS,Analytics,19.99,39.98,Monthly,Active
+19,Call Recording - Standard,Add-On,Compliance,2.99,0,Monthly,Active
+20,Call Recording - Premium,Add-On,Compliance,5.99,0,Monthly,Active
+21,Business Broadband - 100Mbps,Connectivity,Internet,29.99,59.98,Monthly,Active
+22,Business Broadband - 500Mbps,Connectivity,Internet,49.99,99.98,Monthly,Active
+23,Business Broadband - 1Gbps,Connectivity,Internet,79.99,159.98,Monthly,Active
+24,Ethernet First Mile,Connectivity,Internet,199.0,398.0,Monthly,Active
+25,Dedicated Ethernet - 100Mbps,Connectivity,Internet,299.0,598.0,Monthly,Active
+26,Dedicated Ethernet - 1Gbps,Connectivity,Internet,599.0,1198.0,Monthly,Active
+27,SD-WAN - Basic,Connectivity,Network,149.0,298.0,Monthly,Active
+28,SD-WAN - Professional,Connectivity,Network,299.0,598.0,Monthly,Active
+29,SnowTelco MDR,Security,Cyber,19.99,39.98,Monthly,Active
+30,Managed SOC,Security,Cyber,49.99,99.98,Monthly,Active
+31,Vulnerability Management,Security,Cyber,9.99,0,Monthly,Active
+32,Security Awareness Training,Security,Cyber,2.99,0,Monthly,Active
+33,Mobile Voice - Pay Monthly,Mobile,Voice,0.0,0,Monthly,Active
+34,Mobile Data - Pay Monthly,Mobile,Data,0.0,0,Monthly,Active
+35,Mobile SMS - Pay Monthly,Mobile,Messaging,0.0,0,Monthly,Active
+36,Mobile Voice - PAYG,Mobile,Voice,0.1,0,Monthly,Active
+37,Mobile Data - PAYG,Mobile,Data,0.05,0,Monthly,Active
+38,5G Access,Mobile,Network,5.0,0,Monthly,Active
+39,EU Roaming,Mobile,Roaming,0.0,0,Monthly,Active
+40,International Roaming,Mobile,Roaming,5.0,0,Monthly,Active
+41,Device Protection,Mobile,Insurance,7.99,0,Monthly,Active
+42,Family Plan Discount,Mobile,Discount,-5.0,0,Monthly,Active
+43,IoT Connectivity - Low Data,IoT,Connectivity,1.99,0,Monthly,Active
+44,IoT Connectivity - Medium Data,IoT,Connectivity,4.99,0,Monthly,Active
+45,IoT Connectivity - High Data,IoT,Connectivity,9.99,0,Monthly,Active
+46,IoT Platform Access,IoT,Platform,49.0,98.0,Monthly,Active
+47,IoT Analytics,IoT,Analytics,19.0,38.0,Monthly,Active

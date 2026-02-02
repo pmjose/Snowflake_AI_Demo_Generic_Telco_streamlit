@@ -1,0 +1,16 @@
+matter_id,matter_type,matter_title,status,priority,open_date,close_date,opposing_party,description,potential_exposure,reserved_amount,actual_cost,assigned_counsel,business_unit,related_contract_id,region
+LM001,Customer Dispute,Billing Overcharge Claim,Open,Medium,2025-08-15,,Smith Family Trust,Customer claims systematic overcharging on international calls,25000,15000,0,Internal,Consumer,,South East
+LM002,Employment,Wrongful Termination,Under Review,High,2025-06-20,,J. Williams,Former employee claims unfair dismissal,150000,100000,12500,External,HR,,North West
+LM003,Regulatory,Ofcom Investigation - Coverage Claims,Open,High,2025-09-01,,Ofcom,Investigation into marketing claims about 5G coverage,500000,250000,45000,External,Marketing,,National
+LM004,Customer Dispute,Service Quality Complaint,Settled,Low,2025-03-10,2025-07-15,ABC Corp Ltd,B2B customer dispute over SLA credits,35000,35000,42000,Internal,Enterprise,CON000156,West Midlands
+LM005,Contract,Vendor Payment Dispute,Under Review,Medium,2025-07-22,,TechSupply Inc,Dispute over equipment delivery terms,75000,50000,8000,Internal,Procurement,,London
+LM006,Employment,Discrimination Claim,Open,High,2025-10-05,,M. Patel,Alleged discrimination in promotion process,200000,150000,25000,External,HR,,Yorkshire
+LM007,IP/Patent,Patent Infringement Notice,Under Review,Medium,2025-08-30,,TelecomPatents LLC,Received notice alleging infringement of network optimization patent,1000000,100000,35000,External,Technology,,National
+LM008,Customer Dispute,Data Breach Claim,Open,High,2025-11-12,,Consumer Group,Class action threat following minor data incident,750000,500000,65000,External,IT,,National
+LM009,Regulatory,ICO Data Protection Query,Open,Medium,2025-10-20,,ICO,Query regarding data retention practices,100000,25000,5000,Internal,Compliance,,National
+LM010,Contract,Lease Dispute,Under Review,Low,2025-05-15,,Property Holdings Ltd,Dispute over retail store lease terms,45000,30000,12000,Internal,Retail,,Scotland
+LM011,Employment,Harassment Complaint,Open,High,2025-11-28,,Anonymous,Internal investigation into workplace harassment,100000,75000,8000,External,HR,,London
+LM012,Customer Dispute,Mis-selling Allegation,Settled,Medium,2025-02-14,2025-06-30,Enterprise Solutions Ltd,B2B customer claims mis-sold service package,85000,85000,92000,Internal,Sales,CON000892,North West
+LM013,Regulatory,Competition Authority Query,Open,Medium,2025-09-18,,CMA,Query regarding MVNO wholesale pricing,250000,50000,15000,External,Wholesale,,National
+LM014,Contract,Partner Agreement Dispute,Under Review,Medium,2025-08-05,,RetailPartner Co,Dispute over commission calculations,120000,80000,22000,Internal,Partners,,London
+LM015,Customer Dispute,Network Outage Compensation,Open,Low,2025-12-01,,Multiple Claimants,Group claim for compensation following major outage,180000,100000,5000,Internal,Network,,West Midlands

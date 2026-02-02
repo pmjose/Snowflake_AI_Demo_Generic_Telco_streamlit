@@ -1,20 +1,23 @@
-# Python
+# Additional data folder - not needed in repo
+demo_data/additional_data/
+
+# GitLab scripts folder - disregarded
+sql_scripts_gitlab/
+
+# Python cache
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
-.Python
-*.egg-info/
-.eggs/
 
 # Backup files
-*_backup_*.py
-
-# Folders to ignore
-sql_scripts_gitlab/
+*.backup
+demo_dashboard_app_backup_*.py
 
 # macOS
 .DS_Store
+.AppleDouble
+.LSOverride
 
 # IDE
 .idea/
@@ -25,4 +28,11 @@ sql_scripts_gitlab/
 # Environment
 .env
 .venv/
+env/
 venv/
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/

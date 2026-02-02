@@ -1,0 +1,36 @@
+category_key,category_name,department,category_type,sla_hours
+1,Billing Inquiry,Finance,billing,48
+2,Billing Dispute,Finance,billing,48
+3,Payment Issue,Finance,billing,48
+4,Service Activation,Provisioning,technical,4
+5,Service Deactivation,Provisioning,technical,4
+6,Service Change,Provisioning,technical,4
+7,Number Porting,Provisioning,technical,4
+8,Voice Quality Issue,Technical Support,technical,4
+9,No Service,Technical Support,technical,4
+10,Slow Data Speed,Technical Support,technical,4
+11,Network Coverage,Technical Support,technical,4
+12,Device Issue,Technical Support,technical,4
+13,App/Portal Issue,Technical Support,technical,4
+14,Email/Voicemail,Technical Support,technical,4
+15,Feature Request,Product,general,48
+16,Contract Inquiry,Sales,general,48
+17,Upgrade Request,Sales,general,48
+18,Cancellation Request,Retention,general,48
+19,Complaint - Service,Complaints,complaint,24
+20,Complaint - Billing,Complaints,complaint,24
+21,Complaint - Staff,Complaints,complaint,24
+22,Security Concern,Security,technical,4
+23,Fraud Report,Security,technical,4
+24,SIM Swap,Provisioning,technical,4
+25,eSIM Activation,Provisioning,technical,4
+26,Roaming Issue,Technical Support,technical,4
+27,International Calling,Technical Support,technical,4
+28,Contact Centre Setup,Technical Support,technical,4
+29,Integration Issue,Technical Support,technical,4
+30,Training Request,Professional Services,general,48
+31,Documentation Request,Professional Services,general,48
+32,Partner Inquiry,Channel,general,48
+33,API Issue,Technical Support,technical,4
+34,Reporting Issue,Technical Support,technical,4
+35,General Inquiry,Customer Service,general,48
