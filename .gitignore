@@ -1,4 +1,5 @@
-# Additional data folder - not needed in repo
+# Additional data folders - not needed in repo
+additional_data/
 demo_data/additional_data/
 
 # GitLab scripts folder - disregarded

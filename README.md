@@ -4,7 +4,7 @@
 
 *Transform how executives access business insights through natural language conversations with enterprise data.*
 
-![Snowflake Intelligence](https://img.shields.io/badge/Snowflake-Intelligence-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white) ![Telecommunications](https://img.shields.io/badge/Industry-Telecommunications-orange?style=for-the-badge) ![Version 3.4](https://img.shields.io/badge/Version-3.4-green?style=for-the-badge)
+![Snowflake Intelligence](https://img.shields.io/badge/Snowflake-Intelligence-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white) ![Telecommunications](https://img.shields.io/badge/Industry-Telecommunications-orange?style=for-the-badge) ![Version 3.5](https://img.shields.io/badge/Version-3.5-green?style=for-the-badge) ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
 ---
 
@@ -46,6 +46,7 @@ Within seconds, the AI agent queries millions of records, analyzes patterns, and
 
 | Feature | Description |
 |---------|-------------|
+| **Interactive Dashboard** | Beautiful Streamlit app with 40+ persona dashboards and live animations |
 | **28 Demo Scripts** | Ready-to-run executive conversations for every C-suite and VP persona |
 | **38 Semantic Views** | Comprehensive coverage across all business domains |
 | **16M+ Records** | Production-scale data demonstrating enterprise performance |
@@ -53,6 +54,35 @@ Within seconds, the AI agent queries millions of records, analyzes patterns, and
 | **182 Test Questions** | Documented questions with expected insights |
 | **TM Forum ODA Aligned** | Industry-standard telecommunications data model |
 | **Multi-Year Data** | Historical data (2020-2026) for trend analysis |
+
+---
+
+## Interactive Dashboard
+
+This repository includes a **Streamlit-powered interactive dashboard** (`demo_dashboard_app.py`) that provides a visual companion to the Snowflake Intelligence demos.
+
+### Dashboard Features
+
+| Feature | Description |
+|---------|-------------|
+| **40+ Persona Dashboards** | Executive Summary, C-Suite (CEO, CFO, CMO, CTO, etc.), VP-Level dashboards |
+| **Live Animations** | Animated charts, gauges, network maps, and data visualizations |
+| **SnowTelco Website** | Simulated customer-facing website with plans and pricing |
+| **Persona Hub** | Central navigation with clickable tiles for all personas |
+| **Real-time Alerts Ticker** | Live scrolling alerts in the sidebar |
+| **Snowflake Integration** | Click-to-ask questions that open Snowflake Intelligence |
+
+### Running the Dashboard
+
+```bash
+# Install dependencies
+pip install streamlit pandas altair
+
+# Run the dashboard
+streamlit run demo_dashboard_app.py
+```
+
+The dashboard will open at `http://localhost:8501`
 
 ---
 
@@ -440,7 +470,9 @@ SELECT COUNT(*) FROM mvno_settlement_fact WHERE is_overdue IS NOT NULL;
 ## Repository Structure
 
 ```
-Snowflake_AI_Demo_Generic_Telco/
+Snowflake_AI_Demo_Generic_Telco_streamlit/
+│
+├── demo_dashboard_app.py           # 🆕 Interactive Streamlit dashboard (40+ personas)
 │
 ├── sql_scripts/                    # Installation scripts (run in order)
 │   ├── 01_infrastructure.sql       # Database, roles, network
@@ -513,6 +545,6 @@ Snowflake_AI_Demo_Generic_Telco/
 
 ---
 
-**Version 3.4** | Last Updated: January 2026
+**Version 3.5** | Last Updated: February 2026
 
-*Built for Snowflake Intelligence demonstrations — 28 personas | 38 semantic views | 182 test questions | 66 documents*
+*Built for Snowflake Intelligence demonstrations — 40+ dashboards | 28 personas | 38 semantic views | 182 test questions | 66 documents*
