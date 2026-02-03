@@ -24906,104 +24906,95 @@ def main():
         if 'selected_page' not in st.session_state:
             st.session_state.selected_page = "Executive_Summary"
         
-        # Callback functions to handle section switching
-        def on_exec_change():
-            st.session_state.selected_page = st.session_state.nav_exec
-            # Clear other section selections by storing which section is active
-            st.session_state.active_section = 'exec'
+        # Build combined list with section markers for styling
+        all_nav_options = []
+        section_boundaries = {'exec_end': 0, 'vp_end': 0}
         
-        def on_vp_change():
-            st.session_state.selected_page = st.session_state.nav_vp
-            st.session_state.active_section = 'vp'
-        
-        def on_tools_change():
-            st.session_state.selected_page = st.session_state.nav_tools
-            st.session_state.active_section = 'tools'
-        
-        # Determine which section the current selection is in
-        current_page = st.session_state.selected_page
-        current_in_exec = current_page in c_suite
-        current_in_vp = current_page in vp_level
-        current_in_tools = current_page in tools_section
-        
-        # Section 1: Executive Dashboards
-        st.markdown('''
-        <div style="background: linear-gradient(135deg, #1B2A4E 0%, #2D3F5E 100%); padding: 0.5rem 0.75rem; border-radius: 6px; margin-bottom: 0.5rem;">
-            <span style="color: white; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">📊 EXECUTIVE DASHBOARDS</span>
-        </div>
-        ''', unsafe_allow_html=True)
-        
+        # Add filtered items from each section
         if filtered_csuite:
-            exec_index = filtered_csuite.index(current_page) if current_in_exec and current_page in filtered_csuite else 0
-            selected_exec = st.radio(
-                "Executive",
-                filtered_csuite,
-                format_func=lambda x: page_labels.get(x, x),
-                label_visibility="collapsed",
-                key="nav_exec",
-                index=exec_index if current_in_exec else 0,
-                on_change=on_exec_change
-            )
-        
-        # Section 2: VP Operations
-        st.markdown('''
-        <div style="background: linear-gradient(135deg, #1B2A4E 0%, #2D3F5E 100%); padding: 0.5rem 0.75rem; border-radius: 6px; margin: 0.75rem 0 0.5rem 0;">
-            <span style="color: white; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">⚙️ VP OPERATIONS</span>
-        </div>
-        ''', unsafe_allow_html=True)
+            all_nav_options.extend(filtered_csuite)
+            section_boundaries['exec_end'] = len(all_nav_options)
         
         if filtered_vp:
-            vp_index = filtered_vp.index(current_page) if current_in_vp and current_page in filtered_vp else 0
-            selected_vp = st.radio(
-                "VP Level",
-                filtered_vp,
-                format_func=lambda x: page_labels.get(x, x),
-                label_visibility="collapsed",
-                key="nav_vp",
-                index=vp_index if current_in_vp else 0,
-                on_change=on_vp_change
-            )
-        
-        # Section 3: Tools & Analytics
-        st.markdown('''
-        <div style="background: linear-gradient(135deg, #1B2A4E 0%, #2D3F5E 100%); padding: 0.5rem 0.75rem; border-radius: 6px; margin: 0.75rem 0 0.5rem 0;">
-            <span style="color: white; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">🔧 TOOLS & ANALYTICS</span>
-        </div>
-        ''', unsafe_allow_html=True)
+            all_nav_options.extend(filtered_vp)
+            section_boundaries['vp_end'] = len(all_nav_options)
         
         if filtered_tools:
-            tools_index = filtered_tools.index(current_page) if current_in_tools and current_page in filtered_tools else 0
-            selected_tools = st.radio(
-                "Tools",
-                filtered_tools,
-                format_func=lambda x: page_labels.get(x, x),
-                label_visibility="collapsed",
-                key="nav_tools",
-                index=tools_index if current_in_tools else 0,
-                on_change=on_tools_change
-            )
+            all_nav_options.extend(filtered_tools)
         
-        # Inject JavaScript to highlight only the actual current page
-        current_page_label = page_labels.get(current_page, current_page)
+        # Find current index in combined list
+        current_page = st.session_state.selected_page
+        if current_page in all_nav_options:
+            current_index = all_nav_options.index(current_page)
+        else:
+            current_index = 0
+        
+        # Single unified radio for all navigation
+        selected_page = st.radio(
+            "Navigation",
+            all_nav_options,
+            format_func=lambda x: page_labels.get(x, x),
+            label_visibility="collapsed",
+            key="nav_unified",
+            index=current_index
+        )
+        
+        # Update session state
+        st.session_state.selected_page = selected_page
+        
+        # Inject JavaScript to apply section colors and highlight the current page
+        current_page_label = page_labels.get(selected_page, selected_page)
+        exec_end = section_boundaries['exec_end']
+        vp_end = section_boundaries['vp_end']
+        
+        # Define section colors
+        exec_color = '#E8F4FD'  # Light blue
+        exec_border = '#29B5E8'
+        vp_color = '#F3E8FD'    # Light purple  
+        vp_border = '#8B5CF6'
+        tools_color = '#E8FDF3'  # Light green
+        tools_border = '#10B981'
+        
         components.html(f'''
         <script>
-            function highlightCurrentPage() {{
-                // Reset all labels to default state
+            function styleNavigation() {{
                 const allLabels = parent.document.querySelectorAll('section[data-testid="stSidebar"] .stRadio label');
-                allLabels.forEach(label => {{
-                    label.style.background = 'white';
-                    label.style.borderColor = '#E2E8F0';
+                const execEnd = {exec_end};
+                const vpEnd = {vp_end};
+                
+                // Apply section colors based on index
+                allLabels.forEach((label, index) => {{
+                    let bgColor, borderColor;
+                    
+                    if (index < execEnd) {{
+                        // Executive section - blue
+                        bgColor = '{exec_color}';
+                        borderColor = '{exec_border}';
+                    }} else if (index < vpEnd) {{
+                        // VP section - purple
+                        bgColor = '{vp_color}';
+                        borderColor = '{vp_border}';
+                    }} else {{
+                        // Tools section - green
+                        bgColor = '{tools_color}';
+                        borderColor = '{tools_border}';
+                    }}
+                    
+                    label.style.background = bgColor;
+                    label.style.borderColor = borderColor;
+                    label.style.borderLeftWidth = '3px';
                     label.style.color = '#1B2A4E';
                     label.style.boxShadow = '0 1px 2px rgba(0,0,0,0.04)';
                     label.style.transform = 'none';
                 }});
                 
-                // Find and highlight the current page
+                // Now highlight the selected item
                 allLabels.forEach(label => {{
                     const labelText = label.innerText.trim();
                     if (labelText === "{current_page_label}") {{
                         label.style.background = 'linear-gradient(135deg, #29B5E8 0%, #1A8BC4 100%)';
                         label.style.borderColor = '#29B5E8';
+                        label.style.borderLeftWidth = '3px';
                         label.style.color = 'white';
                         label.style.boxShadow = '0 2px 8px rgba(41, 181, 232, 0.3)';
                         label.style.transform = 'translateX(4px)';
@@ -25011,10 +25002,10 @@ def main():
                 }});
             }}
             
-            // Run after a short delay to ensure DOM is ready
-            setTimeout(highlightCurrentPage, 50);
-            setTimeout(highlightCurrentPage, 200);
-            setTimeout(highlightCurrentPage, 500);
+            // Run after delays to ensure DOM is ready
+            setTimeout(styleNavigation, 50);
+            setTimeout(styleNavigation, 200);
+            setTimeout(styleNavigation, 500);
         </script>
         ''', height=0)
         
