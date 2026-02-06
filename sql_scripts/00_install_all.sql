@@ -86,11 +86,8 @@ SELECT '=== STEP 14: Validating 2024 Data ===' AS status;
 EXECUTE IMMEDIATE FROM $github_base || '/14_validate_2024_data.sql';
 
 -- ========================================================================
--- ENHANCEMENTS (Optional - Scripts 12, 15, 90)
+-- ENHANCEMENTS (Optional - Scripts 15, 90)
 -- ========================================================================
-SELECT '=== STEP 12: Creating Demo User ===' AS status;
-EXECUTE IMMEDIATE FROM $github_base || '/12_create_demo_user.sql';
-
 SELECT '=== STEP 15: Applying Data Enhancements ===' AS status;
 EXECUTE IMMEDIATE FROM $github_base || '/15_data_enhancements.sql';
 

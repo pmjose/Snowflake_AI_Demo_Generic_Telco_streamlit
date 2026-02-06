@@ -448,6 +448,8 @@ This will automatically:
 7. Load historical data (2024-2025)
 8. Apply data enhancements
 
+> **Note:** To create a dedicated demo user, run `12_create_demo_user.sql` separately after installation.
+
 ---
 
 ### Manual Installation (Alternative)
