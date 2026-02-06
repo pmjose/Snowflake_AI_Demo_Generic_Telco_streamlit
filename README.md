@@ -414,9 +414,45 @@ Enterprise ARPU is trending up 8% YoY driven by UCaaS bundle adoption.
 | **Cortex** | Must be available in your region |
 | **Region** | AWS or Azure with Cortex LLM support |
 
-### Quick Start (15-20 minutes)
+### One-Click Installation (Recommended)
 
-Execute the SQL scripts in the `sql_scripts/` folder in numerical order.
+Run a single SQL script that automatically fetches and executes all installation scripts from GitHub:
+
+```sql
+-- Copy and paste this into a Snowflake worksheet and run as ACCOUNTADMIN
+-- Total time: ~20-30 minutes
+
+USE ROLE ACCOUNTADMIN;
+
+-- Setup GitHub access
+CREATE OR REPLACE NETWORK RULE github_install_rule
+  MODE = EGRESS
+  TYPE = HOST_PORT
+  VALUE_LIST = ('raw.githubusercontent.com:443');
+
+CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION github_install_integration
+  ALLOWED_NETWORK_RULES = (github_install_rule)
+  ENABLED = TRUE;
+
+-- Run master installation script
+EXECUTE IMMEDIATE FROM 'https://raw.githubusercontent.com/pmjose/Snowflake_AI_Demo_Generic_Telco_streamlit/main/sql_scripts/00_install_all.sql';
+```
+
+This will automatically:
+1. Create infrastructure (database, roles, warehouse)
+2. Download all data files from GitHub
+3. Create and load 100+ tables
+4. Set up 38 semantic views
+5. Configure 6 Cortex Search services
+6. Create the Intelligence Agent
+7. Load historical data (2024-2025)
+8. Apply data enhancements
+
+---
+
+### Manual Installation (Alternative)
+
+If you prefer step-by-step control, execute the SQL scripts in the `sql_scripts/` folder in numerical order.
 
 ---
 
@@ -664,6 +700,7 @@ Snowflake_AI_Demo_Generic_Telco_streamlit/
 ├── demo_dashboard_app.py           # 🆕 Interactive Streamlit dashboard (40+ personas)
 │
 ├── sql_scripts/                    # Installation scripts (run in order)
+│   ├── 00_install_all.sql          # 🚀 ONE-CLICK INSTALL (runs all scripts from GitHub)
 │   ├── 01_infrastructure.sql       # Database, roles, network
 │   ├── 02_download_data.sql        # Download CSV files
 │   ├── 03_create_tables.sql        # Create all tables (incl. computed columns)
