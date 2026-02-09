@@ -4528,6 +4528,53 @@ def render_executive_showcase():
     </div>
     """, unsafe_allow_html=True)
 
+    show_sf_highlights = st.session_state.get("sf_highlights", True)
+    if show_sf_highlights:
+        st.markdown("""
+        <style>
+        .exec-sf-feature-banner {
+            background: linear-gradient(135deg, #F0F9FF 0%, #ECFEFF 100%);
+            border: 1px solid #BAE6FD;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin: 0.5rem 0 1.5rem 0;
+        }
+        .exec-sf-feature-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1B2A4E;
+            margin-bottom: 0.75rem;
+        }
+        .exec-sf-feature-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .exec-sf-feature-pill {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1E40AF;
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+        }
+        </style>
+        <div class="exec-sf-feature-banner">
+            <div class="exec-sf-feature-title">❄️ Snowflake Features powering this showcase</div>
+            <div class="exec-sf-feature-grid">
+                <span class="exec-sf-feature-pill">Snowflake Intelligence</span>
+                <span class="exec-sf-feature-pill">Cortex AI</span>
+                <span class="exec-sf-feature-pill">Cortex Search</span>
+                <span class="exec-sf-feature-pill">Semantic Models</span>
+                <span class="exec-sf-feature-pill">Dynamic Tables</span>
+                <span class="exec-sf-feature-pill">Snowpark</span>
+                <span class="exec-sf-feature-pill">Horizon Governance</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     # Dashboard Tabs
     tab_overview, tab_market, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧭 Market & Customers", "❄️ Snowflake Intelligence"])
 
@@ -4874,6 +4921,92 @@ def render_executive_showcase():
         </div>
         """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Executive Performance Signals</div>', unsafe_allow_html=True)
+        exec_col1, exec_col2 = st.columns(2)
+        
+        with exec_col1:
+            st.markdown("**Revenue Mix by Segment**")
+            with st.container(border=True):
+                seg_df = pd.DataFrame({
+                    'Segment': ['Consumer', 'SMB', 'Enterprise', 'Wholesale'],
+                    'Revenue': [4.8, 1.6, 1.2, 0.7]
+                })
+                seg_bar = alt.Chart(seg_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Revenue:Q', title='Revenue (£M)'),
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Segment:N', alt.Tooltip('Revenue:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(seg_bar, use_container_width=True)
+        
+        with exec_col2:
+            st.markdown("**NPS vs Churn Risk**")
+            with st.container(border=True):
+                churn_df = pd.DataFrame({
+                    'Segment': ['Premium', 'Standard', 'Budget', 'Enterprise'],
+                    'NPS': [62, 47, 28, 55],
+                    'Churn': [1.2, 1.8, 2.9, 1.1]
+                })
+                churn_scatter = alt.Chart(churn_df).mark_circle(size=120, color='#8B5CF6').encode(
+                    x=alt.X('NPS:Q', title='NPS'),
+                    y=alt.Y('Churn:Q', title='Churn %'),
+                    tooltip=['Segment:N', 'NPS:Q', alt.Tooltip('Churn:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(churn_scatter, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Revenue Bridge (YoY)</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            bridge_df = pd.DataFrame({
+                'Driver': ['Base', 'Volume', 'Price', 'Mix', 'Churn', 'Discounts', 'Current'],
+                'Impact': [13.2, 1.2, 0.6, 0.4, -0.5, -0.3, 14.6],
+                'Type': ['Total', 'Up', 'Up', 'Up', 'Down', 'Down', 'Total']
+            })
+            bridge_df['Label'] = bridge_df['Impact'].apply(lambda v: f"{v:+.1f}M" if v != 13.2 and v != 14.6 else f"{v:.1f}M")
+            bridge_bar = alt.Chart(bridge_df).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4).encode(
+                x=alt.X('Driver:N', title=None),
+                y=alt.Y('Impact:Q', title='£M'),
+                color=alt.Color('Type:N', scale=alt.Scale(domain=['Up', 'Down', 'Total'], range=['#10B981', '#EF4444', '#3B82F6']), legend=None),
+                tooltip=['Driver:N', alt.Tooltip('Impact:Q', format='.1f')]
+            ).properties(height=200)
+            bridge_text = alt.Chart(bridge_df).mark_text(dy=-8, fontSize=10, fontWeight='bold').encode(
+                x='Driver:N',
+                y='Impact:Q',
+                text='Label:N',
+                color=alt.value('#1B2A4E')
+            )
+            st.altair_chart(bridge_bar + bridge_text, use_container_width=True)
+
+        st.markdown('<div class="section-header">ARPU & Plan Mix</div>', unsafe_allow_html=True)
+        arpu_col, mix_col = st.columns(2)
+        with arpu_col:
+            st.markdown("**ARPU by Segment**")
+            with st.container(border=True):
+                arpu_df = pd.DataFrame({
+                    'Segment': ['Enterprise', 'Premium', 'Standard', 'Budget'],
+                    'ARPU': [142, 58, 38, 24]
+                })
+                arpu_bar = alt.Chart(arpu_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('ARPU:Q', title='ARPU (£)'),
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    color=alt.value('#14B8A6'),
+                    tooltip=['Segment:N', 'ARPU:Q']
+                ).properties(height=200)
+                st.altair_chart(arpu_bar, use_container_width=True)
+        with mix_col:
+            st.markdown("**Plan Mix by Type**")
+            with st.container(border=True):
+                plan_df = pd.DataFrame({
+                    'Plan': ['Pay Monthly', 'SIM Only', 'Family', 'PAYG'],
+                    'Share': [46, 28, 16, 10]
+                })
+                plan_bar = alt.Chart(plan_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Share:Q', title='Share %'),
+                    y=alt.Y('Plan:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Plan:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=200)
+                st.altair_chart(plan_bar, use_container_width=True)
+
         # Main Dashboard Section - Enhanced Visual Design
         col_left, col_right = st.columns([1.2, 1])
         
@@ -5343,126 +5476,106 @@ def render_executive_showcase():
         # Interactive Agent Section
 
     with tab_market:
-        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MOBILE', 'PORTING', 'MARKET_INTELLIGENCE', 'CUSTOMER_EXPERIENCE']])
-        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
-        
-        st.markdown('<div class="section-header">Market & Customer Snapshot</div>', unsafe_allow_html=True)
         st.markdown("""
         <style>
-        .snapshot-strip {
-            background: linear-gradient(135deg, #F8FAFF 0%, #EEF6FF 100%);
-            border: 1px solid #E2E8F0;
-            border-radius: 16px;
-            padding: 1rem 1.25rem;
+        @keyframes exec-market-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes exec-market-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .exec-market-pulse {
             position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: exec-market-glow 3s ease-in-out infinite;
         }
-        .snapshot-strip::before {
-            content: "";
+        .exec-market-pulse::after {
+            content: '';
             position: absolute;
             top: 0;
-            left: -120%;
-            width: 60%;
+            left: 0;
+            width: 40%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(41, 181, 232, 0.12), transparent);
-            animation: snapshot-shimmer 4s ease-in-out infinite;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: exec-market-sweep 3s linear infinite;
         }
-        @keyframes snapshot-shimmer {
-            0% { left: -120%; }
-            100% { left: 220%; }
-        }
-        .snapshot-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+        .exec-market-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
             position: relative;
             z-index: 1;
         }
-        .snapshot-card {
-            background: white;
-            border-radius: 14px;
-            padding: 0.85rem 1rem;
-            border: 1px solid #E5E7EB;
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            animation: snapshot-rise 0.6s ease-out forwards;
-            opacity: 0;
-        }
-        .snapshot-card:nth-child(1) { animation-delay: 0.1s; }
-        .snapshot-card:nth-child(2) { animation-delay: 0.25s; }
-        .snapshot-card:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes snapshot-rise {
-            0% { transform: translateY(8px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        .snapshot-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(41, 181, 232, 0.18); }
-        .snapshot-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #1B2A4E;
-            background: linear-gradient(135deg, rgba(41,181,232,0.18), rgba(16,185,129,0.18));
-            animation: snapshot-pulse 3s ease-in-out infinite;
-        }
-        @keyframes snapshot-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        .snapshot-title { font-size: 0.78rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; }
-        .snapshot-value { font-size: 1.45rem; font-weight: 700; color: #0F172A; line-height: 1.1; }
-        .snapshot-delta {
-            margin-left: auto;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.2rem 0.5rem;
+        .exec-market-title { font-weight: 700; color: #1E3A8A; }
+        .exec-market-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
             border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
         }
-        .snapshot-delta.up { color: #047857; background: #D1FAE5; }
-        .snapshot-delta.down { color: #B91C1C; background: #FEE2E2; }
-        .snapshot-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.15rem; }
-        @media (max-width: 900px) {
-            .snapshot-grid { grid-template-columns: 1fr; }
+        .exec-market-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
         }
+        .exec-market-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .exec-market-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .exec-market-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .exec-market-delta { font-size: 0.75rem; color: #1E40AF; }
+        @media (max-width: 900px) { .exec-market-grid { grid-template-columns: repeat(2, 1fr); } }
         </style>
-        <div class="snapshot-strip">
-            <div class="snapshot-grid">
-                <div class="snapshot-card">
-                    <div class="snapshot-icon">📈</div>
-                    <div>
-                        <div class="snapshot-title">Market Share</div>
-                        <div class="snapshot-value">5.2%</div>
-                        <div class="snapshot-sub">Share gained in key metros</div>
-                    </div>
-                    <div class="snapshot-delta up">↑ +0.4% YoY</div>
+        <div class="exec-market-pulse">
+            <div class="exec-market-header">
+                <div class="exec-market-title">🧭 Market & Customer Pulse</div>
+                <div class="exec-market-tag">LIVE</div>
+            </div>
+            <div class="exec-market-grid">
+                <div class="exec-market-card">
+                    <div class="exec-market-label">Net Port-Ins</div>
+                    <div class="exec-market-value">+432</div>
+                    <div class="exec-market-delta">MTD</div>
                 </div>
-                <div class="snapshot-card">
-                    <div class="snapshot-icon">🔁</div>
-                    <div>
-                        <div class="snapshot-title">Net Port-Ins</div>
-                        <div class="snapshot-value">+432</div>
-                        <div class="snapshot-sub">Three +167 lead</div>
-                    </div>
-                    <div class="snapshot-delta up">↑ +96 MoM</div>
+                <div class="exec-market-card">
+                    <div class="exec-market-label">Churn Risk</div>
+                    <div class="exec-market-value">2.1%</div>
+                    <div class="exec-market-delta">-0.2% QoQ</div>
                 </div>
-                <div class="snapshot-card">
-                    <div class="snapshot-icon">⚠️</div>
-                    <div>
-                        <div class="snapshot-title">Churn Rate</div>
-                        <div class="snapshot-value">2.1%</div>
-                        <div class="snapshot-sub">Prepaid softness easing</div>
-                    </div>
-                    <div class="snapshot-delta down">↓ -0.3% QoQ</div>
+                <div class="exec-market-card">
+                    <div class="exec-market-label">5G Adoption</div>
+                    <div class="exec-market-value">42%</div>
+                    <div class="exec-market-delta">+8% QoQ</div>
+                </div>
+                <div class="exec-market-card">
+                    <div class="exec-market-label">ARPU</div>
+                    <div class="exec-market-value">£43.6</div>
+                    <div class="exec-market-delta">+£2.1 MoM</div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MOBILE', 'PORTING', 'MARKET_INTELLIGENCE', 'CUSTOMER_EXPERIENCE']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+        
         
         st.markdown('<div class="section-header">Market Position</div>', unsafe_allow_html=True)
         pos_left, pos_right = st.columns([1.2, 1])
@@ -5589,6 +5702,23 @@ def render_executive_showcase():
             </div>
             """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Regional Performance Heatmap</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            heat_df = pd.DataFrame({
+                'Region': ['London', 'South East', 'South West', 'Midlands', 'North West', 'North East', 'Yorkshire', 'Scotland', 'Wales', 'East'],
+                'Market Share': [6.2, 5.8, 5.5, 4.8, 5.1, 4.2, 3.9, 4.5, 4.1, 5.3],
+                'NPS': [52, 48, 51, 45, 44, 41, 38, 46, 43, 47],
+                'Growth': [8.2, 6.1, 7.3, 5.2, 4.8, 3.1, 2.4, 5.5, 4.2, 6.8]
+            })
+            heat_long = heat_df.melt('Region', var_name='Metric', value_name='Value')
+            heat = alt.Chart(heat_long).mark_rect().encode(
+                x=alt.X('Metric:N', title=None),
+                y=alt.Y('Region:N', sort='-x', title=None),
+                color=alt.Color('Value:Q', scale=alt.Scale(scheme='blues')),
+                tooltip=['Region:N', 'Metric:N', alt.Tooltip('Value:Q', format='.1f')]
+            ).properties(height=260)
+            st.altair_chart(heat, use_container_width=True)
+
         st.markdown('<div class="section-header">Competitive Porting Analysis</div>', unsafe_allow_html=True)
         with st.container(border=True):
             porting_data = pd.DataFrame({
@@ -5596,18 +5726,19 @@ def render_executive_showcase():
                 'Port-In': [245, 156, 98, 112, 67, 45],
                 'Port-Out': [78, 123, 143, 87, 42, 38]
             })
-            port_in = alt.Chart(porting_data).mark_bar(color='#10B981', cornerRadiusTopRight=4, cornerRadiusBottomRight=4).encode(
-                x=alt.X('Port-In:Q', title='Port-In', scale=alt.Scale(domain=[0, 280])),
-                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), title=None, axis=alt.Axis(labels=False)),
-                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-In:Q', title='Gained')]
-            ).properties(height=220)
-            port_out = alt.Chart(porting_data).mark_bar(color='#EF4444', cornerRadiusTopLeft=4, cornerRadiusBottomLeft=4).encode(
-                x=alt.X('Port-Out:Q', title='Port-Out', scale=alt.Scale(domain=[0, 280], reverse=True)),
-                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), axis=alt.Axis(labels=True, title=None)),
-                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-Out:Q', title='Lost')]
-            ).properties(height=220)
-            combined = alt.hconcat(port_out, port_in).resolve_scale(y='shared')
-            st.altair_chart(combined, use_container_width=True)
+            porting_long = porting_data.melt('Competitor', var_name='Flow', value_name='Count')
+            porting_long['Count'] = porting_long.apply(
+                lambda row: row['Count'] if row['Flow'] == 'Port-In' else -row['Count'], axis=1
+            )
+            porting_long['Abs'] = porting_long['Count'].abs()
+            porting_chart = alt.Chart(porting_long).mark_bar(cornerRadius=4).encode(
+                x=alt.X('Count:Q', title='Net Porting', scale=alt.Scale(domain=[-260, 260])),
+                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), title=None),
+                color=alt.Color('Flow:N', scale=alt.Scale(range=['#10B981', '#EF4444']), legend=alt.Legend(orient='bottom', title=None)),
+                tooltip=['Competitor:N', 'Flow:N', alt.Tooltip('Abs:Q', title='Customers')]
+            ).properties(height=240)
+            zero_rule = alt.Chart(pd.DataFrame({'x': [0]})).mark_rule(color='#CBD5F5').encode(x='x:Q')
+            st.altair_chart(porting_chart + zero_rule, use_container_width=True)
             col_p1, col_p2 = st.columns(2)
             with col_p1:
                 st.markdown("""
@@ -5662,6 +5793,48 @@ def render_executive_showcase():
                 ).properties(height=220)
                 st.altair_chart(churn_bars, use_container_width=True)
         
+        st.markdown('<div class="section-header">Experience vs NPS</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            exp_df = pd.DataFrame({
+                'Region': ['London', 'South East', 'Midlands', 'North West', 'North East', 'Scotland', 'Wales', 'East'],
+                'Experience Score': [84, 81, 78, 76, 74, 79, 75, 80],
+                'NPS': [56, 49, 44, 42, 39, 46, 41, 47]
+            })
+            exp_scatter = alt.Chart(exp_df).mark_circle(size=180, opacity=0.75).encode(
+                x=alt.X('Experience Score:Q', title='Network Experience Score'),
+                y=alt.Y('NPS:Q', title='NPS'),
+                color=alt.Color('Region:N', legend=alt.Legend(orient='bottom', title=None)),
+                tooltip=['Region:N', 'Experience Score:Q', 'NPS:Q']
+            ).properties(height=260)
+            st.altair_chart(exp_scatter, use_container_width=True)
+
+        st.markdown('<div class="section-header">Churn Cohort Waterfall</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            waterfall_df = pd.DataFrame({
+                'Stage': ['Base', 'New Adds', 'Save Offers', 'Churn', 'Migrations', 'End'],
+                'Start': [0.0, 30.2, 31.0, 31.6, 30.8, 0.0],
+                'End': [30.2, 31.0, 31.6, 30.8, 31.1, 31.1],
+                'Type': ['Total', 'Increase', 'Increase', 'Decrease', 'Increase', 'Total']
+            })
+            waterfall_df['Label'] = waterfall_df.apply(
+                lambda row: f"{row['End']:.1f}M" if row['Type'] == 'Total' else f"{(row['End'] - row['Start']):+.1f}M",
+                axis=1
+            )
+            waterfall = alt.Chart(waterfall_df).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4).encode(
+                x=alt.X('Stage:N', title=None),
+                y=alt.Y('Start:Q', title='Subscribers (M)'),
+                y2='End:Q',
+                color=alt.Color('Type:N', scale=alt.Scale(domain=['Increase', 'Decrease', 'Total'], range=['#10B981', '#EF4444', '#3B82F6']), legend=None),
+                tooltip=['Stage:N', 'Type:N', alt.Tooltip('Start:Q', format='.1f'), alt.Tooltip('End:Q', format='.1f')]
+            ).properties(height=220)
+            waterfall_text = alt.Chart(waterfall_df).mark_text(dy=-8, fontSize=10, fontWeight='bold').encode(
+                x='Stage:N',
+                y='End:Q',
+                text='Label:N',
+                color=alt.value('#1B2A4E')
+            )
+            st.altair_chart(waterfall + waterfall_text, use_container_width=True)
+
         st.markdown('<div class="section-header">Growth & Mix</div>', unsafe_allow_html=True)
         st.markdown("**Customer Base Trend (12 Months)**")
         with st.container(border=True):
@@ -5704,132 +5877,43 @@ def render_executive_showcase():
             )
             st.altair_chart(alt.layer(revenue_line, subs_line).resolve_scale(y='independent').properties(height=220), use_container_width=True)
 
+        st.markdown('<div class="section-header">Customer Value & Competitive Signals</div>', unsafe_allow_html=True)
+        value_col1, value_col2 = st.columns(2)
+        
+        with value_col1:
+            st.markdown("**ARPU by Segment**")
+            with st.container(border=True):
+                arpu_df = pd.DataFrame({
+                    'Segment': ['Enterprise', 'Premium', 'Standard', 'Budget'],
+                    'ARPU': [142, 58, 38, 24]
+                })
+                arpu_bar = alt.Chart(arpu_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('ARPU:Q', title='ARPU (£)'),
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    color=alt.value('#14B8A6'),
+                    tooltip=['Segment:N', 'ARPU:Q']
+                ).properties(height=180)
+                st.altair_chart(arpu_bar, use_container_width=True)
+        
+        with value_col2:
+            st.markdown("**Competitive Win/Loss Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                win_df = pd.DataFrame({
+                    'Month': months,
+                    'Wins': [48, 52, 50, 55, 57, 60],
+                    'Losses': [34, 33, 35, 30, 28, 26]
+                })
+                win_long = win_df.melt('Month', var_name='Outcome', value_name='Count')
+                win_line = alt.Chart(win_long).mark_line(point=True).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Count:Q', title='Deals'),
+                    color=alt.Color('Outcome:N', scale=alt.Scale(range=['#22C55E', '#EF4444'])),
+                    tooltip=['Month:N', 'Outcome:N', 'Count:Q']
+                ).properties(height=180)
+                st.altair_chart(win_line, use_container_width=True)
+
     with tab_strategy:
-        st.markdown("""
-        <style>
-        .cmo-ai-pulse {
-            background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%);
-            border-radius: 16px;
-            border: 1px solid #FBCFE8;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        .cmo-ai-pulse::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -120%;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(236,72,153,0.2), transparent);
-            animation: cmo-ai-sweep 4s ease-in-out infinite;
-        }
-        @keyframes cmo-ai-sweep {
-            0% { left: -120%; }
-            100% { left: 220%; }
-        }
-        .cmo-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
-        .cmo-ai-title { font-weight: 700; color: #9D174D; font-size: 1.05rem; }
-        .cmo-ai-tag { background: #EC4899; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
-        .cmo-ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; position: relative; z-index: 1; }
-        .cmo-ai-card { background: white; border-radius: 12px; border: 1px solid #FBCFE8; padding: 0.9rem 1rem; }
-        .cmo-ai-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
-        .cmo-ai-value { font-size: 1.4rem; font-weight: 700; color: #9D174D; }
-        .cmo-ai-sub { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem; }
-        @media (max-width: 900px) { .cmo-ai-grid { grid-template-columns: 1fr; } }
-        </style>
-        <div class="cmo-ai-pulse">
-            <div class="cmo-ai-header">
-                <div class="cmo-ai-title">❄️ Snowflake Intelligence Pulse</div>
-                <div class="cmo-ai-tag">AI LIVE</div>
-            </div>
-            <div class="cmo-ai-grid">
-                <div class="cmo-ai-card">
-                    <div class="cmo-ai-label">Campaign Lift</div>
-                    <div class="cmo-ai-value">+18.3%</div>
-                    <div class="cmo-ai-sub">Above target vs Q3</div>
-                </div>
-                <div class="cmo-ai-card">
-                    <div class="cmo-ai-label">CAC Efficiency</div>
-                    <div class="cmo-ai-value">-12.5%</div>
-                    <div class="cmo-ai-sub">Optimized spend mix</div>
-                </div>
-                <div class="cmo-ai-card">
-                    <div class="cmo-ai-label">Brand Momentum</div>
-                    <div class="cmo-ai-value">+5 pts</div>
-                    <div class="cmo-ai-sub">Awareness & NPS gains</div>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
-        if st.session_state.get('sf_highlights', True):
-            st.info("❄️ **Powered by Snowflake Cortex AI** — Executive summary synthesized from campaign, customer, and experience data.")
-        
-        with st.container(border=True):
-            st.markdown("""
-            **Executive Summary (Q1 2026):**
-            - Acquisition momentum is strong (+18.3% vs target), driven by digital and social ROI gains.
-            - CAC efficiency improved (-12.5% QoQ) with higher conversion in high-intent segments.
-            - Brand perception is trending up (Awareness 68%, NPS +42) but mid-tenure churn remains a risk.
-            """)
-        
-        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
-        insight_cols = st.columns(3)
-        with insight_cols[0]:
-            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
-            with st.container(border=True):
-                st.markdown("""
-                - **Digital paid** ROI at **5.2x**
-                - **Net new adds** +2,847 MTD
-                - **Enterprise LTV** strongest (8.5k)
-                """)
-        with insight_cols[1]:
-            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
-            with st.container(border=True):
-                st.markdown("""
-                - **24–36 mo cohort** retention dip
-                - **TV/Radio ROI** lagging at **2.1x**
-                - **Churn rate** stuck at **1.8%**
-                """)
-        with insight_cols[2]:
-            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
-            with st.container(border=True):
-                st.markdown("""
-                - **Referral ROI** 9.8x
-                - **Email ROI** 8.2x
-                - **Digital share** +8% YoY
-                """)
-        
-        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
-        action_cols = st.columns(3)
-        with action_cols[0]:
-            with st.container(border=True):
-                st.markdown("""
-                **1) Accelerate 5G Adoption**
-                - Target **15,000** upgrades in Q1
-                - Concentrate on Premium/VIP cohorts
-                - Expected impact: +£450K ARR
-                """)
-        with action_cols[1]:
-            with st.container(border=True):
-                st.markdown("""
-                **2) Reduce CAC by 15%**
-                - Shift spend to high-ROI digital
-                - Expand referral incentives
-                - Expected impact: -£7 CAC
-                """)
-        with action_cols[2]:
-            with st.container(border=True):
-                st.markdown("""
-                **3) Lift NPS to +50**
-                - Detractor recovery journeys
-                - Onboarding improvements
-                - Expected impact: +6 NPS pts
-                """)
         st.markdown("""
         <style>
         .sf-pulse {
@@ -5874,7 +5958,7 @@ def render_executive_showcase():
         }
         .sf-pulse-metrics {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 1rem;
             position: relative;
             z-index: 1;
@@ -5891,6 +5975,7 @@ def render_executive_showcase():
         .sf-pulse-card:nth-child(1) { animation-delay: 0.05s; }
         .sf-pulse-card:nth-child(2) { animation-delay: 0.2s; }
         .sf-pulse-card:nth-child(3) { animation-delay: 0.35s; }
+        .sf-pulse-card:nth-child(4) { animation-delay: 0.5s; }
         @keyframes sf-card-rise {
             0% { transform: translateY(8px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
@@ -5910,19 +5995,24 @@ def render_executive_showcase():
             </div>
             <div class="sf-pulse-metrics">
                 <div class="sf-pulse-card">
-                    <div class="sf-pulse-label">Insight Confidence</div>
-                    <div class="sf-pulse-value">92%</div>
-                    <div class="sf-pulse-sub">High signal across market + CX</div>
+                    <div class="sf-pulse-label">Revenue Momentum</div>
+                    <div class="sf-pulse-value">+8.4%</div>
+                    <div class="sf-pulse-sub">YoY growth</div>
                 </div>
                 <div class="sf-pulse-card">
-                    <div class="sf-pulse-label">Decision Velocity</div>
-                    <div class="sf-pulse-value">2.4x</div>
-                    <div class="sf-pulse-sub">Faster priority alignment</div>
+                    <div class="sf-pulse-label">Churn Risk</div>
+                    <div class="sf-pulse-value">2.1%</div>
+                    <div class="sf-pulse-sub">Improving</div>
                 </div>
                 <div class="sf-pulse-card">
-                    <div class="sf-pulse-label">Risk Coverage</div>
-                    <div class="sf-pulse-value">97%</div>
-                    <div class="sf-pulse-sub">Cross-domain anomaly watch</div>
+                    <div class="sf-pulse-label">5G Adoption</div>
+                    <div class="sf-pulse-value">42%</div>
+                    <div class="sf-pulse-sub">+8% QoQ</div>
+                </div>
+                <div class="sf-pulse-card">
+                    <div class="sf-pulse-label">Enterprise ARPU</div>
+                    <div class="sf-pulse-value">£142</div>
+                    <div class="sf-pulse-sub">4.4x Consumer</div>
                 </div>
             </div>
         </div>
@@ -5930,82 +6020,15 @@ def render_executive_showcase():
 
         st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
         if st.session_state.get('sf_highlights', True):
-            st.info("❄️ **Powered by Snowflake Cortex AI** — Executive summary synthesized from cross-domain data in real time.")
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Executive summary synthesized from revenue, churn, market share, and network quality data.")
         
         with st.container(border=True):
             st.markdown("""
             **Executive Summary (Q1 2026):**
-            - Revenue momentum remains positive (+4.2% YoY) with strong enterprise ARPU driving margin uplift.
-            - Net port-ins are positive (+432), with gains concentrated against Three in the North West.
-            - Customer health is stable (NPS +45), but prepaid churn is elevated and needs targeted action.
+            - Revenue growth remains strong at **+8.4% YoY**, supported by enterprise ARPU and port-in momentum.
+            - Churn risk improved to **2.1%**, though prepaid segments need targeted retention.
+            - Market share reached **5.2%**, with 5G adoption accelerating in priority regions.
             """)
-
-        # AI-Powered Strategic Recommendations
-        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            with st.container(border=True):
-                st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #DC2626; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">HIGH PRIORITY</span>
-                    <span style="margin-left: 0.5rem; font-weight: 600;">Churn Prevention Program</span>
-                </div>
-                """, unsafe_allow_html=True)
-                st.markdown("""
-                - **847 high-risk customers** identified via ML propensity model
-                - Revenue at risk: **£2.4M ARR** (Premium segment most exposed)
-                - Root causes: Network issues (32%), Price sensitivity (28%), Support experience (22%)
-                - **Recommended Action**: Launch targeted retention campaign with 15% discount offers to high-value at-risk customers
-                - **Expected Impact**: Reduce churn by 0.5%, save £1.2M ARR
-                """)
-            
-            with st.container(border=True):
-                st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #F59E0B; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">MEDIUM PRIORITY</span>
-                    <span style="margin-left: 0.5rem; font-weight: 600;">5G Network Expansion</span>
-                </div>
-                """, unsafe_allow_html=True)
-                st.markdown("""
-                - 5G coverage: Currently **62%** of subscribers
-                - Competitor benchmark: EE at 78%, Vodafone at 71%
-                - Correlation: 5G users show **18% higher NPS** and **23% lower churn**
-                - **Recommended Action**: Accelerate Yorkshire & Midlands 5G rollout
-                - **Expected Impact**: +3 NPS points, unlock £800K upsell revenue
-                """)
-        
-        with col2:
-            with st.container(border=True):
-                st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #F59E0B; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">MEDIUM PRIORITY</span>
-                    <span style="margin-left: 0.5rem; font-weight: 600;">Enterprise Growth Initiative</span>
-                </div>
-                """, unsafe_allow_html=True)
-                st.markdown("""
-                - Enterprise segment: **4% of base** but **12% of revenue**
-                - ARPU: £142 (4.4x Consumer segment)
-                - Pipeline: **£1.8M** in active opportunities
-                - Win rate vs. BT: 34% (improving from 28% last quarter)
-                - **Recommended Action**: Invest in dedicated enterprise sales team expansion
-                - **Expected Impact**: +200 enterprise accounts, £2.8M incremental revenue
-                """)
-            
-            with st.container(border=True):
-                st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #10B981; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">OPPORTUNITY</span>
-                    <span style="margin-left: 0.5rem; font-weight: 600;">Three Customer Acquisition</span>
-                </div>
-                """, unsafe_allow_html=True)
-                st.markdown("""
-                - Three network issues driving **+167 net port-ins** this quarter
-                - Target audience: Three customers in areas where we have superior coverage
-                - **Recommended Action**: Geo-targeted campaign in Manchester, Leeds, Sheffield
-                - **Expected Impact**: 500+ new subscribers, £180K incremental ARR
-                """)
 
         st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
         insight_cols = st.columns(3)
@@ -6013,28 +6036,51 @@ def render_executive_showcase():
             st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
             with st.container(border=True):
                 st.markdown("""
-                - **Market share** trending up to **5.2%**
-                - **Enterprise ARPU** at **£142** (4.4x consumer)
-                - **QoE** improved: 99.2% availability
+                - **Enterprise ARPU** £142 driving margin expansion
+                - **Net port-ins** +432 MTD from Three
+                - **Revenue mix** steady with SMB uplift
                 """)
         with insight_cols[1]:
             st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
             with st.container(border=True):
                 st.markdown("""
-                - **Prepaid churn** +0.3% QoQ
-                - **Yorkshire** NPS lagging at **38**
-                - **Port-out** pressure vs EE in East
+                - **Prepaid churn** still above target
+                - **Yorkshire NPS** trailing by 9 points
+                - **Competitive pressure** vs EE in East
                 """)
         with insight_cols[2]:
             st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
             with st.container(border=True):
                 st.markdown("""
                 - **5G adoption** +12% YoY
-                - **Digital sales** 45% (+7% vs industry)
                 - **Enterprise pipeline** £1.8M active
+                - **Digital conversion** +7% QoQ
                 """)
 
-        st.markdown('<div class="section-header">Recommended Actions</div>', unsafe_allow_html=True)
+        # AI-Powered Strategic Recommendations
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Target churn hotspots** with win-back bundles
+                - Focus on prepaid segments in the North
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Accelerate 5G rollout** in Yorkshire & Midlands
+                - Prioritize high NPS impact zones
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Scale enterprise sales** in top 3 verticals
+                - Goal: +£2.8M ARR in H1
+                """)
+
+        st.markdown('<div class="section-header">Executive Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         action_cols = st.columns(3)
         with action_cols[0]:
             with st.container(border=True):
@@ -6530,16 +6576,69 @@ def render_ceo_strategic():
         </div>
         """, unsafe_allow_html=True)
 
+        st.markdown('<div class="section-header">Executive Growth & Margin Signals</div>', unsafe_allow_html=True)
+        perf_col1, perf_col2 = st.columns(2)
+        
+        with perf_col1:
+            st.markdown("**Revenue & EBITDA Margin Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                margin_df = pd.DataFrame({
+                    'Month': months,
+                    'Revenue': [4.6, 4.7, 4.8, 5.0, 5.2, 5.4],
+                    'Margin': [20.8, 21.2, 21.6, 22.1, 22.4, 22.8]
+                })
+                base = alt.Chart(margin_df).encode(
+                    x=alt.X('Month:N', sort=months, title=None)
+                )
+                rev_line = base.mark_line(color='#10B981', strokeWidth=2).encode(
+                    y=alt.Y('Revenue:Q', title='Revenue (£M)'),
+                    tooltip=['Month:N', alt.Tooltip('Revenue:Q', format='.2f')]
+                )
+                margin_line = base.mark_line(color='#3B82F6', strokeWidth=2, strokeDash=[4, 3]).encode(
+                    y=alt.Y('Margin:Q', title='EBITDA Margin %'),
+                    tooltip=['Month:N', alt.Tooltip('Margin:Q', format='.1f')]
+                )
+                st.altair_chart(
+                    alt.layer(rev_line, margin_line).resolve_scale(y='independent').properties(height=200),
+                    use_container_width=True
+                )
+        
+        with perf_col2:
+            st.markdown("**Cash Flow vs Capex**")
+            with st.container(border=True):
+                cash_df = pd.DataFrame({
+                    'Month': months,
+                    'Cash Flow': [0.9, 1.0, 1.1, 1.2, 1.3, 1.35],
+                    'Capex': [0.62, 0.65, 0.7, 0.74, 0.78, 0.82]
+                })
+                cash_long = cash_df.melt('Month', var_name='Type', value_name='Value')
+                cash_area = alt.Chart(cash_long).mark_area(opacity=0.5).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Value:Q', title='£M'),
+                    color=alt.Color('Type:N', scale=alt.Scale(range=['#22C55E', '#F59E0B'])),
+                    tooltip=['Month:N', 'Type:N', alt.Tooltip('Value:Q', format='.2f')]
+                ).properties(height=200)
+                st.altair_chart(cash_area, use_container_width=True)
+
+        st.markdown('<div class="section-header">Product Mix Momentum</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            mix_df = pd.DataFrame({
+                'Month': months * 3,
+                'Product': ['Mobile'] * 6 + ['Broadband'] * 6 + ['Enterprise'] * 6,
+                'Share': [52, 52, 51, 50, 49, 48, 28, 27, 27, 26, 26, 25, 20, 21, 22, 24, 25, 27]
+            })
+            mix_area = alt.Chart(mix_df).mark_area(opacity=0.6).encode(
+                x=alt.X('Month:N', sort=months, title=None),
+                y=alt.Y('Share:Q', stack='normalize', title='Mix %'),
+                color=alt.Color('Product:N', scale=alt.Scale(range=['#29B5E8', '#10B981', '#8B5CF6'])),
+                tooltip=['Month:N', 'Product:N', alt.Tooltip('Share:Q', format='.0f')]
+            ).properties(height=200)
+            st.altair_chart(mix_area, use_container_width=True)
+
     with tab_market:
         views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MOBILE', 'PORTING', 'NETWORK_OPS', 'MARKET_INTELLIGENCE']])
         st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
-
-        st.markdown("## Market & Customers Overview")
-        pulse_cols = st.columns(3)
-        pulse_cols[0].metric("Market Share", "5.2%", "+0.4% YoY")
-        pulse_cols[1].metric("Net Port-Ins", "+432", "+168 vs last Q")
-        pulse_cols[2].metric("Overall NPS", "+45", "+3 pts QoQ")
-        st.divider()
 
         st.markdown("""
         <style>
@@ -6908,33 +7007,26 @@ def render_ceo_strategic():
                 """, unsafe_allow_html=True)
             
         
-        # Port-In/Port-Out Analysis (full-width to avoid empty space)
         st.markdown('<div class="section-header">Competitive Porting Analysis</div>', unsafe_allow_html=True)
-        
         with st.container(border=True):
             porting_data = pd.DataFrame({
                 'Competitor': ['Three', 'Vodafone', 'EE', 'O2', 'Virgin', 'Sky'],
                 'Port-In': [245, 156, 98, 112, 67, 45],
                 'Port-Out': [78, 123, 143, 87, 42, 38]
             })
-            
-            # Butterfly chart
-            port_in = alt.Chart(porting_data).mark_bar(color='#10B981', cornerRadiusTopRight=4, cornerRadiusBottomRight=4).encode(
-                x=alt.X('Port-In:Q', title='Port-In', scale=alt.Scale(domain=[0, 280])),
-                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), title=None, axis=alt.Axis(labels=False)),
-                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-In:Q', title='Gained')]
-            ).properties(height=220)
-            
-            port_out = alt.Chart(porting_data).mark_bar(color='#EF4444', cornerRadiusTopLeft=4, cornerRadiusBottomLeft=4).encode(
-                x=alt.X('Port-Out:Q', title='Port-Out', scale=alt.Scale(domain=[0, 280], reverse=True)),
-                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), axis=alt.Axis(labels=True, title=None)),
-                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-Out:Q', title='Lost')]
-            ).properties(height=220)
-            
-            combined = alt.hconcat(port_out, port_in).resolve_scale(y='shared')
-            st.altair_chart(combined, use_container_width=True)
-            
-            # Net porting summary
+            porting_long = porting_data.melt('Competitor', var_name='Flow', value_name='Count')
+            porting_long['Count'] = porting_long.apply(
+                lambda row: row['Count'] if row['Flow'] == 'Port-In' else -row['Count'], axis=1
+            )
+            porting_long['Abs'] = porting_long['Count'].abs()
+            porting_chart = alt.Chart(porting_long).mark_bar(cornerRadius=4).encode(
+                x=alt.X('Count:Q', title='Net Porting', scale=alt.Scale(domain=[-260, 260])),
+                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), title=None),
+                color=alt.Color('Flow:N', scale=alt.Scale(range=['#10B981', '#EF4444']), legend=alt.Legend(orient='bottom', title=None)),
+                tooltip=['Competitor:N', 'Flow:N', alt.Tooltip('Abs:Q', title='Customers')]
+            ).properties(height=240)
+            zero_rule = alt.Chart(pd.DataFrame({'x': [0]})).mark_rule(color='#CBD5F5').encode(x='x:Q')
+            st.altair_chart(porting_chart + zero_rule, use_container_width=True)
             col_p1, col_p2 = st.columns(2)
             with col_p1:
                 st.markdown("""
@@ -6948,6 +7040,7 @@ def render_ceo_strategic():
                     <span style="color: #0369A1; font-weight: 600;">Three: +167 | EE: -45</span>
                 </div>
                 """, unsafe_allow_html=True)
+
         st.markdown('<div class="section-header">Customer Health & Value</div>', unsafe_allow_html=True)
 
         cust_left, cust_right = st.columns(2)
@@ -7056,6 +7149,70 @@ def render_ceo_strategic():
                         <div style="font-size: 0.7rem; color: #92400E;">Monthly Revenue at Risk</div>
                     </div>
                     """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Acquisition & Engagement Signals</div>', unsafe_allow_html=True)
+        acq_col1, acq_col2 = st.columns(2)
+        
+        with acq_col1:
+            st.markdown("**Acquisition Channel Mix**")
+            with st.container(border=True):
+                channel_df = pd.DataFrame({
+                    'Channel': ['Digital', 'Retail', 'Partner', 'Referral'],
+                    'Share': [44, 22, 18, 16]
+                })
+                channel_arc = alt.Chart(channel_df).mark_arc(innerRadius=50).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Channel:N', legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Channel:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=200)
+                st.altair_chart(channel_arc, use_container_width=True)
+        
+        with acq_col2:
+            st.markdown("**Cohort Retention Curve**")
+            with st.container(border=True):
+                cohort_df = pd.DataFrame({
+                    'Month': ['M0', 'M1', 'M2', 'M3', 'M4', 'M5', 'M6'],
+                    'Retention': [100, 94, 90, 87, 84, 82, 80]
+                })
+                cohort_line = alt.Chart(cohort_df).mark_line(point=True, color='#6366F1', strokeWidth=2).encode(
+                    x=alt.X('Month:N', title=None),
+                    y=alt.Y('Retention:Q', title='Retention %'),
+                    tooltip=['Month:N', alt.Tooltip('Retention:Q', format='.0f')]
+                ).properties(height=200)
+                st.altair_chart(cohort_line, use_container_width=True)
+
+        st.markdown('<div class="section-header">Sentiment & Brand Momentum</div>', unsafe_allow_html=True)
+        sent_col1, sent_col2 = st.columns(2)
+        
+        with sent_col1:
+            st.markdown("**Brand Sentiment Split**")
+            with st.container(border=True):
+                sent_df = pd.DataFrame({
+                    'Sentiment': ['Positive', 'Neutral', 'Negative'],
+                    'Share': [62, 26, 12]
+                })
+                sent_bar = alt.Chart(sent_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Share:Q', title='Share %'),
+                    y=alt.Y('Sentiment:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Sentiment:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=200)
+                st.altair_chart(sent_bar, use_container_width=True)
+        
+        with sent_col2:
+            st.markdown("**Brand Awareness Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                awareness_df = pd.DataFrame({
+                    'Month': months,
+                    'Awareness': [61, 62, 63, 65, 66, 68]
+                })
+                aware_line = alt.Chart(awareness_df).mark_line(point=True, color='#F59E0B', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Awareness:Q', title='Awareness %'),
+                    tooltip=['Month:N', alt.Tooltip('Awareness:Q', format='.0f')]
+                ).properties(height=200)
+                st.altair_chart(aware_line, use_container_width=True)
 
         # Revenue & Subscriber Trends
         st.markdown('<div class="section-header">Revenue & Subscriber Performance — 12 Month Trend</div>', unsafe_allow_html=True)
@@ -32862,6 +33019,29 @@ def main():
         # Executive Summary
         {"name": "Company Health Overview", "dashboard": "Executive_Summary", "label": "Executive Summary"},
         {"name": "Key Performance Indicators", "dashboard": "Executive_Summary", "label": "Executive Summary"},
+
+        # SnowTelco Website
+        {"name": "Homepage Highlights", "dashboard": "SnowTelco_Website", "label": "SnowTelco Website"},
+        {"name": "Plan Comparison", "dashboard": "SnowTelco_Website", "label": "SnowTelco Website"},
+        {"name": "Coverage Map", "dashboard": "SnowTelco_Website", "label": "SnowTelco Website"},
+
+        # Persona Hub
+        {"name": "Persona Explorer", "dashboard": "Persona_Hub", "label": "Persona Hub"},
+        {"name": "Persona Highlights", "dashboard": "Persona_Hub", "label": "Persona Hub"},
+        {"name": "Persona Navigation", "dashboard": "Persona_Hub", "label": "Persona Hub"},
+
+        # Executive Showcase
+        {"name": "Executive Performance Signals", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Revenue Bridge (YoY)", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Revenue & EBITDA Margin Trend", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Cash Flow vs Capex", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Product Mix Momentum", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "ARPU by Segment", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Plan Mix by Type", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Regional Performance Heatmap", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Competitive Porting Analysis", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Experience vs NPS", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
+        {"name": "Churn Cohort Waterfall", "dashboard": "00_WOW_Executive_Showcase", "label": "Executive Showcase"},
         
         # CEO Strategic
         {"name": "Revenue Trend", "dashboard": "01_CEO_Strategic", "label": "CEO Strategic Dashboard"},
@@ -33007,35 +33187,35 @@ def main():
         {"name": "Enterprise Revenue", "dashboard": "21_VP_Enterprise_Sales", "label": "VP Enterprise Sales"},
         {"name": "Account Health", "dashboard": "21_VP_Enterprise_Sales", "label": "VP Enterprise Sales"},
         
+        # VP Wholesale
+        {"name": "Wholesale Revenue", "dashboard": "22_VP_Wholesale", "label": "VP Wholesale"},
+        {"name": "MVNO Partners", "dashboard": "22_VP_Wholesale", "label": "VP Wholesale"},
+        {"name": "Interconnect Traffic", "dashboard": "22_VP_Wholesale", "label": "VP Wholesale"},
+        
         # VP Retail
-        {"name": "Store Performance", "dashboard": "22_VP_Retail", "label": "VP Retail"},
-        {"name": "Footfall Analytics", "dashboard": "22_VP_Retail", "label": "VP Retail"},
-        {"name": "Retail Sales", "dashboard": "22_VP_Retail", "label": "VP Retail"},
+        {"name": "Store Performance", "dashboard": "23_VP_Retail", "label": "VP Retail"},
+        {"name": "Footfall Analytics", "dashboard": "23_VP_Retail", "label": "VP Retail"},
+        {"name": "Retail Sales", "dashboard": "23_VP_Retail", "label": "VP Retail"},
         
         # CHRO People
-        {"name": "Headcount", "dashboard": "23_CHRO_People", "label": "CHRO People"},
-        {"name": "Employee Turnover", "dashboard": "23_CHRO_People", "label": "CHRO People"},
-        {"name": "Training Completion", "dashboard": "23_CHRO_People", "label": "CHRO People"},
+        {"name": "Headcount", "dashboard": "24_CHRO_People", "label": "CHRO People"},
+        {"name": "Employee Turnover", "dashboard": "24_CHRO_People", "label": "CHRO People"},
+        {"name": "Training Completion", "dashboard": "24_CHRO_People", "label": "CHRO People"},
         
         # VP Legal
-        {"name": "Legal Matters", "dashboard": "24_VP_Legal", "label": "VP Legal"},
-        {"name": "Contract Risk", "dashboard": "24_VP_Legal", "label": "VP Legal"},
-        {"name": "Litigation Status", "dashboard": "24_VP_Legal", "label": "VP Legal"},
+        {"name": "Legal Matters", "dashboard": "25_VP_Legal", "label": "VP Legal"},
+        {"name": "Contract Risk", "dashboard": "25_VP_Legal", "label": "VP Legal"},
+        {"name": "Litigation Status", "dashboard": "25_VP_Legal", "label": "VP Legal"},
         
         # VP Product
-        {"name": "Product Performance", "dashboard": "25_VP_Product", "label": "VP Product Management"},
-        {"name": "Plan Subscribers", "dashboard": "25_VP_Product", "label": "VP Product Management"},
-        {"name": "ARPU by Plan", "dashboard": "25_VP_Product", "label": "VP Product Management"},
+        {"name": "Product Performance", "dashboard": "26_VP_Product", "label": "VP Product Management"},
+        {"name": "Plan Subscribers", "dashboard": "26_VP_Product", "label": "VP Product Management"},
+        {"name": "ARPU by Plan", "dashboard": "26_VP_Product", "label": "VP Product Management"},
         
         # VP Procurement
-        {"name": "Vendor Spend", "dashboard": "26_VP_Procurement", "label": "VP Procurement"},
-        {"name": "Contract Renewals", "dashboard": "26_VP_Procurement", "label": "VP Procurement"},
-        {"name": "Procurement Pipeline", "dashboard": "26_VP_Procurement", "label": "VP Procurement"},
-        
-        # VP Wholesale
-        {"name": "Wholesale Revenue", "dashboard": "27_VP_Wholesale", "label": "VP Wholesale"},
-        {"name": "MVNO Partners", "dashboard": "27_VP_Wholesale", "label": "VP Wholesale"},
-        {"name": "Interconnect Traffic", "dashboard": "27_VP_Wholesale", "label": "VP Wholesale"},
+        {"name": "Vendor Spend", "dashboard": "27_VP_Procurement", "label": "VP Procurement"},
+        {"name": "Contract Renewals", "dashboard": "27_VP_Procurement", "label": "VP Procurement"},
+        {"name": "Procurement Pipeline", "dashboard": "27_VP_Procurement", "label": "VP Procurement"},
         
         # Data Monetization
         {"name": "Data Revenue", "dashboard": "data_monetization", "label": "Data Monetization"},
@@ -33054,6 +33234,80 @@ def main():
         {"name": "Snowflake Intelligence", "dashboard": "architecture", "label": "Architecture Overview"},
         {"name": "Data Sources Inventory", "dashboard": "architecture", "label": "Architecture Overview"},
     ]
+
+    # Add generic search entries for every dashboard
+    generic_terms = ["Overview", "KPIs", "Insights"]
+    label_overrides = {
+        "Executive_Summary": "Executive Summary",
+        "03_CMO_Marketing": "CMO Marketing Dashboard",
+        "04_CTO_Technology": "CTO Technology Dashboard",
+        "05_COO_Operations": "COO Operations Dashboard",
+        "06_CCO_Commercial": "CCO Commercial Dashboard",
+        "07_CXO_Customer_Experience": "CXO Customer Experience Dashboard",
+        "08_CNO_Network_QoE": "CNO Network Quality Dashboard",
+        "09_CDO_Data_Science": "CDO AI/ML Analytics Dashboard",
+        "10_CSO_Sustainability": "CSO Sustainability Dashboard"
+    }
+    extra_pages = {
+        "data_monetization": "Data Monetization",
+        "architecture": "Architecture Overview"
+    }
+    all_keys = set(PAGES.keys()) | set(label_overrides.keys()) | set(extra_pages.keys())
+    existing = {(v["name"], v["dashboard"]) for v in VISUALIZATION_INDEX}
+    for key in sorted(all_keys):
+        label = extra_pages.get(key) or label_overrides.get(key) or PAGES[key]["title"]
+        for term in generic_terms:
+            name = f"{label} {term}"
+            if (name, key) not in existing:
+                VISUALIZATION_INDEX.append({"name": name, "dashboard": key, "label": label})
+                existing.add((name, key))
+
+    role_terms = {
+        "Executive_Summary": ["executive summary", "company health", "kpi", "overview"],
+        "SnowTelco_Website": ["website", "plans", "coverage", "pricing"],
+        "Persona_Hub": ["persona", "role", "dashboard"],
+        "00_WOW_Executive_Showcase": ["executive showcase", "performance", "market", "customers", "revenue", "nps"],
+        "01_CEO_Strategic": ["strategy", "growth", "market share", "revenue", "nps"],
+        "02_CFO_Finance": ["finance", "ebitda", "cash flow", "budget", "capex", "arpu"],
+        "03_CMO_Marketing": ["marketing", "campaign", "cac", "roi", "sentiment", "social"],
+        "04_CTO_Technology": ["technology", "availability", "incidents", "cloud", "digital transformation"],
+        "05_COO_Operations": ["operations", "sla", "efficiency", "workforce", "field operations"],
+        "06_CCO_Commercial": ["commercial", "pipeline", "revenue", "churn", "subscriber growth"],
+        "07_CXO_Customer_Experience": ["customer experience", "nps", "csat", "journey", "tickets"],
+        "08_CNO_Network_QoE": ["network", "5g", "coverage", "qoe", "cell site"],
+        "09_CDO_Data_Science": ["data science", "ml", "churn prediction", "propensity", "clv", "model"],
+        "10_CSO_Sustainability": ["sustainability", "esg", "carbon", "energy", "renewable"],
+        "11_VP_Customer_Service": ["customer service", "call center", "aht", "fcr", "ces"],
+        "12_VP_Network_Operations": ["network ops", "alarms", "capacity", "fault", "handover", "rsrp"],
+        "Alert_Center": ["alerts", "incidents", "mttr", "sla", "network map"],
+        "13_Head_of_Partners": ["partners", "mvno", "pipeline", "partner revenue"],
+        "14_VP_Billing_Revenue": ["billing", "revenue assurance", "invoice", "disputes", "accuracy"],
+        "15_VP_IT_Digital": ["it", "digital", "system health", "application performance", "incident management"],
+        "16_VP_Field_Operations": ["field ops", "technician", "work orders", "first time fix"],
+        "17_VP_Strategy": ["strategy", "competitor", "market share", "arpu", "pricing"],
+        "18_VP_Communications": ["communications", "sentiment", "media", "brand"],
+        "19_Regulatory_Compliance": ["regulatory", "compliance", "ofcom", "sla"],
+        "20_VP_Security": ["security", "fraud", "incidents", "risk"],
+        "21_VP_Enterprise_Sales": ["enterprise sales", "pipeline", "contracts", "account health"],
+        "22_VP_Wholesale": ["wholesale", "mvno", "interconnect", "wholesale revenue"],
+        "23_VP_Retail": ["retail", "stores", "footfall", "retail sales"],
+        "24_CHRO_People": ["people", "headcount", "turnover", "training", "attrition"],
+        "25_VP_Legal": ["legal", "litigation", "contracts", "compliance", "outside counsel"],
+        "26_VP_Product": ["product", "roadmap", "launch", "pricing", "nps", "churn"],
+        "27_VP_Procurement": ["procurement", "spend", "sourcing", "savings", "vendors"],
+        "data_monetization": ["data monetization", "data products", "clean rooms", "marketplace"],
+        "architecture": ["architecture", "data flow", "engineering", "ml models", "snowflake intelligence"]
+    }
+
+    for key, terms in role_terms.items():
+        if key not in all_keys:
+            continue
+        label = extra_pages.get(key) or label_overrides.get(key) or PAGES[key]["title"]
+        for term in terms:
+            name = term.title() if term.islower() else term
+            if (name, key) not in existing:
+                VISUALIZATION_INDEX.append({"name": name, "dashboard": key, "label": label})
+                existing.add((name, key))
     
     with st.sidebar:
         # Live Alerts Ticker
@@ -33155,16 +33409,50 @@ def main():
         render_snowflake_logo()
         
         # Search functionality
+        st.markdown("""
+        <style>
+        .search-chip {
+            display: inline-block;
+            padding: 0.2rem 0.55rem;
+            margin: 0 0.35rem 0.35rem 0;
+            border-radius: 16px;
+            background: #EEF2FF;
+            color: #4338CA;
+            font-size: 0.75rem;
+            border: 1px solid #E0E7FF;
+        }
+        </style>
+        """, unsafe_allow_html=True)
         st.markdown("**🔍 Search Insights**")
-        search_query = st.text_input("Search", placeholder="e.g., churn, revenue, NPS...", label_visibility="collapsed")
+        search_query = st.text_input(
+            "Search",
+            placeholder="e.g., revenue, churn, NPS, CEO, network...",
+            label_visibility="collapsed"
+        )
+        suggested_searches = [
+            "Revenue", "Churn", "NPS", "ARPU", "Market Share",
+            "Network", "5G", "SLA", "Cash Flow", "Procurement"
+        ]
+        if not search_query:
+            st.caption("Popular searches:")
+            st.markdown(
+                " ".join([f"<span class='search-chip'>{term}</span>" for term in suggested_searches]),
+                unsafe_allow_html=True
+            )
         
         # Determine matching dashboards from search
         matching_dashboards = set()
         search_results = []
         
-        if search_query:
+        if search_query and search_query.strip():
+            query = search_query.strip().lower()
             # Filter visualizations based on search
-            search_results = [v for v in VISUALIZATION_INDEX if search_query.lower() in v["name"].lower()]
+            search_results = [
+                v for v in VISUALIZATION_INDEX
+                if query in v["name"].lower()
+                or query in v["label"].lower()
+                or query in v["dashboard"].lower()
+            ]
             matching_dashboards = set(v["dashboard"] for v in search_results)
             
             if search_results:
