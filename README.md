@@ -4,7 +4,7 @@
 
 *Transform how executives access business insights through natural language conversations with enterprise data.*
 
-![Snowflake Intelligence](https://img.shields.io/badge/Snowflake-Intelligence-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white) ![Telecommunications](https://img.shields.io/badge/Industry-Telecommunications-orange?style=for-the-badge) ![Version 3.5](https://img.shields.io/badge/Version-3.5-green?style=for-the-badge) ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Snowflake Intelligence](https://img.shields.io/badge/Snowflake-Intelligence-29B5E8?style=for-the-badge&logo=snowflake&logoColor=white) ![Telecommunications](https://img.shields.io/badge/Industry-Telecommunications-orange?style=for-the-badge) ![Version 3.6](https://img.shields.io/badge/Version-3.6-green?style=for-the-badge) ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
 
 ---
 
@@ -202,12 +202,15 @@ Agent: "According to your retention policy, Premium customers
 
 This repository includes a **Streamlit-powered interactive dashboard** (`demo_dashboard_app.py`) that provides a visual companion to the Snowflake Intelligence demos.
 
+Recent updates standardize VP dashboards into a 3-tab flow with expanded visuals and an AI-first Snowflake Intelligence section.
+
 ### Dashboard Features
 
 | Feature | Description |
 |---------|-------------|
 | **40+ Persona Dashboards** | Executive Summary, C-Suite (CEO, CFO, CMO, CTO, etc.), VP-Level dashboards |
 | **Live Animations** | Animated charts, gauges, network maps, and data visualizations |
+| **AI-First Tabs** | Standardized 3-tab flow with Snowflake Intelligence insights |
 | **SnowTelco Website** | Simulated customer-facing website with plans and pricing |
 | **Persona Hub** | Central navigation with clickable tiles for all personas |
 | **Real-time Alerts Ticker** | Live scrolling alerts in the sidebar |
@@ -776,6 +779,6 @@ Snowflake_AI_Demo_Generic_Telco_streamlit/
 
 ---
 
-**Version 3.5** | Last Updated: February 2026
+**Version 3.6** | Last Updated: February 2026
 
 *Built for Snowflake Intelligence demonstrations — 40+ dashboards | 28 personas | 38 semantic views | 182 test questions | 66 documents*

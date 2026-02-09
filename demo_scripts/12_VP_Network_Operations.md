@@ -75,7 +75,28 @@
 
 ---
 
-### Question 5: SLA Compliance
+### Question 5: RF Optimization
+> "Show me RF optimization KPIs - RSRP, RSRQ, SINR, handover success, and call drop rate by site."
+
+**Expected Insights:**
+- Signal strength (RSRP) by site/cell
+- Signal quality (RSRQ) and SINR hot spots
+- Handover success rate by region
+- Call drop rate trends
+- PRB utilization correlation with SINR
+
+**Talking Point:** "RF optimization is targeted where SINR degrades under high PRB load."
+
+**Snowflake Intelligence Questions (RF Optimization, 2026):**
+- "Show me average RSRP, RSRQ, and SINR by site for the last 7 days in 2026."
+- "Which cells in 2026 have SINR below 10 dB and PRB utilization above 80%?"
+- "Show handover success rate by region and technology (4G vs 5G) for 2026."
+- "Which sites have the highest call drop rate this month in 2026?"
+- "Correlate call drop rate with RSRP by site for 2026."
+
+---
+
+### Question 6: SLA Compliance
 > "Are we meeting our SLAs? Show me SLA measurements - how many met versus breached this month."
 
 **Expected Insights:**
@@ -113,6 +134,12 @@ Network excellence through data-driven operations - with MTTR as our key metric.
 | Throughput | Average Gbps | network_performance_fact |
 | Latency | Average ms | network_performance_fact |
 | Utilization | Capacity usage % | network_performance_fact |
+| RSRP | Signal strength (dBm) | ran_performance_fact |
+| RSRQ | Signal quality (dB) | ran_performance_fact |
+| SINR | Signal-to-interference (dB) | ran_performance_fact |
+| Handover Success | Successful handovers % | ran_performance_fact |
+| Call Drop Rate | Dropped calls % | ran_performance_fact |
+| PRB Utilization | Radio resource usage % | ran_performance_fact |
 
 ---
 

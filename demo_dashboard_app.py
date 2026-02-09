@@ -1359,19 +1359,21 @@ PAGES = {
         "title": "VP Network Operations",
         "persona": "VP Network Operations / Head of Network Management Centre",
         "duration": "10 minutes",
-        "focus": "Network availability, alarm management, capacity planning, incident response, SLA delivery",
+        "focus": "Network availability, alarm management, capacity planning, RF optimization, incident response, SLA delivery",
         "views": ["NETWORK_OPS", "NETWORK_ALARM", "SLA", "MOBILE", "RAN"],
         "questions": [
             "Show me the current health of our network - average availability, latency, and throughput.",
             "Show me our network alarms - alarm counts by severity, MTTR, and average alarm duration.",
             "How is our network performing by region? Show me availability and latency for major cities.",
             "Which network elements have the highest utilization? Show me elements above 60% utilization.",
+            "Show me RF optimization KPIs - RSRP, RSRQ, SINR, handover success, and call drop rate by site.",
             "Are we meeting our SLAs? Show me SLA measurements - how many met versus breached."
         ],
         "insights": [
             "Network availability: 99.5-99.9%",
             "MTTR by severity",
             "Regional performance comparison",
+            "RF signal quality and handover success trends",
             "SLA attainment and breach tracking"
         ]
     },
@@ -4139,7 +4141,7 @@ def render_persona_hub():
             "title": "VP Network Operations",
             "persona": "VP Network Operations",
             "duration": "10 min",
-            "focus": "Network availability, alarm management, capacity planning, and SLA delivery tracking",
+            "focus": "Network availability, alarm management, capacity planning, RF optimization, and SLA delivery tracking",
             "snowflake_value": "Real-time network monitoring with anomaly detection",
             "icon": "🖥️",
             "featured": False,
@@ -4527,7 +4529,7 @@ def render_executive_showcase():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_market, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧭 Market & Customers", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -4937,33 +4939,6 @@ def render_executive_showcase():
                         </div>
                         """, unsafe_allow_html=True)
             
-            # Monthly Trend Chart - NEW
-            st.markdown('<div class="section-header">Revenue & Subscriber Trend</div>', unsafe_allow_html=True)
-            
-            with st.container(border=True):
-                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
-                trend_data = pd.DataFrame({
-                    'Month': months * 2,
-                    'Metric': ['Revenue'] * 6 + ['Subscribers'] * 6,
-                    'Value': [11.8, 12.1, 12.3, 12.5, 12.9, 13.2, 28.5, 29.0, 29.4, 29.7, 30.0, 30.2],
-                    'Normalized': [85, 87, 89, 90, 93, 95, 82, 84, 86, 88, 91, 94]
-                })
-                
-                trend_chart = alt.Chart(trend_data).mark_line(
-                    strokeWidth=3,
-                    point=True
-                ).encode(
-                    x=alt.X('Month:N', sort=months, axis=alt.Axis(labelAngle=0, title=None)),
-                    y=alt.Y('Normalized:Q', scale=alt.Scale(domain=[70, 100]), axis=alt.Axis(title='Growth Index', grid=True)),
-                    color=alt.Color('Metric:N', scale=alt.Scale(
-                        domain=['Revenue', 'Subscribers'],
-                        range=['#29B5E8', '#10B981']
-                    ), legend=alt.Legend(orient='top-right', title=None)),
-                    tooltip=['Month:N', 'Metric:N', alt.Tooltip('Value:Q', format='.1f')]
-                ).properties(height=200)
-                
-                st.altair_chart(trend_chart, use_container_width=True)
-        
         with col_right:
             # Customer Segments at Risk - Enhanced Lollipop Chart
             st.markdown('<div class="section-header">At-Risk Customer Analysis</div>', unsafe_allow_html=True)
@@ -5333,6 +5308,638 @@ def render_executive_showcase():
                 </div>
                 """, unsafe_allow_html=True)
         
+        # Board Presentation Summary
+        st.markdown('<div class="section-header">Board Presentation Summary</div>', unsafe_allow_html=True)
+        
+        with st.container(border=True):
+            st.markdown("""
+            <div style="background: #F8FAFC; border-radius: 12px; padding: 1.5rem; border: 1px solid #E2E8F0;">
+                <h3 style="color: #1B2A4E; margin-top: 0;">Executive Summary — Q4 2025</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                    <div>
+                        <strong style="color: #29B5E8;">1. Business Performance</strong>
+                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">Revenue +8.4% YoY (£13.2M), subscriber base grew 5.2% to 30,247. Enterprise ARPU at £142 driving margin expansion.</p>
+                    </div>
+                    <div>
+                        <strong style="color: #29B5E8;">2. Customer Health</strong>
+                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">NPS improved to +47 (+5 pts). Churn reduced to 2.1%. 847 customers (£2.4M) remain at-risk requiring intervention.</p>
+                    </div>
+                    <div>
+                        <strong style="color: #29B5E8;">3. Competitive Position</strong>
+                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">Net port-in positive (+432). Gaining share from Three. Market share at 5%, on track for 7% target by 2027.</p>
+                    </div>
+                    <div>
+                        <strong style="color: #29B5E8;">4. Network Quality</strong>
+                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">99.7% availability. Strong NPS-network correlation (R²=0.89). Yorkshire requires infrastructure investment.</p>
+                    </div>
+                    <div>
+                        <strong style="color: #29B5E8;">5. Strategic Priorities</strong>
+                        <p style="margin: 0.25rem 0 0 0; opacity: 0.9;">① Launch retention campaign (save £1.2M) ② Accelerate 5G rollout ③ Scale enterprise sales ④ Target Three defectors</p>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # Interactive Agent Section
+
+    with tab_market:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MOBILE', 'PORTING', 'MARKET_INTELLIGENCE', 'CUSTOMER_EXPERIENCE']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Market & Customer Snapshot</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        .snapshot-strip {
+            background: linear-gradient(135deg, #F8FAFF 0%, #EEF6FF 100%);
+            border: 1px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 1rem 1.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+        }
+        .snapshot-strip::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(41, 181, 232, 0.12), transparent);
+            animation: snapshot-shimmer 4s ease-in-out infinite;
+        }
+        @keyframes snapshot-shimmer {
+            0% { left: -120%; }
+            100% { left: 220%; }
+        }
+        .snapshot-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .snapshot-card {
+            background: white;
+            border-radius: 14px;
+            padding: 0.85rem 1rem;
+            border: 1px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            animation: snapshot-rise 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .snapshot-card:nth-child(1) { animation-delay: 0.1s; }
+        .snapshot-card:nth-child(2) { animation-delay: 0.25s; }
+        .snapshot-card:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes snapshot-rise {
+            0% { transform: translateY(8px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .snapshot-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(41, 181, 232, 0.18); }
+        .snapshot-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #1B2A4E;
+            background: linear-gradient(135deg, rgba(41,181,232,0.18), rgba(16,185,129,0.18));
+            animation: snapshot-pulse 3s ease-in-out infinite;
+        }
+        @keyframes snapshot-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .snapshot-title { font-size: 0.78rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; }
+        .snapshot-value { font-size: 1.45rem; font-weight: 700; color: #0F172A; line-height: 1.1; }
+        .snapshot-delta {
+            margin-left: auto;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 999px;
+        }
+        .snapshot-delta.up { color: #047857; background: #D1FAE5; }
+        .snapshot-delta.down { color: #B91C1C; background: #FEE2E2; }
+        .snapshot-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.15rem; }
+        @media (max-width: 900px) {
+            .snapshot-grid { grid-template-columns: 1fr; }
+        }
+        </style>
+        <div class="snapshot-strip">
+            <div class="snapshot-grid">
+                <div class="snapshot-card">
+                    <div class="snapshot-icon">📈</div>
+                    <div>
+                        <div class="snapshot-title">Market Share</div>
+                        <div class="snapshot-value">5.2%</div>
+                        <div class="snapshot-sub">Share gained in key metros</div>
+                    </div>
+                    <div class="snapshot-delta up">↑ +0.4% YoY</div>
+                </div>
+                <div class="snapshot-card">
+                    <div class="snapshot-icon">🔁</div>
+                    <div>
+                        <div class="snapshot-title">Net Port-Ins</div>
+                        <div class="snapshot-value">+432</div>
+                        <div class="snapshot-sub">Three +167 lead</div>
+                    </div>
+                    <div class="snapshot-delta up">↑ +96 MoM</div>
+                </div>
+                <div class="snapshot-card">
+                    <div class="snapshot-icon">⚠️</div>
+                    <div>
+                        <div class="snapshot-title">Churn Rate</div>
+                        <div class="snapshot-value">2.1%</div>
+                        <div class="snapshot-sub">Prepaid softness easing</div>
+                    </div>
+                    <div class="snapshot-delta down">↓ -0.3% QoQ</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Market Position</div>', unsafe_allow_html=True)
+        pos_left, pos_right = st.columns([1.2, 1])
+        with pos_left:
+            st.markdown('<div class="section-header">UK Regional Performance</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                region_data = pd.DataFrame({
+                    'Region': ['London', 'South East', 'South West', 'Midlands', 'North West', 'North East', 'Yorkshire', 'Scotland', 'Wales', 'East'],
+                    'Market Share': [6.2, 5.8, 5.5, 4.8, 5.1, 4.2, 3.9, 4.5, 4.1, 5.3],
+                    'Subscribers': [6240, 4820, 3150, 4100, 3890, 2340, 2180, 1520, 980, 3027],
+                    'NPS': [52, 48, 51, 45, 44, 41, 38, 46, 43, 47],
+                    'Growth': ['+8.2%', '+6.1%', '+7.3%', '+5.2%', '+4.8%', '+3.1%', '+2.4%', '+5.5%', '+4.2%', '+6.8%']
+                })
+                bars = alt.Chart(region_data).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Market Share:Q', title='Market Share (%)', scale=alt.Scale(domain=[0, 8])),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.Color('Market Share:Q', scale=alt.Scale(scheme='blues'), legend=None),
+                    tooltip=[
+                        alt.Tooltip('Region:N'),
+                        alt.Tooltip('Market Share:Q', title='Share', format='.1f'),
+                        alt.Tooltip('Subscribers:Q', title='Subscribers', format=','),
+                        alt.Tooltip('NPS:Q', title='NPS'),
+                        alt.Tooltip('Growth:N', title='YoY Growth')
+                    ]
+                ).properties(height=260)
+                text = alt.Chart(region_data).mark_text(align='left', dx=5, fontSize=11, fontWeight='bold').encode(
+                    x=alt.X('Market Share:Q'),
+                    y=alt.Y('Region:N', sort='-x'),
+                    text=alt.Text('Market Share:Q', format='.1f'),
+                    color=alt.value('#1B2A4E')
+                )
+                st.altair_chart(bars + text, use_container_width=True)
+        
+        with pos_right:
+            st.markdown('<div class="section-header">Competitive Share</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                competitor_data = pd.DataFrame({
+                    'Competitor': ['EE', 'O2', 'Vodafone', 'Three', 'SnowTelco', 'Others'],
+                    'Market Share': [28, 26, 22, 14, 5, 5]
+                })
+                donut = alt.Chart(competitor_data).mark_arc(innerRadius=55, outerRadius=95, cornerRadius=3).encode(
+                    theta=alt.Theta('Market Share:Q', stack=True),
+                    color=alt.Color('Competitor:N',
+                        scale=alt.Scale(
+                            domain=['EE', 'O2', 'Vodafone', 'Three', 'SnowTelco', 'Others'],
+                            range=['#8B5CF6', '#3B82F6', '#EF4444', '#F59E0B', '#29B5E8', '#9CA3AF']
+                        ),
+                        legend=None
+                    ),
+                    tooltip=[alt.Tooltip('Competitor:N'), alt.Tooltip('Market Share:Q', format='d', title='Share %')]
+                ).properties(height=220)
+                st.altair_chart(donut, use_container_width=True)
+                st.markdown("""
+                <div style="font-size: 0.8rem; color: #6B7280; text-align: center;">
+                    SnowTelco gaining share vs Three and O2
+                </div>
+                """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Competitive Dynamics</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.markdown("""
+            <style>
+            @keyframes benchmark-fill {
+                0% { width: 0%; }
+                100% { width: var(--fill-width); }
+            }
+            .benchmark-row { display: flex; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid #F3F4F6; }
+            .benchmark-row:last-child { border-bottom: none; }
+            .benchmark-label { width: 100px; font-size: 0.8rem; color: #6B7280; font-weight: 500; }
+            .benchmark-bars { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+            .benchmark-bar-container { display: flex; align-items: center; gap: 8px; }
+            .benchmark-bar-bg { flex: 1; height: 12px; background: #F3F4F6; border-radius: 6px; overflow: hidden; }
+            .benchmark-bar { height: 100%; border-radius: 6px; animation: benchmark-fill 1.5s ease-out forwards; }
+            .benchmark-bar.snowtelco { background: linear-gradient(90deg, #29B5E8, #1A8BC4); }
+            .benchmark-bar.industry { background: #D1D5DB; }
+            .benchmark-value { font-size: 0.75rem; font-weight: 600; min-width: 45px; text-align: right; }
+            .benchmark-legend { display: flex; gap: 1.5rem; margin-bottom: 0.75rem; font-size: 0.75rem; }
+            .legend-item { display: flex; align-items: center; gap: 6px; }
+            .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+            .better-badge { font-size: 0.65rem; padding: 2px 6px; border-radius: 10px; background: #D1FAE5; color: #059669; font-weight: 600; margin-left: 4px; }
+            </style>
+            <div class="benchmark-legend">
+                <div class="legend-item"><div class="legend-dot" style="background: linear-gradient(90deg, #29B5E8, #1A8BC4);"></div><span style="font-weight: 600; color: #1B2A4E;">SnowTelco</span></div>
+                <div class="legend-item"><div class="legend-dot" style="background: #D1D5DB;"></div><span style="color: #6B7280;">Industry Avg</span></div>
+            </div>
+            <div class="benchmark-row">
+                <div class="benchmark-label">NPS Score</div>
+                <div class="benchmark-bars">
+                    <div class="benchmark-bar-container">
+                        <div class="benchmark-bar-bg"><div class="benchmark-bar snowtelco" style="--fill-width: 72%;"></div></div>
+                        <div class="benchmark-value" style="color: #29B5E8;">72<span class="better-badge">+17</span></div>
+                    </div>
+                    <div class="benchmark-bar-container">
+                        <div class="benchmark-bar-bg"><div class="benchmark-bar industry" style="--fill-width: 55%;"></div></div>
+                        <div class="benchmark-value" style="color: #9CA3AF;">55</div>
+                    </div>
+                </div>
+            </div>
+            <div class="benchmark-row">
+                <div class="benchmark-label">Churn Rate</div>
+                <div class="benchmark-bars">
+                    <div class="benchmark-bar-container">
+                        <div class="benchmark-bar-bg"><div class="benchmark-bar snowtelco" style="--fill-width: 21%;"></div></div>
+                        <div class="benchmark-value" style="color: #29B5E8;">2.1%<span class="better-badge">Better</span></div>
+                    </div>
+                    <div class="benchmark-bar-container">
+                        <div class="benchmark-bar-bg"><div class="benchmark-bar industry" style="--fill-width: 28%;"></div></div>
+                        <div class="benchmark-value" style="color: #9CA3AF;">2.8%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="benchmark-row">
+                <div class="benchmark-label">ARPU</div>
+                <div class="benchmark-bars">
+                    <div class="benchmark-bar-container">
+                        <div class="benchmark-bar-bg"><div class="benchmark-bar snowtelco" style="--fill-width: 78%;"></div></div>
+                        <div class="benchmark-value" style="color: #29B5E8;">£38<span class="better-badge">+£6</span></div>
+                    </div>
+                    <div class="benchmark-bar-container">
+                        <div class="benchmark-bar-bg"><div class="benchmark-bar industry" style="--fill-width: 64%;"></div></div>
+                        <div class="benchmark-value" style="color: #9CA3AF;">£32</div>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Competitive Porting Analysis</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            porting_data = pd.DataFrame({
+                'Competitor': ['Three', 'Vodafone', 'EE', 'O2', 'Virgin', 'Sky'],
+                'Port-In': [245, 156, 98, 112, 67, 45],
+                'Port-Out': [78, 123, 143, 87, 42, 38]
+            })
+            port_in = alt.Chart(porting_data).mark_bar(color='#10B981', cornerRadiusTopRight=4, cornerRadiusBottomRight=4).encode(
+                x=alt.X('Port-In:Q', title='Port-In', scale=alt.Scale(domain=[0, 280])),
+                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), title=None, axis=alt.Axis(labels=False)),
+                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-In:Q', title='Gained')]
+            ).properties(height=220)
+            port_out = alt.Chart(porting_data).mark_bar(color='#EF4444', cornerRadiusTopLeft=4, cornerRadiusBottomLeft=4).encode(
+                x=alt.X('Port-Out:Q', title='Port-Out', scale=alt.Scale(domain=[0, 280], reverse=True)),
+                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), axis=alt.Axis(labels=True, title=None)),
+                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-Out:Q', title='Lost')]
+            ).properties(height=220)
+            combined = alt.hconcat(port_out, port_in).resolve_scale(y='shared')
+            st.altair_chart(combined, use_container_width=True)
+            col_p1, col_p2 = st.columns(2)
+            with col_p1:
+                st.markdown("""
+                <div style="background: #D1FAE5; border-radius: 20px; padding: 0.5rem 1rem; text-align: center;">
+                    <span style="color: #065F46; font-weight: 600;">Net: +432 customers</span>
+                </div>
+                """, unsafe_allow_html=True)
+            with col_p2:
+                st.markdown("""
+                <div style="background: #E0F2FE; border-radius: 20px; padding: 0.5rem 1rem; text-align: center;">
+                    <span style="color: #0369A1; font-weight: 600;">Three: +167 | EE: -45</span>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Customer Health & Value</div>', unsafe_allow_html=True)
+        cust_left, cust_right = st.columns(2)
+        with cust_left:
+            st.markdown('<div class="section-header">NPS by Segment</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                nps_data = pd.DataFrame({
+                    'Segment': ['Enterprise', 'SMB', 'Premium', 'Standard', 'Budget'],
+                    'NPS': [62, 51, 48, 42, 35]
+                })
+                nps_bars = alt.Chart(nps_data).mark_bar(cornerRadiusEnd=6, color='#29B5E8').encode(
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    x=alt.X('NPS:Q', title='NPS Score', scale=alt.Scale(domain=[0, 70])),
+                    tooltip=['Segment:N', 'NPS:Q']
+                ).properties(height=220)
+                st.altair_chart(nps_bars, use_container_width=True)
+        
+        with cust_right:
+            st.markdown('<div class="section-header">Churn Risk by Segment</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                churn_data = pd.DataFrame({
+                    'Segment': ['Enterprise', 'SMB', 'Premium', 'Standard', 'Budget'],
+                    'Churn Rate': [0.8, 1.4, 1.6, 2.1, 3.2],
+                    'At Risk': [10, 110, 83, 220, 175],
+                    'Revenue Impact': [14.2, 63.8, 37.4, 70.4, 38.5]
+                })
+                churn_bars = alt.Chart(churn_data).mark_bar(
+                    cornerRadiusTopRight=6, cornerRadiusBottomRight=6
+                ).encode(
+                    x=alt.X('Churn Rate:Q', title='Churn Rate (%)', scale=alt.Scale(domain=[0, 4])),
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    color=alt.Color('Churn Rate:Q', scale=alt.Scale(domain=[0, 4], range=['#10B981', '#F59E0B', '#EF4444']), legend=None),
+                    tooltip=[
+                        alt.Tooltip('Segment:N'),
+                        alt.Tooltip('Churn Rate:Q', title='Churn %', format='.1f'),
+                        alt.Tooltip('At Risk:Q', title='At Risk Customers'),
+                        alt.Tooltip('Revenue Impact:Q', title='Revenue at Risk (£K)', format='.1f')
+                    ]
+                ).properties(height=220)
+                st.altair_chart(churn_bars, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Growth & Mix</div>', unsafe_allow_html=True)
+        st.markdown("**Customer Base Trend (12 Months)**")
+        with st.container(border=True):
+            trend_months = pd.DataFrame({
+                'Month': ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                'Customers': [101.0, 101.3, 101.6, 101.9, 102.2, 102.5, 102.8, 103.0, 103.2, 103.3, 103.4, 103.5]
+            })
+            trend_months['Net_Adds_K'] = (trend_months['Customers'] - trend_months['Customers'].iloc[0]).round(2)
+            area_chart = alt.Chart(trend_months).mark_area(
+                color='#29B5E8', opacity=0.3, line={'color': '#29B5E8', 'strokeWidth': 2}
+            ).encode(
+                x=alt.X('Month:N', sort=list(trend_months['Month']), title=None, axis=alt.Axis(labelAngle=0)),
+                y=alt.Y('Net_Adds_K:Q', title=None, scale=alt.Scale(domain=[0, 3], zero=True), axis=alt.Axis(format='.1f', tickCount=4)),
+                tooltip=[alt.Tooltip('Month:N'), alt.Tooltip('Net_Adds_K:Q', title='Net Adds (K)', format='.2f')]
+            ).properties(height=180)
+            points = alt.Chart(trend_months).mark_circle(color='#29B5E8', size=40).encode(
+                x=alt.X('Month:N', sort=list(trend_months['Month'])),
+                y=alt.Y('Net_Adds_K:Q', scale=alt.Scale(domain=[0, 3], zero=True))
+            )
+            st.altair_chart(area_chart + points, use_container_width=True)
+            st.caption("Net Adds (K) vs Feb baseline")
+        
+        st.markdown('<div class="section-header">Revenue & Subscriber Trend</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            trend_data = pd.DataFrame({
+                'Month': ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                'Revenue': [4.2, 4.35, 4.48, 4.52, 4.61, 4.78, 4.85, 4.92, 5.05, 5.18, 5.32, 5.48],
+                'Subscribers': [28.5, 28.9, 29.2, 29.6, 30.1, 30.4, 30.8, 31.1, 31.5, 31.9, 32.2, 32.4]
+            })
+            base = alt.Chart(trend_data).encode(
+                x=alt.X('Month:N', sort=list(trend_data['Month']), title=None, axis=alt.Axis(labelAngle=0))
+            )
+            revenue_line = base.mark_line(color='#10B981', strokeWidth=2).encode(
+                y=alt.Y('Revenue:Q', title='Revenue (£M)', scale=alt.Scale(domain=[4, 6])),
+                tooltip=[alt.Tooltip('Month:N'), alt.Tooltip('Revenue:Q', title='Revenue (£M)', format='.2f')]
+            )
+            subs_line = base.mark_line(color='#29B5E8', strokeWidth=2, strokeDash=[4, 3]).encode(
+                y=alt.Y('Subscribers:Q', title='Subscribers (K)', scale=alt.Scale(domain=[28, 34])),
+                tooltip=[alt.Tooltip('Month:N'), alt.Tooltip('Subscribers:Q', title='Subscribers (K)', format='.1f')]
+            )
+            st.altair_chart(alt.layer(revenue_line, subs_line).resolve_scale(y='independent').properties(height=220), use_container_width=True)
+
+    with tab_strategy:
+        st.markdown("""
+        <style>
+        .cmo-ai-pulse {
+            background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 100%);
+            border-radius: 16px;
+            border: 1px solid #FBCFE8;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cmo-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(236,72,153,0.2), transparent);
+            animation: cmo-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes cmo-ai-sweep {
+            0% { left: -120%; }
+            100% { left: 220%; }
+        }
+        .cmo-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .cmo-ai-title { font-weight: 700; color: #9D174D; font-size: 1.05rem; }
+        .cmo-ai-tag { background: #EC4899; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .cmo-ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; position: relative; z-index: 1; }
+        .cmo-ai-card { background: white; border-radius: 12px; border: 1px solid #FBCFE8; padding: 0.9rem 1rem; }
+        .cmo-ai-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .cmo-ai-value { font-size: 1.4rem; font-weight: 700; color: #9D174D; }
+        .cmo-ai-sub { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .cmo-ai-grid { grid-template-columns: 1fr; } }
+        </style>
+        <div class="cmo-ai-pulse">
+            <div class="cmo-ai-header">
+                <div class="cmo-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="cmo-ai-tag">AI LIVE</div>
+            </div>
+            <div class="cmo-ai-grid">
+                <div class="cmo-ai-card">
+                    <div class="cmo-ai-label">Campaign Lift</div>
+                    <div class="cmo-ai-value">+18.3%</div>
+                    <div class="cmo-ai-sub">Above target vs Q3</div>
+                </div>
+                <div class="cmo-ai-card">
+                    <div class="cmo-ai-label">CAC Efficiency</div>
+                    <div class="cmo-ai-value">-12.5%</div>
+                    <div class="cmo-ai-sub">Optimized spend mix</div>
+                </div>
+                <div class="cmo-ai-card">
+                    <div class="cmo-ai-label">Brand Momentum</div>
+                    <div class="cmo-ai-value">+5 pts</div>
+                    <div class="cmo-ai-sub">Awareness & NPS gains</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Executive summary synthesized from campaign, customer, and experience data.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - Acquisition momentum is strong (+18.3% vs target), driven by digital and social ROI gains.
+            - CAC efficiency improved (-12.5% QoQ) with higher conversion in high-intent segments.
+            - Brand perception is trending up (Awareness 68%, NPS +42) but mid-tenure churn remains a risk.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Digital paid** ROI at **5.2x**
+                - **Net new adds** +2,847 MTD
+                - **Enterprise LTV** strongest (8.5k)
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **24–36 mo cohort** retention dip
+                - **TV/Radio ROI** lagging at **2.1x**
+                - **Churn rate** stuck at **1.8%**
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Referral ROI** 9.8x
+                - **Email ROI** 8.2x
+                - **Digital share** +8% YoY
+                """)
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                **1) Accelerate 5G Adoption**
+                - Target **15,000** upgrades in Q1
+                - Concentrate on Premium/VIP cohorts
+                - Expected impact: +£450K ARR
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                **2) Reduce CAC by 15%**
+                - Shift spend to high-ROI digital
+                - Expand referral incentives
+                - Expected impact: -£7 CAC
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                **3) Lift NPS to +50**
+                - Detractor recovery journeys
+                - Onboarding improvements
+                - Expected impact: +6 NPS pts
+                """)
+        st.markdown("""
+        <style>
+        .sf-pulse {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-radius: 16px;
+            border: 1px solid #BAE6FD;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .sf-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(41,181,232,0.18), transparent);
+            animation: sf-pulse-sweep 4s ease-in-out infinite;
+        }
+        @keyframes sf-pulse-sweep {
+            0% { left: -120%; }
+            100% { left: 220%; }
+        }
+        .sf-pulse-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .sf-pulse-title { font-weight: 700; color: #1B2A4E; font-size: 1.05rem; }
+        .sf-pulse-tag {
+            background: #0EA5E9;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+        }
+        .sf-pulse-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .sf-pulse-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            padding: 0.9rem 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            animation: sf-card-rise 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        .sf-pulse-card:nth-child(1) { animation-delay: 0.05s; }
+        .sf-pulse-card:nth-child(2) { animation-delay: 0.2s; }
+        .sf-pulse-card:nth-child(3) { animation-delay: 0.35s; }
+        @keyframes sf-card-rise {
+            0% { transform: translateY(8px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .sf-pulse-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(41,181,232,0.2); }
+        .sf-pulse-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #64748B; }
+        .sf-pulse-value { font-size: 1.4rem; font-weight: 700; color: #0F172A; }
+        .sf-pulse-sub { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) {
+            .sf-pulse-metrics { grid-template-columns: 1fr; }
+        }
+        </style>
+        <div class="sf-pulse">
+            <div class="sf-pulse-header">
+                <div class="sf-pulse-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-pulse-tag">AI LIVE</div>
+            </div>
+            <div class="sf-pulse-metrics">
+                <div class="sf-pulse-card">
+                    <div class="sf-pulse-label">Insight Confidence</div>
+                    <div class="sf-pulse-value">92%</div>
+                    <div class="sf-pulse-sub">High signal across market + CX</div>
+                </div>
+                <div class="sf-pulse-card">
+                    <div class="sf-pulse-label">Decision Velocity</div>
+                    <div class="sf-pulse-value">2.4x</div>
+                    <div class="sf-pulse-sub">Faster priority alignment</div>
+                </div>
+                <div class="sf-pulse-card">
+                    <div class="sf-pulse-label">Risk Coverage</div>
+                    <div class="sf-pulse-value">97%</div>
+                    <div class="sf-pulse-sub">Cross-domain anomaly watch</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Executive summary synthesized from cross-domain data in real time.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - Revenue momentum remains positive (+4.2% YoY) with strong enterprise ARPU driving margin uplift.
+            - Net port-ins are positive (+432), with gains concentrated against Three in the North West.
+            - Customer health is stable (NPS +45), but prepaid churn is elevated and needs targeted action.
+            """)
+
         # AI-Powered Strategic Recommendations
         st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
         
@@ -5399,42 +6006,61 @@ def render_executive_showcase():
                 - **Recommended Action**: Geo-targeted campaign in Manchester, Leeds, Sheffield
                 - **Expected Impact**: 500+ new subscribers, £180K incremental ARR
                 """)
-        
-        # Board Presentation Summary
-        st.markdown('<div class="section-header">Board Presentation Summary</div>', unsafe_allow_html=True)
-        
-        with st.container(border=True):
-            st.markdown("""
-            <div style="background: #F8FAFC; border-radius: 12px; padding: 1.5rem; border: 1px solid #E2E8F0;">
-                <h3 style="color: #1B2A4E; margin-top: 0;">Executive Summary — Q4 2025</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
-                    <div>
-                        <strong style="color: #29B5E8;">1. Business Performance</strong>
-                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">Revenue +8.4% YoY (£13.2M), subscriber base grew 5.2% to 30,247. Enterprise ARPU at £142 driving margin expansion.</p>
-                    </div>
-                    <div>
-                        <strong style="color: #29B5E8;">2. Customer Health</strong>
-                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">NPS improved to +47 (+5 pts). Churn reduced to 2.1%. 847 customers (£2.4M) remain at-risk requiring intervention.</p>
-                    </div>
-                    <div>
-                        <strong style="color: #29B5E8;">3. Competitive Position</strong>
-                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">Net port-in positive (+432). Gaining share from Three. Market share at 5%, on track for 7% target by 2027.</p>
-                    </div>
-                    <div>
-                        <strong style="color: #29B5E8;">4. Network Quality</strong>
-                        <p style="margin: 0.25rem 0 0.75rem 0; opacity: 0.9;">99.7% availability. Strong NPS-network correlation (R²=0.89). Yorkshire requires infrastructure investment.</p>
-                    </div>
-                    <div>
-                        <strong style="color: #29B5E8;">5. Strategic Priorities</strong>
-                        <p style="margin: 0.25rem 0 0 0; opacity: 0.9;">① Launch retention campaign (save £1.2M) ② Accelerate 5G rollout ③ Scale enterprise sales ④ Target Three defectors</p>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        # Interactive Agent Section
 
-    with tab_strategy:
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Market share** trending up to **5.2%**
+                - **Enterprise ARPU** at **£142** (4.4x consumer)
+                - **QoE** improved: 99.2% availability
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Prepaid churn** +0.3% QoQ
+                - **Yorkshire** NPS lagging at **38**
+                - **Port-out** pressure vs EE in East
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **5G adoption** +12% YoY
+                - **Digital sales** 45% (+7% vs industry)
+                - **Enterprise pipeline** £1.8M active
+                """)
+
+        st.markdown('<div class="section-header">Recommended Actions</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                **1) Retention Focus**
+                - Target prepaid churn hotspots
+                - Offer tiered win-back bundles
+                - Goal: reduce churn by 0.4%
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                **2) Competitive Capture**
+                - Double down on Three defectors
+                - Geo-target Manchester/Leeds
+                - Goal: +500 net adds
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                **3) Enterprise Acceleration**
+                - Expand sales pods in London
+                - Prioritize high-ARPU verticals
+                - Goal: +£2.8M ARR
+                """)
+
         st.markdown('<div class="section-header">Ask Snowflake Intelligence</div>', unsafe_allow_html=True)
         
         suggested_questions = [
@@ -5470,189 +6096,6 @@ def render_executive_showcase():
         </div>
         """, unsafe_allow_html=True)
         
-        # Company Timeline - Milestones & Metrics
-        st.markdown('<div class="section-header">Company Timeline & Milestones</div>', unsafe_allow_html=True)
-        
-        st.markdown("""
-        <style>
-        @keyframes timeline-dot-pulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(41, 181, 232, 0.4); }
-            50% { box-shadow: 0 0 0 10px rgba(41, 181, 232, 0); }
-        }
-        @keyframes timeline-line-grow {
-            0% { width: 0; }
-            100% { width: 100%; }
-        }
-        @keyframes timeline-item-appear {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .timeline-container {
-            position: relative;
-            padding: 1.5rem 0;
-            margin-bottom: 1rem;
-        }
-        .timeline-line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #29B5E8, #8B5CF6);
-            border-radius: 2px;
-            animation: timeline-line-grow 2s ease-out forwards;
-            z-index: 1;
-        }
-        .timeline-items {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            z-index: 2;
-        }
-        .timeline-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 140px;
-            animation: timeline-item-appear 0.5s ease-out forwards;
-            opacity: 0;
-        }
-        .timeline-item:nth-child(1) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.5s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.7s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.9s; }
-        .timeline-item:nth-child(5) { animation-delay: 1.1s; }
-        .timeline-item:nth-child(6) { animation-delay: 1.3s; }
-        .timeline-dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: white;
-            border: 4px solid #29B5E8;
-            margin-bottom: 0.75rem;
-            position: relative;
-            z-index: 3;
-        }
-        .timeline-item.highlight .timeline-dot {
-            background: #29B5E8;
-            animation: timeline-dot-pulse 2s ease-in-out infinite;
-        }
-        .timeline-item.milestone .timeline-dot {
-            border-color: #8B5CF6;
-            background: #8B5CF6;
-        }
-        .timeline-date {
-            font-size: 0.7rem;
-            color: #6B7280;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-        .timeline-event {
-            font-size: 0.75rem;
-            color: #1B2A4E;
-            font-weight: 600;
-            text-align: center;
-            line-height: 1.3;
-        }
-        .timeline-metric {
-            font-size: 0.65rem;
-            color: #10B981;
-            font-weight: 600;
-            margin-top: 0.25rem;
-            padding: 2px 8px;
-            background: #D1FAE5;
-            border-radius: 10px;
-        }
-        .timeline-metric.negative {
-            color: #DC2626;
-            background: #FEE2E2;
-        }
-        .timeline-content-top {
-            margin-bottom: 3rem;
-        }
-        .timeline-content-bottom {
-            margin-top: 0.5rem;
-        }
-        .timeline-item:nth-child(even) .timeline-content-top { visibility: hidden; height: 0; margin: 0; }
-        .timeline-item:nth-child(odd) .timeline-content-bottom { visibility: hidden; height: 0; margin: 0; }
-        </style>
-        <div class="timeline-container">
-            <div class="timeline-line"></div>
-            <div class="timeline-items">
-                <div class="timeline-item milestone">
-                    <div class="timeline-content-top">
-                        <div class="timeline-date">Q1 2024</div>
-                        <div class="timeline-event">Snowflake Migration Complete</div>
-                        <div class="timeline-metric">100% Cloud</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content-bottom">
-                        <div class="timeline-date">Q1 2024</div>
-                        <div class="timeline-event">Snowflake Migration</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content-top">
-                        <div class="timeline-date">Q2 2024</div>
-                        <div class="timeline-event">AI/ML Models Deployed</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content-bottom">
-                        <div class="timeline-date">Q2 2024</div>
-                        <div class="timeline-event">AI/ML Launch</div>
-                        <div class="timeline-metric">94% Accuracy</div>
-                    </div>
-                </div>
-                <div class="timeline-item milestone">
-                    <div class="timeline-content-top">
-                        <div class="timeline-date">Q3 2024</div>
-                        <div class="timeline-event">5G Network Launch</div>
-                        <div class="timeline-metric">+12% Subs</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content-bottom">
-                        <div class="timeline-date">Q3 2024</div>
-                        <div class="timeline-event">5G Launch</div>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content-top">
-                        <div class="timeline-date">Q4 2024</div>
-                        <div class="timeline-event">Record NPS Score</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content-bottom">
-                        <div class="timeline-date">Q4 2024</div>
-                        <div class="timeline-event">NPS Peak</div>
-                        <div class="timeline-metric">NPS 72</div>
-                    </div>
-                </div>
-                <div class="timeline-item milestone">
-                    <div class="timeline-content-top">
-                        <div class="timeline-date">Q1 2025</div>
-                        <div class="timeline-event">Enterprise Growth +18%</div>
-                        <div class="timeline-metric">+£2.4M ARR</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content-bottom">
-                        <div class="timeline-date">Q1 2025</div>
-                        <div class="timeline-event">B2B Expansion</div>
-                    </div>
-                </div>
-                <div class="timeline-item highlight">
-                    <div class="timeline-content-top">
-                        <div class="timeline-date">NOW</div>
-                        <div class="timeline-event">Current Quarter</div>
-                    </div>
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content-bottom">
-                        <div class="timeline-date">Q1 2026</div>
-                        <div class="timeline-event">Today</div>
-                        <div class="timeline-metric">On Track</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
 
 
 def render_ceo_strategic():
@@ -5706,9 +6149,9 @@ def render_ceo_strategic():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_performance, tab_market, tab_strategy = st.tabs(["📈 Performance", "🧭 Market & Customers", "🎯 Strategy & AI"])
 
-    with tab_overview:
+    with tab_performance:
         
         views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MOBILE', 'PORTING', 'NETWORK_OPS', 'MARKET_INTELLIGENCE']])
         st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
@@ -5782,6 +6225,164 @@ def render_ceo_strategic():
         
         # HTML content for the momentum tracker
         st.markdown("""<div class="momentum-tracker"><div class="tracker-header"><div class="tracker-title">📈 Strategic Momentum Tracker</div><div class="tracker-period">FY 2025-26 Progress</div></div><div class="gauges-container"><div class="gauge-item gauge-1"><div class="gauge-wrapper"><svg class="gauge-svg" viewBox="0 0 100 100"><circle class="gauge-bg" cx="50" cy="50" r="40"></circle><circle class="gauge-fill" cx="50" cy="50" r="40"></circle></svg><div class="gauge-center"><div class="gauge-value">82%</div></div></div><div class="gauge-label">Market Share</div><div class="gauge-target">Target: 7% → Current: 5.2%</div></div><div class="gauge-item gauge-2"><div class="gauge-wrapper"><svg class="gauge-svg" viewBox="0 0 100 100"><circle class="gauge-bg" cx="50" cy="50" r="40"></circle><circle class="gauge-fill" cx="50" cy="50" r="40"></circle></svg><div class="gauge-center"><div class="gauge-value">75%</div></div></div><div class="gauge-label">Revenue Target</div><div class="gauge-target">£89M of £120M goal</div></div><div class="gauge-item gauge-3"><div class="gauge-wrapper"><svg class="gauge-svg" viewBox="0 0 100 100"><circle class="gauge-bg" cx="50" cy="50" r="40"></circle><circle class="gauge-fill" cx="50" cy="50" r="40"></circle></svg><div class="gauge-center"><div class="gauge-value">65%</div></div></div><div class="gauge-label">5G Rollout</div><div class="gauge-target">325 of 500 sites</div></div><div class="gauge-item gauge-4"><div class="gauge-wrapper"><svg class="gauge-svg" viewBox="0 0 100 100"><circle class="gauge-bg" cx="50" cy="50" r="40"></circle><circle class="gauge-fill" cx="50" cy="50" r="40"></circle></svg><div class="gauge-center"><div class="gauge-value">90%</div></div></div><div class="gauge-label">NPS Goal</div><div class="gauge-target">+47 of +52 target</div></div></div></div>""", unsafe_allow_html=True)
+
+        st.markdown("""
+        <style>
+        @keyframes pulse-line {
+            0% { stroke-dashoffset: 420; opacity: 0.2; }
+            35% { opacity: 1; }
+            60% { stroke-dashoffset: 0; opacity: 1; }
+            100% { stroke-dashoffset: 0; opacity: 0.85; }
+        }
+        @keyframes kpi-pop {
+            0% { transform: translateY(6px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes rotate-fade {
+            0% { opacity: 0; transform: translateY(6px); }
+            10% { opacity: 1; transform: translateY(0); }
+            35% { opacity: 1; }
+            45% { opacity: 0; transform: translateY(-6px); }
+            100% { opacity: 0; }
+        }
+        .exec-pulse {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .exec-pulse-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .exec-pulse-title { font-size: 1.05rem; font-weight: 600; }
+        .exec-pulse-badge {
+            background: rgba(56, 189, 248, 0.2);
+            color: #38BDF8;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .exec-pulse-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .exec-metric {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 0.8rem;
+            animation: kpi-pop 0.8s ease-out forwards;
+        }
+        .exec-metric:nth-child(2) { animation-delay: 0.1s; }
+        .exec-metric:nth-child(3) { animation-delay: 0.2s; }
+        .exec-metric:nth-child(4) { animation-delay: 0.3s; }
+        .exec-metric-label { font-size: 0.7rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.05em; }
+        .exec-metric-value { font-size: 1.4rem; font-weight: 700; margin-top: 0.2rem; }
+        .exec-metric-delta { font-size: 0.75rem; color: #34D399; margin-top: 0.2rem; }
+        .exec-pulse-line {
+            margin-top: 0.75rem;
+            height: 80px;
+        }
+        .exec-pulse-line svg { width: 100%; height: 80px; }
+        .pulse-line {
+            fill: none;
+            stroke: #38BDF8;
+            stroke-width: 2.4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 420;
+            stroke-dashoffset: 420;
+            animation: pulse-line 3.2s ease-in-out infinite;
+        }
+        .pulse-area {
+            fill: rgba(56, 189, 248, 0.15);
+        }
+        .exec-rotator {
+            margin-top: 0.75rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 0.6rem 0.8rem;
+            position: relative;
+            height: 34px;
+            overflow: hidden;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.85);
+        }
+        .rotator-item {
+            position: absolute;
+            left: 0.8rem;
+            right: 0.8rem;
+            opacity: 0;
+            animation: rotate-fade 9s ease-in-out infinite;
+        }
+        .rotator-item:nth-child(2) { animation-delay: 3s; }
+        .rotator-item:nth-child(3) { animation-delay: 6s; }
+        .rotator-badge {
+            display: inline-block;
+            margin-right: 0.4rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 999px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            background: rgba(56, 189, 248, 0.2);
+            color: #38BDF8;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="exec-pulse">
+            <div class="exec-pulse-header">
+                <div class="exec-pulse-title">⚡ Executive Performance Pulse</div>
+                <div class="exec-pulse-badge">Real-time composite index</div>
+            </div>
+            <div class="exec-pulse-line">
+                <svg viewBox="0 0 520 80" preserveAspectRatio="none">
+                    <path class="pulse-line" d="M0,60 L60,58 L120,52 L180,48 L240,44 L300,38 L360,42 L420,30 L480,28 L520,24"></path>
+                    <path class="pulse-area" d="M0,60 L60,58 L120,52 L180,48 L240,44 L300,38 L360,42 L420,30 L480,28 L520,24 L520,80 L0,80 Z"></path>
+                </svg>
+            </div>
+            <div class="exec-pulse-grid">
+                <div class="exec-metric">
+                    <div class="exec-metric-label">Composite Score</div>
+                    <div class="exec-metric-value">86</div>
+                    <div class="exec-metric-delta">▲ +4 vs last month</div>
+                </div>
+                <div class="exec-metric">
+                    <div class="exec-metric-label">Revenue Momentum</div>
+                    <div class="exec-metric-value">+5.6%</div>
+                    <div class="exec-metric-delta">▲ +0.8% QoQ</div>
+                </div>
+                <div class="exec-metric">
+                    <div class="exec-metric-label">Net Adds</div>
+                    <div class="exec-metric-value">+142K</div>
+                    <div class="exec-metric-delta">▲ +12K QoQ</div>
+                </div>
+                <div class="exec-metric">
+                    <div class="exec-metric-label">Network QoE</div>
+                    <div class="exec-metric-value">4.2/5</div>
+                    <div class="exec-metric-delta">▲ +0.1 QoQ</div>
+                </div>
+            </div>
+            <div class="exec-rotator">
+                <div class="rotator-item"><span class="rotator-badge">Focus</span>5G expansion pacing ahead of plan — +12 sites this month</div>
+                <div class="rotator-item"><span class="rotator-badge">Risk</span>Prepaid churn up 0.3% in Yorkshire — target retention action</div>
+                <div class="rotator-item"><span class="rotator-badge">Upside</span>Enterprise pipeline conversion trending +6% QoQ</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
         # KPI CSS styles
         st.markdown("""
@@ -5928,7 +6529,81 @@ def render_ceo_strategic():
             </div>
         </div>
         """, unsafe_allow_html=True)
-        
+
+    with tab_market:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MOBILE', 'PORTING', 'NETWORK_OPS', 'MARKET_INTELLIGENCE']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+
+        st.markdown("## Market & Customers Overview")
+        pulse_cols = st.columns(3)
+        pulse_cols[0].metric("Market Share", "5.2%", "+0.4% YoY")
+        pulse_cols[1].metric("Net Port-Ins", "+432", "+168 vs last Q")
+        pulse_cols[2].metric("Overall NPS", "+45", "+3 pts QoQ")
+        st.divider()
+
+        st.markdown("""
+        <style>
+        @keyframes market-pulse {
+            0% { transform: translateX(-30%); opacity: 0.2; }
+            50% { opacity: 0.7; }
+            100% { transform: translateX(130%); opacity: 0.2; }
+        }
+        .market-pulse {
+            position: relative;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border: 1px solid #BAE6FD;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .market-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -40%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(41,181,232,0.35), transparent);
+            animation: market-pulse 4.5s ease-in-out infinite;
+        }
+        .market-pulse-title {
+            font-weight: 700;
+            color: #0F172A;
+            font-size: 1rem;
+        }
+        .market-pulse-sub {
+            color: #64748B;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+        .market-pulse-metrics {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 0.6rem;
+            font-size: 0.8rem;
+            color: #0F172A;
+        }
+        .market-pulse-metrics span {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid #E2E8F0;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+        }
+        </style>
+        <div class="market-pulse">
+            <div class="market-pulse-title">📊 Market Pulse — FY 2025-26</div>
+            <div class="market-pulse-sub">Share momentum, competitor movement, and customer sentiment in one view</div>
+            <div class="market-pulse-metrics">
+                <span>Market Share: 5.2% ▲</span>
+                <span>Net Port-Ins: +432</span>
+                <span>Overall NPS: +45</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Market Position</div>', unsafe_allow_html=True)
+
         # Main dashboard layout
         col_left, col_right = st.columns([1.2, 1])
         
@@ -6004,112 +6679,6 @@ def render_ceo_strategic():
                             Wales: 4.1% (low subs)<br>
                             North East: 4.2% share
                         </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-            
-            # NPS by Customer Segment
-            st.markdown('<div class="section-header">NPS by Customer Segment</div>', unsafe_allow_html=True)
-            
-            with st.container(border=True):
-                nps_data = pd.DataFrame({
-                    'Segment': ['Enterprise', 'SMB', 'Consumer Premium', 'Consumer Standard', 'Consumer Budget'],
-                    'NPS': [62, 51, 48, 42, 35],
-                    'Subscribers': [1200, 7874, 5200, 10500, 5473],
-                    'ARPU': [142, 58, 45, 32, 22],
-                    'Target': [65, 55, 50, 45, 40]
-                })
-                
-                # Lollipop chart for NPS
-                nps_line = alt.Chart(nps_data).mark_rule(strokeWidth=3).encode(
-                    y=alt.Y('Segment:N', sort='-x', title=None),
-                    x=alt.X('NPS:Q', title='NPS Score', scale=alt.Scale(domain=[0, 70])),
-                    color=alt.value('#E5E7EB')
-                )
-                
-                nps_point = alt.Chart(nps_data).mark_circle(size=200).encode(
-                    y=alt.Y('Segment:N', sort='-x'),
-                    x='NPS:Q',
-                    color=alt.Color('NPS:Q', scale=alt.Scale(
-                        domain=[30, 65],
-                        range=['#F59E0B', '#10B981']
-                    ), legend=None),
-                    tooltip=[
-                        alt.Tooltip('Segment:N'),
-                        alt.Tooltip('NPS:Q', title='NPS Score'),
-                        alt.Tooltip('Subscribers:Q', format=','),
-                        alt.Tooltip('ARPU:Q', title='ARPU (£)', format='d'),
-                        alt.Tooltip('Target:Q', title='Target NPS')
-                    ]
-                )
-                
-                # Target markers
-                target_mark = alt.Chart(nps_data).mark_tick(
-                    thickness=3,
-                    size=20,
-                    color='#DC2626'
-                ).encode(
-                    y=alt.Y('Segment:N', sort='-x'),
-                    x='Target:Q'
-                )
-                
-                st.altair_chart(nps_line + nps_point + target_mark, use_container_width=True)
-                
-                st.markdown("""
-                <div style="display: flex; gap: 1rem; font-size: 0.8rem; color: #6B7280;">
-                    <span>● NPS Score</span>
-                    <span style="color: #DC2626;">| Target</span>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            # Churn Risk by Segment - Added to fill blank space
-            st.markdown('<div class="section-header">Churn Risk by Segment</div>', unsafe_allow_html=True)
-            
-            with st.container(border=True):
-                churn_data = pd.DataFrame({
-                    'Segment': ['Enterprise', 'SMB', 'Consumer Premium', 'Consumer Standard', 'Consumer Budget'],
-                    'Churn Rate': [0.8, 1.4, 1.6, 2.1, 3.2],
-                    'At Risk': [10, 110, 83, 220, 175],
-                    'Revenue Impact': [14.2, 63.8, 37.4, 70.4, 38.5]
-                })
-                
-                churn_bars = alt.Chart(churn_data).mark_bar(
-                    cornerRadiusTopRight=6, cornerRadiusBottomRight=6
-                ).encode(
-                    x=alt.X('Churn Rate:Q', title='Churn Rate (%)', scale=alt.Scale(domain=[0, 4])),
-                    y=alt.Y('Segment:N', sort='-x', title=None),
-                    color=alt.Color('Churn Rate:Q', scale=alt.Scale(domain=[0, 4], range=['#10B981', '#F59E0B', '#EF4444']), legend=None),
-                    tooltip=[
-                        alt.Tooltip('Segment:N'),
-                        alt.Tooltip('Churn Rate:Q', title='Churn %', format='.1f'),
-                        alt.Tooltip('At Risk:Q', title='At Risk Customers'),
-                        alt.Tooltip('Revenue Impact:Q', title='Revenue at Risk (£K)', format='.1f')
-                    ]
-                ).properties(height=180)
-                
-                churn_text = alt.Chart(churn_data).mark_text(
-                    align='left', dx=5, fontSize=11, fontWeight='bold'
-                ).encode(
-                    x='Churn Rate:Q',
-                    y=alt.Y('Segment:N', sort='-x'),
-                    text=alt.Text('Churn Rate:Q', format='.1f'),
-                    color=alt.value('#1B2A4E')
-                )
-                
-                st.altair_chart(churn_bars + churn_text, use_container_width=True)
-                
-                col_churn1, col_churn2 = st.columns(2)
-                with col_churn1:
-                    st.markdown("""
-                    <div style="background: #FEE2E2; border-radius: 8px; padding: 0.6rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #DC2626;">598</div>
-                        <div style="font-size: 0.7rem; color: #991B1B;">At-Risk Customers</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                with col_churn2:
-                    st.markdown("""
-                    <div style="background: #FEF3C7; border-radius: 8px; padding: 0.6rem; text-align: center;">
-                        <div style="font-size: 1.2rem; font-weight: 700; color: #92400E;">£224K</div>
-                        <div style="font-size: 0.7rem; color: #92400E;">Monthly Revenue at Risk</div>
                     </div>
                     """, unsafe_allow_html=True)
         
@@ -6338,47 +6907,156 @@ def render_ceo_strategic():
                 </div>
                 """, unsafe_allow_html=True)
             
-            # Port-In/Port-Out Analysis
-            st.markdown('<div class="section-header">Competitive Porting Analysis</div>', unsafe_allow_html=True)
+        
+        # Port-In/Port-Out Analysis (full-width to avoid empty space)
+        st.markdown('<div class="section-header">Competitive Porting Analysis</div>', unsafe_allow_html=True)
+        
+        with st.container(border=True):
+            porting_data = pd.DataFrame({
+                'Competitor': ['Three', 'Vodafone', 'EE', 'O2', 'Virgin', 'Sky'],
+                'Port-In': [245, 156, 98, 112, 67, 45],
+                'Port-Out': [78, 123, 143, 87, 42, 38]
+            })
+            
+            # Butterfly chart
+            port_in = alt.Chart(porting_data).mark_bar(color='#10B981', cornerRadiusTopRight=4, cornerRadiusBottomRight=4).encode(
+                x=alt.X('Port-In:Q', title='Port-In', scale=alt.Scale(domain=[0, 280])),
+                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), title=None, axis=alt.Axis(labels=False)),
+                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-In:Q', title='Gained')]
+            ).properties(height=220)
+            
+            port_out = alt.Chart(porting_data).mark_bar(color='#EF4444', cornerRadiusTopLeft=4, cornerRadiusBottomLeft=4).encode(
+                x=alt.X('Port-Out:Q', title='Port-Out', scale=alt.Scale(domain=[0, 280], reverse=True)),
+                y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), axis=alt.Axis(labels=True, title=None)),
+                tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-Out:Q', title='Lost')]
+            ).properties(height=220)
+            
+            combined = alt.hconcat(port_out, port_in).resolve_scale(y='shared')
+            st.altair_chart(combined, use_container_width=True)
+            
+            # Net porting summary
+            col_p1, col_p2 = st.columns(2)
+            with col_p1:
+                st.markdown("""
+                <div style="background: #D1FAE5; border-radius: 20px; padding: 0.5rem 1rem; text-align: center;">
+                    <span style="color: #065F46; font-weight: 600;">Net: +432 customers</span>
+                </div>
+                """, unsafe_allow_html=True)
+            with col_p2:
+                st.markdown("""
+                <div style="background: #E0F2FE; border-radius: 20px; padding: 0.5rem 1rem; text-align: center;">
+                    <span style="color: #0369A1; font-weight: 600;">Three: +167 | EE: -45</span>
+                </div>
+                """, unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Customer Health & Value</div>', unsafe_allow_html=True)
+
+        cust_left, cust_right = st.columns(2)
+        with cust_left:
+            st.markdown('<div class="section-header">NPS by Customer Segment</div>', unsafe_allow_html=True)
             
             with st.container(border=True):
-                porting_data = pd.DataFrame({
-                    'Competitor': ['Three', 'Vodafone', 'EE', 'O2', 'Virgin', 'Sky'],
-                    'Port-In': [245, 156, 98, 112, 67, 45],
-                    'Port-Out': [78, 123, 143, 87, 42, 38]
+                nps_data = pd.DataFrame({
+                    'Segment': ['Enterprise', 'SMB', 'Consumer Premium', 'Consumer Standard', 'Consumer Budget'],
+                    'NPS': [62, 51, 48, 42, 35],
+                    'Subscribers': [1200, 7874, 5200, 10500, 5473],
+                    'ARPU': [142, 58, 45, 32, 22],
+                    'Target': [65, 55, 50, 45, 40]
                 })
                 
-                # Butterfly chart
-                port_in = alt.Chart(porting_data).mark_bar(color='#10B981', cornerRadiusTopRight=4, cornerRadiusBottomRight=4).encode(
-                    x=alt.X('Port-In:Q', title='Port-In', scale=alt.Scale(domain=[0, 280])),
-                    y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), title=None, axis=alt.Axis(labels=False)),
-                    tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-In:Q', title='Gained')]
-                ).properties(height=200, width=160)
+                # Lollipop chart for NPS
+                nps_line = alt.Chart(nps_data).mark_rule(strokeWidth=3).encode(
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    x=alt.X('NPS:Q', title='NPS Score', scale=alt.Scale(domain=[0, 70])),
+                    color=alt.value('#E5E7EB')
+                )
                 
-                port_out = alt.Chart(porting_data).mark_bar(color='#EF4444', cornerRadiusTopLeft=4, cornerRadiusBottomLeft=4).encode(
-                    x=alt.X('Port-Out:Q', title='Port-Out', scale=alt.Scale(domain=[0, 280], reverse=True)),
-                    y=alt.Y('Competitor:N', sort=list(porting_data['Competitor']), axis=alt.Axis(labels=True, title=None)),
-                    tooltip=[alt.Tooltip('Competitor'), alt.Tooltip('Port-Out:Q', title='Lost')]
-                ).properties(height=200, width=160)
+                nps_point = alt.Chart(nps_data).mark_circle(size=200).encode(
+                    y=alt.Y('Segment:N', sort='-x'),
+                    x='NPS:Q',
+                    color=alt.Color('NPS:Q', scale=alt.Scale(
+                        domain=[30, 65],
+                        range=['#F59E0B', '#10B981']
+                    ), legend=None),
+                    tooltip=[
+                        alt.Tooltip('Segment:N'),
+                        alt.Tooltip('NPS:Q', title='NPS Score'),
+                        alt.Tooltip('Subscribers:Q', format=','),
+                        alt.Tooltip('ARPU:Q', title='ARPU (£)', format='d'),
+                        alt.Tooltip('Target:Q', title='Target NPS')
+                    ]
+                )
                 
-                combined = alt.hconcat(port_out, port_in).resolve_scale(y='shared')
-                st.altair_chart(combined)
+                # Target markers
+                target_mark = alt.Chart(nps_data).mark_tick(
+                    thickness=3,
+                    size=20,
+                    color='#DC2626'
+                ).encode(
+                    y=alt.Y('Segment:N', sort='-x'),
+                    x='Target:Q'
+                )
                 
-                # Net porting summary
-                col_p1, col_p2 = st.columns(2)
-                with col_p1:
+                st.altair_chart(nps_line + nps_point + target_mark, use_container_width=True)
+                
+                st.markdown("""
+                <div style="display: flex; gap: 1rem; font-size: 0.8rem; color: #6B7280;">
+                    <span>● NPS Score</span>
+                    <span style="color: #DC2626;">| Target</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+        with cust_right:
+            st.markdown('<div class="section-header">Churn Risk by Segment</div>', unsafe_allow_html=True)
+            
+            with st.container(border=True):
+                churn_data = pd.DataFrame({
+                    'Segment': ['Enterprise', 'SMB', 'Consumer Premium', 'Consumer Standard', 'Consumer Budget'],
+                    'Churn Rate': [0.8, 1.4, 1.6, 2.1, 3.2],
+                    'At Risk': [10, 110, 83, 220, 175],
+                    'Revenue Impact': [14.2, 63.8, 37.4, 70.4, 38.5]
+                })
+                
+                churn_bars = alt.Chart(churn_data).mark_bar(
+                    cornerRadiusTopRight=6, cornerRadiusBottomRight=6
+                ).encode(
+                    x=alt.X('Churn Rate:Q', title='Churn Rate (%)', scale=alt.Scale(domain=[0, 4])),
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    color=alt.Color('Churn Rate:Q', scale=alt.Scale(domain=[0, 4], range=['#10B981', '#F59E0B', '#EF4444']), legend=None),
+                    tooltip=[
+                        alt.Tooltip('Segment:N'),
+                        alt.Tooltip('Churn Rate:Q', title='Churn %', format='.1f'),
+                        alt.Tooltip('At Risk:Q', title='At Risk Customers'),
+                        alt.Tooltip('Revenue Impact:Q', title='Revenue at Risk (£K)', format='.1f')
+                    ]
+                ).properties(height=180)
+                
+                churn_text = alt.Chart(churn_data).mark_text(
+                    align='left', dx=5, fontSize=11, fontWeight='bold'
+                ).encode(
+                    x='Churn Rate:Q',
+                    y=alt.Y('Segment:N', sort='-x'),
+                    text=alt.Text('Churn Rate:Q', format='.1f'),
+                    color=alt.value('#1B2A4E')
+                )
+                
+                st.altair_chart(churn_bars + churn_text, use_container_width=True)
+                
+                col_churn1, col_churn2 = st.columns(2)
+                with col_churn1:
                     st.markdown("""
-                    <div style="background: #D1FAE5; border-radius: 20px; padding: 0.5rem 1rem; text-align: center;">
-                        <span style="color: #065F46; font-weight: 600;">Net: +432 customers</span>
+                    <div style="background: #FEE2E2; border-radius: 8px; padding: 0.6rem; text-align: center;">
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #DC2626;">598</div>
+                        <div style="font-size: 0.7rem; color: #991B1B;">At-Risk Customers</div>
                     </div>
                     """, unsafe_allow_html=True)
-                with col_p2:
+                with col_churn2:
                     st.markdown("""
-                    <div style="background: #E0F2FE; border-radius: 20px; padding: 0.5rem 1rem; text-align: center;">
-                        <span style="color: #0369A1; font-weight: 600;">Three: +167 | EE: -45</span>
+                    <div style="background: #FEF3C7; border-radius: 8px; padding: 0.6rem; text-align: center;">
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #92400E;">£224K</div>
+                        <div style="font-size: 0.7rem; color: #92400E;">Monthly Revenue at Risk</div>
                     </div>
                     """, unsafe_allow_html=True)
-        
+
         # Revenue & Subscriber Trends
         st.markdown('<div class="section-header">Revenue & Subscriber Performance — 12 Month Trend</div>', unsafe_allow_html=True)
         
@@ -6646,12 +7324,13 @@ def render_ceo_strategic():
         with growth_col:
             st.markdown("**Customer Base Trend (12 Months)**")
             with st.container(border=True):
-                # Customer growth trend data
+                # Customer growth trend data (net adds to show movement clearly)
                 trend_months = pd.DataFrame({
                     'Month': ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
                     'Month_Num': list(range(1, 13)),
                     'Customers': [101.0, 101.3, 101.6, 101.9, 102.2, 102.5, 102.8, 103.0, 103.2, 103.3, 103.4, 103.5]
                 })
+                trend_months['Net_Adds_K'] = (trend_months['Customers'] - trend_months['Customers'].iloc[0]).round(2)
                 
                 area_chart = alt.Chart(trend_months).mark_area(
                     color='#29B5E8',
@@ -6659,16 +7338,22 @@ def render_ceo_strategic():
                     line={'color': '#29B5E8', 'strokeWidth': 2}
                 ).encode(
                     x=alt.X('Month:N', sort=list(trend_months['Month']), title=None, axis=alt.Axis(labelAngle=0)),
-                    y=alt.Y('Customers:Q', title='Customers (K)', scale=alt.Scale(domain=[100, 104])),
-                    tooltip=[alt.Tooltip('Month:N'), alt.Tooltip('Customers:Q', title='Customers (K)', format='.1f')]
-                ).properties(height=120)
+                    y=alt.Y(
+                        'Net_Adds_K:Q',
+                        title=None,
+                        scale=alt.Scale(domain=[0, 3], zero=True),
+                        axis=alt.Axis(format='.1f', tickCount=4)
+                    ),
+                    tooltip=[alt.Tooltip('Month:N'), alt.Tooltip('Net_Adds_K:Q', title='Net Adds (K)', format='.2f')]
+                ).properties(height=180)
                 
                 points = alt.Chart(trend_months).mark_circle(color='#29B5E8', size=40).encode(
                     x=alt.X('Month:N', sort=list(trend_months['Month'])),
-                    y='Customers:Q'
+                    y=alt.Y('Net_Adds_K:Q', scale=alt.Scale(domain=[0, 3], zero=True))
                 )
                 
                 st.altair_chart(area_chart + points, use_container_width=True)
+                st.caption("Net Adds (K) vs Feb baseline")
                 st.markdown('<div style="text-align: center; font-size: 0.75rem; color: #10B981;">Steady growth trajectory • +2,504 net adds in 12 months</div>', unsafe_allow_html=True)
         
         with split_col:
@@ -6707,7 +7392,7 @@ def render_ceo_strategic():
                     </div>
                     """, unsafe_allow_html=True)
         
-        # AI Executive Summary Section
+    with tab_strategy:
         st.markdown('<div class="section-header">🤖 AI-Generated Executive Briefing</div>', unsafe_allow_html=True)
         
         if st.session_state.get('sf_highlights', True):
@@ -6755,10 +7440,7 @@ def render_ceo_strategic():
                     st.markdown("🟢 **FYI**")
                     st.caption("NPS score reached all-time high of +42")
                     st.button("See Details →", key="action3", use_container_width=True)
-        
-        # Strategic Priorities Section
 
-    with tab_strategy:
         st.markdown('<div class="section-header">CEO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -6891,7 +7573,7 @@ def render_cfo_financial():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "💼 Financial Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -7695,8 +8377,236 @@ def render_cfo_financial():
                 </div>
                 """, unsafe_allow_html=True)
         
+    with tab_ops:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['FINANCE', 'BILLING', 'REVENUE_ASSURANCE']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+
+        st.markdown("""
+        <style>
+        @keyframes fin-pulse {
+            0% { transform: translateX(-30%); opacity: 0.2; }
+            50% { opacity: 0.7; }
+            100% { transform: translateX(130%); opacity: 0.2; }
+        }
+        .fin-pulse {
+            position: relative;
+            background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+            border: 1px solid #A7F3D0;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .fin-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -40%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(16,185,129,0.35), transparent);
+            animation: fin-pulse 4.5s ease-in-out infinite;
+        }
+        .fin-pulse-title { font-weight: 700; color: #065F46; font-size: 1rem; }
+        .fin-pulse-sub { color: #047857; font-size: 0.8rem; margin-top: 0.25rem; }
+        .fin-pulse-metrics {
+            display: flex; gap: 1.2rem; margin-top: 0.6rem; font-size: 0.8rem; color: #065F46;
+        }
+        .fin-pulse-metrics span {
+            background: rgba(255,255,255,0.7);
+            border: 1px solid #D1FAE5;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+        }
+        </style>
+        <div class="fin-pulse">
+            <div class="fin-pulse-title">💼 Financial Operations Pulse</div>
+            <div class="fin-pulse-sub">Working capital, spend efficiency, and cash posture at a glance</div>
+            <div class="fin-pulse-metrics">
+                <span>DSO: 32 days</span>
+                <span>Overdue: £0.30M</span>
+                <span>Cash Runway: 9.3 months</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Working Capital</div>', unsafe_allow_html=True)
+        wc_left, wc_right = st.columns(2)
+
+        with wc_left:
+            st.markdown('<div class="section-header">Accounts Receivable Aging</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                ar_data = pd.DataFrame({
+                    'Bucket': ['0-30', '31-60', '61-90', '90+'],
+                    'Amount': [2.1, 0.9, 0.4, 0.3]
+                })
+                ar_chart = alt.Chart(ar_data).mark_bar(color='#29B5E8', cornerRadiusEnd=6).encode(
+                    y=alt.Y('Bucket:N', sort=None, title=None),
+                    x=alt.X('Amount:Q', title='£M', scale=alt.Scale(domain=[0, 2.5])),
+                    tooltip=['Bucket:N', alt.Tooltip('Amount:Q', title='£M', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(ar_chart, use_container_width=True)
+
+        with wc_right:
+            st.markdown('<div class="section-header">Accounts Payable Aging</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                ap_data = pd.DataFrame({
+                    'Bucket': ['0-30', '31-60', '61-90', '90+'],
+                    'Amount': [1.6, 0.7, 0.3, 0.1]
+                })
+                ap_chart = alt.Chart(ap_data).mark_bar(color='#10B981', cornerRadiusEnd=6).encode(
+                    y=alt.Y('Bucket:N', sort=None, title=None),
+                    x=alt.X('Amount:Q', title='£M', scale=alt.Scale(domain=[0, 2.0])),
+                    tooltip=['Bucket:N', alt.Tooltip('Amount:Q', title='£M', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(ap_chart, use_container_width=True)
+
+        st.markdown('<div class="section-header">Cost Structure</div>', unsafe_allow_html=True)
+        cost_cols = st.columns([1.2, 1])
+        with cost_cols[0]:
+            with st.container(border=True):
+                opex = pd.DataFrame({
+                    'Category': ['Network', 'IT', 'Support', 'Sales', 'Admin'],
+                    'Spend': [2.8, 1.9, 1.2, 0.9, 0.6]
+                })
+                donut = alt.Chart(opex).mark_arc(innerRadius=45, outerRadius=80).encode(
+                    theta=alt.Theta('Spend:Q'),
+                    color=alt.Color('Category:N', legend=None),
+                    tooltip=['Category:N', alt.Tooltip('Spend:Q', title='£M', format='.1f')]
+                ).properties(height=200)
+                st.altair_chart(donut, use_container_width=True)
+        with cost_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                **Top Cost Drivers**
+                - Network Ops: **£2.8M**
+                - IT & Cloud: **£1.9M**
+                - Support: **£1.2M**
+                - Sales: **£0.9M**
+                """)
+
+        st.markdown('<div class="section-header">Cash Runway & Forecast</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.markdown("""
+            <style>
+            @keyframes cash-fill { 0% { width: 0%; } 100% { width: 78%; } }
+            .cash-bar { background: #F3F4F6; border-radius: 999px; height: 14px; overflow: hidden; }
+            .cash-fill { height: 100%; background: linear-gradient(90deg, #10B981, #34D399); animation: cash-fill 1.8s ease-out forwards; }
+            .cash-row { display: flex; justify-content: space-between; font-size: 0.8rem; color: #6B7280; margin-top: 0.4rem; }
+            </style>
+            <div style="font-weight: 600; margin-bottom: 0.4rem;">Runway Coverage: 9.3 months</div>
+            <div class="cash-bar"><div class="cash-fill"></div></div>
+            <div class="cash-row"><span>Low: 6 months</span><span>Target: 12 months</span></div>
+            """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Top Vendor Spend</div>', unsafe_allow_html=True)
+        vendor_cols = st.columns([1.2, 1])
+        with vendor_cols[0]:
+            with st.container(border=True):
+                vendor_data = pd.DataFrame({
+                    'Vendor': ['Ericsson', 'AWS', 'Nokia', 'Accenture', 'Microsoft'],
+                    'Spend': [1.8, 1.2, 0.9, 0.7, 0.6]
+                })
+                vendor_chart = alt.Chart(vendor_data).mark_bar(color='#10B981', cornerRadiusEnd=6).encode(
+                    y=alt.Y('Vendor:N', sort='-x', title=None),
+                    x=alt.X('Spend:Q', title='£M'),
+                    tooltip=['Vendor:N', alt.Tooltip('Spend:Q', title='£M', format='.1f')]
+                ).properties(height=200)
+                st.altair_chart(vendor_chart, use_container_width=True)
+        with vendor_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                **Spend Notes**
+                - Cloud costs trending down **-6% QoQ**
+                - Network vendor savings **£0.4M** via consolidation
+                - Professional services under budget
+                """)
+
+        st.markdown('<div class="section-header">Budget vs Actual (YTD)</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            budget_data = pd.DataFrame({
+                'Category': ['Network', 'IT', 'Support', 'Sales', 'Admin'],
+                'Budget': [3.0, 2.1, 1.4, 1.0, 0.7],
+                'Actual': [2.8, 1.9, 1.2, 0.9, 0.6]
+            })
+            budget = alt.Chart(budget_data).mark_bar(color='#94A3B8').encode(
+                y=alt.Y('Category:N', sort='-x', title=None),
+                x=alt.X('Budget:Q', title='£M'),
+                tooltip=['Category:N', alt.Tooltip('Budget:Q', title='Budget (£M)', format='.1f')]
+            )
+            actual = alt.Chart(budget_data).mark_bar(color='#29B5E8').encode(
+                y=alt.Y('Category:N', sort='-x'),
+                x=alt.X('Actual:Q'),
+                tooltip=['Category:N', alt.Tooltip('Actual:Q', title='Actual (£M)', format='.1f')]
+            )
+            st.altair_chart(alt.layer(budget, actual).properties(height=220), use_container_width=True)
 
     with tab_strategy:
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Finance insights synthesized from billing, payments, and revenue data.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Finance Summary (Q1 2026):**
+            - Revenue +12.4% YoY with EBITDA margin at **27.6%**.
+            - Collection rate remains strong at **98.2%**, but DSO sits above target (32 vs 28).
+            - OpEx trending below budget in IT and Support, supporting margin expansion.
+            """)
+
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Revenue growth**: +£7.4M MTD
+                - **Enterprise ARPU**: £142 (+15% YoY)
+                - **Billing accuracy**: 98.2%
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **DSO** above target by 4 days
+                - **Overdue** balance at £0.30M
+                - **Credit exposure** rising in SMB
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Efficiency Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **OpEx savings** £1.5M identified
+                - **Cloud spend** down 6% QoQ
+                - **Cash runway** 9.3 months
+                """)
+
+        st.markdown('<div class="section-header">Recommended Actions</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                **1) DSO Reduction**
+                - Automate reminders & escalations
+                - Tighten credit checks
+                - Target: **28 days**
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                **2) Margin Expansion**
+                - Vendor consolidation
+                - Reduce low-ROI spend
+                - Target: **30% EBITDA**
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                **3) Cash Discipline**
+                - Prioritize collections
+                - Defer non-critical CapEx
+                - Maintain **12-month runway**
+                """)
+
         st.markdown('<div class="section-header">CFO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -7827,7 +8737,7 @@ def render_cmo_marketing():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_campaigns, tab_strategy = st.tabs(["📊 Overview & Analysis", "📣 Campaigns & Growth", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -8377,7 +9287,402 @@ def render_cmo_marketing():
                 </div>
                 """, unsafe_allow_html=True)
         
-
+    with tab_campaigns:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MARKETING', 'CUSTOMER_EXPERIENCE', 'DIGITAL', 'SALES']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        .cmo-campaign-pulse {
+            background: linear-gradient(135deg, #FDF4FF 0%, #EDE9FE 100%);
+            border-radius: 16px;
+            border: 1px solid #DDD6FE;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cmo-campaign-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124,58,237,0.18), transparent);
+            animation: cmo-campaign-sweep 4s ease-in-out infinite;
+        }
+        @keyframes cmo-campaign-sweep {
+            0% { left: -120%; }
+            100% { left: 220%; }
+        }
+        .cmo-campaign-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .cmo-campaign-title { font-weight: 700; color: #4C1D95; font-size: 1.05rem; }
+        .cmo-campaign-tag {
+            background: #7C3AED;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+        }
+        .cmo-campaign-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .cmo-campaign-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #EDE9FE;
+            padding: 0.85rem 1rem;
+        }
+        .cmo-campaign-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .cmo-campaign-value { font-size: 1.25rem; font-weight: 700; color: #4C1D95; }
+        .cmo-campaign-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .cmo-campaign-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 640px) { .cmo-campaign-grid { grid-template-columns: 1fr; } }
+        </style>
+        <div class="cmo-campaign-pulse">
+            <div class="cmo-campaign-header">
+                <div class="cmo-campaign-title">📣 Campaign Pulse</div>
+                <div class="cmo-campaign-tag">LIVE</div>
+            </div>
+            <div class="cmo-campaign-grid">
+                <div class="cmo-campaign-card">
+                    <div class="cmo-campaign-label">Active Campaigns</div>
+                    <div class="cmo-campaign-value">6</div>
+                    <div class="cmo-campaign-sub">2 launches this month</div>
+                </div>
+                <div class="cmo-campaign-card">
+                    <div class="cmo-campaign-label">Conversion Rate</div>
+                    <div class="cmo-campaign-value">12.8%</div>
+                    <div class="cmo-campaign-sub">+2.1 pts QoQ</div>
+                </div>
+                <div class="cmo-campaign-card">
+                    <div class="cmo-campaign-label">Top Channel ROI</div>
+                    <div class="cmo-campaign-value">12.4x</div>
+                    <div class="cmo-campaign-sub">SEO/Organic</div>
+                </div>
+                <div class="cmo-campaign-card">
+                    <div class="cmo-campaign-label">Net New Adds</div>
+                    <div class="cmo-campaign-value">+2,847</div>
+                    <div class="cmo-campaign-sub">MTD performance</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Campaigns & Growth</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Monthly Acquisition & Churn Trends</div>', unsafe_allow_html=True)
+        
+        with st.container(border=True):
+            col_acq, col_churn = st.columns(2)
+            
+            with col_acq:
+                acq_data = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                    'Consumer': [1850, 1920, 2100, 2280, 2450, 2520],
+                    'SMB': [180, 195, 210, 225, 240, 252],
+                    'Enterprise': [45, 52, 58, 62, 68, 75]
+                })
+                
+                acq_melted = acq_data.melt('Month', var_name='Segment', value_name='New Customers')
+                
+                acq_chart = alt.Chart(acq_melted).mark_area(opacity=0.7).encode(
+                    x=alt.X('Month:N', sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'], title=None),
+                    y=alt.Y('New Customers:Q', stack='zero', title='New Customers'),
+                    color=alt.Color('Segment:N',
+                        scale=alt.Scale(
+                            domain=['Consumer', 'SMB', 'Enterprise'],
+                            range=['#29B5E8', '#10B981', '#8B5CF6']
+                        ),
+                        legend=alt.Legend(orient='top', title=None)
+                    ),
+                    tooltip=[
+                        alt.Tooltip('Month:N'),
+                        alt.Tooltip('Segment:N'),
+                        alt.Tooltip('New Customers:Q', format=',')
+                    ]
+                ).properties(height=220, title='New Customer Acquisition')
+                
+                st.altair_chart(acq_chart, use_container_width=True)
+            
+            with col_churn:
+                churn_data = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                    'Churn Rate': [2.4, 2.2, 2.1, 1.9, 1.8, 1.8],
+                    'Target': [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
+                    'Churned': [720, 660, 630, 570, 540, 540]
+                })
+                
+                base = alt.Chart(churn_data).encode(
+                    x=alt.X('Month:N', sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'], title=None)
+                )
+                
+                bars = base.mark_bar(color='#EF4444', opacity=0.7, cornerRadiusTopLeft=4, cornerRadiusTopRight=4).encode(
+                    y=alt.Y('Churn Rate:Q', title='Churn Rate (%)', scale=alt.Scale(domain=[0, 3])),
+                    tooltip=[alt.Tooltip('Month:N'), alt.Tooltip('Churn Rate:Q', format='.1f'), alt.Tooltip('Churned:Q', format=',')]
+                )
+                
+                target_line = base.mark_line(color='#10B981', strokeWidth=2, strokeDash=[5, 3]).encode(
+                    y='Target:Q'
+                )
+                
+                st.altair_chart((bars + target_line).properties(height=220, title='Churn Rate Trend'), use_container_width=True)
+        
+        st.markdown('<div class="section-header">Campaign Calendar — Q1 2026</div>', unsafe_allow_html=True)
+        
+        with st.container(border=True):
+            st.markdown("""
+            <div style="font-size: 0.85rem;">
+                <div style="display: flex; align-items: center; padding: 0.6rem; background: #FDF4FF; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <span style="background: #EC4899; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.75rem;">LIVE</span>
+                    <div>
+                        <div style="font-weight: 600; color: #1B2A4E;">5G Launch Campaign</div>
+                        <div style="color: #6B7280; font-size: 0.75rem;">Jan 15 - Mar 31 · £450K budget</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; padding: 0.6rem; background: #E0F2FE; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <span style="background: #29B5E8; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.75rem;">LIVE</span>
+                    <div>
+                        <div style="font-weight: 600; color: #1B2A4E;">Valentine's Promo</div>
+                        <div style="color: #6B7280; font-size: 0.75rem;">Feb 1 - Feb 14 · £80K budget</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; padding: 0.6rem; background: #F3F4F6; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <span style="background: #6B7280; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.75rem;">PLANNED</span>
+                    <div>
+                        <div style="font-weight: 600; color: #1B2A4E;">Spring Switch Campaign</div>
+                        <div style="color: #6B7280; font-size: 0.75rem;">Mar 1 - Mar 31 · £200K budget</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; padding: 0.6rem; background: #D1FAE5; border-radius: 8px;">
+                    <span style="background: #10B981; color: white; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.75rem;">COMPLETE</span>
+                    <div>
+                        <div style="font-weight: 600; color: #1B2A4E;">New Year Offer</div>
+                        <div style="color: #6B7280; font-size: 0.75rem;">Dec 26 - Jan 7 · 4.8x ROI achieved</div>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Customer Insights & Retention</div>', unsafe_allow_html=True)
+        
+        seg_col, demo_col, acq_col = st.columns(3)
+        
+        with seg_col:
+            st.markdown("**Customer Segmentation by Value**")
+            with st.container(border=True):
+                st.markdown("""
+                <div style="font-size: 0.85rem;">
+                    <div style="margin-bottom: 0.6rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>🥇 Platinum</span><span style="font-weight: 600;">12,450 <span style="color: #10B981;">£85 ARPU</span></span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
+                            <div style="background: linear-gradient(90deg, #6366F1, #8B5CF6); width: 15%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.6rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>🥈 Gold</span><span style="font-weight: 600;">28,320 <span style="color: #10B981;">£52 ARPU</span></span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
+                            <div style="background: linear-gradient(90deg, #F59E0B, #FBBF24); width: 35%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.6rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>🥉 Silver</span><span style="font-weight: 600;">42,180 <span style="color: #6B7280;">£32 ARPU</span></span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
+                            <div style="background: #9CA3AF; width: 52%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>Bronze</span><span style="font-weight: 600;">18,250 <span style="color: #6B7280;">£18 ARPU</span></span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
+                            <div style="background: #D1D5DB; width: 22%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.75rem; color: #6B7280;">Total: 101,200 B2C Customers</div>
+                """, unsafe_allow_html=True)
+        
+        with demo_col:
+            st.markdown("**Age Demographics**")
+            with st.container(border=True):
+                st.markdown("""
+                <div style="font-size: 0.85rem;">
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>18-24</span><span style="font-weight: 600;">14%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #8B5CF6; width: 14%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>25-34</span><span style="font-weight: 600;">28%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #6366F1; width: 28%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>35-44</span><span style="font-weight: 600;">24%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #3B82F6; width: 24%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>45-54</span><span style="font-weight: 600;">18%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #29B5E8; width: 18%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>55+</span><span style="font-weight: 600;">16%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #10B981; width: 16%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.75rem; color: #6B7280;">Median Age: 38</div>
+                """, unsafe_allow_html=True)
+        
+        with acq_col:
+            st.markdown("**Acquisition Channels**")
+            with st.container(border=True):
+                st.markdown("""
+                <div style="font-size: 0.85rem;">
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>Digital (Web/App)</span><span style="font-weight: 600; color: #10B981;">42%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #10B981; width: 42%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>Retail Store</span><span style="font-weight: 600;">28%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #29B5E8; width: 28%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>Telesales</span><span style="font-weight: 600;">15%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #F59E0B; width: 15%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>Partner/Reseller</span><span style="font-weight: 600;">10%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #8B5CF6; width: 10%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
+                            <span>Referral</span><span style="font-weight: 600;">5%</span>
+                        </div>
+                        <div style="background: #E5E7EB; border-radius: 4px; height: 14px;">
+                            <div style="background: #EC4899; width: 5%; height: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.75rem; color: #10B981;">Digital +8% YoY</div>
+                """, unsafe_allow_html=True)
+        
+        ret_col, engage_col = st.columns(2)
+        
+        with ret_col:
+            st.markdown("**Retention Cohorts (12 Month)**")
+            with st.container(border=True):
+                st.markdown("""
+                <div style="font-size: 0.85rem;">
+                    <div style="display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #E5E7EB;">
+                        <span>0-12 months</span>
+                        <span><strong>92%</strong> retained</span>
+                        <span style="color: #10B981;">▲ 2%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #E5E7EB;">
+                        <span>12-24 months</span>
+                        <span><strong>88%</strong> retained</span>
+                        <span style="color: #10B981;">▲ 1%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #E5E7EB;">
+                        <span>24-36 months</span>
+                        <span><strong>81%</strong> retained</span>
+                        <span style="color: #DC2626;">▼ 3%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #E5E7EB;">
+                        <span>36-48 months</span>
+                        <span><strong>85%</strong> retained</span>
+                        <span style="color: #10B981;">▲ 1%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 0.4rem 0;">
+                        <span>48+ months</span>
+                        <span><strong>94%</strong> retained</span>
+                        <span style="color: #10B981;">▲ 3%</span>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.75rem; color: #DC2626;">⚠️ 24-36 mo cohort needs attention</div>
+                """, unsafe_allow_html=True)
+        
+        with engage_col:
+            st.markdown("**Digital Engagement**")
+            with st.container(border=True):
+                st.markdown("""
+                <div style="display: flex; justify-content: space-around; text-align: center; padding: 0.5rem 0;">
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #29B5E8;">68%</div>
+                        <div style="font-size: 0.75rem; color: #6B7280;">App Active</div>
+                        <div style="font-size: 0.7rem; color: #10B981;">▲ 5%</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #10B981;">4.2M</div>
+                        <div style="font-size: 0.75rem; color: #6B7280;">Monthly Logins</div>
+                        <div style="font-size: 0.7rem; color: #10B981;">▲ 12%</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.5rem; font-weight: 700; color: #8B5CF6;">72%</div>
+                        <div style="font-size: 0.75rem; color: #6B7280;">Self-Service</div>
+                        <div style="font-size: 0.7rem; color: #10B981;">▲ 8%</div>
+                    </div>
+                </div>
+                <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #E5E7EB;">
+                    <div style="font-size: 0.8rem; text-align: center;">
+                        <span style="color: #1B2A4E; font-weight: 600;">Top Actions:</span> Bill Pay (34%) • Usage Check (28%) • Support (18%)
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        
     with tab_strategy:
         st.markdown('<div class="section-header">CMO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
@@ -8736,7 +10041,7 @@ def render_cto_technology():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_platforms, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧩 Platforms & Security", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -9036,169 +10341,169 @@ def render_cto_technology():
         </div>
         """, unsafe_allow_html=True)
         
-        col_left, col_right = st.columns([1.3, 1])
+        st.markdown('<div class="section-header">Network Performance by Region</div>', unsafe_allow_html=True)
         
-        with col_left:
-            st.markdown('<div class="section-header">Network Performance by Region</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            region_data = pd.DataFrame({
+                'Region': ['London', 'South East', 'Midlands', 'North West', 'Scotland', 'Wales', 'North East', 'South West'],
+                'Uptime': [99.98, 99.97, 99.96, 99.95, 99.94, 99.93, 99.92, 99.91],
+                'Latency': [8, 10, 12, 14, 16, 15, 18, 13],
+                'Cells': [1250, 890, 720, 680, 420, 280, 350, 410],
+                '5G_Coverage': [92, 85, 78, 72, 65, 58, 62, 68]
+            })
             
-            with st.container(border=True):
-                region_data = pd.DataFrame({
-                    'Region': ['London', 'South East', 'Midlands', 'North West', 'Scotland', 'Wales', 'North East', 'South West'],
-                    'Uptime': [99.98, 99.97, 99.96, 99.95, 99.94, 99.93, 99.92, 99.91],
-                    'Latency': [8, 10, 12, 14, 16, 15, 18, 13],
-                    'Cells': [1250, 890, 720, 680, 420, 280, 350, 410],
-                    '5G_Coverage': [92, 85, 78, 72, 65, 58, 62, 68]
-                })
-                
-                bars = alt.Chart(region_data).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
-                    x=alt.X('5G_Coverage:Q', title='5G Coverage (%)', scale=alt.Scale(domain=[0, 100])),
-                    y=alt.Y('Region:N', sort=alt.EncodingSortField(field='5G_Coverage', order='descending'), title=None),
-                    color=alt.Color('5G_Coverage:Q',
-                        scale=alt.Scale(scheme='blues', domain=[50, 100]),
-                        legend=None
-                    ),
-                    tooltip=[
-                        alt.Tooltip('Region:N'),
-                        alt.Tooltip('Uptime:Q', title='Uptime (%)', format='.2f'),
-                        alt.Tooltip('Latency:Q', title='Latency (ms)'),
-                        alt.Tooltip('Cells:Q', title='Cell Sites', format=','),
-                        alt.Tooltip('5G_Coverage:Q', title='5G Coverage (%)')
-                    ]
-                ).properties(height=280)
-                
-                text = alt.Chart(region_data).mark_text(align='left', dx=5, fontSize=10, fontWeight='bold').encode(
-                    x='5G_Coverage:Q',
-                    y=alt.Y('Region:N', sort=alt.EncodingSortField(field='5G_Coverage', order='descending')),
-                    text=alt.Text('5G_Coverage:Q', format='.0f'),
-                    color=alt.value('#1B2A4E')
-                )
-                
-                st.altair_chart(bars + text, use_container_width=True)
-                
-                reg_cols = st.columns(4)
-                with reg_cols[0]:
-                    st.markdown("""
-                    <div style="text-align: center; padding: 0.5rem;">
-                        <div style="font-size: 0.7rem; color: #6B7280;">Total Cells</div>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #1B2A4E;">5,000</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                with reg_cols[1]:
-                    st.markdown("""
-                    <div style="text-align: center; padding: 0.5rem;">
-                        <div style="font-size: 0.7rem; color: #6B7280;">5G Cells</div>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #29B5E8;">3,900</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                with reg_cols[2]:
-                    st.markdown("""
-                    <div style="text-align: center; padding: 0.5rem;">
-                        <div style="font-size: 0.7rem; color: #6B7280;">Avg Uptime</div>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">99.95%</div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                with reg_cols[3]:
-                    st.markdown("""
-                    <div style="text-align: center; padding: 0.5rem;">
-                        <div style="font-size: 0.7rem; color: #6B7280;">Avg Latency</div>
-                        <div style="font-size: 1.1rem; font-weight: 700; color: #8B5CF6;">12ms</div>
-                    </div>
-                    """, unsafe_allow_html=True)
+            bars = alt.Chart(region_data).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                x=alt.X('5G_Coverage:Q', title='5G Coverage (%)', scale=alt.Scale(domain=[0, 100])),
+                y=alt.Y('Region:N', sort=alt.EncodingSortField(field='5G_Coverage', order='descending'), title=None),
+                color=alt.Color('5G_Coverage:Q',
+                    scale=alt.Scale(scheme='blues', domain=[50, 100]),
+                    legend=None
+                ),
+                tooltip=[
+                    alt.Tooltip('Region:N'),
+                    alt.Tooltip('Uptime:Q', title='Uptime (%)', format='.2f'),
+                    alt.Tooltip('Latency:Q', title='Latency (ms)'),
+                    alt.Tooltip('Cells:Q', title='Cell Sites', format=','),
+                    alt.Tooltip('5G_Coverage:Q', title='5G Coverage (%)')
+                ]
+            ).properties(height=280)
+            
+            text = alt.Chart(region_data).mark_text(align='left', dx=5, fontSize=10, fontWeight='bold').encode(
+                x='5G_Coverage:Q',
+                y=alt.Y('Region:N', sort=alt.EncodingSortField(field='5G_Coverage', order='descending')),
+                text=alt.Text('5G_Coverage:Q', format='.0f'),
+                color=alt.value('#1B2A4E')
+            )
+            
+            st.altair_chart(bars + text, use_container_width=True)
+            
+            reg_cols = st.columns(4)
+            with reg_cols[0]:
+                st.markdown("""
+                <div style="text-align: center; padding: 0.5rem;">
+                    <div style="font-size: 0.7rem; color: #6B7280;">Total Cells</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #1B2A4E;">5,000</div>
+                </div>
+                """, unsafe_allow_html=True)
+            with reg_cols[1]:
+                st.markdown("""
+                <div style="text-align: center; padding: 0.5rem;">
+                    <div style="font-size: 0.7rem; color: #6B7280;">5G Cells</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #29B5E8;">3,900</div>
+                </div>
+                """, unsafe_allow_html=True)
+            with reg_cols[2]:
+                st.markdown("""
+                <div style="text-align: center; padding: 0.5rem;">
+                    <div style="font-size: 0.7rem; color: #6B7280;">Avg Uptime</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">99.95%</div>
+                </div>
+                """, unsafe_allow_html=True)
+            with reg_cols[3]:
+                st.markdown("""
+                <div style="text-align: center; padding: 0.5rem;">
+                    <div style="font-size: 0.7rem; color: #6B7280;">Avg Latency</div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: #8B5CF6;">12ms</div>
+                </div>
+                """, unsafe_allow_html=True)
+    
+    with tab_platforms:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['IT_OPS', 'SECURITY', 'CLOUD', 'DIGITAL_TRANSFORMATION']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
         
-        with col_right:
-            st.markdown('<div class="section-header">Incident Status</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-header">Incident Status</div>', unsafe_allow_html=True)
+        
+        with st.container(border=True):
+            incident_data = pd.DataFrame({
+                'Severity': ['P1 Critical', 'P2 High', 'P3 Medium', 'P4 Low'],
+                'Open': [0, 1, 2, 8],
+                'MTTR': [15, 45, 120, 480],
+                'Target_MTTR': [30, 60, 180, 720]
+            })
             
-            with st.container(border=True):
-                incident_data = pd.DataFrame({
-                    'Severity': ['P1 Critical', 'P2 High', 'P3 Medium', 'P4 Low'],
-                    'Open': [0, 1, 2, 8],
-                    'MTTR': [15, 45, 120, 480],
-                    'Target_MTTR': [30, 60, 180, 720]
-                })
-                
-                st.markdown("""
-                <div style="font-size: 0.85rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #D1FAE5; border-radius: 8px; margin-bottom: 0.5rem;">
-                        <span style="font-weight: 600;"><span style="color: #DC2626;">●</span> P1 Critical</span>
-                        <span style="background: #10B981; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">0 Open</span>
+            st.markdown("""
+            <div style="font-size: 0.85rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #D1FAE5; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 600;"><span style="color: #DC2626;">●</span> P1 Critical</span>
+                    <span style="background: #10B981; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">0 Open</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #FEF3C7; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 600;"><span style="color: #F97316;">●</span> P2 High</span>
+                    <span style="background: #F59E0B; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">1 Open</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #E0F2FE; border-radius: 8px; margin-bottom: 0.5rem;">
+                    <span style="font-weight: 600;"><span style="color: #29B5E8;">●</span> P3 Medium</span>
+                    <span style="background: #29B5E8; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">2 Open</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #F3F4F6; border-radius: 8px;">
+                    <span style="font-weight: 600;"><span style="color: #6B7280;">●</span> P4 Low</span>
+                    <span style="background: #6B7280; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">8 Open</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div style="margin-top: 1rem; background: linear-gradient(135deg, #1B2A4E 0%, #2D3F6B 100%); border-radius: 8px; padding: 0.75rem; color: white;">
+                <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 0.25rem;">Mean Time to Resolution</div>
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">15m</div>
+                        <div style="font-size: 0.65rem;">P1 (Target: 30m)</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #FEF3C7; border-radius: 8px; margin-bottom: 0.5rem;">
-                        <span style="font-weight: 600;"><span style="color: #F97316;">●</span> P2 High</span>
-                        <span style="background: #F59E0B; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">1 Open</span>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">45m</div>
+                        <div style="font-size: 0.65rem;">P2 (Target: 60m)</div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #E0F2FE; border-radius: 8px; margin-bottom: 0.5rem;">
-                        <span style="font-weight: 600;"><span style="color: #29B5E8;">●</span> P3 Medium</span>
-                        <span style="background: #29B5E8; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">2 Open</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem; background: #F3F4F6; border-radius: 8px;">
-                        <span style="font-weight: 600;"><span style="color: #6B7280;">●</span> P4 Low</span>
-                        <span style="background: #6B7280; color: white; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem;">8 Open</span>
+                    <div style="text-align: center;">
+                        <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">2h</div>
+                        <div style="font-size: 0.65rem;">P3 (Target: 3h)</div>
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
-                
-                st.markdown("""
-                <div style="margin-top: 1rem; background: linear-gradient(135deg, #1B2A4E 0%, #2D3F6B 100%); border-radius: 8px; padding: 0.75rem; color: white;">
-                    <div style="font-size: 0.75rem; opacity: 0.8; margin-bottom: 0.25rem;">Mean Time to Resolution</div>
-                    <div style="display: flex; justify-content: space-between;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">15m</div>
-                            <div style="font-size: 0.65rem;">P1 (Target: 30m)</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">45m</div>
-                            <div style="font-size: 0.65rem;">P2 (Target: 60m)</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 1.1rem; font-weight: 700; color: #10B981;">2h</div>
-                            <div style="font-size: 0.65rem;">P3 (Target: 3h)</div>
-                        </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">System Health</div>', unsafe_allow_html=True)
+        
+        with st.container(border=True):
+            st.markdown("""
+            <div style="font-size: 0.85rem;">
+                <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
+                    <span style="width: 100px;">Core Network</span>
+                    <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
+                        <div style="background: #10B981; width: 98%; height: 100%; border-radius: 4px;"></div>
                     </div>
+                    <span style="font-weight: 700; color: #10B981; width: 40px;">98%</span>
                 </div>
-                """, unsafe_allow_html=True)
-            
-            st.markdown('<div class="section-header">System Health</div>', unsafe_allow_html=True)
-            
-            with st.container(border=True):
-                st.markdown("""
-                <div style="font-size: 0.85rem;">
-                    <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
-                        <span style="width: 100px;">Core Network</span>
-                        <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
-                            <div style="background: #10B981; width: 98%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                        <span style="font-weight: 700; color: #10B981; width: 40px;">98%</span>
+                <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
+                    <span style="width: 100px;">RAN</span>
+                    <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
+                        <div style="background: #10B981; width: 96%; height: 100%; border-radius: 4px;"></div>
                     </div>
-                    <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
-                        <span style="width: 100px;">RAN</span>
-                        <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
-                            <div style="background: #10B981; width: 96%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                        <span style="font-weight: 700; color: #10B981; width: 40px;">96%</span>
-                    </div>
-                    <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
-                        <span style="width: 100px;">BSS/OSS</span>
-                        <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
-                            <div style="background: #F59E0B; width: 94%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                        <span style="font-weight: 700; color: #F59E0B; width: 40px;">94%</span>
-                    </div>
-                    <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
-                        <span style="width: 100px;">Security</span>
-                        <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
-                            <div style="background: #F59E0B; width: 94%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                        <span style="font-weight: 700; color: #F59E0B; width: 40px;">94%</span>
-                    </div>
-                    <div style="display: flex; align-items: center; padding: 0.5rem 0;">
-                        <span style="width: 100px;">Cloud Infra</span>
-                        <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
-                            <div style="background: #F59E0B; width: 92%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                        <span style="font-weight: 700; color: #F59E0B; width: 40px;">92%</span>
-                    </div>
+                    <span style="font-weight: 700; color: #10B981; width: 40px;">96%</span>
                 </div>
-                """, unsafe_allow_html=True)
+                <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
+                    <span style="width: 100px;">BSS/OSS</span>
+                    <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
+                        <div style="background: #F59E0B; width: 94%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                    <span style="font-weight: 700; color: #F59E0B; width: 40px;">94%</span>
+                </div>
+                <div style="display: flex; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #F3F4F6;">
+                    <span style="width: 100px;">Security</span>
+                    <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
+                        <div style="background: #F59E0B; width: 94%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                    <span style="font-weight: 700; color: #F59E0B; width: 40px;">94%</span>
+                </div>
+                <div style="display: flex; align-items: center; padding: 0.5rem 0;">
+                    <span style="width: 100px;">Cloud Infra</span>
+                    <div style="flex: 1; background: #E5E7EB; border-radius: 4px; height: 12px; margin: 0 1rem;">
+                        <div style="background: #F59E0B; width: 92%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                    <span style="font-weight: 700; color: #F59E0B; width: 40px;">92%</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         
         st.markdown('<div class="section-header">Infrastructure Capacity & Utilization</div>', unsafe_allow_html=True)
         
@@ -9393,55 +10698,252 @@ def render_cto_technology():
                 </div>
                 """, unsafe_allow_html=True)
         
-
     with tab_strategy:
-        st.markdown('<div class="section-header">CTO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        .cso-ai-pulse {
+            background: linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%);
+            border-radius: 16px;
+            border: 1px solid #A5F3FC;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cso-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14,116,144,0.18), transparent);
+            animation: cso-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes cso-ai-sweep { 0% { left: -120%; } 100% { left: 220%; } }
+        .cso-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .cso-ai-title { font-weight: 700; color: #0E7490; font-size: 1.05rem; }
+        .cso-ai-tag { background: #0284C7; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .cso-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; position: relative; z-index: 1; }
+        .cso-ai-card { background: white; border-radius: 12px; border: 1px solid #A5F3FC; padding: 0.85rem 0.95rem; }
+        .cso-ai-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .cso-ai-value { font-size: 1.3rem; font-weight: 700; color: #0E7490; }
+        .cso-ai-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .cso-ai-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="cso-ai-pulse">
+            <div class="cso-ai-header">
+                <div class="cso-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="cso-ai-tag">AI LIVE</div>
+            </div>
+            <div class="cso-ai-grid">
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">Renewables</div>
+                    <div class="cso-ai-value">65%</div>
+                    <div class="cso-ai-sub">Target 70%</div>
+                </div>
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">Carbon Reduction</div>
+                    <div class="cso-ai-value">-42%</div>
+                    <div class="cso-ai-sub">vs 2019 baseline</div>
+                </div>
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">PUE Average</div>
+                    <div class="cso-ai-value">1.42</div>
+                    <div class="cso-ai-sub">Target 1.30</div>
+                </div>
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">Supplier ESG</div>
+                    <div class="cso-ai-value">84%</div>
+                    <div class="cso-ai-sub">Tier 2 focus</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
-        col1, col2, col3 = st.columns(3)
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Summary synthesized from energy, emissions, and ESG compliance data.")
         
-        with col1:
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - Renewable energy reached **65%**, on track to hit 70% target.
+            - Emissions are **down 15% YoY** with data center efficiency gains.
+            - Supply chain compliance improved to **84%**, with Tier 2 remediation planned.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
             with st.container(border=True):
                 st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #DC2626; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 1</span>
-                </div>
-                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">5G Rollout to 85%</h4>
-                """, unsafe_allow_html=True)
+                - **Macro sites** drive 52% of energy load
+                - **Wind + solar** deliver 50% of renewables
+                - **Water intensity** down in London and North
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
                 st.markdown("""
-                - Current coverage: **78%** (target: 85%)
-                - 350 new cell sites planned Q1
-                - Focus: Midlands & North regions
-                - CapEx: **£12M** allocated
+                - **Network features** closest to SLA thresholds
+                - **Tier 2 suppliers** below 85% compliance
+                - **PUE** above target in Manchester DC
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Solar expansion** adds +5% renewables
+                - **Fleet EV** rollout to 50% by 2025
+                - **Energy efficiency** saves £180K/year
                 """)
         
-        with col2:
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
             with st.container(border=True):
                 st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #F59E0B; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 2</span>
-                </div>
-                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Cloud Migration 85%</h4>
-                """, unsafe_allow_html=True)
+                - **Accelerate renewables** via PPAs in top 3 regions
+                - Prioritize sites with >1.5 PUE
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
                 st.markdown("""
-                - Current: **72%** (target: 85% by Q4)
-                - BSS migration in progress
-                - Data center consolidation: 4→2
-                - OpEx savings: **£2.4M** annual
+                - **Reduce water intensity** with closed-loop cooling
+                - Target 10% reduction by Q4
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Improve supplier ESG** with quarterly audits
+                - Enforce Tier 2 remediation milestones
+                """)
+        st.markdown("""
+        <style>
+        .cto-ai-pulse {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-radius: 16px;
+            border: 1px solid #BAE6FD;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cto-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(41,181,232,0.18), transparent);
+            animation: cto-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes cto-ai-sweep {
+            0% { left: -120%; }
+            100% { left: 220%; }
+        }
+        .cto-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .cto-ai-title { font-weight: 700; color: #0C4A6E; font-size: 1.05rem; }
+        .cto-ai-tag { background: #0EA5E9; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .cto-ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; position: relative; z-index: 1; }
+        .cto-ai-card { background: white; border-radius: 12px; border: 1px solid #E2E8F0; padding: 0.9rem 1rem; }
+        .cto-ai-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .cto-ai-value { font-size: 1.4rem; font-weight: 700; color: #0C4A6E; }
+        .cto-ai-sub { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .cto-ai-grid { grid-template-columns: 1fr; } }
+        </style>
+        <div class="cto-ai-pulse">
+            <div class="cto-ai-header">
+                <div class="cto-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="cto-ai-tag">AI LIVE</div>
+            </div>
+            <div class="cto-ai-grid">
+                <div class="cto-ai-card">
+                    <div class="cto-ai-label">Service Resilience</div>
+                    <div class="cto-ai-value">99.97%</div>
+                    <div class="cto-ai-sub">SLA above target</div>
+                </div>
+                <div class="cto-ai-card">
+                    <div class="cto-ai-label">Cloud Migration</div>
+                    <div class="cto-ai-value">72%</div>
+                    <div class="cto-ai-sub">On track for 85%</div>
+                </div>
+                <div class="cto-ai-card">
+                    <div class="cto-ai-label">Security Posture</div>
+                    <div class="cto-ai-value">94/100</div>
+                    <div class="cto-ai-sub">Patch compliance 98%</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Executive summary synthesized from network, infra, and security telemetry.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - Network performance remains strong (99.97% uptime) with latency improvements in all regions.
+            - Cloud migration is progressing (72%) but compute capacity is nearing the 80% threshold.
+            - Security posture is stable (94/100); access control and data protection are the top focus areas.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **5G coverage** at **78%**
+                - **Latency** down to **12ms**
+                - **Compute** at **76%** utilization
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Compute capacity** nearing threshold
+                - **Access control** at **94%**
+                - **Tech debt** still **18%**
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **5G expansion** +12% YoY
+                - **SLA** above 99.9%
+                - **AI/ML platform** 45% complete
                 """)
         
-        with col3:
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
             with st.container(border=True):
                 st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #10B981; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 3</span>
-                </div>
-                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Tech Debt to 15%</h4>
-                """, unsafe_allow_html=True)
+                **1) Accelerate 5G Rollout**
+                - Add 350 sites in Q1
+                - Focus Midlands & North
+                - Expected impact: +7% coverage
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
                 st.markdown("""
-                - Current: **18%** (target: 15%)
-                - 3 legacy systems to retire Q1
-                - API modernization: 65% complete
-                - Security patching: **98%** current
+                **2) De-risk Capacity**
+                - Scale compute +30% by Q3
+                - Optimize storage tiers
+                - Expected impact: +12% headroom
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                **3) Reduce Tech Debt**
+                - Retire 3 legacy systems
+                - Complete API modernization
+                - Expected impact: -3% debt
                 """)
         
         st.markdown('<div class="section-header">Ask Snowflake Intelligence</div>', unsafe_allow_html=True)
@@ -9517,7 +11019,7 @@ def render_coo_operations():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_mlops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧪 Model Ops & Strategy", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -10161,7 +11663,7 @@ def render_cco_commercial():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_mlops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧪 Model Ops & Strategy", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -11076,7 +12578,7 @@ def render_cxo_customer_experience():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_mlops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧪 Model Ops & Strategy", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -12031,7 +13533,7 @@ def render_cno_network():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_mlops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧪 Model Ops & Strategy", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -13150,7 +14652,7 @@ def render_cdo_data_science():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_mlops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧪 Model Ops & Strategy", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -13973,88 +15475,6 @@ def render_cdo_data_science():
             </div>
             """, unsafe_allow_html=True)
         
-        col_exp1, col_exp2, col_exp3, col_exp4 = st.columns(4)
-        
-        with col_exp1:
-            st.markdown('<div class="section-header">A/B Test Results</div>', unsafe_allow_html=True)
-            with st.container(border=True):
-                st.markdown("""
-                <div style="text-align: center;">
-                    <div style="font-size: 0.75rem; color: #6B7280; margin-bottom: 0.5rem;">Offer Personalization</div>
-                    <div style="display: flex; justify-content: center; gap: 0.5rem;">
-                        <div style="background: #E5E7EB; padding: 0.5rem; border-radius: 8px; flex: 1;">
-                            <div style="font-size: 0.65rem; color: #6B7280;">Control</div>
-                            <div style="font-size: 1.2rem; font-weight: 700;">12.4%</div>
-                        </div>
-                        <div style="background: #D1FAE5; padding: 0.5rem; border-radius: 8px; flex: 1;">
-                            <div style="font-size: 0.65rem; color: #065F46;">Variant</div>
-                            <div style="font-size: 1.2rem; font-weight: 700; color: #10B981;">18.2%</div>
-                        </div>
-                    </div>
-                    <div style="margin-top: 0.5rem; font-size: 0.7rem; color: #10B981; font-weight: 600;">+47% lift ✓</div>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        with col_exp2:
-            st.markdown('<div class="section-header">Data Quality</div>', unsafe_allow_html=True)
-            with st.container(border=True):
-                st.markdown("""
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: #10B981;">98.4%</div>
-                    <div style="font-size: 0.75rem; color: #6B7280;">Data Completeness</div>
-                    <div style="margin-top: 0.5rem; font-size: 0.75rem;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Freshness</span>
-                            <span style="color: #10B981;">✓ 2hr</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Accuracy</span>
-                            <span style="color: #10B981;">✓ 99.1%</span>
-                        </div>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        with col_exp3:
-            st.markdown('<div class="section-header">Model Drift</div>', unsafe_allow_html=True)
-            with st.container(border=True):
-                st.markdown("""
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: #10B981;">Low</div>
-                    <div style="font-size: 0.75rem; color: #6B7280;">Drift Detected</div>
-                    <div style="margin-top: 0.5rem; font-size: 0.75rem;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Feature Drift</span>
-                            <span style="color: #10B981;">2.1%</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Target Drift</span>
-                            <span style="color: #10B981;">1.4%</span>
-                        </div>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        with col_exp4:
-            st.markdown('<div class="section-header">Inference Load</div>', unsafe_allow_html=True)
-            with st.container(border=True):
-                st.markdown("""
-                <div style="text-align: center;">
-                    <div style="font-size: 2rem; font-weight: 700; color: #29B5E8;">142K</div>
-                    <div style="font-size: 0.75rem; color: #6B7280;">Daily Predictions</div>
-                    <div style="margin-top: 0.5rem; font-size: 0.75rem;">
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>Avg Latency</span>
-                            <span style="color: #10B981;">12ms</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span>P99 Latency</span>
-                            <span style="color: #F59E0B;">45ms</span>
-                        </div>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-        
         # Customer Intelligence Section
         st.markdown('<div class="section-header">Customer Intelligence & Analytics</div>', unsafe_allow_html=True)
         
@@ -14140,6 +15560,47 @@ def render_cdo_data_science():
                 <div style="text-align: center; margin-top: 0.5rem; font-size: 0.75rem; color: #DC2626;">⚠️ Total Revenue at Risk: £3.46M</div>
                 """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Propensity & Churn Signals</div>', unsafe_allow_html=True)
+        signal_col1, signal_col2 = st.columns(2)
+        
+        with signal_col1:
+            st.markdown("**Churn Risk Distribution**")
+            with st.container(border=True):
+                churn_dist = pd.DataFrame({
+                    'Risk Band': ['Low', 'Medium', 'High', 'Critical'],
+                    'Customers': [48200, 26500, 8420, 2940]
+                })
+                churn_chart = alt.Chart(churn_dist).mark_bar(cornerRadiusEnd=6).encode(
+                    x=alt.X('Customers:Q', title='Customers'),
+                    y=alt.Y('Risk Band:N', sort='-x', title=None),
+                    color=alt.Color('Risk Band:N', scale=alt.Scale(
+                        domain=['Low', 'Medium', 'High', 'Critical'],
+                        range=['#10B981', '#F59E0B', '#EF4444', '#7F1D1D']
+                    ), legend=None),
+                    tooltip=['Risk Band:N', 'Customers:Q']
+                ).properties(height=200)
+                st.altair_chart(churn_chart, use_container_width=True)
+                st.caption("Critical and high-risk cohorts drive 62% of projected churn revenue risk.")
+        
+        with signal_col2:
+            st.markdown("**Upsell Propensity Lift (Deciles)**")
+            with st.container(border=True):
+                lift_df = pd.DataFrame({
+                    'Decile': list(range(1, 11)),
+                    'Lift': [0.9, 1.2, 1.4, 1.7, 2.1, 2.6, 3.0, 3.4, 3.8, 4.2]
+                })
+                lift_line = alt.Chart(lift_df).mark_line(color='#8B5CF6', strokeWidth=2).encode(
+                    x=alt.X('Decile:Q', title='Propensity Decile'),
+                    y=alt.Y('Lift:Q', title='Lift vs Baseline')
+                )
+                lift_points = alt.Chart(lift_df).mark_circle(size=60, color='#6366F1').encode(
+                    x='Decile:Q',
+                    y='Lift:Q',
+                    tooltip=['Decile:Q', alt.Tooltip('Lift:Q', format='.1f')]
+                )
+                st.altair_chart((lift_line + lift_points).properties(height=200), use_container_width=True)
+                st.caption("Top two deciles deliver 3.8–4.2x response lift.")
+        
         # Cross-sell and NBA
         cross_col, nba_col = st.columns(2)
         
@@ -14214,7 +15675,377 @@ def render_cdo_data_science():
                 """, unsafe_allow_html=True)
         
 
+    with tab_mlops:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MLOPS', 'FEATURE_STORE', 'MODEL_MONITOR']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+        
+        st.markdown("""
+        <style>
+        @keyframes cdo-ops-sweep { 0% { transform: translateX(-120%); opacity: 0; } 25% { opacity: 0.6; } 100% { transform: translateX(120%); opacity: 0; } }
+        @keyframes cdo-ops-glow { 0%, 100% { box-shadow: 0 0 0 rgba(99,102,241,0.25); } 50% { box-shadow: 0 0 16px rgba(99,102,241,0.45); } }
+        .cdo-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+            color: white;
+            margin-bottom: 1.5rem;
+            animation: cdo-ops-glow 2.8s ease-in-out infinite;
+        }
+        .cdo-ops-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: cdo-ops-sweep 3.4s ease-in-out infinite;
+        }
+        .cdo-ops-title { font-weight: 700; font-size: 1rem; position: relative; z-index: 1; }
+        .cdo-ops-sub { font-size: 0.85rem; opacity: 0.85; position: relative; z-index: 1; }
+        .cdo-ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.9rem; position: relative; z-index: 1; }
+        .cdo-ops-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 0.6rem 0.75rem; }
+        .cdo-ops-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); }
+        .cdo-ops-value { font-size: 1.2rem; font-weight: 700; color: #FFFFFF; margin-top: 0.2rem; }
+        .cdo-ops-delta { font-size: 0.7rem; color: rgba(255,255,255,0.85); margin-top: 0.15rem; }
+        @media (max-width: 900px) { .cdo-ops-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="cdo-ops-pulse">
+            <div class="cdo-ops-title">🧪 Model Ops Pulse</div>
+            <div class="cdo-ops-sub">Real-time model health, drift, and inference latency.</div>
+            <div class="cdo-ops-grid">
+                <div class="cdo-ops-card">
+                    <div class="cdo-ops-label">Accuracy</div>
+                    <div class="cdo-ops-value">92.4%</div>
+                    <div class="cdo-ops-delta">↑ +0.6% WoW</div>
+                </div>
+                <div class="cdo-ops-card">
+                    <div class="cdo-ops-label">Drift Score</div>
+                    <div class="cdo-ops-value">0.07</div>
+                    <div class="cdo-ops-delta">Low risk</div>
+                </div>
+                <div class="cdo-ops-card">
+                    <div class="cdo-ops-label">Latency</div>
+                    <div class="cdo-ops-value">84 ms</div>
+                    <div class="cdo-ops-delta">Target &lt; 100 ms</div>
+                </div>
+                <div class="cdo-ops-card">
+                    <div class="cdo-ops-label">Jobs Healthy</div>
+                    <div class="cdo-ops-value">98%</div>
+                    <div class="cdo-ops-delta">2 retrains pending</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Model Health Trends</div>', unsafe_allow_html=True)
+        mlops_left, mlops_right = st.columns(2)
+        
+        with mlops_left:
+            st.markdown("**Accuracy & AUC (12 Weeks)**")
+            with st.container(border=True):
+                perf_df = pd.DataFrame({
+                    'Week': list(range(1, 13)),
+                    'Accuracy': [90.1, 90.4, 90.6, 90.9, 91.2, 91.6, 91.8, 92.0, 92.2, 92.3, 92.4, 92.4],
+                    'AUC': [0.86, 0.865, 0.868, 0.872, 0.878, 0.882, 0.885, 0.889, 0.892, 0.894, 0.897, 0.898]
+                })
+                acc_line = alt.Chart(perf_df).mark_line(color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Week:Q', title='Week'),
+                    y=alt.Y('Accuracy:Q', title='Accuracy (%)', scale=alt.Scale(domain=[89, 93]))
+                )
+                auc_line = alt.Chart(perf_df).mark_line(color='#8B5CF6', strokeWidth=2, strokeDash=[4, 3]).encode(
+                    x='Week:Q',
+                    y=alt.Y('AUC:Q', title='AUC', scale=alt.Scale(domain=[0.85, 0.91]))
+                )
+                st.altair_chart((acc_line + auc_line).properties(height=200), use_container_width=True)
+                st.caption("Accuracy and AUC trending upward after feature refresh.")
+        
+        with mlops_right:
+            st.markdown("**Drift Score by Feature Group**")
+            with st.container(border=True):
+                drift_df = pd.DataFrame({
+                    'Feature Group': ['Usage', 'Device', 'Billing', 'Network', 'Engagement'],
+                    'Drift Score': [0.05, 0.09, 0.03, 0.07, 0.06]
+                })
+                drift_chart = alt.Chart(drift_df).mark_bar(color='#F59E0B', cornerRadiusEnd=6).encode(
+                    x=alt.X('Drift Score:Q', title='PSI / Drift Score', scale=alt.Scale(domain=[0, 0.12])),
+                    y=alt.Y('Feature Group:N', sort='-x', title=None),
+                    tooltip=['Feature Group:N', alt.Tooltip('Drift Score:Q', format='.2f')]
+                ).properties(height=200)
+                st.altair_chart(drift_chart, use_container_width=True)
+                st.caption("Device features show elevated drift; retrain queued.")
+        
+        st.markdown('<div class="section-header">Operational Throughput & Reliability</div>', unsafe_allow_html=True)
+        ops_left, ops_right = st.columns(2)
+        
+        with ops_left:
+            st.markdown("**Inference Volume by Channel (14 Days)**")
+            with st.container(border=True):
+                vol_df = pd.DataFrame({
+                    'Day': list(range(1, 15)),
+                    'Digital': [42, 44, 45, 47, 49, 46, 48, 50, 52, 54, 53, 55, 56, 58],
+                    'Care': [28, 27, 29, 31, 30, 32, 33, 31, 34, 35, 36, 34, 37, 38]
+                })
+                vol_melt = vol_df.melt('Day', var_name='Channel', value_name='Requests_K')
+                vol_chart = alt.Chart(vol_melt).mark_area(opacity=0.5).encode(
+                    x=alt.X('Day:Q', title='Day'),
+                    y=alt.Y('Requests_K:Q', title='Requests (K)'),
+                    color=alt.Color('Channel:N', scale=alt.Scale(range=['#6366F1', '#22C55E']), legend=None)
+                )
+                st.altair_chart(vol_chart.properties(height=200), use_container_width=True)
+                st.caption("Digital channels drive ~60% of real-time scoring volume.")
+        
+        with ops_right:
+            st.markdown("**Retraining Pipeline Status**")
+            with st.container(border=True):
+                retrain_df = pd.DataFrame({
+                    'Stage': ['Queued', 'Running', 'Validating', 'Deployed'],
+                    'Models': [6, 3, 4, 18]
+                })
+                retrain_chart = alt.Chart(retrain_df).mark_bar(color='#8B5CF6', cornerRadiusEnd=6).encode(
+                    x=alt.X('Models:Q', title='Models'),
+                    y=alt.Y('Stage:N', sort='-x', title=None),
+                    tooltip=['Stage:N', 'Models:Q']
+                ).properties(height=200)
+                st.altair_chart(retrain_chart, use_container_width=True)
+                st.caption("Deployment backlog low; 18 models promoted this month.")
+        
+        st.markdown('<div class="section-header">Feature Store Freshness</div>', unsafe_allow_html=True)
+        fresh_col1, fresh_col2 = st.columns(2)
+        
+        with fresh_col1:
+            st.markdown("**Top Feature Groups (SLA %)**")
+            with st.container(border=True):
+                fresh_df = pd.DataFrame({
+                    'feature_group': ['Usage', 'Device', 'Billing', 'Network', 'Engagement'],
+                    'sla_pct': [99.2, 97.8, 98.6, 96.9, 98.1]
+                }).set_index('feature_group')
+                st.bar_chart(fresh_df, height=220, color="#0EA5E9")
+                st.caption("Network features are closest to SLA threshold.")
+        
+        with fresh_col2:
+            st.markdown("**Latency Distribution (p50/p95/p99)**")
+            with st.container(border=True):
+                latency_df = pd.DataFrame({
+                    'Percentile': ['p50', 'p95', 'p99'],
+                    'Latency_ms': [62, 118, 164]
+                })
+                latency_chart = alt.Chart(latency_df).mark_bar(color='#10B981', cornerRadiusEnd=6).encode(
+                    x=alt.X('Latency_ms:Q', title='Latency (ms)'),
+                    y=alt.Y('Percentile:N', sort=['p50', 'p95', 'p99'], title=None),
+                    tooltip=['Percentile:N', 'Latency_ms:Q']
+                ).properties(height=200)
+                st.altair_chart(latency_chart, use_container_width=True)
+                st.caption("p99 latency remains below 200 ms target.")
+        
+        st.markdown('<div class="section-header">Experimentation & Quality</div>', unsafe_allow_html=True)
+        col_exp1, col_exp2, col_exp3, col_exp4 = st.columns(4)
+        
+        with col_exp1:
+            st.markdown('<div class="section-header">A/B Test Results</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                <div style="text-align: center;">
+                    <div style="font-size: 0.75rem; color: #6B7280; margin-bottom: 0.5rem;">Offer Personalization</div>
+                    <div style="display: flex; justify-content: center; gap: 0.5rem;">
+                        <div style="background: #E5E7EB; padding: 0.5rem; border-radius: 8px; flex: 1;">
+                            <div style="font-size: 0.65rem; color: #6B7280;">Control</div>
+                            <div style="font-size: 1.2rem; font-weight: 700;">12.4%</div>
+                        </div>
+                        <div style="background: #D1FAE5; padding: 0.5rem; border-radius: 8px; flex: 1;">
+                            <div style="font-size: 0.65rem; color: #065F46;">Variant</div>
+                            <div style="font-size: 1.2rem; font-weight: 700; color: #10B981;">18.2%</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 0.5rem; font-size: 0.7rem; color: #10B981; font-weight: 600;">+47% lift ✓</div>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        with col_exp2:
+            st.markdown('<div class="section-header">Data Quality</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #10B981;">98.4%</div>
+                    <div style="font-size: 0.75rem; color: #6B7280;">Data Completeness</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Freshness</span>
+                            <span style="color: #10B981;">✓ 2hr</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Accuracy</span>
+                            <span style="color: #10B981;">✓ 99.1%</span>
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        with col_exp3:
+            st.markdown('<div class="section-header">Model Drift</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #10B981;">Low</div>
+                    <div style="font-size: 0.75rem; color: #6B7280;">Drift Detected</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Feature Drift</span>
+                            <span style="color: #10B981;">2.1%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Target Drift</span>
+                            <span style="color: #10B981;">1.4%</span>
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        with col_exp4:
+            st.markdown('<div class="section-header">Inference Load</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #29B5E8;">142K</div>
+                    <div style="font-size: 0.75rem; color: #6B7280;">Daily Predictions</div>
+                    <div style="margin-top: 0.5rem; font-size: 0.75rem;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Avg Latency</span>
+                            <span style="color: #10B981;">12ms</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>P99 Latency</span>
+                            <span style="color: #F59E0B;">45ms</span>
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+        
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .cdo-ai-pulse {
+            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+            border-radius: 16px;
+            border: 1px solid #C7D2FE;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cdo-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99,102,241,0.18), transparent);
+            animation: cdo-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes cdo-ai-sweep { 0% { left: -120%; } 100% { left: 220%; } }
+        .cdo-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .cdo-ai-title { font-weight: 700; color: #3730A3; font-size: 1.05rem; }
+        .cdo-ai-tag { background: #4F46E5; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .cdo-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; position: relative; z-index: 1; }
+        .cdo-ai-card { background: white; border-radius: 12px; border: 1px solid #C7D2FE; padding: 0.85rem 0.95rem; }
+        .cdo-ai-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .cdo-ai-value { font-size: 1.3rem; font-weight: 700; color: #3730A3; }
+        .cdo-ai-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .cdo-ai-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="cdo-ai-pulse">
+            <div class="cdo-ai-header">
+                <div class="cdo-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="cdo-ai-tag">AI LIVE</div>
+            </div>
+            <div class="cdo-ai-grid">
+                <div class="cdo-ai-card">
+                    <div class="cdo-ai-label">Model Accuracy</div>
+                    <div class="cdo-ai-value">92.4%</div>
+                    <div class="cdo-ai-sub">+0.6% vs last week</div>
+                </div>
+                <div class="cdo-ai-card">
+                    <div class="cdo-ai-label">Feature Freshness</div>
+                    <div class="cdo-ai-value">98.1%</div>
+                    <div class="cdo-ai-sub">Streaming feeds healthy</div>
+                </div>
+                <div class="cdo-ai-card">
+                    <div class="cdo-ai-label">Decision Velocity</div>
+                    <div class="cdo-ai-value">84 ms</div>
+                    <div class="cdo-ai-sub">Target &lt; 100 ms</div>
+                </div>
+                <div class="cdo-ai-card">
+                    <div class="cdo-ai-label">Drift Alerts</div>
+                    <div class="cdo-ai-value">3</div>
+                    <div class="cdo-ai-sub">2 resolved today</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Summary synthesized from model performance, drift, and feature health telemetry.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - Churn and upsell models are stable with **92%+ accuracy** across core segments.
+            - Drift signals are concentrated in **prepaid cohorts** and **regional devices**.
+            - Real-time scoring latency is **84 ms**, within the sub-100 ms target.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Churn risk** elevated in top 3 urban clusters
+                - **Upsell lift** +12% in 5G-eligible segments
+                - **CLV growth** strongest in bundled households
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Feature drift** in device age and ARPU
+                - **Cold-start** risk for new prepaid activations
+                - **Data lag** in partner app events
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **NBA adoption** up to 68% of agents
+                - **Campaign ROI** +1.8x vs baseline
+                - **Real-time scoring** expanding to web
+                """)
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Reduce drift** with weekly retraining on prepaid cohorts
+                - Prioritize top 20 features by SHAP impact
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Scale NBA** across call center + digital channels
+                - Target 80% adoption by end of quarter
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Boost CLV** via bundle propensity campaigns
+                - Focus on households with 2+ lines
+                """)
+        
         st.markdown('<div class="section-header">CDO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -14267,11 +16098,11 @@ def render_cdo_data_science():
         st.markdown('<div class="section-header">Ask Snowflake Intelligence</div>', unsafe_allow_html=True)
         
         questions = [
-            "How many customers are at high risk of churning?",
-            "Show me the churn risk distribution by customer segment.",
-            "What's the predicted revenue at risk from high-churn customers?",
-            "Which customers have the highest upsell propensity?",
-            "Compare churn risk for 5G vs non-5G customers."
+            "Show churn risk distribution by segment and device type.",
+            "Which features are driving the top 10% churn predictions?",
+            "What is the uplift from NBA recommendations by channel?",
+            "List customers with highest upsell propensity in the last 7 days.",
+            "Compare model accuracy for prepaid vs postpaid cohorts."
         ]
         
         sf_intel_url = "https://ai.snowflake.com/sfseeurope/pjose_aws3"
@@ -14344,7 +16175,7 @@ def render_cso_sustainability():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🌿 Operations & Impact", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -15123,7 +16954,296 @@ def render_cso_sustainability():
                 """, unsafe_allow_html=True)
         
 
+    with tab_ops:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['ENERGY', 'CARBON', 'ESG']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+        
+        st.markdown("""
+        <style>
+        @keyframes cso-ops-sweep { 0% { transform: translateX(-120%); opacity: 0; } 25% { opacity: 0.6; } 100% { transform: translateX(120%); opacity: 0; } }
+        @keyframes cso-ops-glow { 0%, 100% { box-shadow: 0 0 0 rgba(16,185,129,0.25); } 50% { box-shadow: 0 0 16px rgba(16,185,129,0.45); } }
+        .cso-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+            color: white;
+            margin-bottom: 1.5rem;
+            animation: cso-ops-glow 2.8s ease-in-out infinite;
+        }
+        .cso-ops-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: cso-ops-sweep 3.4s ease-in-out infinite;
+        }
+        .cso-ops-title { font-weight: 700; font-size: 1rem; position: relative; z-index: 1; }
+        .cso-ops-sub { font-size: 0.85rem; opacity: 0.85; position: relative; z-index: 1; }
+        .cso-ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.9rem; position: relative; z-index: 1; }
+        .cso-ops-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 0.6rem 0.75rem; }
+        .cso-ops-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); }
+        .cso-ops-value { font-size: 1.2rem; font-weight: 700; color: #FFFFFF; margin-top: 0.2rem; }
+        .cso-ops-delta { font-size: 0.7rem; color: rgba(255,255,255,0.85); margin-top: 0.15rem; }
+        @media (max-width: 900px) { .cso-ops-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="cso-ops-pulse">
+            <div class="cso-ops-title">🌿 Operations & Impact Pulse</div>
+            <div class="cso-ops-sub">Energy, emissions, and ESG compliance signals across the footprint.</div>
+            <div class="cso-ops-grid">
+                <div class="cso-ops-card">
+                    <div class="cso-ops-label">Renewables</div>
+                    <div class="cso-ops-value">65%</div>
+                    <div class="cso-ops-delta">↑ +12% YoY</div>
+                </div>
+                <div class="cso-ops-card">
+                    <div class="cso-ops-label">Emissions</div>
+                    <div class="cso-ops-value">12.4K tCO₂e</div>
+                    <div class="cso-ops-delta">↓ -15% YoY</div>
+                </div>
+                <div class="cso-ops-card">
+                    <div class="cso-ops-label">PUE</div>
+                    <div class="cso-ops-value">1.42</div>
+                    <div class="cso-ops-delta">Target 1.30</div>
+                </div>
+                <div class="cso-ops-card">
+                    <div class="cso-ops-label">Supplier ESG</div>
+                    <div class="cso-ops-value">84%</div>
+                    <div class="cso-ops-delta">Tier 2 focus</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Energy & Emissions Operations</div>', unsafe_allow_html=True)
+        ops_left, ops_right = st.columns(2)
+        
+        with ops_left:
+            st.markdown("**Energy Consumption by Site Type**")
+            with st.container(border=True):
+                energy_df = pd.DataFrame({
+                    'Site Type': ['Macro Sites', 'Small Cells', 'Data Centers', 'Offices'],
+                    'MWh': [18400, 6200, 9800, 2100]
+                })
+                energy_chart = alt.Chart(energy_df).mark_bar(color='#10B981', cornerRadiusEnd=6).encode(
+                    x=alt.X('MWh:Q', title='MWh (Monthly)'),
+                    y=alt.Y('Site Type:N', sort='-x', title=None),
+                    tooltip=['Site Type:N', 'MWh:Q']
+                ).properties(height=220)
+                st.altair_chart(energy_chart, use_container_width=True)
+                st.caption("Macro sites account for 52% of total energy load.")
+        
+        with ops_right:
+            st.markdown("**Emissions Trend (12 Months)**")
+            with st.container(border=True):
+                emissions_df = pd.DataFrame({
+                    'Month': ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+                    'tCO2e': [1200, 1180, 1165, 1152, 1128, 1105, 1092, 1080, 1068, 1050, 1036, 1022]
+                })
+                emissions_line = alt.Chart(emissions_df).mark_line(color='#059669', strokeWidth=2).encode(
+                    x=alt.X('Month:N', title=None),
+                    y=alt.Y('tCO2e:Q', title='tCO₂e')
+                )
+                emissions_area = alt.Chart(emissions_df).mark_area(color='rgba(16,185,129,0.2)').encode(
+                    x='Month:N',
+                    y='tCO2e:Q'
+                )
+                st.altair_chart((emissions_area + emissions_line).properties(height=220), use_container_width=True)
+                st.caption("Emissions down 15% YoY with renewable ramp-up.")
+        
+        st.markdown('<div class="section-header">Renewables & Water Stewardship</div>', unsafe_allow_html=True)
+        mix_left, mix_right = st.columns(2)
+        
+        with mix_left:
+            st.markdown("**Renewable Mix**")
+            with st.container(border=True):
+                mix_df = pd.DataFrame({
+                    'Source': ['Solar', 'Wind', 'Hydro', 'Grid'],
+                    'Share': [28, 22, 15, 35]
+                })
+                donut = alt.Chart(mix_df).mark_arc(innerRadius=50, outerRadius=90).encode(
+                    theta=alt.Theta('Share:Q'),
+                    color=alt.Color('Source:N', scale=alt.Scale(range=['#10B981', '#22C55E', '#34D399', '#9CA3AF']), legend=None),
+                    tooltip=['Source:N', 'Share:Q']
+                ).properties(height=220)
+                st.altair_chart(donut, use_container_width=True)
+                st.caption("Renewables now represent 65% of total energy.")
+        
+        with mix_right:
+            st.markdown("**Water Usage by Region**")
+            with st.container(border=True):
+                water_df = pd.DataFrame({
+                    'Region': ['London', 'Midlands', 'North', 'Scotland', 'Wales'],
+                    'MLiters': [5.2, 3.8, 3.1, 2.6, 2.2]
+                })
+                water_chart = alt.Chart(water_df).mark_bar(color='#0EA5E9', cornerRadiusEnd=6).encode(
+                    x=alt.X('MLiters:Q', title='ML (Quarterly)'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    tooltip=['Region:N', 'MLiters:Q']
+                ).properties(height=220)
+                st.altair_chart(water_chart, use_container_width=True)
+                st.caption("Water intensity improves as cooling upgrades roll out.")
+        
+        st.markdown('<div class="section-header">Compliance & Supplier ESG</div>', unsafe_allow_html=True)
+        comp_left, comp_right = st.columns(2)
+        
+        with comp_left:
+            st.markdown("**Regulatory Reporting Readiness**")
+            with st.container(border=True):
+                st.markdown("""
+                <div style="font-size: 0.85rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;"><span>Scope 1+2 reporting</span><span style="font-weight: 600;">96%</span></div>
+                    <div style="background: #E5E7EB; border-radius: 6px; height: 10px; margin-bottom: 0.6rem;">
+                        <div style="background: #10B981; width: 96%; height: 100%; border-radius: 6px;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;"><span>Scope 3 coverage</span><span style="font-weight: 600;">82%</span></div>
+                    <div style="background: #E5E7EB; border-radius: 6px; height: 10px; margin-bottom: 0.6rem;">
+                        <div style="background: #F59E0B; width: 82%; height: 100%; border-radius: 6px;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;"><span>EU CSRD alignment</span><span style="font-weight: 600;">88%</span></div>
+                    <div style="background: #E5E7EB; border-radius: 6px; height: 10px;">
+                        <div style="background: #3B82F6; width: 88%; height: 100%; border-radius: 6px;"></div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+        
+        with comp_right:
+            st.markdown("**Supplier ESG Compliance**")
+            with st.container(border=True):
+                supplier_df = pd.DataFrame({
+                    'Tier': ['Tier 1', 'Tier 2', 'Tier 3'],
+                    'Compliance': [92, 84, 76]
+                }).set_index('Tier')
+                st.bar_chart(supplier_df, height=220, color="#8B5CF6")
+                st.caption("Tier 2 remediation plan scheduled for Q2.")
+
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .cso-ai-pulse {
+            background: linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%);
+            border-radius: 16px;
+            border: 1px solid #A5F3FC;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cso-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14,116,144,0.18), transparent);
+            animation: cso-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes cso-ai-sweep { 0% { left: -120%; } 100% { left: 220%; } }
+        .cso-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .cso-ai-title { font-weight: 700; color: #0E7490; font-size: 1.05rem; }
+        .cso-ai-tag { background: #0284C7; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .cso-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; position: relative; z-index: 1; }
+        .cso-ai-card { background: white; border-radius: 12px; border: 1px solid #A5F3FC; padding: 0.85rem 0.95rem; }
+        .cso-ai-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .cso-ai-value { font-size: 1.3rem; font-weight: 700; color: #0E7490; }
+        .cso-ai-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .cso-ai-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="cso-ai-pulse">
+            <div class="cso-ai-header">
+                <div class="cso-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="cso-ai-tag">AI LIVE</div>
+            </div>
+            <div class="cso-ai-grid">
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">Renewables</div>
+                    <div class="cso-ai-value">65%</div>
+                    <div class="cso-ai-sub">Target 70%</div>
+                </div>
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">Carbon Reduction</div>
+                    <div class="cso-ai-value">-42%</div>
+                    <div class="cso-ai-sub">vs 2019 baseline</div>
+                </div>
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">PUE Average</div>
+                    <div class="cso-ai-value">1.42</div>
+                    <div class="cso-ai-sub">Target 1.30</div>
+                </div>
+                <div class="cso-ai-card">
+                    <div class="cso-ai-label">Supplier ESG</div>
+                    <div class="cso-ai-value">84%</div>
+                    <div class="cso-ai-sub">Tier 2 focus</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Summary synthesized from energy, emissions, and ESG compliance data.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - Renewable energy reached **65%**, on track to hit 70% target.
+            - Emissions are **down 15% YoY** with data center efficiency gains.
+            - Supply chain compliance improved to **84%**, with Tier 2 remediation planned.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Macro sites** drive 52% of energy load
+                - **Wind + solar** deliver 50% of renewables
+                - **Water intensity** down in London and North
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Network features** closest to SLA thresholds
+                - **Tier 2 suppliers** below 85% compliance
+                - **PUE** above target in Manchester DC
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Solar expansion** adds +5% renewables
+                - **Fleet EV** rollout to 50% by 2025
+                - **Energy efficiency** saves £180K/year
+                """)
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Accelerate renewables** via PPAs in top 3 regions
+                - Prioritize sites with >1.5 PUE
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Reduce water intensity** with closed-loop cooling
+                - Target 10% reduction by Q4
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Improve supplier ESG** with quarterly audits
+                - Enforce Tier 2 remediation milestones
+                """)
+        
         st.markdown('<div class="section-header">CSO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -15260,7 +17380,7 @@ def render_vp_customer_service():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧭 Service Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -15915,7 +18035,259 @@ def render_vp_customer_service():
                         st.metric("Roaming", "2.4 GB", "EU included")
         
 
+    with tab_ops:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['SUPPORT', 'WORKFORCE', 'QUALITY']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+        
+        st.markdown("""
+        <style>
+        @keyframes cs-ops-sweep { 0% { transform: translateX(-120%); opacity: 0; } 25% { opacity: 0.6; } 100% { transform: translateX(120%); opacity: 0; } }
+        @keyframes cs-ops-glow { 0%, 100% { box-shadow: 0 0 0 rgba(14,116,144,0.25); } 50% { box-shadow: 0 0 16px rgba(14,116,144,0.45); } }
+        .cs-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+            color: white;
+            margin-bottom: 1.5rem;
+            animation: cs-ops-glow 2.8s ease-in-out infinite;
+        }
+        .cs-ops-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: cs-ops-sweep 3.4s ease-in-out infinite;
+        }
+        .cs-ops-title { font-weight: 700; font-size: 1rem; position: relative; z-index: 1; }
+        .cs-ops-sub { font-size: 0.85rem; opacity: 0.85; position: relative; z-index: 1; }
+        .cs-ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.9rem; position: relative; z-index: 1; }
+        .cs-ops-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 0.6rem 0.75rem; }
+        .cs-ops-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); }
+        .cs-ops-value { font-size: 1.2rem; font-weight: 700; color: #FFFFFF; margin-top: 0.2rem; }
+        .cs-ops-delta { font-size: 0.7rem; color: rgba(255,255,255,0.85); margin-top: 0.15rem; }
+        @media (max-width: 900px) { .cs-ops-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="cs-ops-pulse">
+            <div class="cs-ops-title">🎧 Service Operations Pulse</div>
+            <div class="cs-ops-sub">Queue health, backlog, and workforce performance signals.</div>
+            <div class="cs-ops-grid">
+                <div class="cs-ops-card">
+                    <div class="cs-ops-label">SLA Met</div>
+                    <div class="cs-ops-value">94%</div>
+                    <div class="cs-ops-delta">↑ +2% WoW</div>
+                </div>
+                <div class="cs-ops-card">
+                    <div class="cs-ops-label">Backlog</div>
+                    <div class="cs-ops-value">1,842</div>
+                    <div class="cs-ops-delta">↓ -6% WoW</div>
+                </div>
+                <div class="cs-ops-card">
+                    <div class="cs-ops-label">AHT</div>
+                    <div class="cs-ops-value">6:42</div>
+                    <div class="cs-ops-delta">↓ -0:18</div>
+                </div>
+                <div class="cs-ops-card">
+                    <div class="cs-ops-label">CSAT</div>
+                    <div class="cs-ops-value">4.2</div>
+                    <div class="cs-ops-delta">↑ +0.3</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Backlog & Channel Load</div>', unsafe_allow_html=True)
+        ops_left, ops_right = st.columns(2)
+        
+        with ops_left:
+            st.markdown("**Ticket Aging Breakdown**")
+            with st.container(border=True):
+                aging_df = pd.DataFrame({
+                    'Age Bucket': ['0-24h', '1-3d', '4-7d', '8-14d', '15+d'],
+                    'Tickets': [620, 540, 360, 210, 112]
+                })
+                aging_chart = alt.Chart(aging_df).mark_bar(color='#0EA5E9', cornerRadiusEnd=6).encode(
+                    x=alt.X('Tickets:Q', title='Tickets'),
+                    y=alt.Y('Age Bucket:N', sort='-x', title=None),
+                    tooltip=['Age Bucket:N', 'Tickets:Q']
+                ).properties(height=220)
+                st.altair_chart(aging_chart, use_container_width=True)
+                st.caption("32% of backlog is within SLA (0–3 days).")
+        
+        with ops_right:
+            st.markdown("**Channel Mix**")
+            with st.container(border=True):
+                channel_df = pd.DataFrame({
+                    'Channel': ['App', 'Phone', 'Chat', 'Store'],
+                    'Share': [45, 28, 15, 12]
+                })
+                channel_chart = alt.Chart(channel_df).mark_arc(innerRadius=50, outerRadius=90).encode(
+                    theta=alt.Theta('Share:Q'),
+                    color=alt.Color('Channel:N', scale=alt.Scale(range=['#0EA5E9', '#10B981', '#8B5CF6', '#F59E0B']), legend=None),
+                    tooltip=['Channel:N', 'Share:Q']
+                ).properties(height=220)
+                st.altair_chart(channel_chart, use_container_width=True)
+                st.caption("Digital channels represent 60% of total volume.")
+        
+        st.markdown('<div class="section-header">Workforce & Quality</div>', unsafe_allow_html=True)
+        wf_left, wf_right = st.columns(2)
+        
+        with wf_left:
+            st.markdown("**Agent Occupancy Trend (8 Weeks)**")
+            with st.container(border=True):
+                occ_df = pd.DataFrame({
+                    'Week': [f'W{i}' for i in range(1, 9)],
+                    'Occupancy': [76, 78, 79, 81, 80, 82, 83, 81]
+                })
+                occ_chart = alt.Chart(occ_df).mark_line(color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Week:N', title=None),
+                    y=alt.Y('Occupancy:Q', title='Occupancy %', scale=alt.Scale(domain=[70, 90]))
+                )
+                st.altair_chart(occ_chart.properties(height=200), use_container_width=True)
+                st.caption("Occupancy stays within 78–83% target band.")
+        
+        with wf_right:
+            st.markdown("**Repeat Contact Drivers**")
+            with st.container(border=True):
+                repeat_df = pd.DataFrame({
+                    'Reason': ['Billing', 'Network', 'Plan Confusion', 'Device', 'Other'],
+                    'Share': [34, 28, 22, 9, 7]
+                })
+                repeat_chart = alt.Chart(repeat_df).mark_bar(color='#F59E0B', cornerRadiusEnd=6).encode(
+                    x=alt.X('Share:Q', title='Share (%)'),
+                    y=alt.Y('Reason:N', sort='-x', title=None),
+                    tooltip=['Reason:N', 'Share:Q']
+                ).properties(height=200)
+                st.altair_chart(repeat_chart, use_container_width=True)
+                st.caption("Billing and network issues drive 62% of repeat contacts.")
+
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .cs-ai-pulse {
+            background: linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%);
+            border-radius: 16px;
+            border: 1px solid #A5F3FC;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .cs-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14,116,144,0.18), transparent);
+            animation: cs-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes cs-ai-sweep { 0% { left: -120%; } 100% { left: 220%; } }
+        .cs-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .cs-ai-title { font-weight: 700; color: #0E7490; font-size: 1.05rem; }
+        .cs-ai-tag { background: #0284C7; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .cs-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; position: relative; z-index: 1; }
+        .cs-ai-card { background: white; border-radius: 12px; border: 1px solid #A5F3FC; padding: 0.85rem 0.95rem; }
+        .cs-ai-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .cs-ai-value { font-size: 1.3rem; font-weight: 700; color: #0E7490; }
+        .cs-ai-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .cs-ai-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="cs-ai-pulse">
+            <div class="cs-ai-header">
+                <div class="cs-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="cs-ai-tag">AI LIVE</div>
+            </div>
+            <div class="cs-ai-grid">
+                <div class="cs-ai-card">
+                    <div class="cs-ai-label">CSAT</div>
+                    <div class="cs-ai-value">4.2</div>
+                    <div class="cs-ai-sub">Target 4.5</div>
+                </div>
+                <div class="cs-ai-card">
+                    <div class="cs-ai-label">FCR</div>
+                    <div class="cs-ai-value">78%</div>
+                    <div class="cs-ai-sub">Target 85%</div>
+                </div>
+                <div class="cs-ai-card">
+                    <div class="cs-ai-label">Deflection</div>
+                    <div class="cs-ai-value">18%</div>
+                    <div class="cs-ai-sub">AI chatbot pilot</div>
+                </div>
+                <div class="cs-ai-card">
+                    <div class="cs-ai-label">Complaints</div>
+                    <div class="cs-ai-value">284</div>
+                    <div class="cs-ai-sub">↑ +12% MoM</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Summary synthesized from contact center, ticket, and CSAT data.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - CSAT holds at **4.2**, with technical support queues driving variance.
+            - FCR is **78%**, improving as knowledge base coverage expands.
+            - Backlog is trending down **6% WoW** with staffing stabilization.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Digital volume** up 12% YoY
+                - **Repeat contacts** driven by billing and network
+                - **Top agents** exceed 4.7 CSAT
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Complaints MTD** +12% MoM
+                - **AHT** above target in tech queue
+                - **Pending tickets** >150
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **AI chatbot** deflection trending 18%
+                - **FCR** +3% MoM with KB refresh
+                - **Wait time** down 30 seconds
+                """)
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Raise CSAT** by prioritizing tech support coaching
+                - Add 25 agents to peak shifts
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Lift FCR** via knowledge base coverage
+                - Target top 5 ticket categories
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Scale chatbot** to app + WhatsApp
+                - Aim for 30% deflection by Q2
+                """)
+        
         st.markdown('<div class="section-header">VP Customer Service Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -15998,15 +18370,27 @@ def render_vp_network_operations():
     import pandas as pd
     import altair as alt
     
+    def _spark_points(values, width=300, height=90, padding=8):
+        min_v = min(values)
+        max_v = max(values)
+        span = max(max_v - min_v, 0.0001)
+        step = (width - 2 * padding) / max(len(values) - 1, 1)
+        points = []
+        for i, v in enumerate(values):
+            x = padding + i * step
+            y = padding + (max_v - v) / span * (height - 2 * padding)
+            points.append(f"{x:.1f},{y:.1f}")
+        return " ".join(points)
+    
     st.markdown("""
     <div class="main-header">
         <h1>VP Network Operations Dashboard</h1>
-        <p>Network Availability, Alarm Management & SLA Delivery</p>
+        <p>Network Availability, RF Optimization, Alarm Management & SLA Delivery</p>
     </div>
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_rf, tab_strategy = st.tabs(["📊 Overview & Analysis", "📶 RF Optimization", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -16130,7 +18514,12 @@ def render_vp_network_operations():
                     color='#29B5E8', opacity=0.7
                 ).encode(
                     x=alt.X('Day:O', title='Day', axis=alt.Axis(labelAngle=0, values=[1, 5, 10, 15, 20, 25, 30])),
-                    y=alt.Y('Availability:Q', scale=alt.Scale(domain=[99.0, 100]), title='%'),
+                    y=alt.Y(
+                        'Availability:Q',
+                        scale=alt.Scale(domain=[99.0, 100], zero=False),
+                        title='%',
+                        axis=alt.Axis(format='.2f')
+                    ),
                     tooltip=['Day:O', alt.Tooltip('Availability:Q', format='.2f', title='Availability %')]
                 )
                 
@@ -16139,7 +18528,7 @@ def render_vp_network_operations():
                     color='#0891B2', strokeWidth=2
                 ).encode(
                     x=alt.X('Day:O'),
-                    y=alt.Y('Availability:Q', scale=alt.Scale(domain=[99.0, 100]))
+                    y=alt.Y('Availability:Q', scale=alt.Scale(domain=[99.0, 100], zero=False))
                 )
                 
                 # SLA target line at 99.5%
@@ -16182,7 +18571,7 @@ def render_vp_network_operations():
                 
                 st.altair_chart((actual_line + forecast_line + threshold_rule).properties(height=160), use_container_width=True)
                 st.markdown('<div style="text-align: center; font-size: 0.75rem;"><span style="color: #29B5E8;">—</span> Actual <span style="color: #8B5CF6;">- -</span> Forecast <span style="color: #EF4444;">---</span> 80% Threshold</div>', unsafe_allow_html=True)
-        
+
         col_left, col_right = st.columns([1.3, 1])
         
         with col_left:
@@ -16356,7 +18745,361 @@ def render_vp_network_operations():
                 """, unsafe_allow_html=True)
         
 
+    with tab_rf:
+        views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['RAN', 'NETWORK_OPS']])
+        st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+
+        st.markdown("""
+        <style>
+        @keyframes rf-ops-sweep { 0% { transform: translateX(-120%); opacity: 0; } 25% { opacity: 0.6; } 100% { transform: translateX(120%); opacity: 0; } }
+        @keyframes rf-ops-glow { 0%, 100% { box-shadow: 0 0 0 rgba(14,165,233,0.25); } 50% { box-shadow: 0 0 16px rgba(14,165,233,0.45); } }
+        .rf-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+            color: white;
+            margin-bottom: 1.5rem;
+            animation: rf-ops-glow 2.8s ease-in-out infinite;
+        }
+        .rf-ops-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: rf-ops-sweep 3.4s ease-in-out infinite;
+        }
+        .rf-ops-title { font-weight: 700; font-size: 1rem; position: relative; z-index: 1; }
+        .rf-ops-sub { font-size: 0.85rem; opacity: 0.85; position: relative; z-index: 1; }
+        .rf-ops-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-top: 0.9rem; position: relative; z-index: 1; }
+        .rf-ops-card { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 10px; padding: 0.6rem 0.75rem; }
+        .rf-ops-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.7); }
+        .rf-ops-value { font-size: 1.2rem; font-weight: 700; color: #FFFFFF; margin-top: 0.2rem; }
+        .rf-ops-delta { font-size: 0.7rem; color: rgba(255,255,255,0.85); margin-top: 0.15rem; }
+        @media (max-width: 900px) { .rf-ops-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="rf-ops-pulse">
+            <div class="rf-ops-title">📶 RF Optimization Pulse</div>
+            <div class="rf-ops-sub">Signal quality, drops, and handover performance hotspots.</div>
+            <div class="rf-ops-grid">
+                <div class="rf-ops-card">
+                    <div class="rf-ops-label">RSRP</div>
+                    <div class="rf-ops-value">-97 dBm</div>
+                    <div class="rf-ops-delta">Stable</div>
+                </div>
+                <div class="rf-ops-card">
+                    <div class="rf-ops-label">RSRQ</div>
+                    <div class="rf-ops-value">-9 dB</div>
+                    <div class="rf-ops-delta">Within target</div>
+                </div>
+                <div class="rf-ops-card">
+                    <div class="rf-ops-label">SINR</div>
+                    <div class="rf-ops-value">18 dB</div>
+                    <div class="rf-ops-delta">Monitor</div>
+                </div>
+                <div class="rf-ops-card">
+                    <div class="rf-ops-label">Call Drops</div>
+                    <div class="rf-ops-value">0.7%</div>
+                    <div class="rf-ops-delta">↓ -0.2% MoM</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">RF Optimization KPIs</div>', unsafe_allow_html=True)
+        with st.container(border=True):
+            st.markdown("""
+            <div class="kpi-grid">
+                <div class="kpi-card" style="--accent: #0EA5E9;">
+                    <div class="kpi-icon">📶</div>
+                    <div class="kpi-label">RSRP (Signal)</div>
+                    <div class="kpi-value">-97 dBm</div>
+                    <div class="kpi-delta neutral">Stable vs baseline</div>
+                </div>
+                <div class="kpi-card" style="--accent: #22C55E;">
+                    <div class="kpi-icon">🛰️</div>
+                    <div class="kpi-label">RSRQ (Quality)</div>
+                    <div class="kpi-value">-9 dB</div>
+                    <div class="kpi-delta neutral">Within target</div>
+                </div>
+                <div class="kpi-card" style="--accent: #8B5CF6;">
+                    <div class="kpi-icon">📡</div>
+                    <div class="kpi-label">SINR</div>
+                    <div class="kpi-value">18 dB</div>
+                    <div class="kpi-delta neutral">Monitor hotspots</div>
+                </div>
+                <div class="kpi-card" style="--accent: #10B981;">
+                    <div class="kpi-icon">🔁</div>
+                    <div class="kpi-label">Handover Success</div>
+                    <div class="kpi-value">98.4%</div>
+                    <div class="kpi-delta positive">↑ +0.3% MoM</div>
+                </div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card" style="--accent: #EF4444;">
+                    <div class="kpi-icon">📉</div>
+                    <div class="kpi-label">Call Drop Rate</div>
+                    <div class="kpi-value">0.7%</div>
+                    <div class="kpi-delta positive">↓ -0.2% MoM</div>
+                </div>
+                <div class="kpi-card" style="--accent: #F59E0B;">
+                    <div class="kpi-icon">📊</div>
+                    <div class="kpi-label">PRB Utilization</div>
+                    <div class="kpi-value">72%</div>
+                    <div class="kpi-delta neutral">Near threshold</div>
+                </div>
+                <div class="kpi-card" style="--accent: #6366F1;">
+                    <div class="kpi-icon">✅</div>
+                    <div class="kpi-label">RRC Setup</div>
+                    <div class="kpi-value">99.1%</div>
+                    <div class="kpi-delta positive">↑ +0.4% MoM</div>
+                </div>
+                <div class="kpi-card" style="--accent: #14B8A6;">
+                    <div class="kpi-icon">🧭</div>
+                    <div class="kpi-label">E-RAB Setup</div>
+                    <div class="kpi-value">98.7%</div>
+                    <div class="kpi-delta neutral">Within SLA</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 0.5rem; font-size: 0.8rem; color: #6B7280;">
+                Optimization focus: improve SINR in Leeds and Manchester cells with PRB &gt;80%.
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <style>
+        .rf-sparkline { width: 100%; height: 110px; }
+        .rf-sparkline svg { width: 100%; height: 110px; }
+        .rf-line { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
+                   stroke-dasharray: 420; stroke-dashoffset: 420; animation: rf-draw 3.2s ease-in-out infinite; }
+        .rf-line.b { animation-delay: 0.2s; }
+        .rf-line.c { animation-delay: 0.4s; }
+        @keyframes rf-draw { 0% { stroke-dashoffset: 420; opacity: 0.1; } 35% { opacity: 1; }
+                             60% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0.9; } }
+        .rf-legend { font-size: 0.7rem; color: #6B7280; text-align: center; margin-top: 0.2rem; }
+        </style>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">RF Optimization Analytics (2026)</div>', unsafe_allow_html=True)
+        rf_cols = st.columns([1.4, 1.2, 1])
+
+        rsrp_vals = [-100, -98, -101, -97, -99, -96, -98]
+        rsrq_vals = [-11.2, -10.6, -10.9, -10.1, -10.4, -9.8, -10.2]
+        sinr_vals = [15.4, 16.2, 14.8, 17.1, 16.6, 17.8, 16.9]
+        rsrp_points = _spark_points(rsrp_vals)
+        rsrq_points = _spark_points(rsrq_vals)
+        sinr_points = _spark_points(sinr_vals)
+
+        with rf_cols[0]:
+            st.markdown('<div class="section-header">Signal Quality (Last 7 Days)</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown(f"""
+                <div class="rf-sparkline">
+                    <svg viewBox="0 0 300 90" preserveAspectRatio="none">
+                        <polyline class="rf-line a" stroke="#0EA5E9" points="{rsrp_points}"></polyline>
+                        <polyline class="rf-line b" stroke="#22C55E" points="{rsrq_points}"></polyline>
+                        <polyline class="rf-line c" stroke="#8B5CF6" points="{sinr_points}"></polyline>
+                    </svg>
+                </div>
+                <div class="rf-legend">
+                    RSRP (blue) • RSRQ (green) • SINR (purple)
+                </div>
+                """, unsafe_allow_html=True)
+
+        handover_vals = [98.1, 98.3, 98.0, 98.4, 98.6, 98.5, 98.7]
+        calldrop_vals = [0.9, 0.8, 0.95, 0.75, 0.7, 0.72, 0.68]
+        handover_points = _spark_points(handover_vals)
+        calldrop_points = _spark_points(calldrop_vals)
+
+        with rf_cols[1]:
+            st.markdown('<div class="section-header">Handover vs Call Drop</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown(f"""
+                <div class="rf-sparkline">
+                    <svg viewBox="0 0 300 90" preserveAspectRatio="none">
+                        <polyline class="rf-line a" stroke="#10B981" points="{handover_points}"></polyline>
+                        <polyline class="rf-line b" stroke="#EF4444" points="{calldrop_points}"></polyline>
+                    </svg>
+                </div>
+                <div class="rf-legend">
+                    Handover Success (green) • Call Drop Rate (red)
+                </div>
+                """, unsafe_allow_html=True)
+
+        with rf_cols[2]:
+            st.markdown('<div class="section-header">Top Call Drop Sites</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                drop_sites = pd.DataFrame({
+                    'Site': ['Leeds Central', 'Manchester Arena', 'Birmingham New St', 'Sheffield City', 'Glasgow West'],
+                    'Call Drop %': [1.4, 1.2, 1.0, 0.9, 0.85]
+                })
+                drop_chart = alt.Chart(drop_sites).mark_bar(color='#EF4444', cornerRadiusEnd=6).encode(
+                    y=alt.Y('Site:N', sort='-x', title=None),
+                    x=alt.X('Call Drop %:Q', title=None),
+                    tooltip=['Site:N', alt.Tooltip('Call Drop %:Q', format='.2f')]
+                ).properties(height=160)
+                st.altair_chart(drop_chart, use_container_width=True)
+
+        rf_row_left, rf_row_right = st.columns([1.2, 1])
+        with rf_row_left:
+            st.markdown('<div class="section-header">Correlation: Call Drop vs RSRP</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                corr_data = pd.DataFrame({
+                    'Site': ['Leeds Central', 'Manchester Arena', 'Birmingham New St', 'Sheffield City', 'Glasgow West', 'London East', 'Liverpool Dock'],
+                    'RSRP': [-106, -103, -101, -100, -98, -96, -97],
+                    'Call Drop %': [1.5, 1.2, 1.0, 0.9, 0.8, 0.7, 0.75]
+                })
+                corr_chart = alt.Chart(corr_data).mark_circle(size=90, color='#EF4444', opacity=0.7).encode(
+                    x=alt.X('RSRP:Q', title='RSRP (dBm)'),
+                    y=alt.Y('Call Drop %:Q', title='Call Drop Rate %'),
+                    tooltip=['Site:N', 'RSRP:Q', alt.Tooltip('Call Drop %:Q', format='.2f')]
+                ).properties(height=200)
+                st.altair_chart(corr_chart, use_container_width=True)
+
+        with rf_row_right:
+            st.markdown('<div class="section-header">SINR & PRB Hotspots</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                hotspot_data = pd.DataFrame({
+                    'Cell': ['Leeds C-12', 'Manchester M-07', 'Birmingham B-03', 'Sheffield S-09', 'Liverpool L-05'],
+                    'SINR (dB)': [8.4, 9.1, 7.8, 8.9, 9.4],
+                    'PRB Util %': [88, 86, 91, 84, 82]
+                })
+                hotspot_chart = alt.Chart(hotspot_data).mark_bar(color='#F59E0B', cornerRadiusEnd=6).encode(
+                    y=alt.Y('Cell:N', sort='-x', title=None),
+                    x=alt.X('PRB Util %:Q', title='PRB Utilization %'),
+                    tooltip=['Cell:N', 'SINR (dB):Q', 'PRB Util %:Q']
+                ).properties(height=200)
+                st.altair_chart(hotspot_chart, use_container_width=True)
+
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .net-ai-pulse {
+            background: linear-gradient(135deg, #ECFEFF 0%, #CFFAFE 100%);
+            border-radius: 16px;
+            border: 1px solid #A5F3FC;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .net-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(14,116,144,0.18), transparent);
+            animation: net-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes net-ai-sweep { 0% { left: -120%; } 100% { left: 220%; } }
+        .net-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .net-ai-title { font-weight: 700; color: #0E7490; font-size: 1.05rem; }
+        .net-ai-tag { background: #0284C7; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .net-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.9rem; position: relative; z-index: 1; }
+        .net-ai-card { background: white; border-radius: 12px; border: 1px solid #A5F3FC; padding: 0.85rem 0.95rem; }
+        .net-ai-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .net-ai-value { font-size: 1.3rem; font-weight: 700; color: #0E7490; }
+        .net-ai-sub { font-size: 0.75rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .net-ai-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="net-ai-pulse">
+            <div class="net-ai-header">
+                <div class="net-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="net-ai-tag">AI LIVE</div>
+            </div>
+            <div class="net-ai-grid">
+                <div class="net-ai-card">
+                    <div class="net-ai-label">Availability</div>
+                    <div class="net-ai-value">99.72%</div>
+                    <div class="net-ai-sub">Target 99.9%</div>
+                </div>
+                <div class="net-ai-card">
+                    <div class="net-ai-label">Latency</div>
+                    <div class="net-ai-value">24 ms</div>
+                    <div class="net-ai-sub">Target &lt; 20 ms</div>
+                </div>
+                <div class="net-ai-card">
+                    <div class="net-ai-label">Call Drops</div>
+                    <div class="net-ai-value">0.7%</div>
+                    <div class="net-ai-sub">↓ -0.2% MoM</div>
+                </div>
+                <div class="net-ai-card">
+                    <div class="net-ai-label">Sites at Risk</div>
+                    <div class="net-ai-value">124</div>
+                    <div class="net-ai-sub">>70% utilization</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Summary synthesized from availability, RF, and alarm telemetry.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - Network availability holds at **99.72%**, with localized alarms in Leeds and Manchester.
+            - RF optimization shows improving SINR in priority cells, but **124 sites** remain above 70% utilization.
+            - MTTR improved to **42 min**, trending toward the 30‑minute target.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **5G** delivers 4.2x faster downloads vs 4G
+                - **SINR** improving in Manchester hotspots
+                - **SLA attainment** at 97.8%
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **124 sites** above 70% utilization
+                - **Call drops** elevated in Leeds Central
+                - **Critical alarms** at 12 sites
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Capacity upgrades** scheduled for top 20 sites
+                - **Handover success** at 98.4%
+                - **RF tuning** coverage expanding weekly
+                """)
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Lift availability** with targeted Leeds upgrades
+                - Automate P1 incident routing
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Reduce MTTR** via AIOps auto-triage
+                - Standardize playbooks across regions
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Expand capacity** on top 20 congested sites
+                - Prioritize PRB >80% cells
+                """)
+        
         st.markdown('<div class="section-header">VP Network Operations Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -16410,6 +19153,7 @@ def render_vp_network_operations():
             "Show me network alarms by severity with MTTR and alarm duration.",
             "How is our network performing by region?",
             "Which network elements have utilization above 60%?",
+            "Show me RF optimization KPIs - RSRP, RSRQ, SINR, handover success, and call drop rate.",
             "Are we meeting our SLAs? Show me breaches and credit liability."
         ]
         
@@ -16477,7 +19221,7 @@ def render_alert_center():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🛠️ Incident Response", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -17129,6 +19873,103 @@ def render_alert_center():
                 st.altair_chart(mttr_bars + target_line, use_container_width=True)
                 st.caption("Black line = SLA Target")
         
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes alert-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(220,38,38,0.15); }
+            50% { box-shadow: 0 0 24px rgba(220,38,38,0.35); }
+        }
+        @keyframes alert-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .alert-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+            border: 1px solid #FCA5A5;
+            animation: alert-ops-glow 3s ease-in-out infinite;
+        }
+        .alert-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: alert-ops-sweep 3s linear infinite;
+        }
+        .alert-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .alert-ops-title { font-weight: 700; color: #991B1B; }
+        .alert-ops-tag {
+            background: rgba(220,38,38,0.15);
+            color: #991B1B;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .alert-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .alert-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(220,38,38,0.2);
+        }
+        .alert-ops-label { font-size: 0.7rem; color: #B91C1C; text-transform: uppercase; letter-spacing: 0.06em; }
+        .alert-ops-value { font-size: 1.35rem; font-weight: 700; color: #7F1D1D; }
+        .alert-ops-delta { font-size: 0.75rem; color: #991B1B; }
+        </style>
+        <div class="alert-ops-pulse">
+            <div class="alert-ops-header">
+                <div class="alert-ops-title">🛠️ Incident Response Pulse</div>
+                <div class="alert-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="alert-ops-grid">
+                <div class="alert-ops-card">
+                    <div class="alert-ops-label">Active Incidents</div>
+                    <div class="alert-ops-value">9</div>
+                    <div class="alert-ops-delta">3 critical • 6 major</div>
+                </div>
+                <div class="alert-ops-card">
+                    <div class="alert-ops-label">Avg MTTR</div>
+                    <div class="alert-ops-value">58 min</div>
+                    <div class="alert-ops-delta">+6 min vs target</div>
+                </div>
+                <div class="alert-ops-card">
+                    <div class="alert-ops-label">SLA Breaches</div>
+                    <div class="alert-ops-value">2</div>
+                    <div class="alert-ops-delta">£48K exposure</div>
+                </div>
+                <div class="alert-ops-card">
+                    <div class="alert-ops-label">Engineers Online</div>
+                    <div class="alert-ops-value">62</div>
+                    <div class="alert-ops-delta">8 field teams active</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
         # Third row - Affected Services and Impact
         st.markdown('<div class="section-header">🎯 Impact Analysis</div>', unsafe_allow_html=True)
         
@@ -17217,10 +20058,121 @@ def render_alert_center():
                 st.markdown("**Team:** External contractor")
                 st.progress(0.25, "Resolution Progress: 25%")
                 st.caption("ETA: 2 hours • Excavation required")
-        
-        # Ask Snowflake Intelligence
 
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-alert-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-alert-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: si-sweep 3s linear infinite;
+        }
+        @keyframes si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-alert-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-alert-title { font-weight: 700; font-size: 1rem; }
+        .sf-alert-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-alert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-alert-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: si-glow 3s ease-in-out infinite; }
+        .sf-alert-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-alert-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-alert-pulse">
+            <div class="sf-alert-header">
+                <div class="sf-alert-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-alert-tag">AI LIVE</div>
+            </div>
+            <div class="sf-alert-grid">
+                <div class="sf-alert-card">
+                    <div class="sf-alert-label">Risk Hotspots</div>
+                    <div class="sf-alert-value">6 regions</div>
+                </div>
+                <div class="sf-alert-card">
+                    <div class="sf-alert-label">Predicted Breaches</div>
+                    <div class="sf-alert-value">3 SLA</div>
+                </div>
+                <div class="sf-alert-card">
+                    <div class="sf-alert-label">Auto-Mitigation</div>
+                    <div class="sf-alert-value">92%</div>
+                </div>
+                <div class="sf-alert-card">
+                    <div class="sf-alert-label">Revenue at Risk</div>
+                    <div class="sf-alert-value">£142K</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** flags three high-risk incidents likely to breach SLA within 60 minutes, driven by correlated power faults and backhaul congestion. Automated mitigations are containing impact in 92% of cases, but two London sites require manual escalation.")
+
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Escalation Pattern**")
+                st.caption("P1 alerts rising in London + Midlands after 18:00; 4 sites share upstream power dependency.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**SLA Drift**")
+                st.caption("MTTR for P2 incidents trending 12% above target; staffing gap in field ops coverage window.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Customer Impact**")
+                st.caption("High-value enterprise accounts in Manchester show 3x incident exposure vs baseline this week.")
+
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Automate Power Failover**")
+                st.caption("Expand smart failover rules across 14 at-risk sites; projected SLA recovery +0.4%.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Targeted Field Dispatch**")
+                st.caption("Pre-stage crews in London/Midlands corridors to cut P1 MTTR by ~18 minutes.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Alert Noise Reduction**")
+                st.caption("Tune alarm thresholds for 9 low-impact KPIs to lower P3 volume by 22%.")
+
+        st.markdown('<div class="section-header">Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
+        pri_col1, pri_col2, pri_col3 = st.columns(3)
+        with pri_col1:
+            with st.container(border=True):
+                st.markdown("**SLA Resilience**")
+                st.caption("Deploy predictive MTTR alerts and auto-remediation playbooks.")
+        with pri_col2:
+            with st.container(border=True):
+                st.markdown("**Critical Site Hardening**")
+                st.caption("Upgrade power redundancy for the top 20 revenue-impacting sites.")
+        with pri_col3:
+            with st.container(border=True):
+                st.markdown("**Customer Impact Lens**")
+                st.caption("Prioritize incident triage using churn risk and revenue weighting.")
+
         st.markdown('<div class="section-header">Ask Snowflake Intelligence</div>', unsafe_allow_html=True)
         
         questions = [
@@ -17265,7 +20217,7 @@ def render_head_of_partners():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🤝 Partner Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -17375,6 +20327,176 @@ def render_head_of_partners():
         </div>
         """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Channel Performance Highlights</div>', unsafe_allow_html=True)
+        
+        perf_col1, perf_col2 = st.columns(2)
+        
+        with perf_col1:
+            st.markdown("**Revenue by Product Line**")
+            with st.container(border=True):
+                product_rev = pd.DataFrame({
+                    'Product': ['Mobile', 'Broadband', 'Business', 'IoT', 'Cloud'],
+                    'Revenue': [1.12, 0.74, 0.46, 0.28, 0.20]
+                })
+                product_bar = alt.Chart(product_rev).mark_bar(cornerRadiusTopRight=8, cornerRadiusBottomRight=8).encode(
+                    x=alt.X('Revenue:Q', title='Revenue (£M)'),
+                    y=alt.Y('Product:N', sort='-x', title=None),
+                    color=alt.Color('Product:N', legend=None, scale=alt.Scale(
+                        domain=['Mobile', 'Broadband', 'Business', 'IoT', 'Cloud'],
+                        range=['#2563EB', '#10B981', '#F59E0B', '#8B5CF6', '#14B8A6']
+                    )),
+                    tooltip=['Product:N', alt.Tooltip('Revenue:Q', format='.2f')]
+                ).properties(height=180)
+                st.altair_chart(product_bar, use_container_width=True)
+        
+        with perf_col2:
+            st.markdown("**Order Mix by Channel**")
+            with st.container(border=True):
+                channel_mix = pd.DataFrame({
+                    'Channel': ['Resellers', 'System Integrators', 'Retail Partners', 'Online Affiliates'],
+                    'Orders': [640, 420, 510, 272]
+                })
+                channel_arc = alt.Chart(channel_mix).mark_arc(innerRadius=45).encode(
+                    theta=alt.Theta('Orders:Q'),
+                    color=alt.Color('Channel:N', scale=alt.Scale(
+                        domain=['Resellers', 'System Integrators', 'Retail Partners', 'Online Affiliates'],
+                        range=['#2563EB', '#F59E0B', '#10B981', '#8B5CF6']
+                    ), legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Channel:N', 'Orders:Q']
+                ).properties(height=200)
+                st.altair_chart(channel_arc, use_container_width=True)
+        
+        growth_col1, growth_col2 = st.columns(2)
+        
+        with growth_col1:
+            st.markdown("**Partner Activation Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                activation_df = pd.DataFrame({
+                    'Month': months,
+                    'Activation': [78, 79, 80, 81, 82, 82]
+                })
+                activation_line = alt.Chart(activation_df).mark_line(point=True, color='#2563EB').encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Activation:Q', title='Activation %', scale=alt.Scale(domain=[70, 90])),
+                    tooltip=['Month:N', 'Activation:Q']
+                ).properties(height=180)
+                st.altair_chart(activation_line, use_container_width=True)
+        
+        with growth_col2:
+            st.markdown("**Partner Tier Mix**")
+            with st.container(border=True):
+                tier_mix = pd.DataFrame({
+                    'Tier': ['Gold', 'Silver', 'Bronze', 'Standard'],
+                    'Partners': [24, 68, 124, 132]
+                })
+                tier_donut = alt.Chart(tier_mix).mark_arc(innerRadius=45).encode(
+                    theta=alt.Theta('Partners:Q'),
+                    color=alt.Color('Tier:N', scale=alt.Scale(
+                        domain=['Gold', 'Silver', 'Bronze', 'Standard'],
+                        range=['#F59E0B', '#9CA3AF', '#CD7F32', '#6366F1']
+                    ), legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Tier:N', 'Partners:Q']
+                ).properties(height=200)
+                st.altair_chart(tier_donut, use_container_width=True)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes partner-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(37,99,235,0.2); }
+            50% { box-shadow: 0 0 24px rgba(37,99,235,0.4); }
+        }
+        @keyframes partner-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .partner-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: partner-ops-glow 3s ease-in-out infinite;
+        }
+        .partner-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: partner-ops-sweep 3s linear infinite;
+        }
+        .partner-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .partner-ops-title { font-weight: 700; color: #1E3A8A; }
+        .partner-ops-tag {
+            background: rgba(37,99,235,0.15);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .partner-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .partner-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(37,99,235,0.2);
+        }
+        .partner-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .partner-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .partner-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="partner-ops-pulse">
+            <div class="partner-ops-header">
+                <div class="partner-ops-title">🤝 Partner Operations Pulse</div>
+                <div class="partner-ops-tag">CHANNEL LIVE</div>
+            </div>
+            <div class="partner-ops-grid">
+                <div class="partner-ops-card">
+                    <div class="partner-ops-label">Active Partners</div>
+                    <div class="partner-ops-value">286</div>
+                    <div class="partner-ops-delta">82% activation rate</div>
+                </div>
+                <div class="partner-ops-card">
+                    <div class="partner-ops-label">Pipeline</div>
+                    <div class="partner-ops-value">22</div>
+                    <div class="partner-ops-delta">14 in application</div>
+                </div>
+                <div class="partner-ops-card">
+                    <div class="partner-ops-label">Commissions</div>
+                    <div class="partner-ops-value">£142K</div>
+                    <div class="partner-ops-delta">Paid MTD</div>
+                </div>
+                <div class="partner-ops-card">
+                    <div class="partner-ops-label">At-Risk</div>
+                    <div class="partner-ops-value">28</div>
+                    <div class="partner-ops-delta">Needs outreach</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
         # New: Partner Revenue Trend and Onboarding Pipeline
         trend_col, pipeline_col = st.columns(2)
         
@@ -17617,11 +20739,107 @@ def render_head_of_partners():
                     <span style="color: #92400E;">⚠️ 28 partners need outreach this month</span>
                 </div>
                 """, unsafe_allow_html=True)
-        
 
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-partner-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-partner-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: partner-si-sweep 3s linear infinite;
+        }
+        @keyframes partner-si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes partner-si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-partner-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-partner-title { font-weight: 700; font-size: 1rem; }
+        .sf-partner-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-partner-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-partner-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: partner-si-glow 3s ease-in-out infinite; }
+        .sf-partner-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-partner-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-partner-pulse">
+            <div class="sf-partner-header">
+                <div class="sf-partner-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-partner-tag">AI LIVE</div>
+            </div>
+            <div class="sf-partner-grid">
+                <div class="sf-partner-card">
+                    <div class="sf-partner-label">Revenue at Risk</div>
+                    <div class="sf-partner-value">£210K</div>
+                </div>
+                <div class="sf-partner-card">
+                    <div class="sf-partner-label">Activation Lift</div>
+                    <div class="sf-partner-value">+6.4%</div>
+                </div>
+                <div class="sf-partner-card">
+                    <div class="sf-partner-label">Top Growth Tier</div>
+                    <div class="sf-partner-value">Gold</div>
+                </div>
+                <div class="sf-partner-card">
+                    <div class="sf-partner-label">Pipeline Velocity</div>
+                    <div class="sf-partner-value">23 days</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** highlights a softening pipeline conversion in Silver-tier partners and a rising commission backlog. Targeted enablement and revised incentive tiers can unlock ~£210K in at-risk revenue and lift activation above 88%.")
+
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Pipeline Bottleneck**")
+                st.caption("Application-to-approval conversion dips 9% vs last quarter; training step is slowest.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Tier Shift**")
+                st.caption("Gold partners drive 52% of incremental revenue; Silver performance flattening.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Churn Risk**")
+                st.caption("28 partners show low activity signals; 6 at immediate churn risk.")
+
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Accelerate Onboarding**")
+                st.caption("Introduce auto-approval for low-risk profiles to cut cycle time by 6 days.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Incentive Rebalance**")
+                st.caption("Shift bonus weight to high-velocity SKUs; projected +£120K quarterly uplift.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**At-Risk Rescue**")
+                st.caption("Run 4-week enablement sprints for 10 partners with highest revenue potential.")
+
         st.markdown('<div class="section-header">Head of Partners Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
-        
         col1, col2, col3 = st.columns(3)
         with col1:
             with st.container(border=True):
@@ -17710,7 +20928,7 @@ def render_vp_billing_revenue():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "💳 Revenue Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -17860,10 +21078,150 @@ def render_vp_billing_revenue():
                 
                 st.altair_chart(aging_bars, use_container_width=True)
         
+        st.markdown('<div class="section-header">Billing Quality Signals</div>', unsafe_allow_html=True)
+        quality_col1, quality_col2 = st.columns(2)
+        
+        with quality_col1:
+            st.markdown("**Invoice Volume vs Collected**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                volume_df = pd.DataFrame({
+                    'Month': months * 2,
+                    'Metric': ['Invoices'] * 6 + ['Collected'] * 6,
+                    'Value': [26.4, 27.1, 28.3, 29.0, 30.2, 31.8,
+                              24.8, 25.6, 26.4, 27.0, 28.5, 29.9]
+                })
+                volume_line = alt.Chart(volume_df).mark_line(point=True).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Value:Q', title='Volume (K)'),
+                    color=alt.Color('Metric:N', scale=alt.Scale(
+                        domain=['Invoices', 'Collected'],
+                        range=['#2563EB', '#10B981']
+                    ), legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Month:N', 'Metric:N', alt.Tooltip('Value:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(volume_line, use_container_width=True)
+        
+        with quality_col2:
+            st.markdown("**Credit Notes by Reason**")
+            with st.container(border=True):
+                credit_df = pd.DataFrame({
+                    'Reason': ['Pricing Error', 'Service Credit', 'Contract Adjustment', 'Usage Dispute', 'Other'],
+                    'Amount': [18.6, 11.4, 7.2, 6.0, 5.0]
+                })
+                credit_bar = alt.Chart(credit_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Amount:Q', title='Amount (£K)'),
+                    y=alt.Y('Reason:N', sort='-x', title=None),
+                    color=alt.Color('Reason:N', legend=None, scale=alt.Scale(
+                        range=['#EF4444', '#F59E0B', '#8B5CF6', '#29B5E8', '#10B981']
+                    )),
+                    tooltip=['Reason:N', alt.Tooltip('Amount:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(credit_bar, use_container_width=True)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes billing-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(16,185,129,0.2); }
+            50% { box-shadow: 0 0 22px rgba(16,185,129,0.4); }
+        }
+        @keyframes billing-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .billing-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #D1FAE5 0%, #BBF7D0 100%);
+            border: 1px solid #86EFAC;
+            animation: billing-ops-glow 3s ease-in-out infinite;
+        }
+        .billing-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: billing-ops-sweep 3s linear infinite;
+        }
+        .billing-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .billing-ops-title { font-weight: 700; color: #065F46; }
+        .billing-ops-tag {
+            background: rgba(16,185,129,0.2);
+            color: #065F46;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .billing-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .billing-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+        .billing-ops-label { font-size: 0.7rem; color: #047857; text-transform: uppercase; letter-spacing: 0.06em; }
+        .billing-ops-value { font-size: 1.35rem; font-weight: 700; color: #065F46; }
+        .billing-ops-delta { font-size: 0.75rem; color: #047857; }
+        </style>
+        <div class="billing-ops-pulse">
+            <div class="billing-ops-header">
+                <div class="billing-ops-title">💳 Revenue Operations Pulse</div>
+                <div class="billing-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="billing-ops-grid">
+                <div class="billing-ops-card">
+                    <div class="billing-ops-label">Collections</div>
+                    <div class="billing-ops-value">94.2%</div>
+                    <div class="billing-ops-delta">+1.8% MoM</div>
+                </div>
+                <div class="billing-ops-card">
+                    <div class="billing-ops-label">Overdue</div>
+                    <div class="billing-ops-value">£312K</div>
+                    <div class="billing-ops-delta">4.8% of billed</div>
+                </div>
+                <div class="billing-ops-card">
+                    <div class="billing-ops-label">Open Disputes</div>
+                    <div class="billing-ops-value">89</div>
+                    <div class="billing-ops-delta">£124K exposure</div>
+                </div>
+                <div class="billing-ops-card">
+                    <div class="billing-ops-label">Leakage Risk</div>
+                    <div class="billing-ops-value">£28.4K</div>
+                    <div class="billing-ops-delta">Unbilled usage</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Revenue Assurance & Disputes</div>', unsafe_allow_html=True)
+        
         col_left, col_right = st.columns([1.3, 1])
         
         with col_left:
-            st.markdown('<div class="section-header">Payment Status Distribution</div>', unsafe_allow_html=True)
+            st.markdown("**Payment Status Distribution**")
             with st.container(border=True):
                 payment_data = pd.DataFrame({
                     'Status': ['Paid', 'Pending', 'Overdue 1-30d', 'Overdue 31-60d', 'Overdue 60d+'],
@@ -17883,7 +21241,7 @@ def render_vp_billing_revenue():
                 st.altair_chart(donut, use_container_width=True)
         
         with col_right:
-            st.markdown('<div class="section-header">Dispute Categories</div>', unsafe_allow_html=True)
+            st.markdown("**Dispute Categories**")
             with st.container(border=True):
                 st.markdown("""
                 <div style="font-size: 0.85rem;">
@@ -17909,8 +21267,140 @@ def render_vp_billing_revenue():
                 </div>
                 """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Collections & Resolution Ops</div>', unsafe_allow_html=True)
+        ops_col1, ops_col2 = st.columns(2)
+        
+        with ops_col1:
+            st.markdown("**Dunning Effectiveness**")
+            with st.container(border=True):
+                dunning_df = pd.DataFrame({
+                    'Stage': ['Reminder 1', 'Reminder 2', 'Final Notice', 'Collections'],
+                    'Recovered': [38, 26, 18, 12]
+                })
+                dunning_bar = alt.Chart(dunning_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Recovered:Q', title='Recovered (£K)'),
+                    y=alt.Y('Stage:N', sort='-x', title=None),
+                    color=alt.Color('Stage:N', legend=None, scale=alt.Scale(
+                        range=['#10B981', '#29B5E8', '#F59E0B', '#EF4444']
+                    )),
+                    tooltip=['Stage:N', alt.Tooltip('Recovered:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(dunning_bar, use_container_width=True)
+        
+        with ops_col2:
+            st.markdown("**Dispute Resolution Time**")
+            with st.container(border=True):
+                weeks = ['Wk1', 'Wk2', 'Wk3', 'Wk4', 'Wk5', 'Wk6']
+                resolution_df = pd.DataFrame({
+                    'Week': weeks,
+                    'Days': [9.6, 9.1, 8.7, 8.4, 8.3, 8.0]
+                })
+                resolution_line = alt.Chart(resolution_df).mark_line(point=True, color='#2563EB').encode(
+                    x=alt.X('Week:N', sort=weeks, title=None),
+                    y=alt.Y('Days:Q', title='Avg Days', scale=alt.Scale(domain=[6, 11])),
+                    tooltip=['Week:N', alt.Tooltip('Days:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(resolution_line, use_container_width=True)
 
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-billing-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-billing-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: billing-si-sweep 3s linear infinite;
+        }
+        @keyframes billing-si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes billing-si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-billing-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-billing-title { font-weight: 700; font-size: 1rem; }
+        .sf-billing-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-billing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-billing-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: billing-si-glow 3s ease-in-out infinite; }
+        .sf-billing-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-billing-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-billing-pulse">
+            <div class="sf-billing-header">
+                <div class="sf-billing-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-billing-tag">AI LIVE</div>
+            </div>
+            <div class="sf-billing-grid">
+                <div class="sf-billing-card">
+                    <div class="sf-billing-label">At-Risk Cash</div>
+                    <div class="sf-billing-value">£312K</div>
+                </div>
+                <div class="sf-billing-card">
+                    <div class="sf-billing-label">Leakage</div>
+                    <div class="sf-billing-value">£28.4K</div>
+                </div>
+                <div class="sf-billing-card">
+                    <div class="sf-billing-label">Dispute Risk</div>
+                    <div class="sf-billing-value">£124K</div>
+                </div>
+                <div class="sf-billing-card">
+                    <div class="sf-billing-label">Collection Lift</div>
+                    <div class="sf-billing-value">+1.8%</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** detects overdue concentration in 1–30 day buckets and rising dispute volume in service quality. Focused recovery campaigns and invoice clarity updates can close the 1.8% collection gap and reduce dispute exposure by ~£30K.")
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Overdue Drift**")
+                st.caption("1–30 day overdue balance climbs 12% vs last month; SME segment driving most uplift.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Dispute Hotspots**")
+                st.caption("Service quality disputes cluster in two regions; average resolution above target by 2.1 days.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Leakage Risk**")
+                st.caption("Unbilled usage highest in roaming and IoT SKUs; daily reconciliation gap persists.")
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Targeted Collections**")
+                st.caption("Deploy segmented dunning for 1–30 day balances; expected +0.6% collection lift.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Invoice Clarity Fixes**")
+                st.caption("Redesign top dispute drivers; projected 25% reduction in incorrect charge claims.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Leakage Automation**")
+                st.caption("Real-time usage reconciliation and alerting to close £28K leakage risk.")
+        
         st.markdown('<div class="section-header">VP Billing & Revenue Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -17958,7 +21448,12 @@ def render_vp_billing_revenue():
                 """)
         
         st.markdown('<div class="section-header">Ask Snowflake Intelligence</div>', unsafe_allow_html=True)
-        questions = ["Show me billing performance - invoices, amounts, and average values.", "What's our payment status distribution?", "Are there revenue leakage risks?", "Show me billing disputes and resolution times."]
+        questions = [
+            "Show me billing performance - invoices, amounts, and average values.",
+            "What's our payment status distribution?",
+            "Are there revenue leakage risks?",
+            "Show me billing disputes and resolution times."
+        ]
         sf_intel_url = "https://ai.snowflake.com/sfseeurope/pjose_aws3"
         cols = st.columns(2)
         for i, q in enumerate(questions):
@@ -17993,7 +21488,7 @@ def render_vp_it_digital():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧩 IT Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -18102,7 +21597,163 @@ def render_vp_it_digital():
         </div>
         """, unsafe_allow_html=True)
         
-        # New: Incident Trend and Change Success Rate
+        st.markdown('<div class="section-header">Service Reliability Signals</div>', unsafe_allow_html=True)
+        rel_col1, rel_col2 = st.columns(2)
+        
+        with rel_col1:
+            st.markdown("**Uptime Trend (12 Months)**")
+            with st.container(border=True):
+                months = ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                uptime_df = pd.DataFrame({
+                    'Month': months,
+                    'Uptime': [99.88, 99.89, 99.90, 99.91, 99.90, 99.91, 99.92, 99.91, 99.92, 99.93, 99.92, 99.92]
+                })
+                uptime_line = alt.Chart(uptime_df).mark_line(point=True, color='#10B981').encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Uptime:Q', title='Uptime %', scale=alt.Scale(domain=[99.7, 100])),
+                    tooltip=['Month:N', alt.Tooltip('Uptime:Q', format='.2f')]
+                ).properties(height=180)
+                st.altair_chart(uptime_line, use_container_width=True)
+        
+        with rel_col2:
+            st.markdown("**SLA Compliance by Application**")
+            with st.container(border=True):
+                sla_df = pd.DataFrame({
+                    'App': ['CRM', 'Billing', 'Customer Portal', 'Network OSS', 'Analytics'],
+                    'SLA': [99.6, 99.3, 99.1, 99.4, 99.8]
+                })
+                sla_chart = sla_df.set_index('App')
+                st.bar_chart(sla_chart, height=180)
+        
+        backlog_col1, backlog_col2 = st.columns(2)
+        
+        with backlog_col1:
+            st.markdown("**Ticket Backlog by Team**")
+            with st.container(border=True):
+                backlog_df = pd.DataFrame({
+                    'Team': ['App Support', 'Network Ops', 'Security', 'Infra', 'Service Desk'],
+                    'Backlog': [42, 36, 18, 24, 56]
+                })
+                backlog_bar = alt.Chart(backlog_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Backlog:Q', title='Open Tickets'),
+                    y=alt.Y('Team:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Team:N', 'Backlog:Q']
+                ).properties(height=180)
+                st.altair_chart(backlog_bar, use_container_width=True)
+        
+        with backlog_col2:
+            st.markdown("**Digital Experience Incidents**")
+            with st.container(border=True):
+                dx_df = pd.DataFrame({
+                    'Week': ['W1', 'W2', 'W3', 'W4', 'W5', 'W6'],
+                    'Incidents': [14, 12, 16, 11, 10, 9]
+                })
+                dx_line = alt.Chart(dx_df).mark_line(point=True, color='#6366F1').encode(
+                    x=alt.X('Week:N', title=None),
+                    y=alt.Y('Incidents:Q', title='Incidents'),
+                    tooltip=['Week:N', 'Incidents:Q']
+                ).properties(height=180)
+                st.altair_chart(dx_line, use_container_width=True)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes it-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes it-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .it-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: it-ops-glow 3s ease-in-out infinite;
+        }
+        .it-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: it-ops-sweep 3s linear infinite;
+        }
+        .it-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .it-ops-title { font-weight: 700; color: #1E3A8A; }
+        .it-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .it-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .it-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .it-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .it-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .it-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="it-ops-pulse">
+            <div class="it-ops-header">
+                <div class="it-ops-title">🧩 IT Operations Pulse</div>
+                <div class="it-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="it-ops-grid">
+                <div class="it-ops-card">
+                    <div class="it-ops-label">P1 MTTR</div>
+                    <div class="it-ops-value">2.8 hrs</div>
+                    <div class="it-ops-delta">-1.2 hrs vs target</div>
+                </div>
+                <div class="it-ops-card">
+                    <div class="it-ops-label">SLA Attainment</div>
+                    <div class="it-ops-value">94.2%</div>
+                    <div class="it-ops-delta">+0.8% QoQ</div>
+                </div>
+                <div class="it-ops-card">
+                    <div class="it-ops-label">Changes</div>
+                    <div class="it-ops-value">24</div>
+                    <div class="it-ops-delta">100% success</div>
+                </div>
+                <div class="it-ops-card">
+                    <div class="it-ops-label">Uptime</div>
+                    <div class="it-ops-value">99.92%</div>
+                    <div class="it-ops-delta">0.03% to goal</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Incident Trend and Change Success Rate
         trend_col, change_col = st.columns(2)
         
         with trend_col:
@@ -18188,8 +21839,143 @@ def render_vp_it_digital():
                 </div>
                 """, unsafe_allow_html=True)
         
-
+        st.markdown('<div class="section-header">Operational Effectiveness</div>', unsafe_allow_html=True)
+        ops_col1, ops_col2 = st.columns(2)
+        
+        with ops_col1:
+            st.markdown("**Change Volume by Type**")
+            with st.container(border=True):
+                change_df = pd.DataFrame({
+                    'Type': ['Standard', 'Normal', 'Emergency'],
+                    'Changes': [18, 4, 2]
+                })
+                change_bar = alt.Chart(change_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Changes:Q', title='Changes'),
+                    y=alt.Y('Type:N', sort='-x', title=None),
+                    color=alt.Color('Type:N', legend=None, scale=alt.Scale(
+                        domain=['Standard', 'Normal', 'Emergency'],
+                        range=['#10B981', '#F59E0B', '#EF4444']
+                    )),
+                    tooltip=['Type:N', 'Changes:Q']
+                ).properties(height=180)
+                st.altair_chart(change_bar, use_container_width=True)
+        
+        with ops_col2:
+            st.markdown("**MTTR by Category**")
+            with st.container(border=True):
+                mttr_df = pd.DataFrame({
+                    'Category': ['Network', 'Application', 'Database', 'Security', 'Hardware'],
+                    'MTTR': [3.2, 2.4, 4.1, 1.8, 6.2]
+                })
+                mttr_bar = alt.Chart(mttr_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('MTTR:Q', title='MTTR (hrs)'),
+                    y=alt.Y('Category:N', sort='-x', title=None),
+                    color=alt.Color('Category:N', legend=None, scale=alt.Scale(
+                        range=['#29B5E8', '#8B5CF6', '#F59E0B', '#10B981', '#EF4444']
+                    )),
+                    tooltip=['Category:N', alt.Tooltip('MTTR:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(mttr_bar, use_container_width=True)
+        
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-it-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-it-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: it-si-sweep 3s linear infinite;
+        }
+        @keyframes it-si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes it-si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-it-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-it-title { font-weight: 700; font-size: 1rem; }
+        .sf-it-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-it-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-it-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: it-si-glow 3s ease-in-out infinite; }
+        .sf-it-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-it-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-it-pulse">
+            <div class="sf-it-header">
+                <div class="sf-it-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-it-tag">AI LIVE</div>
+            </div>
+            <div class="sf-it-grid">
+                <div class="sf-it-card">
+                    <div class="sf-it-label">P1 Risk</div>
+                    <div class="sf-it-value">3 active</div>
+                </div>
+                <div class="sf-it-card">
+                    <div class="sf-it-label">MTTR Delta</div>
+                    <div class="sf-it-value">+0.8 hrs</div>
+                </div>
+                <div class="sf-it-card">
+                    <div class="sf-it-label">Uptime Gap</div>
+                    <div class="sf-it-value">0.03%</div>
+                </div>
+                <div class="sf-it-card">
+                    <div class="sf-it-label">Change Risk</div>
+                    <div class="sf-it-value">Low</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** detects elevated P1 exposure tied to CRM and billing systems, with MTTR still above target. Change success is strong, and targeted automation should close the MTTR gap by 0.8 hours while protecting 99.95% uptime.")
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Incident Concentration**")
+                st.caption("Application incidents account for 36% of volume; CRM and portal drive most alerts.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**MTTR Variance**")
+                st.caption("Hardware incidents average 6.2 hours; automation gaps in diagnostics.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**SLA Drift**")
+                st.caption("Uptime at 99.92%; billing system maintenance drives 0.03% shortfall.")
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Runbook Automation**")
+                st.caption("Expand auto-remediation for top 5 incident patterns; expected MTTR -0.6 hrs.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**CRM Stability Sprint**")
+                st.caption("Prioritize CRM patching and capacity tuning to reduce P1 exposure by 30%.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Change Risk Controls**")
+                st.caption("Adopt canary releases for emergency changes to keep success rate at 99%+.")
+        
         st.markdown('<div class="section-header">VP IT & Digital Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -18272,7 +22058,7 @@ def render_vp_field_operations():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🛠️ Field Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -18377,7 +22163,158 @@ def render_vp_field_operations():
         </div>
         """, unsafe_allow_html=True)
         
-        # New: SLA Compliance Trend and FTF by Visit Type
+        st.markdown('<div class="section-header">Workforce & Cost Signals</div>', unsafe_allow_html=True)
+        work_col1, work_col2 = st.columns(2)
+        
+        with work_col1:
+            st.markdown("**Jobs by Region**")
+            with st.container(border=True):
+                region_jobs = pd.DataFrame({
+                    'Region': ['London', 'North West', 'Midlands', 'South East', 'Scotland', 'Wales'],
+                    'Jobs': [38, 26, 22, 24, 16, 12]
+                })
+                region_bar = alt.Chart(region_jobs).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Jobs:Q', title='Jobs'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Region:N', 'Jobs:Q']
+                ).properties(height=180)
+                st.altair_chart(region_bar, use_container_width=True)
+        
+        with work_col2:
+            st.markdown("**Cost per Visit Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                cost_df = pd.DataFrame({
+                    'Month': months,
+                    'Cost': [72, 70, 69, 71, 68, 68]
+                })
+                cost_line = alt.Chart(cost_df).mark_line(point=True, color='#F59E0B').encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Cost:Q', title='£ per Visit', scale=alt.Scale(domain=[60, 80])),
+                    tooltip=['Month:N', alt.Tooltip('Cost:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(cost_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Operational Mix</div>', unsafe_allow_html=True)
+        mix_col1, mix_col2 = st.columns(2)
+        
+        with mix_col1:
+            st.markdown("**Jobs by Type**")
+            with st.container(border=True):
+                job_mix = pd.DataFrame({
+                    'Type': ['Installation', 'Repair', 'Maintenance', 'Upgrade'],
+                    'Jobs': [48, 42, 32, 20]
+                }).set_index('Type')
+                st.bar_chart(job_mix, height=180)
+        
+        with mix_col2:
+            st.markdown("**Technician Utilization Trend**")
+            with st.container(border=True):
+                util_df = pd.DataFrame({
+                    'Month': months,
+                    'Utilization': [90, 91, 92, 93, 94, 94]
+                }).set_index('Month')
+                st.line_chart(util_df, height=180)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes field-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(16,185,129,0.2); }
+            50% { box-shadow: 0 0 24px rgba(16,185,129,0.4); }
+        }
+        @keyframes field-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .field-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #D1FAE5 0%, #BBF7D0 100%);
+            border: 1px solid #86EFAC;
+            animation: field-ops-glow 3s ease-in-out infinite;
+        }
+        .field-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: field-ops-sweep 3s linear infinite;
+        }
+        .field-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .field-ops-title { font-weight: 700; color: #065F46; }
+        .field-ops-tag {
+            background: rgba(16,185,129,0.2);
+            color: #065F46;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .field-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .field-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+        .field-ops-label { font-size: 0.7rem; color: #047857; text-transform: uppercase; letter-spacing: 0.06em; }
+        .field-ops-value { font-size: 1.35rem; font-weight: 700; color: #065F46; }
+        .field-ops-delta { font-size: 0.75rem; color: #047857; }
+        </style>
+        <div class="field-ops-pulse">
+            <div class="field-ops-header">
+                <div class="field-ops-title">🛠️ Field Operations Pulse</div>
+                <div class="field-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="field-ops-grid">
+                <div class="field-ops-card">
+                    <div class="field-ops-label">First-Time Fix</div>
+                    <div class="field-ops-value">87%</div>
+                    <div class="field-ops-delta">+3% vs target</div>
+                </div>
+                <div class="field-ops-card">
+                    <div class="field-ops-label">SLA Compliance</div>
+                    <div class="field-ops-value">94%</div>
+                    <div class="field-ops-delta">Above 90% target</div>
+                </div>
+                <div class="field-ops-card">
+                    <div class="field-ops-label">Avg Duration</div>
+                    <div class="field-ops-value">52 min</div>
+                    <div class="field-ops-delta">-8 min vs avg</div>
+                </div>
+                <div class="field-ops-card">
+                    <div class="field-ops-label">Cost/Visit</div>
+                    <div class="field-ops-value">£68</div>
+                    <div class="field-ops-delta">-£4 vs budget</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # SLA Compliance Trend and FTF by Visit Type
         sla_col, ftf_col = st.columns(2)
         
         with sla_col:
@@ -18470,8 +22407,135 @@ def render_vp_field_operations():
                 </div>
                 """, unsafe_allow_html=True)
         
-
+        st.markdown('<div class="section-header">Reschedule Drivers</div>', unsafe_allow_html=True)
+        res_col1, res_col2 = st.columns(2)
+        
+        with res_col1:
+            st.markdown("**Reschedule Reasons**")
+            with st.container(border=True):
+                res_df = pd.DataFrame({
+                    'Reason': ['Customer Not Home', 'Parts Missing', 'Weather', 'Access Issue', 'Other'],
+                    'Count': [6, 5, 3, 2, 2]
+                })
+                res_bar = alt.Chart(res_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Count:Q', title='Reschedules'),
+                    y=alt.Y('Reason:N', sort='-x', title=None),
+                    color=alt.Color('Reason:N', legend=None, scale=alt.Scale(
+                        range=['#EF4444', '#F59E0B', '#29B5E8', '#10B981', '#8B5CF6']
+                    )),
+                    tooltip=['Reason:N', 'Count:Q']
+                ).properties(height=180)
+                st.altair_chart(res_bar, use_container_width=True)
+        
+        with res_col2:
+            st.markdown("**Parts Availability by Depot**")
+            with st.container(border=True):
+                parts_df = pd.DataFrame({
+                    'Depot': ['London', 'Manchester', 'Birmingham', 'Leeds', 'Glasgow'],
+                    'Availability': [96, 92, 94, 90, 93]
+                })
+                parts_chart = parts_df.set_index('Depot')
+                st.bar_chart(parts_chart, height=180)
+        
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-field-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-field-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: field-si-sweep 3s linear infinite;
+        }
+        @keyframes field-si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes field-si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-field-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-field-title { font-weight: 700; font-size: 1rem; }
+        .sf-field-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-field-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-field-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: field-si-glow 3s ease-in-out infinite; }
+        .sf-field-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-field-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-field-pulse">
+            <div class="sf-field-header">
+                <div class="sf-field-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-field-tag">AI LIVE</div>
+            </div>
+            <div class="sf-field-grid">
+                <div class="sf-field-card">
+                    <div class="sf-field-label">FTF Gap</div>
+                    <div class="sf-field-value">5%</div>
+                </div>
+                <div class="sf-field-card">
+                    <div class="sf-field-label">SLA Risk</div>
+                    <div class="sf-field-value">6 routes</div>
+                </div>
+                <div class="sf-field-card">
+                    <div class="sf-field-label">Cost Drift</div>
+                    <div class="sf-field-value">£6/visit</div>
+                </div>
+                <div class="sf-field-card">
+                    <div class="sf-field-label">CSAT Trend</div>
+                    <div class="sf-field-value">+0.2</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** identifies a 5% first-time fix gap tied to repair visits and parts availability, while SLA compliance remains strong. Route optimization and targeted upskilling can reduce cost per visit by £6 and lift FTF toward the 92% target.")
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**FTF Variance**")
+                st.caption("Repair visits underperform at 78% FTF; maintenance leads at 95%.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Route Efficiency**")
+                st.caption("High reschedule rates in two regions increase cost per visit by £4.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Technician Performance**")
+                st.caption("Top 10 technicians deliver 18% higher CSAT and 4% better FTF.")
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Parts Pre-Positioning**")
+                st.caption("Stock critical parts per route to lift repair FTF by ~6%.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Dynamic Routing**")
+                st.caption("Rebalance technician routes to cut travel time by 12%.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Skills Match**")
+                st.caption("Match complex repairs to high-CSAT techs to reduce reschedules.")
+        
         st.markdown('<div class="section-header">VP Field Operations Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -18554,12 +22618,46 @@ def render_vp_strategy():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_market, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧭 Market & Growth", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
         views_html = " ".join([f'<span class="semantic-view-badge">{v}</span>' for v in ['MARKET_INTELLIGENCE']])
         st.markdown(f'<div style="margin-bottom: 1.5rem;">{views_html}</div>', unsafe_allow_html=True)
+        
+        st.markdown("""
+        <style>
+        @keyframes viz-pulse {
+            0%, 100% { box-shadow: 0 0 0 rgba(59,130,246,0.0); transform: translateY(0); }
+            50% { box-shadow: 0 8px 24px rgba(59,130,246,0.18); transform: translateY(-2px); }
+        }
+        @keyframes viz-sweep {
+            0% { transform: translateX(-120%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(120%); opacity: 0; }
+        }
+        .viz-pulse {
+            position: relative;
+            padding: 0.35rem;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(219,234,254,0.35), rgba(191,219,254,0.35));
+            animation: viz-pulse 4s ease-in-out infinite;
+            margin-bottom: 0.5rem;
+        }
+        .viz-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: viz-sweep 3.5s linear infinite;
+            pointer-events: none;
+            border-radius: 14px;
+        }
+        </style>
+        """, unsafe_allow_html=True)
         
         # VP STRATEGY - COMPETITIVE RADAR ANIMATION
         st.markdown("""
@@ -18638,7 +22736,278 @@ def render_vp_strategy():
         </div>
         """, unsafe_allow_html=True)
         
-        # New: Market Share Trend and ARPU Comparison
+        st.markdown('<div class="section-header">Growth & Segment Signals</div>', unsafe_allow_html=True)
+        seg_col1, seg_col2 = st.columns(2)
+        
+        with seg_col1:
+            st.markdown("**Subscriber Growth by Segment**")
+            with st.container(border=True):
+                seg_df = pd.DataFrame({
+                    'Segment': ['Consumer', 'SMB', 'Enterprise'],
+                    'Growth': [3.4, 5.1, 2.2]
+                }).set_index('Segment')
+                st.bar_chart(seg_df, height=180)
+        
+        with seg_col2:
+            st.markdown("**Churn vs Market (Quarterly)**")
+            with st.container(border=True):
+                churn_df = pd.DataFrame({
+                    'Quarter': ['Q2', 'Q3', 'Q4', 'Q1'],
+                    'SnowTelco': [1.8, 1.7, 1.6, 1.6],
+                    'Market': [2.1, 2.0, 1.9, 1.9]
+                }).set_index('Quarter')
+                st.line_chart(churn_df, height=180)
+        
+        st.markdown('<div class="section-header">Brand & Adoption Signals</div>', unsafe_allow_html=True)
+        brand_col1, brand_col2 = st.columns(2)
+        
+        with brand_col1:
+            st.markdown("**NPS by Competitor**")
+            with st.container(border=True):
+                nps_df = pd.DataFrame({
+                    'Brand': ['SnowTelco', 'EE', 'O2', 'Vodafone', 'Three'],
+                    'NPS': [38, 32, 28, 26, 20]
+                }).set_index('Brand')
+                st.bar_chart(nps_df, height=180)
+        
+        with brand_col2:
+            st.markdown("**5G Adoption Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                adoption_df = pd.DataFrame({
+                    'Month': months,
+                    'Adoption': [28, 30, 32, 34, 36, 38]
+                })
+                adoption_area = alt.Chart(adoption_df).mark_area(opacity=0.25, color='#2563EB').encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Adoption:Q', title='Adoption %', scale=alt.Scale(domain=[20, 45])),
+                    tooltip=['Month:N', alt.Tooltip('Adoption:Q', format='.0f')]
+                )
+                adoption_line = alt.Chart(adoption_df).mark_line(point=True, color='#2563EB', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months),
+                    y=alt.Y('Adoption:Q')
+                )
+                st.markdown('<div class="viz-pulse">', unsafe_allow_html=True)
+                st.altair_chart((adoption_area + adoption_line).properties(height=180), use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Regional Growth & Acquisition</div>', unsafe_allow_html=True)
+        reg_col1, reg_col2 = st.columns(2)
+        
+        with reg_col1:
+            st.markdown("**Regional Net Adds**")
+            with st.container(border=True):
+                region_df = pd.DataFrame({
+                    'Region': ['London', 'North West', 'Midlands', 'South East', 'Scotland', 'Wales'],
+                    'Net Adds': [18.4, 12.6, 9.8, 11.2, 6.4, 4.8]
+                })
+                region_bar = alt.Chart(region_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Net Adds:Q', title='Net Adds (K)'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Region:N', alt.Tooltip('Net Adds:Q', format='.1f')]
+                ).properties(height=180)
+                st.markdown('<div class="viz-pulse">', unsafe_allow_html=True)
+                st.altair_chart(region_bar, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+        with reg_col2:
+            st.markdown("**Acquisition Channels Mix**")
+            with st.container(border=True):
+                channel_df = pd.DataFrame({
+                    'Channel': ['Retail', 'Online', 'Partner', 'Inbound'],
+                    'Share': [38, 32, 18, 12]
+                })
+                channel_donut = alt.Chart(channel_df).mark_arc(innerRadius=45).encode(
+                    theta=alt.Theta('Share:Q'),
+                    color=alt.Color('Channel:N', scale=alt.Scale(
+                        domain=['Retail', 'Online', 'Partner', 'Inbound'],
+                        range=['#2563EB', '#10B981', '#F59E0B', '#8B5CF6']
+                    ), legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Channel:N', 'Share:Q']
+                ).properties(height=180)
+                st.markdown('<div class="viz-pulse">', unsafe_allow_html=True)
+                st.altair_chart(channel_donut, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Plan Mix & Win-Back</div>', unsafe_allow_html=True)
+        mix_col1, mix_col2 = st.columns(2)
+        
+        with mix_col1:
+            st.markdown("**Plan Mix (Active Base)**")
+            with st.container(border=True):
+                plan_df = pd.DataFrame({
+                    'Plan': ['SIM Only', 'Handset', '5G Premium', 'Family'],
+                    'Share': [44, 28, 18, 10]
+                })
+                plan_donut = alt.Chart(plan_df).mark_arc(innerRadius=45).encode(
+                    theta=alt.Theta('Share:Q'),
+                    color=alt.Color('Plan:N', scale=alt.Scale(
+                        domain=['SIM Only', 'Handset', '5G Premium', 'Family'],
+                        range=['#29B5E8', '#9CA3AF', '#10B981', '#F59E0B']
+                    ), legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Plan:N', 'Share:Q']
+                ).properties(height=180)
+                st.markdown('<div class="viz-pulse">', unsafe_allow_html=True)
+                st.altair_chart(plan_donut, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+        with mix_col2:
+            st.markdown("**Win-Back Conversion Trend**")
+            with st.container(border=True):
+                quarters = ['Q2', 'Q3', 'Q4', 'Q1']
+                winback_df = pd.DataFrame({
+                    'Quarter': quarters,
+                    'Conversion': [12, 14, 16, 18]
+                })
+                winback_line = alt.Chart(winback_df).mark_line(point=True, color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Quarter:N', sort=quarters, title=None),
+                    y=alt.Y('Conversion:Q', title='Conversion %', scale=alt.Scale(domain=[8, 22])),
+                    tooltip=['Quarter:N', alt.Tooltip('Conversion:Q', format='.0f')]
+                ).properties(height=180)
+                st.markdown('<div class="viz-pulse">', unsafe_allow_html=True)
+                st.altair_chart(winback_line, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Pricing Elasticity</div>', unsafe_allow_html=True)
+        price_col1, price_col2 = st.columns(2)
+        
+        with price_col1:
+            st.markdown("**Price Sensitivity by Segment**")
+            with st.container(border=True):
+                elastic_df = pd.DataFrame({
+                    'Segment': ['Consumer', 'SMB', 'Enterprise'],
+                    'Elasticity': [1.3, 0.9, 0.6]
+                })
+                elastic_bar = alt.Chart(elastic_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Elasticity:Q', title='Elasticity'),
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    color=alt.Color('Segment:N', legend=None, scale=alt.Scale(
+                        range=['#EF4444', '#F59E0B', '#10B981']
+                    )),
+                    tooltip=['Segment:N', alt.Tooltip('Elasticity:Q', format='.1f')]
+                ).properties(height=180)
+                st.markdown('<div class="viz-pulse">', unsafe_allow_html=True)
+                st.altair_chart(elastic_bar, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+        with price_col2:
+            st.markdown("**Promo Lift vs Baseline**")
+            with st.container(border=True):
+                promo_df = pd.DataFrame({
+                    'Offer': ['SIM Only', 'Handset', '5G Premium', 'Family'],
+                    'Lift': [8, 6, 10, 5]
+                })
+                promo_bar = alt.Chart(promo_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Lift:Q', title='Lift %'),
+                    y=alt.Y('Offer:N', sort='-x', title=None),
+                    color=alt.Color('Offer:N', legend=None, scale=alt.Scale(
+                        range=['#29B5E8', '#9CA3AF', '#10B981', '#F59E0B']
+                    )),
+                    tooltip=['Offer:N', alt.Tooltip('Lift:Q', format='.0f')]
+                ).properties(height=180)
+                st.markdown('<div class="viz-pulse">', unsafe_allow_html=True)
+                st.altair_chart(promo_bar, use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+        
+    with tab_market:
+        st.markdown("""
+        <style>
+        @keyframes strat-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes strat-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .strat-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: strat-ops-glow 3s ease-in-out infinite;
+        }
+        .strat-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: strat-ops-sweep 3s linear infinite;
+        }
+        .strat-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .strat-ops-title { font-weight: 700; color: #1E3A8A; }
+        .strat-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .strat-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .strat-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .strat-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .strat-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .strat-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="strat-ops-pulse">
+            <div class="strat-ops-header">
+                <div class="strat-ops-title">🧭 Market & Growth Pulse</div>
+                <div class="strat-ops-tag">LIVE</div>
+            </div>
+            <div class="strat-ops-grid">
+                <div class="strat-ops-card">
+                    <div class="strat-ops-label">Share</div>
+                    <div class="strat-ops-value">5.2%</div>
+                    <div class="strat-ops-delta">+0.4% YoY</div>
+                </div>
+                <div class="strat-ops-card">
+                    <div class="strat-ops-label">ARPU Gap</div>
+                    <div class="strat-ops-value">£4.20</div>
+                    <div class="strat-ops-delta">Above market</div>
+                </div>
+                <div class="strat-ops-card">
+                    <div class="strat-ops-label">Opportunity</div>
+                    <div class="strat-ops-value">£180M</div>
+                    <div class="strat-ops-delta">SMB + Consumer</div>
+                </div>
+                <div class="strat-ops-card">
+                    <div class="strat-ops-label">Threat Level</div>
+                    <div class="strat-ops-value">Medium</div>
+                    <div class="strat-ops-delta">Three declining</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Market Share Trend and ARPU Comparison
         share_trend_col, arpu_col = st.columns(2)
         
         with share_trend_col:
@@ -18724,8 +23093,133 @@ def render_vp_strategy():
                 </div>
                 """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Pricing & Offer Dynamics</div>', unsafe_allow_html=True)
+        price_col1, price_col2 = st.columns(2)
+        
+        with price_col1:
+            st.markdown("**Promo Intensity by Competitor**")
+            with st.container(border=True):
+                promo_df = pd.DataFrame({
+                    'Competitor': ['EE', 'O2', 'Vodafone', 'Three', 'SnowTelco'],
+                    'Intensity': [78, 64, 59, 85, 52]
+                })
+                promo_bar = alt.Chart(promo_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Intensity:Q', title='Promo Intensity'),
+                    y=alt.Y('Competitor:N', sort='-x', title=None),
+                    color=alt.condition(alt.datum.Competitor == 'SnowTelco', alt.value('#29B5E8'), alt.value('#9CA3AF')),
+                    tooltip=['Competitor:N', 'Intensity:Q']
+                ).properties(height=180)
+                st.altair_chart(promo_bar, use_container_width=True)
+        
+        with price_col2:
+            st.markdown("**Offer Mix (New Activations)**")
+            with st.container(border=True):
+                offer_df = pd.DataFrame({
+                    'Offer': ['SIM Only', 'Handset', '5G Premium', 'Family'],
+                    'Share': [42, 26, 18, 14]
+                }).set_index('Offer')
+                st.bar_chart(offer_df, height=180)
+        
 
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-strategy-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-strategy-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: strategy-si-sweep 3s linear infinite;
+        }
+        @keyframes strategy-si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes strategy-si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-strategy-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-strategy-title { font-weight: 700; font-size: 1rem; }
+        .sf-strategy-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-strategy-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-strategy-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: strategy-si-glow 3s ease-in-out infinite; }
+        .sf-strategy-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-strategy-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-strategy-pulse">
+            <div class="sf-strategy-header">
+                <div class="sf-strategy-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-strategy-tag">AI LIVE</div>
+            </div>
+            <div class="sf-strategy-grid">
+                <div class="sf-strategy-card">
+                    <div class="sf-strategy-label">Share Gap</div>
+                    <div class="sf-strategy-value">0.8%</div>
+                </div>
+                <div class="sf-strategy-card">
+                    <div class="sf-strategy-label">Port-in Lift</div>
+                    <div class="sf-strategy-value">+167</div>
+                </div>
+                <div class="sf-strategy-card">
+                    <div class="sf-strategy-label">ARPU Lead</div>
+                    <div class="sf-strategy-value">£4.20</div>
+                </div>
+                <div class="sf-strategy-card">
+                    <div class="sf-strategy-label">Threat Level</div>
+                    <div class="sf-strategy-value">Medium</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** shows steady share gains but a 0.8% gap to the 6% target. ARPU leadership is strong, while competitor price pressure remains elevated in SMB. Focused win‑back and 5G differentiation can accelerate share momentum.")
+
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Share Momentum**")
+                st.caption("SnowTelco share trends +0.4% YoY; Three declining for 4 straight quarters.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**ARPU Advantage**")
+                st.caption("ARPU sits £4.20 above market average, supported by premium 5G bundles.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Competitive Pressure**")
+                st.caption("SMB price pressure intensifies; targeted discounts needed to protect margin.")
+
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Win‑Back Acceleration**")
+                st.caption("Target 3,200 churners with 5G‑plus bundles; projected +0.3% share lift.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**SMB Pricing Guardrails**")
+                st.caption("Deploy segmented pricing to counter Three without eroding ARPU leadership.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**5G Differentiation**")
+                st.caption("Lead with coverage + value messaging in top 5 growth regions.")
+
         st.markdown('<div class="section-header">VP Strategy Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -18808,7 +23302,7 @@ def render_vp_communications():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "📣 Communications Ops", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -18916,7 +23410,174 @@ def render_vp_communications():
         </div>
         """, unsafe_allow_html=True)
         
-        # New: Sentiment Trend and Mention Volume
+        st.markdown('<div class="section-header">Awareness & Reach</div>', unsafe_allow_html=True)
+        reach_col1, reach_col2 = st.columns(2)
+        
+        with reach_col1:
+            st.markdown("**Share of Voice (Weekly)**")
+            with st.container(border=True):
+                weeks = ['W1', 'W2', 'W3', 'W4']
+                sov_df = pd.DataFrame({
+                    'Week': weeks * 3,
+                    'Brand': ['SnowTelco'] * 4 + ['EE'] * 4 + ['O2'] * 4,
+                    'Share': [18, 19, 20, 21, 28, 27, 27, 26, 24, 24, 23, 23]
+                })
+                sov_area = alt.Chart(sov_df).mark_area().encode(
+                    x=alt.X('Week:N', sort=weeks, title=None),
+                    y=alt.Y('Share:Q', stack='normalize', title='%'),
+                    color=alt.Color('Brand:N', legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Week:N', 'Brand:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(sov_area, use_container_width=True)
+        
+        with reach_col2:
+            st.markdown("**Earned Media Mentions**")
+            with st.container(border=True):
+                media_df = pd.DataFrame({
+                    'Channel': ['Press', 'Broadcast', 'Online', 'Podcasts'],
+                    'Mentions': [42, 18, 74, 12]
+                })
+                media_bar = alt.Chart(media_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Mentions:Q', title='Mentions'),
+                    y=alt.Y('Channel:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Channel:N', 'Mentions:Q']
+                ).properties(height=170)
+                st.altair_chart(media_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Engagement Performance</div>', unsafe_allow_html=True)
+        eng_col1, eng_col2 = st.columns(2)
+        
+        with eng_col1:
+            st.markdown("**Engagement Rate by Platform**")
+            with st.container(border=True):
+                eng_df = pd.DataFrame({
+                    'Platform': ['Twitter/X', 'Facebook', 'Instagram', 'LinkedIn'],
+                    'Engagement': [2.8, 3.1, 4.4, 3.6]
+                })
+                eng_bar = alt.Chart(eng_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Engagement:Q', title='Engagement %'),
+                    y=alt.Y('Platform:N', sort='-x', title=None),
+                    color=alt.Color('Platform:N', legend=None, scale=alt.Scale(
+                        range=['#2563EB', '#9CA3AF', '#EC4899', '#14B8A6']
+                    )),
+                    tooltip=['Platform:N', alt.Tooltip('Engagement:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(eng_bar, use_container_width=True)
+        
+        with eng_col2:
+            st.markdown("**Crisis Alert Volume (Daily)**")
+            with st.container(border=True):
+                days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                crisis_df = pd.DataFrame({
+                    'Day': days,
+                    'Alerts': [6, 4, 8, 5, 7, 3, 2]
+                })
+                crisis_line = alt.Chart(crisis_df).mark_line(point=True, color='#EF4444', strokeWidth=2).encode(
+                    x=alt.X('Day:N', sort=days, title=None),
+                    y=alt.Y('Alerts:Q', title='Alerts'),
+                    tooltip=['Day:N', 'Alerts:Q']
+                ).properties(height=170)
+                st.altair_chart(crisis_line, use_container_width=True)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes comms-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(219,39,119,0.2); }
+            50% { box-shadow: 0 0 24px rgba(219,39,119,0.4); }
+        }
+        @keyframes comms-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .comms-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #FCE7F3 0%, #FBCFE8 100%);
+            border: 1px solid #F9A8D4;
+            animation: comms-ops-glow 3s ease-in-out infinite;
+        }
+        .comms-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+            animation: comms-ops-sweep 3s linear infinite;
+        }
+        .comms-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .comms-ops-title { font-weight: 700; color: #9D174D; }
+        .comms-ops-tag {
+            background: rgba(219,39,119,0.15);
+            color: #9D174D;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .comms-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .comms-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(219,39,119,0.2);
+        }
+        .comms-ops-label { font-size: 0.7rem; color: #9D174D; text-transform: uppercase; letter-spacing: 0.06em; }
+        .comms-ops-value { font-size: 1.35rem; font-weight: 700; color: #9D174D; }
+        .comms-ops-delta { font-size: 0.75rem; color: #BE185D; }
+        </style>
+        <div class="comms-ops-pulse">
+            <div class="comms-ops-header">
+                <div class="comms-ops-title">📣 Communications Pulse</div>
+                <div class="comms-ops-tag">LIVE</div>
+            </div>
+            <div class="comms-ops-grid">
+                <div class="comms-ops-card">
+                    <div class="comms-ops-label">Positive</div>
+                    <div class="comms-ops-value">35%</div>
+                    <div class="comms-ops-delta">+4% WoW</div>
+                </div>
+                <div class="comms-ops-card">
+                    <div class="comms-ops-label">Negative</div>
+                    <div class="comms-ops-value">40%</div>
+                    <div class="comms-ops-delta">+2% WoW</div>
+                </div>
+                <div class="comms-ops-card">
+                    <div class="comms-ops-label">Mentions</div>
+                    <div class="comms-ops-value">2,847</div>
+                    <div class="comms-ops-delta">+18% WoW</div>
+                </div>
+                <div class="comms-ops-card">
+                    <div class="comms-ops-label">Response</div>
+                    <div class="comms-ops-value">2.4 hrs</div>
+                    <div class="comms-ops-delta">-0.6 hrs</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Sentiment Trend and Mention Volume
         sentiment_trend_col, volume_col = st.columns(2)
         
         with sentiment_trend_col:
@@ -19042,8 +23703,178 @@ def render_vp_communications():
                 </div>
                 """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Crisis Response Performance</div>', unsafe_allow_html=True)
+        crisis_col1, crisis_col2 = st.columns(2)
+        
+        with crisis_col1:
+            st.markdown("**Response Time Distribution**")
+            with st.container(border=True):
+                response_df = pd.DataFrame({
+                    'Bucket': ['<30m', '30-60m', '1-2h', '2-4h', '4h+'],
+                    'Cases': [42, 38, 28, 16, 8]
+                })
+                response_bar = alt.Chart(response_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Cases:Q', title='Cases'),
+                    y=alt.Y('Bucket:N', sort='-x', title=None),
+                    color=alt.Color('Bucket:N', legend=None, scale=alt.Scale(
+                        range=['#10B981', '#14B8A6', '#F59E0B', '#F97316', '#EF4444']
+                    )),
+                    tooltip=['Bucket:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(response_bar, use_container_width=True)
+        
+        with crisis_col2:
+            st.markdown("**Crisis Escalations by Severity**")
+            with st.container(border=True):
+                esc_df = pd.DataFrame({
+                    'Severity': ['P1', 'P2', 'P3', 'P4'],
+                    'Escalations': [6, 12, 18, 10]
+                })
+                esc_bar = alt.Chart(esc_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Severity:N', title=None),
+                    y=alt.Y('Escalations:Q', title='Escalations'),
+                    color=alt.Color('Severity:N', legend=None, scale=alt.Scale(
+                        domain=['P1', 'P2', 'P3', 'P4'],
+                        range=['#EF4444', '#F59E0B', '#29B5E8', '#9CA3AF']
+                    )),
+                    tooltip=['Severity:N', 'Escalations:Q']
+                ).properties(height=170)
+                st.altair_chart(esc_bar, use_container_width=True)
+        
+        backlog_col1, backlog_col2 = st.columns(2)
+        
+        with backlog_col1:
+            st.markdown("**Response Backlog Trend**")
+            with st.container(border=True):
+                days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                backlog_df = pd.DataFrame({
+                    'Day': days,
+                    'Backlog': [46, 44, 42, 40, 38, 36, 34]
+                })
+                backlog_line = alt.Chart(backlog_df).mark_line(point=True, color='#8B5CF6', strokeWidth=2).encode(
+                    x=alt.X('Day:N', sort=days, title=None),
+                    y=alt.Y('Backlog:Q', title='Backlog'),
+                    tooltip=['Day:N', 'Backlog:Q']
+                ).properties(height=170)
+                st.altair_chart(backlog_line, use_container_width=True)
+        
+        with backlog_col2:
+            st.markdown("**Response Volume by Channel**")
+            with st.container(border=True):
+                resp_df = pd.DataFrame({
+                    'Channel': ['Twitter/X', 'Facebook', 'Instagram', 'LinkedIn', 'TrustPilot'],
+                    'Responses': [220, 180, 120, 90, 60]
+                })
+                resp_bar = alt.Chart(resp_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Responses:Q', title='Responses'),
+                    y=alt.Y('Channel:N', sort='-x', title=None),
+                    color=alt.Color('Channel:N', legend=None, scale=alt.Scale(
+                        range=['#2563EB', '#9CA3AF', '#EC4899', '#14B8A6', '#F59E0B']
+                    )),
+                    tooltip=['Channel:N', 'Responses:Q']
+                ).properties(height=170)
+                st.altair_chart(resp_bar, use_container_width=True)
+        
 
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-comms-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-comms-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: comms-si-sweep 3s linear infinite;
+        }
+        @keyframes comms-si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes comms-si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-comms-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-comms-title { font-weight: 700; font-size: 1rem; }
+        .sf-comms-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-comms-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-comms-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: comms-si-glow 3s ease-in-out infinite; }
+        .sf-comms-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-comms-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-comms-pulse">
+            <div class="sf-comms-header">
+                <div class="sf-comms-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-comms-tag">AI LIVE</div>
+            </div>
+            <div class="sf-comms-grid">
+                <div class="sf-comms-card">
+                    <div class="sf-comms-label">Positive</div>
+                    <div class="sf-comms-value">35%</div>
+                </div>
+                <div class="sf-comms-card">
+                    <div class="sf-comms-label">Negative</div>
+                    <div class="sf-comms-value">40%</div>
+                </div>
+                <div class="sf-comms-card">
+                    <div class="sf-comms-label">Mentions</div>
+                    <div class="sf-comms-value">2,847</div>
+                </div>
+                <div class="sf-comms-card">
+                    <div class="sf-comms-label">Response</div>
+                    <div class="sf-comms-value">2.4 hrs</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** flags negative sentiment concentration around network coverage and response time. Prioritizing coverage narrative and expanding social response capacity can lift positive sentiment by 6–8 points.")
+
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Sentiment Mix**")
+                st.caption("Negative mentions hold at 40% with spikes after outage reports.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Platform Risk**")
+                st.caption("Twitter/X drives 44% of negative mentions; response latency highest.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Topic Drift**")
+                st.caption("Coverage and pricing topics dominate share of voice this week.")
+
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Rapid Response Pods**")
+                st.caption("Deploy surge support for Twitter/X to reduce response time below 1 hr.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Coverage Narrative**")
+                st.caption("Launch 5G coverage proof points to counter negative sentiment drivers.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Influencer Amplification**")
+                st.caption("Expand positive influencer reach during peak sentiment windows.")
+
         st.markdown('<div class="section-header">VP Communications Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -19126,7 +23957,7 @@ def render_regulatory_compliance():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "⚖️ Compliance Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -19231,7 +24062,377 @@ def render_regulatory_compliance():
         </div>
         """, unsafe_allow_html=True)
         
-        # New: Compliance Score Trend and Complaint Resolution Funnel
+        st.markdown('<div class="section-header">Compliance Trend & Risk</div>', unsafe_allow_html=True)
+        trend_col1, trend_col2 = st.columns(2)
+        
+        with trend_col1:
+            st.markdown("**SLA Credits Trend (6 Months)**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                credits_df = pd.DataFrame({
+                    'Month': months,
+                    'Credits': [18.2, 16.8, 15.4, 14.6, 13.1, 12.4]
+                })
+                credits_line = alt.Chart(credits_df).mark_line(point=True, color='#EF4444', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Credits:Q', title='£K'),
+                    tooltip=['Month:N', alt.Tooltip('Credits:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(credits_line, use_container_width=True)
+        
+        with trend_col2:
+            st.markdown("**Complaints by Region**")
+            with st.container(border=True):
+                region_df = pd.DataFrame({
+                    'Region': ['London', 'North West', 'Midlands', 'South East', 'Scotland', 'Wales'],
+                    'Complaints': [128, 92, 74, 88, 56, 42]
+                })
+                region_bar = alt.Chart(region_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Complaints:Q', title='Complaints'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Region:N', 'Complaints:Q']
+                ).properties(height=170)
+                st.altair_chart(region_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Product & Root Cause Signals</div>', unsafe_allow_html=True)
+        signal_col1, signal_col2 = st.columns(2)
+        
+        with signal_col1:
+            st.markdown("**SLA Breaches by Product**")
+            with st.container(border=True):
+                product_df = pd.DataFrame({
+                    'Product': ['Mobile', 'Broadband', 'TV', 'IoT'],
+                    'Breaches': [22, 14, 8, 5]
+                })
+                product_bar = alt.Chart(product_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Breaches:Q', title='Breaches'),
+                    y=alt.Y('Product:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Product:N', 'Breaches:Q']
+                ).properties(height=170)
+                st.altair_chart(product_bar, use_container_width=True)
+        
+        with signal_col2:
+            st.markdown("**Complaint Root Cause Mix**")
+            with st.container(border=True):
+                root_df = pd.DataFrame({
+                    'Cause': ['Billing', 'Coverage', 'Service', 'Outage'],
+                    'Share': [38, 26, 21, 15]
+                })
+                root_arc = alt.Chart(root_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Cause:N', legend=None, scale=alt.Scale(
+                        range=['#6366F1', '#F59E0B', '#10B981', '#29B5E8']
+                    )),
+                    tooltip=['Cause:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(root_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Regulator Readiness</div>', unsafe_allow_html=True)
+        ready_col1, ready_col2 = st.columns(2)
+        
+        with ready_col1:
+            st.markdown("**Escalation Timeline (Weekly)**")
+            with st.container(border=True):
+                weeks = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6']
+                esc_week_df = pd.DataFrame({
+                    'Week': weeks,
+                    'Escalations': [6, 5, 4, 5, 3, 2]
+                })
+                esc_area = alt.Chart(esc_week_df).mark_area(opacity=0.25, color='#F59E0B').encode(
+                    x=alt.X('Week:N', sort=weeks, title=None),
+                    y=alt.Y('Escalations:Q', title='Cases')
+                )
+                esc_line = alt.Chart(esc_week_df).mark_line(point=True, color='#F59E0B', strokeWidth=2).encode(
+                    x=alt.X('Week:N', sort=weeks),
+                    y=alt.Y('Escalations:Q'),
+                    tooltip=['Week:N', 'Escalations:Q']
+                )
+                st.altair_chart((esc_area + esc_line).properties(height=170), use_container_width=True)
+        
+        with ready_col2:
+            st.markdown("**Regulatory Submission Readiness**")
+            with st.container(border=True):
+                report_df = pd.DataFrame({
+                    'Report': ['Ofcom SLA', 'GDPR Audit', 'ADR Review', 'Ombudsman'],
+                    'Ready': [92, 88, 81, 76]
+                })
+                report_bar = alt.Chart(report_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Ready:Q', title='Readiness %', scale=alt.Scale(domain=[0, 100])),
+                    y=alt.Y('Report:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Report:N', 'Ready:Q']
+                ).properties(height=170)
+                st.altair_chart(report_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">SLA & Penalty Exposure</div>', unsafe_allow_html=True)
+        exposure_col1, exposure_col2 = st.columns(2)
+        
+        with exposure_col1:
+            st.markdown("**SLA Breaches by Region**")
+            with st.container(border=True):
+                breach_region_df = pd.DataFrame({
+                    'Region': ['London', 'North West', 'Midlands', 'South East', 'Scotland', 'Wales'],
+                    'Breaches': [12, 9, 7, 6, 4, 3]
+                })
+                breach_bar = alt.Chart(breach_region_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Breaches:Q', title='Breaches'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.value('#F97316'),
+                    tooltip=['Region:N', 'Breaches:Q']
+                ).properties(height=170)
+                st.altair_chart(breach_bar, use_container_width=True)
+        
+        with exposure_col2:
+            st.markdown("**Penalty Exposure by Category**")
+            with st.container(border=True):
+                penalty_df = pd.DataFrame({
+                    'Category': ['Network', 'Billing', 'Privacy', 'Service'],
+                    'Exposure': [4.6, 3.2, 2.1, 1.4]
+                })
+                penalty_bar = alt.Chart(penalty_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Exposure:Q', title='£M Exposure'),
+                    y=alt.Y('Category:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Category:N', alt.Tooltip('Exposure:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(penalty_bar, use_container_width=True)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes reg-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes reg-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .reg-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: reg-ops-glow 3s ease-in-out infinite;
+        }
+        .reg-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: reg-ops-sweep 3s linear infinite;
+        }
+        .reg-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .reg-ops-title { font-weight: 700; color: #1E3A8A; }
+        .reg-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .reg-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .reg-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .reg-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .reg-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .reg-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="reg-ops-pulse">
+            <div class="reg-ops-header">
+                <div class="reg-ops-title">⚖️ Compliance Ops Pulse</div>
+                <div class="reg-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="reg-ops-grid">
+                <div class="reg-ops-card">
+                    <div class="reg-ops-label">SLA Attainment</div>
+                    <div class="reg-ops-value">97.8%</div>
+                    <div class="reg-ops-delta">Above 95%</div>
+                </div>
+                <div class="reg-ops-card">
+                    <div class="reg-ops-label">Complaints/1K</div>
+                    <div class="reg-ops-value">9.4</div>
+                    <div class="reg-ops-delta">Below Ofcom avg</div>
+                </div>
+                <div class="reg-ops-card">
+                    <div class="reg-ops-label">Ombudsman</div>
+                    <div class="reg-ops-value">2.8%</div>
+                    <div class="reg-ops-delta">Target <2%</div>
+                </div>
+                <div class="reg-ops-card">
+                    <div class="reg-ops-label">GDPR Ready</div>
+                    <div class="reg-ops-value">90%</div>
+                    <div class="reg-ops-delta">Audit March</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Operational Readiness</div>', unsafe_allow_html=True)
+        ops_col1, ops_col2 = st.columns(2)
+        
+        with ops_col1:
+            st.markdown("**GDPR Request Mix**")
+            with st.container(border=True):
+                gdpr_df = pd.DataFrame({
+                    'Type': ['Access', 'Deletion', 'Portability', 'Correction'],
+                    'Requests': [12, 6, 4, 2]
+                })
+                gdpr_bar = alt.Chart(gdpr_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Requests:Q', title='Requests'),
+                    y=alt.Y('Type:N', sort='-x', title=None),
+                    color=alt.Color('Type:N', legend=None, scale=alt.Scale(
+                        range=['#10B981', '#F59E0B', '#29B5E8', '#8B5CF6']
+                    )),
+                    tooltip=['Type:N', 'Requests:Q']
+                ).properties(height=170)
+                st.altair_chart(gdpr_bar, use_container_width=True)
+        
+        with ops_col2:
+            st.markdown("**Ombudsman Escalations Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                esc_df = pd.DataFrame({
+                    'Month': months,
+                    'Escalations': [3.4, 3.2, 3.0, 2.9, 2.8, 2.8]
+                })
+                esc_line = alt.Chart(esc_df).mark_line(point=True, color='#F59E0B', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Escalations:Q', title='%'),
+                    tooltip=['Month:N', alt.Tooltip('Escalations:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(esc_line, use_container_width=True)
+
+        st.markdown('<div class="section-header">Case Operations Mix</div>', unsafe_allow_html=True)
+        case_col1, case_col2 = st.columns(2)
+        
+        with case_col1:
+            st.markdown("**Investigation Backlog by Stage**")
+            with st.container(border=True):
+                backlog_df = pd.DataFrame({
+                    'Stage': ['Intake', 'Review', 'Legal', 'Resolution'],
+                    'Cases': [46, 32, 18, 12]
+                })
+                backlog_bar = alt.Chart(backlog_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Cases:Q', title='Cases'),
+                    y=alt.Y('Stage:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Stage:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(backlog_bar, use_container_width=True)
+        
+        with case_col2:
+            st.markdown("**SLA Breach Drivers**")
+            with st.container(border=True):
+                driver_df = pd.DataFrame({
+                    'Driver': ['Network', 'Vendor', 'Process', 'Complexity'],
+                    'Incidents': [14, 9, 7, 5]
+                })
+                driver_bar = alt.Chart(driver_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Incidents:Q', title='Breaches'),
+                    y=alt.Y('Driver:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Driver:N', 'Incidents:Q']
+                ).properties(height=170)
+                st.altair_chart(driver_bar, use_container_width=True)
+
+        st.markdown('<div class="section-header">Regulatory Case Load</div>', unsafe_allow_html=True)
+        load_col1, load_col2 = st.columns(2)
+        
+        with load_col1:
+            st.markdown("**Open Cases by Regulator**")
+            with st.container(border=True):
+                regulator_df = pd.DataFrame({
+                    'Regulator': ['Ofcom', 'ICO', 'ADR', 'Local'],
+                    'Cases': [18, 9, 6, 4]
+                })
+                regulator_arc = alt.Chart(regulator_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Cases:Q', title=None),
+                    color=alt.Color('Regulator:N', legend=None, scale=alt.Scale(
+                        range=['#2563EB', '#10B981', '#F59E0B', '#EC4899']
+                    )),
+                    tooltip=['Regulator:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(regulator_arc, use_container_width=True)
+        
+        with load_col2:
+            st.markdown("**Resolution Time by Channel**")
+            with st.container(border=True):
+                channel_df = pd.DataFrame({
+                    'Channel': ['Call Center', 'Digital', 'Retail', 'Partner'],
+                    'Days': [4.8, 3.6, 5.4, 4.1]
+                })
+                channel_bar = alt.Chart(channel_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Days:Q', title='Days to Resolve'),
+                    y=alt.Y('Channel:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Channel:N', alt.Tooltip('Days:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(channel_bar, use_container_width=True)
+
+        st.markdown('<div class="section-header">Severity & Aging</div>', unsafe_allow_html=True)
+        sev_col1, sev_col2 = st.columns(2)
+        
+        with sev_col1:
+            st.markdown("**Escalation Severity Mix**")
+            with st.container(border=True):
+                severity_df = pd.DataFrame({
+                    'Severity': ['Critical', 'High', 'Medium', 'Low'],
+                    'Cases': [6, 12, 18, 22]
+                })
+                severity_arc = alt.Chart(severity_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Cases:Q', title=None),
+                    color=alt.Color('Severity:N', legend=None, scale=alt.Scale(
+                        range=['#EF4444', '#F59E0B', '#29B5E8', '#10B981']
+                    )),
+                    tooltip=['Severity:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(severity_arc, use_container_width=True)
+        
+        with sev_col2:
+            st.markdown("**Case Aging Buckets**")
+            with st.container(border=True):
+                aging_df = pd.DataFrame({
+                    'Bucket': ['0-3 days', '4-7 days', '8-14 days', '15+ days'],
+                    'Cases': [38, 22, 14, 6]
+                })
+                aging_bar = alt.Chart(aging_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Cases:Q', title='Cases'),
+                    y=alt.Y('Bucket:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Bucket:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(aging_bar, use_container_width=True)
+
+        # Compliance Score Trend and Complaint Resolution Funnel
         compliance_col, funnel_col = st.columns(2)
         
         with compliance_col:
@@ -19369,6 +24570,104 @@ def render_regulatory_compliance():
         
 
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .sf-reg-pulse {
+            background: linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .sf-reg-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -30%;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            animation: reg-si-sweep 3s linear infinite;
+        }
+        @keyframes reg-si-sweep {
+            0% { transform: translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(250%); opacity: 0; }
+        }
+        @keyframes reg-si-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14,165,233,0.35); }
+            50% { box-shadow: 0 0 22px rgba(14,165,233,0.6); }
+        }
+        .sf-reg-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-reg-title { font-weight: 700; font-size: 1rem; }
+        .sf-reg-tag { font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
+        .sf-reg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-reg-card { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 0.75rem; animation: reg-si-glow 3s ease-in-out infinite; }
+        .sf-reg-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8; }
+        .sf-reg-value { font-size: 1.25rem; font-weight: 700; }
+        </style>
+        <div class="sf-reg-pulse">
+            <div class="sf-reg-header">
+                <div class="sf-reg-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-reg-tag">AI LIVE</div>
+            </div>
+            <div class="sf-reg-grid">
+                <div class="sf-reg-card">
+                    <div class="sf-reg-label">SLA</div>
+                    <div class="sf-reg-value">97.8%</div>
+                </div>
+                <div class="sf-reg-card">
+                    <div class="sf-reg-label">Complaints</div>
+                    <div class="sf-reg-value">9.4/1K</div>
+                </div>
+                <div class="sf-reg-card">
+                    <div class="sf-reg-label">Escalation</div>
+                    <div class="sf-reg-value">2.8%</div>
+                </div>
+                <div class="sf-reg-card">
+                    <div class="sf-reg-label">Audit Ready</div>
+                    <div class="sf-reg-value">90%</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Snowflake Intelligence** shows compliance trending above target, but ombudsman escalation remains above the 2% goal. Focused early‑resolution workflows and GDPR readiness actions can close the gap before the March audit.")
+
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Escalation Risk**")
+                st.caption("Ombudsman cases at 2.8% driven by billing dispute delays.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**SLA Stability**")
+                st.caption("Network availability holds at 99.72% with no breach risk.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Audit Readiness**")
+                st.caption("GDPR readiness at 90%; data retention gaps remain.")
+
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Early Resolution Triage**")
+                st.caption("Route billing disputes to specialist pods; target escalation <2%.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**SLA Monitoring**")
+                st.caption("Automate SLA variance alerts for Ofcom submissions.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**GDPR Controls**")
+                st.caption("Complete retention policy updates ahead of March audit.")
+
         st.markdown('<div class="section-header">Regulatory & Compliance Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -19451,7 +24750,7 @@ def render_vp_security():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🛡️ Security Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -19617,6 +24916,237 @@ def render_vp_security():
                 st.altair_chart((accuracy_line + precision_line).properties(height=160), use_container_width=True)
                 st.markdown('<div style="text-align: center; font-size: 0.75rem;"><span style="color: #10B981;">—</span> Accuracy <span style="color: #8B5CF6;">- -</span> Precision</div>', unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Channel & Segment Risk</div>', unsafe_allow_html=True)
+        channel_col1, channel_col2 = st.columns(2)
+        
+        with channel_col1:
+            st.markdown("**Fraud Losses by Channel**")
+            with st.container(border=True):
+                channel_df = pd.DataFrame({
+                    'Channel': ['Digital', 'Retail', 'Call Center', 'Partner'],
+                    'Losses': [1.1, 0.7, 0.4, 0.2]
+                })
+                channel_bar = alt.Chart(channel_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Losses:Q', title='£M'),
+                    y=alt.Y('Channel:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Channel:N', alt.Tooltip('Losses:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(channel_bar, use_container_width=True)
+        
+        with channel_col2:
+            st.markdown("**High-Risk Segment Mix**")
+            with st.container(border=True):
+                segment_df = pd.DataFrame({
+                    'Segment': ['Prepaid', 'SME', 'Consumer', 'Enterprise'],
+                    'Share': [32, 26, 24, 18]
+                })
+                segment_arc = alt.Chart(segment_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Segment:N', legend=None, scale=alt.Scale(
+                        range=['#F59E0B', '#6366F1', '#10B981', '#29B5E8']
+                    )),
+                    tooltip=['Segment:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(segment_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Threat Velocity</div>', unsafe_allow_html=True)
+        velocity_col1, velocity_col2 = st.columns(2)
+        
+        with velocity_col1:
+            st.markdown("**Suspicious Login Attempts (Weekly)**")
+            with st.container(border=True):
+                weeks = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6']
+                login_df = pd.DataFrame({
+                    'Week': weeks,
+                    'Attempts': [860, 910, 980, 940, 1020, 1085]
+                })
+                login_line = alt.Chart(login_df).mark_line(point=True, color='#29B5E8', strokeWidth=2).encode(
+                    x=alt.X('Week:N', sort=weeks, title=None),
+                    y=alt.Y('Attempts:Q', title='Attempts'),
+                    tooltip=['Week:N', 'Attempts:Q']
+                ).properties(height=170)
+                st.altair_chart(login_line, use_container_width=True)
+        
+        with velocity_col2:
+            st.markdown("**SIM Swap Attempts by Region**")
+            with st.container(border=True):
+                sim_df = pd.DataFrame({
+                    'Region': ['London', 'North West', 'Midlands', 'South East', 'Scotland', 'Wales'],
+                    'Attempts': [82, 64, 48, 52, 34, 21]
+                })
+                sim_bar = alt.Chart(sim_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Attempts:Q', title='Attempts'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Region:N', 'Attempts:Q']
+                ).properties(height=170)
+                st.altair_chart(sim_bar, use_container_width=True)
+
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes sec-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(37,99,235,0.2); }
+            50% { box-shadow: 0 0 24px rgba(37,99,235,0.45); }
+        }
+        @keyframes sec-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .sec-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: sec-ops-glow 3s ease-in-out infinite;
+        }
+        .sec-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: sec-ops-sweep 3s linear infinite;
+        }
+        .sec-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .sec-ops-title { font-weight: 700; color: #1E3A8A; }
+        .sec-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .sec-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .sec-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .sec-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .sec-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .sec-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="sec-ops-pulse">
+            <div class="sec-ops-header">
+                <div class="sec-ops-title">🛡️ Security Ops Pulse</div>
+                <div class="sec-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="sec-ops-grid">
+                <div class="sec-ops-card">
+                    <div class="sec-ops-label">Active Alerts</div>
+                    <div class="sec-ops-value">186</div>
+                    <div class="sec-ops-delta">28 critical</div>
+                </div>
+                <div class="sec-ops-card">
+                    <div class="sec-ops-label">High Risk Cases</div>
+                    <div class="sec-ops-value">42</div>
+                    <div class="sec-ops-delta">Triage queue</div>
+                </div>
+                <div class="sec-ops-card">
+                    <div class="sec-ops-label">Avg Triage</div>
+                    <div class="sec-ops-value">18m</div>
+                    <div class="sec-ops-delta">↓ 6m WoW</div>
+                </div>
+                <div class="sec-ops-card">
+                    <div class="sec-ops-label">Fraud Losses</div>
+                    <div class="sec-ops-value">£0.6M</div>
+                    <div class="sec-ops-delta">MTD exposure</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Investigation Workbench</div>', unsafe_allow_html=True)
+        work_col1, work_col2 = st.columns(2)
+        
+        with work_col1:
+            st.markdown("**Case Volume by Queue**")
+            with st.container(border=True):
+                queue_df = pd.DataFrame({
+                    'Queue': ['Identity', 'SIM Swap', 'Payments', 'Account'],
+                    'Cases': [38, 29, 22, 17]
+                })
+                queue_bar = alt.Chart(queue_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Cases:Q', title='Cases'),
+                    y=alt.Y('Queue:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Queue:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(queue_bar, use_container_width=True)
+        
+        with work_col2:
+            st.markdown("**Alert Source Mix**")
+            with st.container(border=True):
+                source_df = pd.DataFrame({
+                    'Source': ['ML Model', 'Rules', 'Customer', 'Partner'],
+                    'Share': [54, 26, 12, 8]
+                })
+                source_arc = alt.Chart(source_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Source:N', legend=None, scale=alt.Scale(
+                        range=['#10B981', '#29B5E8', '#F59E0B', '#EC4899']
+                    )),
+                    tooltip=['Source:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(source_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Containment Metrics</div>', unsafe_allow_html=True)
+        cont_col1, cont_col2 = st.columns(2)
+        
+        with cont_col1:
+            st.markdown("**Containment Rate Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                contain_df = pd.DataFrame({
+                    'Month': months,
+                    'Rate': [92.1, 92.8, 93.4, 94.0, 94.4, 94.9]
+                })
+                contain_line = alt.Chart(contain_df).mark_line(point=True, color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Rate:Q', title='%'),
+                    tooltip=['Month:N', alt.Tooltip('Rate:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(contain_line, use_container_width=True)
+        
+        with cont_col2:
+            st.markdown("**False Positives by Model**")
+            with st.container(border=True):
+                fp_df = pd.DataFrame({
+                    'Model': ['Identity', 'SIM Swap', 'Payments', 'Device'],
+                    'Rate': [4.2, 3.6, 3.1, 2.4]
+                })
+                fp_bar = alt.Chart(fp_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Rate:Q', title='%'),
+                    y=alt.Y('Model:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Model:N', alt.Tooltip('Rate:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(fp_bar, use_container_width=True)
+        
         col_left, col_right = st.columns([1.3, 1])
         
         with col_left:
@@ -19689,11 +25219,87 @@ def render_vp_security():
                     <span style="color: #065F46;">ML models 3x more effective than rules</span>
                 </div>
                 """, unsafe_allow_html=True)
-        
 
     with tab_strategy:
-        st.markdown('<div class="section-header">VP Security Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        @keyframes sf-sec-glow { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25); } 50% { box-shadow: 0 0 26px rgba(59,130,246,0.45); } }
+        @keyframes sf-sec-sweep { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+        .sf-sec-pulse { position: relative; overflow: hidden; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border: 1px solid #93C5FD; animation: sf-sec-glow 3s ease-in-out infinite; }
+        .sf-sec-pulse::after { content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: sf-sec-sweep 3s linear infinite; }
+        .sf-sec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-sec-title { font-weight: 700; color: #1E3A8A; }
+        .sf-sec-tag { background: rgba(59,130,246,0.2); color: #1E3A8A; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; }
+        .sf-sec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-sec-card { background: rgba(255,255,255,0.85); border-radius: 10px; padding: 0.75rem 0.85rem; border: 1px solid rgba(59,130,246,0.2); }
+        .sf-sec-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .sf-sec-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .sf-sec-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="sf-sec-pulse">
+            <div class="sf-sec-header">
+                <div class="sf-sec-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-sec-tag">AI INSIGHTS</div>
+            </div>
+            <div class="sf-sec-grid">
+                <div class="sf-sec-card">
+                    <div class="sf-sec-label">Fraud Risk</div>
+                    <div class="sf-sec-value">High</div>
+                    <div class="sf-sec-delta">SIM swap spike</div>
+                </div>
+                <div class="sf-sec-card">
+                    <div class="sf-sec-label">Containment</div>
+                    <div class="sf-sec-value">94.9%</div>
+                    <div class="sf-sec-delta">↑ +1.2% MoM</div>
+                </div>
+                <div class="sf-sec-card">
+                    <div class="sf-sec-label">Exposure</div>
+                    <div class="sf-sec-value">£0.6M</div>
+                    <div class="sf-sec-delta">MTD at risk</div>
+                </div>
+                <div class="sf-sec-card">
+                    <div class="sf-sec-label">Model Lift</div>
+                    <div class="sf-sec-value">3.1x</div>
+                    <div class="sf-sec-delta">vs rules</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        st.info("Fraud attempts increased 9% WoW, driven by SIM swap and identity theft spikes in urban regions. ML models are sustaining 94%+ accuracy with reduced false positives, while containment improved to 94.9%. Focus on high-risk prepaid segments and partner-channel anomalies to reduce exposure below £0.5M this month.")
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**SIM Swap Clusters**")
+                st.caption("Three SIM swap clusters account for 41% of current high-risk alerts in London and North West.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Channel Leakage**")
+                st.caption("Digital and partner channels show elevated loss ratios; authentication friction below baseline.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Model Drift Watch**")
+                st.caption("Identity model drift detected in SME segment; retraining recommended within 2 weeks.")
+        
+        st.markdown('<div class="section-header">AI‑Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Tighten SIM Swap Controls**")
+                st.caption("Add biometric step-up for high-risk prepaid and escalate to manual review.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Partner Channel Guardrails**")
+                st.caption("Deploy anomaly detection on partner activations and block repeat device IDs.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Model Refresh Cadence**")
+                st.caption("Accelerate retraining cadence to bi-weekly for identity and device fraud models.")
+        
+        st.markdown('<div class="section-header">Strategic Priorities</div>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         with col1:
             with st.container(border=True):
@@ -19774,7 +25380,7 @@ def render_vp_enterprise_sales():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "💼 Sales Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -19883,7 +25489,307 @@ def render_vp_enterprise_sales():
         if st.session_state.get('sf_highlights', True):
             st.info("❄️ **Powered by Snowflake** — B2B contract analytics with Cortex ML for renewal prediction and churn risk scoring on enterprise accounts")
         
-        # New: Sales Pipeline and Renewal Calendar
+        st.markdown('<div class="section-header">Enterprise Growth Signals</div>', unsafe_allow_html=True)
+        growth_col1, growth_col2 = st.columns(2)
+        
+        with growth_col1:
+            st.markdown("**ACV Trend (6 Quarters)**")
+            with st.container(border=True):
+                quarters = ['Q1', 'Q2', 'Q3', 'Q4', 'Q1', 'Q2']
+                acv_df = pd.DataFrame({
+                    'Quarter': quarters,
+                    'ACV': [46.2, 47.8, 49.1, 50.6, 51.8, 52.4]
+                })
+                acv_line = alt.Chart(acv_df).mark_line(point=True, color='#29B5E8', strokeWidth=2).encode(
+                    x=alt.X('Quarter:N', sort=quarters, title=None),
+                    y=alt.Y('ACV:Q', title='£M'),
+                    tooltip=['Quarter:N', alt.Tooltip('ACV:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(acv_line, use_container_width=True)
+        
+        with growth_col2:
+            st.markdown("**Win Rate by Segment**")
+            with st.container(border=True):
+                segment_df = pd.DataFrame({
+                    'Segment': ['Enterprise', 'Mid-Market', 'SMB', 'Public'],
+                    'WinRate': [38, 34, 29, 41]
+                })
+                win_bar = alt.Chart(segment_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('WinRate:Q', title='%'),
+                    y=alt.Y('Segment:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Segment:N', alt.Tooltip('WinRate:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(win_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Pipeline Mix</div>', unsafe_allow_html=True)
+        mix_col1, mix_col2 = st.columns(2)
+        
+        with mix_col1:
+            st.markdown("**Pipeline by Region**")
+            with st.container(border=True):
+                region_df = pd.DataFrame({
+                    'Region': ['London', 'North', 'Midlands', 'South', 'Scotland'],
+                    'Pipeline': [8.2, 5.6, 4.4, 3.8, 2.5]
+                })
+                region_bar = alt.Chart(region_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Pipeline:Q', title='£M'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Region:N', alt.Tooltip('Pipeline:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(region_bar, use_container_width=True)
+        
+        with mix_col2:
+            st.markdown("**Deal Size Distribution**")
+            with st.container(border=True):
+                size_df = pd.DataFrame({
+                    'Band': ['<£50K', '£50-100K', '£100-250K', '£250K+'],
+                    'Deals': [18, 24, 16, 7]
+                })
+                size_bar = alt.Chart(size_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Deals:Q', title='Deals'),
+                    y=alt.Y('Band:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Band:N', 'Deals:Q']
+                ).properties(height=170)
+                st.altair_chart(size_bar, use_container_width=True)
+
+        st.markdown('<div class="section-header">Revenue & Margin Signals</div>', unsafe_allow_html=True)
+        rev_col1, rev_col2 = st.columns(2)
+        
+        with rev_col1:
+            st.markdown("**Gross Margin by Product**")
+            with st.container(border=True):
+                margin_df = pd.DataFrame({
+                    'Product': ['UCaaS', 'SIP Trunks', 'SD-WAN', 'Mobile Fleet', 'Security'],
+                    'Margin': [46, 38, 41, 32, 52]
+                })
+                margin_bar = alt.Chart(margin_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Margin:Q', title='Margin %'),
+                    y=alt.Y('Product:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Product:N', alt.Tooltip('Margin:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(margin_bar, use_container_width=True)
+        
+        with rev_col2:
+            st.markdown("**ACV vs Revenue Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                rev_df = pd.DataFrame({
+                    'Month': months * 2,
+                    'Metric': ['ACV'] * 6 + ['Revenue'] * 6,
+                    'Value': [46.2, 47.1, 48.0, 49.2, 50.6, 52.4,
+                              3.8, 3.9, 4.1, 4.3, 4.5, 4.7]
+                })
+                rev_line = alt.Chart(rev_df).mark_line(point=True).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Value:Q', title='£M'),
+                    color=alt.Color('Metric:N', scale=alt.Scale(
+                        domain=['ACV', 'Revenue'], range=['#6366F1', '#10B981']
+                    )),
+                    tooltip=['Month:N', 'Metric:N', alt.Tooltip('Value:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(rev_line, use_container_width=True)
+
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes ent-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes ent-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .ent-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: ent-ops-glow 3s ease-in-out infinite;
+        }
+        .ent-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: ent-ops-sweep 3s linear infinite;
+        }
+        .ent-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .ent-ops-title { font-weight: 700; color: #1E3A8A; }
+        .ent-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .ent-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .ent-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .ent-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .ent-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .ent-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="ent-ops-pulse">
+            <div class="ent-ops-header">
+                <div class="ent-ops-title">💼 Sales Ops Pulse</div>
+                <div class="ent-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="ent-ops-grid">
+                <div class="ent-ops-card">
+                    <div class="ent-ops-label">Renewals Due</div>
+                    <div class="ent-ops-value">42</div>
+                    <div class="ent-ops-delta">£8.4M ACV</div>
+                </div>
+                <div class="ent-ops-card">
+                    <div class="ent-ops-label">At-Risk ACV</div>
+                    <div class="ent-ops-value">£3.2M</div>
+                    <div class="ent-ops-delta">18 contracts</div>
+                </div>
+                <div class="ent-ops-card">
+                    <div class="ent-ops-label">Avg Cycle</div>
+                    <div class="ent-ops-value">64d</div>
+                    <div class="ent-ops-delta">↓ 6d QoQ</div>
+                </div>
+                <div class="ent-ops-card">
+                    <div class="ent-ops-label">Forecast Attain</div>
+                    <div class="ent-ops-value">78%</div>
+                    <div class="ent-ops-delta">Target 85%</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Renewal Operations</div>', unsafe_allow_html=True)
+        renew_col1, renew_col2 = st.columns(2)
+        
+        with renew_col1:
+            st.markdown("**Renewal Risk by Stage**")
+            with st.container(border=True):
+                risk_df = pd.DataFrame({
+                    'Stage': ['Discovery', 'Proposal', 'Negotiation', 'Legal'],
+                    'AtRisk': [6, 8, 5, 4]
+                })
+                risk_bar = alt.Chart(risk_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('AtRisk:Q', title='At-Risk Accounts'),
+                    y=alt.Y('Stage:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Stage:N', 'AtRisk:Q']
+                ).properties(height=170)
+                st.altair_chart(risk_bar, use_container_width=True)
+        
+        with renew_col2:
+            st.markdown("**Sales Cycle Time by Stage**")
+            with st.container(border=True):
+                cycle_df = pd.DataFrame({
+                    'Stage': ['Lead', 'Qualified', 'Proposal', 'Negotiation', 'Closed'],
+                    'Days': [8, 12, 16, 18, 10]
+                })
+                cycle_line = alt.Chart(cycle_df).mark_line(point=True, color='#29B5E8', strokeWidth=2).encode(
+                    x=alt.X('Stage:N', title=None),
+                    y=alt.Y('Days:Q', title='Days'),
+                    tooltip=['Stage:N', 'Days:Q']
+                ).properties(height=170)
+                st.altair_chart(cycle_line, use_container_width=True)
+
+        st.markdown('<div class="section-header">Forecast & Slippage</div>', unsafe_allow_html=True)
+        forecast_col1, forecast_col2 = st.columns(2)
+        
+        with forecast_col1:
+            st.markdown("**Forecast Attainment (Quarterly)**")
+            with st.container(border=True):
+                quarters = ['Q1', 'Q2', 'Q3', 'Q4']
+                forecast_df = pd.DataFrame({
+                    'Quarter': quarters,
+                    'Attainment': [76, 78, 82, 80]
+                })
+                forecast_bar = alt.Chart(forecast_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Attainment:Q', title='%'),
+                    y=alt.Y('Quarter:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Quarter:N', alt.Tooltip('Attainment:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(forecast_bar, use_container_width=True)
+        
+        with forecast_col2:
+            st.markdown("**Pipeline Slippage (Days)**")
+            with st.container(border=True):
+                slip_df = pd.DataFrame({
+                    'Stage': ['Qualified', 'Proposal', 'Negotiation'],
+                    'Slippage': [2, 4, 6]
+                })
+                slip_bar = alt.Chart(slip_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Slippage:Q', title='Days'),
+                    y=alt.Y('Stage:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Stage:N', 'Slippage:Q']
+                ).properties(height=170)
+                st.altair_chart(slip_bar, use_container_width=True)
+
+        st.markdown('<div class="section-header">Team Performance</div>', unsafe_allow_html=True)
+        team_col1, team_col2 = st.columns(2)
+        
+        with team_col1:
+            st.markdown("**Quota Attainment by Team**")
+            with st.container(border=True):
+                team_df = pd.DataFrame({
+                    'Team': ['North', 'South', 'London', 'Midlands'],
+                    'Attainment': [82, 76, 88, 71]
+                })
+                team_bar = alt.Chart(team_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Attainment:Q', title='%'),
+                    y=alt.Y('Team:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Team:N', alt.Tooltip('Attainment:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(team_bar, use_container_width=True)
+        
+        with team_col2:
+            st.markdown("**Average Deal Velocity (Days)**")
+            with st.container(border=True):
+                velocity_df = pd.DataFrame({
+                    'Rep': ['Team A', 'Team B', 'Team C', 'Team D'],
+                    'Days': [52, 58, 61, 67]
+                })
+                velocity_bar = alt.Chart(velocity_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Days:Q', title='Days'),
+                    y=alt.Y('Rep:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Rep:N', 'Days:Q']
+                ).properties(height=170)
+                st.altair_chart(velocity_bar, use_container_width=True)
+        
+        # Sales Pipeline and Renewal Calendar
         pipeline_col, renewal_col = st.columns(2)
         
         with pipeline_col:
@@ -20037,77 +25943,6 @@ def render_vp_enterprise_sales():
                 </div>
                 """, unsafe_allow_html=True)
         
-
-    with tab_strategy:
-        st.markdown('<div class="section-header">VP Enterprise Sales Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
-        
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            with st.container(border=True):
-                st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #DC2626; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 1</span>
-                </div>
-                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Renewal Rate 92%</h4>
-                """, unsafe_allow_html=True)
-                st.markdown("""
-                - Current: **87%** renewal
-                - Gap: **5%** to target
-                - Focus: At-risk accounts
-                - Action: Executive engagement
-                """)
-        with col2:
-            with st.container(border=True):
-                st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #F59E0B; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 2</span>
-                </div>
-                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Expansion £3.5M</h4>
-                """, unsafe_allow_html=True)
-                st.markdown("""
-                - Pipeline: **£2.8M** identified
-                - Target: **£3.5M** closed
-                - Focus: UCaaS upsell
-                - Timeline: Q1-Q2 2026
-                """)
-        with col3:
-            with st.container(border=True):
-                st.markdown("""
-                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
-                    <span style="background: #10B981; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 3</span>
-                </div>
-                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Win Rate 40%</h4>
-                """, unsafe_allow_html=True)
-                st.markdown("""
-                - Current: **34%** win rate
-                - Target: **40%** by Q2
-                - Action: Competitive intel
-                - Training: Battle cards
-                """)
-        
-        st.markdown('<div class="section-header">Ask Snowflake Intelligence</div>', unsafe_allow_html=True)
-        questions = ["What is our B2B contract portfolio value?", "Show me contracts coming up for renewal in 90 days.", "Which contracts have competitive threats?", "What's our at-risk contract value?"]
-        sf_intel_url = "https://ai.snowflake.com/sfseeurope/pjose_aws3"
-        cols = st.columns(2)
-        for i, q in enumerate(questions):
-            with cols[i % 2]:
-                escaped_q = q.replace('"', '&quot;').replace("'", "&#39;")
-                st.markdown(f"""
-                <a href="{sf_intel_url}" target="_blank" onclick="navigator.clipboard.writeText('{escaped_q}')" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="question-card">
-                        <p style="margin-bottom: 1.5rem;"><strong>Q{i+1}:</strong> "{q}"</p>
-                    </div>
-                </a>
-                """, unsafe_allow_html=True)
-        
-        st.markdown(f"""
-        <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: linear-gradient(135deg, #29B5E8 0%, #1A8BC4 100%); border-radius: 8px;">
-            <a href="{sf_intel_url}" target="_blank" style="color: white; text-decoration: none; font-weight: 600; font-size: 1rem;">
-                ❄️ Ask these questions in Snowflake Intelligence →
-            </a>
-        </div>
-        """, unsafe_allow_html=True)
-        
         # B2B Account Health Section
         st.markdown('<div class="section-header">B2B Account Health & Intelligence</div>', unsafe_allow_html=True)
         
@@ -20215,79 +26050,161 @@ def render_vp_enterprise_sales():
                     </div>
                     <div>
                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
-                            <span>Professional Services</span><span style="font-weight: 600;">£4.2M (16%)</span>
+                            <span>Manufacturing</span><span style="font-weight: 600;">£2.4M (9%)</span>
                         </div>
                         <div style="background: #E5E7EB; border-radius: 4px; height: 18px;">
-                            <div style="background: #EC4899; width: 50%; height: 100%; border-radius: 4px;"></div>
+                            <div style="background: #EC4899; width: 29%; height: 100%; border-radius: 4px;"></div>
                         </div>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.75rem; color: #6B7280;">Total B2B Revenue: £26.2M</div>
                 """, unsafe_allow_html=True)
+
+    with tab_strategy:
+        st.markdown("""
+        <style>
+        @keyframes sf-ent-glow { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25); } 50% { box-shadow: 0 0 26px rgba(59,130,246,0.45); } }
+        @keyframes sf-ent-sweep { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+        .sf-ent-pulse { position: relative; overflow: hidden; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border: 1px solid #93C5FD; animation: sf-ent-glow 3s ease-in-out infinite; }
+        .sf-ent-pulse::after { content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: sf-ent-sweep 3s linear infinite; }
+        .sf-ent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-ent-title { font-weight: 700; color: #1E3A8A; }
+        .sf-ent-tag { background: rgba(59,130,246,0.2); color: #1E3A8A; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; }
+        .sf-ent-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-ent-card { background: rgba(255,255,255,0.85); border-radius: 10px; padding: 0.75rem 0.85rem; border: 1px solid rgba(59,130,246,0.2); }
+        .sf-ent-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .sf-ent-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .sf-ent-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="sf-ent-pulse">
+            <div class="sf-ent-header">
+                <div class="sf-ent-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-ent-tag">AI INSIGHTS</div>
+            </div>
+            <div class="sf-ent-grid">
+                <div class="sf-ent-card">
+                    <div class="sf-ent-label">Renewal Forecast</div>
+                    <div class="sf-ent-value">89%</div>
+                    <div class="sf-ent-delta">↑ +2% QoQ</div>
+                </div>
+                <div class="sf-ent-card">
+                    <div class="sf-ent-label">At-Risk ACV</div>
+                    <div class="sf-ent-value">£3.2M</div>
+                    <div class="sf-ent-delta">18 accounts</div>
+                </div>
+                <div class="sf-ent-card">
+                    <div class="sf-ent-label">Expansion</div>
+                    <div class="sf-ent-value">£2.8M</div>
+                    <div class="sf-ent-delta">UCaaS focus</div>
+                </div>
+                <div class="sf-ent-card">
+                    <div class="sf-ent-label">Win Rate</div>
+                    <div class="sf-ent-value">34%</div>
+                    <div class="sf-ent-delta">Target 40%</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
-        # Account Penetration & Concentration
-        pen_col, conc_col = st.columns(2)
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        st.info("Renewal momentum remains strong at 87% with risk concentrated in 18 competitive accounts worth £3.2M. Expansion pipeline is led by UCaaS and SD-WAN, while win rates lag in mid-market segments. Prioritize executive engagement on near-term renewals and accelerate competitive positioning to lift win rate toward 40%.")
         
-        with pen_col:
-            st.markdown("**Product Penetration by Account Size**")
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Renewal Risk Clusters**")
+                st.caption("Five contracts drive 38% of at-risk ACV; most are in London finance accounts.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Pipeline Slippage**")
+                st.caption("Negotiation stage dwell time increased by 4 days, impacting Q2 forecast.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Expansion Hotspots**")
+                st.caption("UCaaS upsell rate is highest in healthcare and public sector renewals.")
+        
+        st.markdown('<div class="section-header">AI‑Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Executive Renewal Plays**")
+                st.caption("Activate executive sponsorship on top 10 at-risk accounts within 2 weeks.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Competitive Countering**")
+                st.caption("Deploy battle cards for BT/Vodafone accounts and bundle SD-WAN offers.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Cycle Time Reduction**")
+                st.caption("Standardize legal templates to cut negotiation stage by 3–5 days.")
+        
+        st.markdown('<div class="section-header">Strategic Priorities</div>', unsafe_allow_html=True)
+        col1, col2, col3 = st.columns(3)
+        with col1:
             with st.container(border=True):
                 st.markdown("""
-                <table style="width: 100%; font-size: 0.8rem; border-collapse: collapse;">
-                    <tr style="border-bottom: 1px solid #E5E7EB;">
-                        <th style="text-align: left; padding: 0.4rem;">Segment</th>
-                        <th style="text-align: center; padding: 0.4rem;">Voice</th>
-                        <th style="text-align: center; padding: 0.4rem;">Data</th>
-                        <th style="text-align: center; padding: 0.4rem;">UCaaS</th>
-                        <th style="text-align: center; padding: 0.4rem;">Security</th>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #E5E7EB;">
-                        <td style="padding: 0.4rem;">Enterprise</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #10B981;">98%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #10B981;">94%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #F59E0B;">62%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #DC2626;">38%</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #E5E7EB;">
-                        <td style="padding: 0.4rem;">Mid-Market</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #10B981;">92%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #10B981;">78%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #DC2626;">34%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #DC2626;">22%</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 0.4rem;">SMB</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #10B981;">85%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #F59E0B;">56%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #DC2626;">18%</td>
-                        <td style="text-align: center; padding: 0.4rem; color: #DC2626;">8%</td>
-                    </tr>
-                </table>
-                <div style="text-align: center; margin-top: 0.5rem; font-size: 0.75rem; color: #29B5E8;">🎯 UCaaS & Security upsell opportunity: £3.2M</div>
+                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                    <span style="background: #DC2626; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 1</span>
+                </div>
+                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Renewal Rate 92%</h4>
                 """, unsafe_allow_html=True)
-        
-        with conc_col:
-            st.markdown("**Revenue Concentration Risk**")
+                st.markdown("""
+                - Current: **87%** renewal
+                - Gap: **5%** to target
+                - Focus: At-risk accounts
+                - Action: Executive engagement
+                """)
+        with col2:
             with st.container(border=True):
                 st.markdown("""
-                <div style="display: flex; justify-content: space-around; text-align: center; padding: 0.5rem 0;">
-                    <div>
-                        <div style="font-size: 1.3rem; font-weight: 700; color: #F59E0B;">42%</div>
-                        <div style="font-size: 0.75rem; color: #6B7280;">Top 10 Accounts</div>
-                        <div style="font-size: 0.7rem; color: #F59E0B;">High concentration</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 1.3rem; font-weight: 700; color: #29B5E8;">68%</div>
-                        <div style="font-size: 0.75rem; color: #6B7280;">Top 50 Accounts</div>
-                    </div>
-                    <div>
-                        <div style="font-size: 1.3rem; font-weight: 700; color: #10B981;">524</div>
-                        <div style="font-size: 0.75rem; color: #6B7280;">Total Accounts</div>
-                    </div>
+                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                    <span style="background: #F59E0B; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 2</span>
                 </div>
-                <div style="margin-top: 0.5rem; padding: 0.5rem; background: #FEF3C7; border-radius: 6px; font-size: 0.75rem;">
-                    <strong>⚠️ Risk Alert:</strong> Top 3 accounts represent 22% of B2B revenue. Diversification needed.
-                </div>
+                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Expansion £3.5M</h4>
                 """, unsafe_allow_html=True)
+                st.markdown("""
+                - Pipeline: **£2.8M** identified
+                - Target: **£3.5M** closed
+                - Focus: UCaaS upsell
+                - Timeline: Q1-Q2 2026
+                """)
+        with col3:
+            with st.container(border=True):
+                st.markdown("""
+                <div style="display: flex; align-items: center; margin-bottom: 0.75rem;">
+                    <span style="background: #10B981; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.7rem; font-weight: 600;">PRIORITY 3</span>
+                </div>
+                <h4 style="color: #1B2A4E; margin: 0 0 0.5rem 0;">Win Rate 40%</h4>
+                """, unsafe_allow_html=True)
+                st.markdown("""
+                - Current: **34%** win rate
+                - Target: **40%** by Q2
+                - Action: Competitive intel
+                - Training: Battle cards
+                """)
+        
+        st.markdown('<div class="section-header">Ask Snowflake Intelligence</div>', unsafe_allow_html=True)
+        questions = ["What is our B2B contract portfolio value?", "Show me contracts coming up for renewal in 90 days.", "Which contracts have competitive threats?", "What's our at-risk contract value?"]
+        sf_intel_url = "https://ai.snowflake.com/sfseeurope/pjose_aws3"
+        cols = st.columns(2)
+        for i, q in enumerate(questions):
+            with cols[i % 2]:
+                escaped_q = q.replace('"', '&quot;').replace("'", "&#39;")
+                st.markdown(f"""
+                <a href="{sf_intel_url}" target="_blank" onclick="navigator.clipboard.writeText('{escaped_q}')" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="question-card">
+                        <p style="margin-bottom: 1.5rem;"><strong>Q{i+1}:</strong> "{q}"</p>
+                    </div>
+                </a>
+                """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div style="text-align: center; margin-top: 1rem; padding: 1rem; background: linear-gradient(135deg, #29B5E8 0%, #1A8BC4 100%); border-radius: 8px;">
+            <a href="{sf_intel_url}" target="_blank" style="color: white; text-decoration: none; font-weight: 600; font-size: 1rem;">
+                ❄️ Ask these questions in Snowflake Intelligence →
+            </a>
+        </div>
+        """, unsafe_allow_html=True)
 
 
 def render_vp_wholesale():
@@ -20302,7 +26219,7 @@ def render_vp_wholesale():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "📶 Wholesale Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -20434,52 +26351,284 @@ def render_vp_wholesale():
                 st.altair_chart(traffic_lines, use_container_width=True)
         
         with growth_col:
-            st.markdown('<div class="section-header">Partner YoY Growth</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-header">Wholesale Revenue Trend</div>', unsafe_allow_html=True)
             with st.container(border=True):
-                st.markdown("""
-                <div style="font-size: 0.85rem;">
-                    <div style="margin-bottom: 0.6rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
-                            <span>GiffGaff</span><span style="font-weight: 600; color: #10B981;">+24%</span>
-                        </div>
-                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
-                            <div style="background: #10B981; width: 100%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 0.6rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
-                            <span>Tesco</span><span style="font-weight: 600; color: #10B981;">+18%</span>
-                        </div>
-                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
-                            <div style="background: #10B981; width: 75%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 0.6rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
-                            <span>Lebara</span><span style="font-weight: 600; color: #10B981;">+12%</span>
-                        </div>
-                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
-                            <div style="background: #10B981; width: 50%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 0.6rem;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
-                            <span>Lyca</span><span style="font-weight: 600; color: #10B981;">+8%</span>
-                        </div>
-                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
-                            <div style="background: #10B981; width: 33%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.2rem;">
-                            <span>iD</span><span style="font-weight: 600; color: #EF4444;">-5%</span>
-                        </div>
-                        <div style="background: #E5E7EB; border-radius: 4px; height: 16px;">
-                            <div style="background: #EF4444; width: 21%; height: 100%; border-radius: 4px;"></div>
-                        </div>
-                    </div>
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                rev_df = pd.DataFrame({
+                    'Month': months,
+                    'Revenue': [3.2, 3.4, 3.6, 3.8, 4.0, 4.2]
+                })
+                rev_line = alt.Chart(rev_df).mark_line(point=True, color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Revenue:Q', title='£M'),
+                    tooltip=['Month:N', alt.Tooltip('Revenue:Q', format='.1f')]
+                ).properties(height=160)
+                st.altair_chart(rev_line, use_container_width=True)
+
+        st.markdown('<div class="section-header">Partner Economics</div>', unsafe_allow_html=True)
+        econ_col1, econ_col2 = st.columns(2)
+        
+        with econ_col1:
+            st.markdown("**ARPU by Partner**")
+            with st.container(border=True):
+                arpu_df = pd.DataFrame({
+                    'Partner': ['Tesco', 'GiffGaff', 'Lebara', 'Lyca', 'iD'],
+                    'ARPU': [5.4, 4.9, 4.6, 4.2, 3.9]
+                })
+                arpu_bar = alt.Chart(arpu_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('ARPU:Q', title='£/sub'),
+                    y=alt.Y('Partner:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Partner:N', alt.Tooltip('ARPU:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(arpu_bar, use_container_width=True)
+        
+        with econ_col2:
+            st.markdown("**Subscriber Share by Partner**")
+            with st.container(border=True):
+                share_df = pd.DataFrame({
+                    'Partner': ['Tesco', 'GiffGaff', 'Lebara', 'Lyca', 'iD'],
+                    'Share': [34, 22, 18, 14, 12]
+                })
+                share_arc = alt.Chart(share_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Partner:N', legend=None, scale=alt.Scale(
+                        range=['#29B5E8', '#10B981', '#F59E0B', '#8B5CF6', '#EC4899']
+                    )),
+                    tooltip=['Partner:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(share_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Roaming & Cost Signals</div>', unsafe_allow_html=True)
+        roam_col1, roam_col2 = st.columns(2)
+        
+        with roam_col1:
+            st.markdown("**Roaming Revenue Mix**")
+            with st.container(border=True):
+                roam_df = pd.DataFrame({
+                    'Type': ['Inbound', 'Outbound', 'Domestic'],
+                    'Share': [18, 12, 70]
+                })
+                roam_arc = alt.Chart(roam_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Type:N', legend=None, scale=alt.Scale(
+                        range=['#F59E0B', '#29B5E8', '#10B981']
+                    )),
+                    tooltip=['Type:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(roam_arc, use_container_width=True)
+        
+        with roam_col2:
+            st.markdown("**Cost per GB by Partner**")
+            with st.container(border=True):
+                cost_df = pd.DataFrame({
+                    'Partner': ['Tesco', 'GiffGaff', 'Lebara', 'Lyca', 'iD'],
+                    'Cost': [0.42, 0.38, 0.46, 0.51, 0.55]
+                })
+                cost_bar = alt.Chart(cost_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Cost:Q', title='£/GB'),
+                    y=alt.Y('Partner:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Partner:N', alt.Tooltip('Cost:Q', format='.2f')]
+                ).properties(height=170)
+                st.altair_chart(cost_bar, use_container_width=True)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes ws-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes ws-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .ws-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: ws-ops-glow 3s ease-in-out infinite;
+        }
+        .ws-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: ws-ops-sweep 3s linear infinite;
+        }
+        .ws-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .ws-ops-title { font-weight: 700; color: #1E3A8A; }
+        .ws-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .ws-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .ws-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .ws-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .ws-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .ws-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="ws-ops-pulse">
+            <div class="ws-ops-header">
+                <div class="ws-ops-title">📶 Wholesale Ops Pulse</div>
+                <div class="ws-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="ws-ops-grid">
+                <div class="ws-ops-card">
+                    <div class="ws-ops-label">Partner Tickets</div>
+                    <div class="ws-ops-value">28</div>
+                    <div class="ws-ops-delta">Open</div>
                 </div>
-                """, unsafe_allow_html=True)
+                <div class="ws-ops-card">
+                    <div class="ws-ops-label">Settlement Risk</div>
+                    <div class="ws-ops-value">£124K</div>
+                    <div class="ws-ops-delta">Overdue</div>
+                </div>
+                <div class="ws-ops-card">
+                    <div class="ws-ops-label">Traffic SLA</div>
+                    <div class="ws-ops-value">99.3%</div>
+                    <div class="ws-ops-delta">Last 7d</div>
+                </div>
+                <div class="ws-ops-card">
+                    <div class="ws-ops-label">Margin</div>
+                    <div class="ws-ops-value">42%</div>
+                    <div class="ws-ops-delta">Target 45%</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Partner Growth & Mix</div>', unsafe_allow_html=True)
+        mix_col1, mix_col2 = st.columns(2)
+        
+        with mix_col1:
+            st.markdown("**Partner YoY Growth**")
+            with st.container(border=True):
+                growth_df = pd.DataFrame({
+                    'Partner': ['GiffGaff', 'Tesco', 'Lebara', 'Lyca', 'iD'],
+                    'Growth': [24, 18, 12, 8, -5]
+                })
+                growth_bar = alt.Chart(growth_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Growth:Q', title='YoY %'),
+                    y=alt.Y('Partner:N', sort='-x', title=None),
+                    color=alt.condition(alt.datum.Growth > 0, alt.value('#10B981'), alt.value('#EF4444')),
+                    tooltip=['Partner:N', alt.Tooltip('Growth:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(growth_bar, use_container_width=True)
+        
+        with mix_col2:
+            st.markdown("**Traffic Mix by Type**")
+            with st.container(border=True):
+                mix_df = pd.DataFrame({
+                    'Type': ['Voice', 'SMS', 'Data'],
+                    'Share': [22, 8, 70]
+                })
+                mix_arc = alt.Chart(mix_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Type:N', legend=None, scale=alt.Scale(
+                        range=['#29B5E8', '#10B981', '#6366F1']
+                    )),
+                    tooltip=['Type:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=190)
+                st.altair_chart(mix_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Partner SLA & Tickets</div>', unsafe_allow_html=True)
+        sla_col1, sla_col2 = st.columns(2)
+        
+        with sla_col1:
+            st.markdown("**Partner SLA Trend (Monthly)**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                sla_df = pd.DataFrame({
+                    'Month': months,
+                    'SLA': [98.7, 98.9, 99.0, 99.1, 99.2, 99.3]
+                })
+                sla_line = alt.Chart(sla_df).mark_line(point=True, color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('SLA:Q', title='%'),
+                    tooltip=['Month:N', alt.Tooltip('SLA:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(sla_line, use_container_width=True)
+        
+        with sla_col2:
+            st.markdown("**Ticket Volume by Partner**")
+            with st.container(border=True):
+                ticket_df = pd.DataFrame({
+                    'Partner': ['Tesco', 'GiffGaff', 'Lebara', 'Lyca', 'iD'],
+                    'Tickets': [6, 5, 8, 4, 5]
+                })
+                ticket_bar = alt.Chart(ticket_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Tickets:Q', title='Tickets'),
+                    y=alt.Y('Partner:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Partner:N', 'Tickets:Q']
+                ).properties(height=170)
+                st.altair_chart(ticket_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Settlement & Margin Ops</div>', unsafe_allow_html=True)
+        settle_col1, settle_col2 = st.columns(2)
+        
+        with settle_col1:
+            st.markdown("**Settlement Aging**")
+            with st.container(border=True):
+                aging_df = pd.DataFrame({
+                    'Bucket': ['0-15d', '16-30d', '31-60d', '60d+'],
+                    'Amount': [2.4, 0.24, 0.12, 0.06]
+                })
+                aging_bar = alt.Chart(aging_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Amount:Q', title='£M'),
+                    y=alt.Y('Bucket:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Bucket:N', alt.Tooltip('Amount:Q', format='.2f')]
+                ).properties(height=170)
+                st.altair_chart(aging_bar, use_container_width=True)
+        
+        with settle_col2:
+            st.markdown("**Margin by Service**")
+            with st.container(border=True):
+                margin_df = pd.DataFrame({
+                    'Service': ['Voice', 'SMS', 'Data', 'Roaming'],
+                    'Margin': [38, 44, 41, 32]
+                })
+                margin_bar = alt.Chart(margin_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Margin:Q', title='%'),
+                    y=alt.Y('Service:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Service:N', alt.Tooltip('Margin:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(margin_bar, use_container_width=True)
         
         col_left, col_right = st.columns([1.3, 1])
         
@@ -20553,11 +26702,87 @@ def render_vp_wholesale():
                     <span style="color: #DC2626;">⚠️ Lebara: 45 days overdue (£68K)</span>
                 </div>
                 """, unsafe_allow_html=True)
-        
 
     with tab_strategy:
-        st.markdown('<div class="section-header">VP Wholesale & MVNO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        @keyframes sf-ws-glow { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25); } 50% { box-shadow: 0 0 26px rgba(59,130,246,0.45); } }
+        @keyframes sf-ws-sweep { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+        .sf-ws-pulse { position: relative; overflow: hidden; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border: 1px solid #93C5FD; animation: sf-ws-glow 3s ease-in-out infinite; }
+        .sf-ws-pulse::after { content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: sf-ws-sweep 3s linear infinite; }
+        .sf-ws-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-ws-title { font-weight: 700; color: #1E3A8A; }
+        .sf-ws-tag { background: rgba(59,130,246,0.2); color: #1E3A8A; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; }
+        .sf-ws-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-ws-card { background: rgba(255,255,255,0.85); border-radius: 10px; padding: 0.75rem 0.85rem; border: 1px solid rgba(59,130,246,0.2); }
+        .sf-ws-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .sf-ws-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .sf-ws-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="sf-ws-pulse">
+            <div class="sf-ws-header">
+                <div class="sf-ws-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-ws-tag">AI INSIGHTS</div>
+            </div>
+            <div class="sf-ws-grid">
+                <div class="sf-ws-card">
+                    <div class="sf-ws-label">Revenue Run-Rate</div>
+                    <div class="sf-ws-value">£4.2M</div>
+                    <div class="sf-ws-delta">↑ +18% YoY</div>
+                </div>
+                <div class="sf-ws-card">
+                    <div class="sf-ws-label">Settlement Risk</div>
+                    <div class="sf-ws-value">£124K</div>
+                    <div class="sf-ws-delta">3 partners</div>
+                </div>
+                <div class="sf-ws-card">
+                    <div class="sf-ws-label">Traffic Growth</div>
+                    <div class="sf-ws-value">+40%</div>
+                    <div class="sf-ws-delta">Data YoY</div>
+                </div>
+                <div class="sf-ws-card">
+                    <div class="sf-ws-label">Margin</div>
+                    <div class="sf-ws-value">42%</div>
+                    <div class="sf-ws-delta">Target 45%</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        st.info("Wholesale revenue continues to climb on strong data traffic growth, but settlement risk remains concentrated in three partners. Margin performance is healthy at 42% yet below target; contract renewal and pricing optimization on high-usage MVNOs can lift profitability. Focus on accelerating IoT MVNO pipeline and tightening overdue enforcement to secure Q1 goals.")
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Partner Growth Leaders**")
+                st.caption("GiffGaff and Tesco account for 60% of net subscriber gains this quarter.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Settlement Risk**")
+                st.caption("Overdue exposure is concentrated in one partner; 45+ days past due.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Traffic Mix Shift**")
+                st.caption("Data now represents 70% of traffic with accelerating roaming usage.")
+        
+        st.markdown('<div class="section-header">AI‑Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Incentivize Data Growth**")
+                st.caption("Introduce tiered volume pricing to capture upside from heavy-usage MVNOs.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Automate Settlement Controls**")
+                st.caption("Trigger auto-suspend workflows at 30+ day overdue thresholds.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Accelerate IoT MVNO Pipeline**")
+                st.caption("Prioritize IoT partner onboarding to unlock £600K incremental revenue.")
+        
+        st.markdown('<div class="section-header">Strategic Priorities</div>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         with col1:
             with st.container(border=True):
@@ -20638,7 +26863,7 @@ def render_vp_retail():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🛍️ Retail Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -20824,6 +27049,40 @@ def render_vp_retail():
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Revenue & Basket Signals</div>', unsafe_allow_html=True)
+        basket_col1, basket_col2 = st.columns(2)
+        
+        with basket_col1:
+            st.markdown("**Average Basket Value (Weekly)**")
+            with st.container(border=True):
+                weeks = [f'W{i}' for i in range(1, 9)]
+                basket_df = pd.DataFrame({
+                    'Week': weeks,
+                    'Basket': [92, 98, 96, 101, 104, 108, 110, 112]
+                })
+                basket_line = alt.Chart(basket_df).mark_line(point=True, color='#6366F1', strokeWidth=2).encode(
+                    x=alt.X('Week:N', sort=weeks, title=None),
+                    y=alt.Y('Basket:Q', title='£'),
+                    tooltip=['Week:N', alt.Tooltip('Basket:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(basket_line, use_container_width=True)
+        
+        with basket_col2:
+            st.markdown("**Revenue by Channel**")
+            with st.container(border=True):
+                channel_df = pd.DataFrame({
+                    'Channel': ['In-Store', 'Click & Collect', 'Assisted Digital', 'Partners'],
+                    'Share': [54, 18, 16, 12]
+                })
+                channel_arc = alt.Chart(channel_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Channel:N', legend=None, scale=alt.Scale(
+                        range=['#29B5E8', '#10B981', '#F59E0B', '#8B5CF6']
+                    )),
+                    tooltip=['Channel:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(channel_arc, use_container_width=True)
         
         col_left, col_right = st.columns([1.3, 1])
         
@@ -20894,6 +27153,39 @@ def render_vp_retail():
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Inventory & Promo Signals</div>', unsafe_allow_html=True)
+        inv_col1, inv_col2 = st.columns(2)
+        
+        with inv_col1:
+            st.markdown("**Inventory Health by Category**")
+            with st.container(border=True):
+                inv_df = pd.DataFrame({
+                    'Category': ['Contract Phones', 'SIM Only', 'Accessories', 'PAYG'],
+                    'Days': [26, 18, 32, 14]
+                })
+                inv_bar = alt.Chart(inv_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Days:Q', title='Days on Hand'),
+                    y=alt.Y('Category:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Category:N', 'Days:Q']
+                ).properties(height=170)
+                st.altair_chart(inv_bar, use_container_width=True)
+        
+        with inv_col2:
+            st.markdown("**Promo Lift vs Baseline**")
+            with st.container(border=True):
+                promo_df = pd.DataFrame({
+                    'Promo': ['Handset Bundle', 'Trade-In', 'Family Plan', 'SIM Only'],
+                    'Lift': [22, 18, 14, 9]
+                })
+                promo_bar = alt.Chart(promo_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Lift:Q', title='Lift %'),
+                    y=alt.Y('Promo:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Promo:N', alt.Tooltip('Lift:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(promo_bar, use_container_width=True)
         
         # In-Store Customer Behavior Section
         st.markdown('<div class="section-header">In-Store Customer Behavior</div>', unsafe_allow_html=True)
@@ -21093,9 +27385,283 @@ def render_vp_retail():
                 """, unsafe_allow_html=True)
         
 
-    with tab_strategy:
-        st.markdown('<div class="section-header">VP Retail Operations Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes retail-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes retail-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .retail-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: retail-ops-glow 3s ease-in-out infinite;
+        }
+        .retail-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: retail-ops-sweep 3s linear infinite;
+        }
+        .retail-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .retail-ops-title { font-weight: 700; color: #1E3A8A; }
+        .retail-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .retail-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .retail-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .retail-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .retail-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .retail-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="retail-ops-pulse">
+            <div class="retail-ops-header">
+                <div class="retail-ops-title">🛍️ Retail Ops Pulse</div>
+                <div class="retail-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="retail-ops-grid">
+                <div class="retail-ops-card">
+                    <div class="retail-ops-label">Open Tickets</div>
+                    <div class="retail-ops-value">56</div>
+                    <div class="retail-ops-delta">Store ops</div>
+                </div>
+                <div class="retail-ops-card">
+                    <div class="retail-ops-label">Staffed Shifts</div>
+                    <div class="retail-ops-value">94%</div>
+                    <div class="retail-ops-delta">Target 96%</div>
+                </div>
+                <div class="retail-ops-card">
+                    <div class="retail-ops-label">Promo Compliance</div>
+                    <div class="retail-ops-value">88%</div>
+                    <div class="retail-ops-delta">Last audit</div>
+                </div>
+                <div class="retail-ops-card">
+                    <div class="retail-ops-label">Stockouts</div>
+                    <div class="retail-ops-value">14</div>
+                    <div class="retail-ops-delta">Critical SKUs</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Store Ops Performance</div>', unsafe_allow_html=True)
+        ops_col1, ops_col2 = st.columns(2)
+        
+        with ops_col1:
+            st.markdown("**Queue Time by Store Type**")
+            with st.container(border=True):
+                queue_df = pd.DataFrame({
+                    'Store Type': ['Flagship', 'Standard', 'Express', 'Kiosk'],
+                    'Minutes': [7.2, 6.1, 5.4, 4.2]
+                })
+                queue_bar = alt.Chart(queue_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Minutes:Q', title='Minutes'),
+                    y=alt.Y('Store Type:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Store Type:N', alt.Tooltip('Minutes:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(queue_bar, use_container_width=True)
+        
+        with ops_col2:
+            st.markdown("**Staffing Coverage (Weekly)**")
+            with st.container(border=True):
+                weeks = [f'W{i}' for i in range(1, 9)]
+                staff_df = pd.DataFrame({
+                    'Week': weeks,
+                    'Coverage': [91, 93, 94, 92, 95, 96, 94, 94]
+                })
+                staff_line = alt.Chart(staff_df).mark_line(point=True, color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Week:N', sort=weeks, title=None),
+                    y=alt.Y('Coverage:Q', title='%'),
+                    tooltip=['Week:N', alt.Tooltip('Coverage:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(staff_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Returns & Service Ops</div>', unsafe_allow_html=True)
+        ret_col1, ret_col2 = st.columns(2)
+        
+        with ret_col1:
+            st.markdown("**Return Rate by Category**")
+            with st.container(border=True):
+                ret_df = pd.DataFrame({
+                    'Category': ['Contract Phones', 'Accessories', 'SIM Only', 'PAYG'],
+                    'Rate': [6.2, 4.1, 2.8, 3.4]
+                })
+                ret_bar = alt.Chart(ret_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Rate:Q', title='%'),
+                    y=alt.Y('Category:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Category:N', alt.Tooltip('Rate:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(ret_bar, use_container_width=True)
+        
+        with ret_col2:
+            st.markdown("**Service Ticket Resolution**")
+            with st.container(border=True):
+                res_df = pd.DataFrame({
+                    'Stage': ['Same Day', '1-2 Days', '3-5 Days', '5+ Days'],
+                    'Share': [42, 31, 18, 9]
+                })
+                res_arc = alt.Chart(res_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Stage:N', legend=None, scale=alt.Scale(
+                        range=['#10B981', '#29B5E8', '#F59E0B', '#EF4444']
+                    )),
+                    tooltip=['Stage:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(res_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Store Compliance & Loss</div>', unsafe_allow_html=True)
+        comp_col1, comp_col2 = st.columns(2)
+        
+        with comp_col1:
+            st.markdown("**Promo Compliance by Region**")
+            with st.container(border=True):
+                comp_df = pd.DataFrame({
+                    'Region': ['London', 'North', 'South East', 'Midlands', 'Scotland'],
+                    'Compliance': [92, 86, 88, 84, 90]
+                })
+                comp_bar = alt.Chart(comp_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Compliance:Q', title='%'),
+                    y=alt.Y('Region:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Region:N', alt.Tooltip('Compliance:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(comp_bar, use_container_width=True)
+        
+        with comp_col2:
+            st.markdown("**Shrinkage by Store Type**")
+            with st.container(border=True):
+                shrink_df = pd.DataFrame({
+                    'Store Type': ['Flagship', 'Standard', 'Express', 'Kiosk'],
+                    'Shrinkage': [1.2, 0.9, 0.7, 0.5]
+                })
+                shrink_bar = alt.Chart(shrink_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Shrinkage:Q', title='%'),
+                    y=alt.Y('Store Type:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Store Type:N', alt.Tooltip('Shrinkage:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(shrink_bar, use_container_width=True)
+
+    with tab_strategy:
+        st.markdown("""
+        <style>
+        @keyframes sf-retail-glow { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25); } 50% { box-shadow: 0 0 26px rgba(59,130,246,0.45); } }
+        @keyframes sf-retail-sweep { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+        .sf-retail-pulse { position: relative; overflow: hidden; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border: 1px solid #93C5FD; animation: sf-retail-glow 3s ease-in-out infinite; }
+        .sf-retail-pulse::after { content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: sf-retail-sweep 3s linear infinite; }
+        .sf-retail-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-retail-title { font-weight: 700; color: #1E3A8A; }
+        .sf-retail-tag { background: rgba(59,130,246,0.2); color: #1E3A8A; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; }
+        .sf-retail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-retail-card { background: rgba(255,255,255,0.85); border-radius: 10px; padding: 0.75rem 0.85rem; border: 1px solid rgba(59,130,246,0.2); }
+        .sf-retail-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .sf-retail-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .sf-retail-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="sf-retail-pulse">
+            <div class="sf-retail-header">
+                <div class="sf-retail-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-retail-tag">AI INSIGHTS</div>
+            </div>
+            <div class="sf-retail-grid">
+                <div class="sf-retail-card">
+                    <div class="sf-retail-label">Conversion</div>
+                    <div class="sf-retail-value">24%</div>
+                    <div class="sf-retail-delta">Target 28%</div>
+                </div>
+                <div class="sf-retail-card">
+                    <div class="sf-retail-label">Footfall</div>
+                    <div class="sf-retail-value">142K</div>
+                    <div class="sf-retail-delta">MTD</div>
+                </div>
+                <div class="sf-retail-card">
+                    <div class="sf-retail-label">Sales/Sq Ft</div>
+                    <div class="sf-retail-value">£142</div>
+                    <div class="sf-retail-delta">Target £160</div>
+                </div>
+                <div class="sf-retail-card">
+                    <div class="sf-retail-label">Underperforming</div>
+                    <div class="sf-retail-value">12</div>
+                    <div class="sf-retail-delta">Stores</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        st.info("Retail performance is improving with rising basket values and strong footfall, but conversion remains below target in several regions. Inventory pressure in accessories and promo compliance gaps are creating missed revenue opportunities. Prioritize staffing coverage and store coaching in underperforming locations to lift conversion and sales per square foot.")
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Conversion Hotspots**")
+                st.caption("London flagships outperform by +6% conversion vs network average.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Basket Value Lift**")
+                st.caption("Accessory attach rate correlates with 18% higher basket size.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Promo Compliance Gaps**")
+                st.caption("Midlands stores show the lowest promo compliance at 84%.")
+        
+        st.markdown('<div class="section-header">AI‑Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Staffing Optimization**")
+                st.caption("Align peak-hour staffing to lift conversion by 2–3 points.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Merchandising Reset**")
+                st.caption("Refresh accessory bays to increase attach and reduce stockouts.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Store Coaching**")
+                st.caption("Target 12 underperforming stores with coaching and incentives.")
+        
+        st.markdown('<div class="section-header">Strategic Priorities</div>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         with col1:
             with st.container(border=True):
@@ -21206,7 +27772,7 @@ def render_chro_people():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "👥 People Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -21389,6 +27955,39 @@ def render_chro_people():
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+
+        st.markdown('<div class="section-header">Talent & Retention Signals</div>', unsafe_allow_html=True)
+        talent_col1, talent_col2 = st.columns(2)
+        
+        with talent_col1:
+            st.markdown("**Attrition by Department**")
+            with st.container(border=True):
+                attr_df = pd.DataFrame({
+                    'Department': ['Contact Centre', 'Network Ops', 'Sales', 'IT', 'Corporate'],
+                    'Attrition': [18, 12, 14, 9, 7]
+                })
+                attr_bar = alt.Chart(attr_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Attrition:Q', title='%'),
+                    y=alt.Y('Department:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Department:N', alt.Tooltip('Attrition:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(attr_bar, use_container_width=True)
+        
+        with talent_col2:
+            st.markdown("**Internal Mobility Rate**")
+            with st.container(border=True):
+                quarters = ['Q1 25', 'Q2 25', 'Q3 25', 'Q4 25', 'Q1 26']
+                mobility_df = pd.DataFrame({
+                    'Quarter': quarters,
+                    'Mobility': [6.2, 6.8, 7.4, 7.9, 8.4]
+                })
+                mobility_line = alt.Chart(mobility_df).mark_line(point=True, color='#6366F1', strokeWidth=2).encode(
+                    x=alt.X('Quarter:N', sort=quarters, title=None),
+                    y=alt.Y('Mobility:Q', title='%'),
+                    tooltip=['Quarter:N', alt.Tooltip('Mobility:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(mobility_line, use_container_width=True)
         
         col_left, col_right = st.columns([1.3, 1])
         
@@ -21465,9 +28064,282 @@ def render_chro_people():
                 """, unsafe_allow_html=True)
         
 
-    with tab_strategy:
-        st.markdown('<div class="section-header">CHRO Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes chro-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes chro-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .chro-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: chro-ops-glow 3s ease-in-out infinite;
+        }
+        .chro-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: chro-ops-sweep 3s linear infinite;
+        }
+        .chro-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .chro-ops-title { font-weight: 700; color: #1E3A8A; }
+        .chro-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .chro-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .chro-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .chro-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .chro-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .chro-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="chro-ops-pulse">
+            <div class="chro-ops-header">
+                <div class="chro-ops-title">👥 People Ops Pulse</div>
+                <div class="chro-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="chro-ops-grid">
+                <div class="chro-ops-card">
+                    <div class="chro-ops-label">Active Cases</div>
+                    <div class="chro-ops-value">96</div>
+                    <div class="chro-ops-delta">HR tickets</div>
+                </div>
+                <div class="chro-ops-card">
+                    <div class="chro-ops-label">Offer Accept</div>
+                    <div class="chro-ops-value">82%</div>
+                    <div class="chro-ops-delta">Last 30d</div>
+                </div>
+                <div class="chro-ops-card">
+                    <div class="chro-ops-label">Time to Fill</div>
+                    <div class="chro-ops-value">32d</div>
+                    <div class="chro-ops-delta">↓ 8d</div>
+                </div>
+                <div class="chro-ops-card">
+                    <div class="chro-ops-label">Training Done</div>
+                    <div class="chro-ops-value">94%</div>
+                    <div class="chro-ops-delta">MTD</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Recruiting Operations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2 = st.columns(2)
+        
+        with rec_col1:
+            st.markdown("**Offer Acceptance by Role**")
+            with st.container(border=True):
+                offer_df = pd.DataFrame({
+                    'Role': ['Engineering', 'Sales', 'Retail', 'Corporate'],
+                    'Acceptance': [78, 84, 88, 80]
+                })
+                offer_bar = alt.Chart(offer_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Acceptance:Q', title='%'),
+                    y=alt.Y('Role:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Role:N', alt.Tooltip('Acceptance:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(offer_bar, use_container_width=True)
+        
+        with rec_col2:
+            st.markdown("**Time-to-Fill by Department**")
+            with st.container(border=True):
+                ttf_df = pd.DataFrame({
+                    'Department': ['Contact Centre', 'Network Ops', 'Sales', 'IT', 'Corporate'],
+                    'Days': [38, 34, 29, 36, 26]
+                })
+                ttf_bar = alt.Chart(ttf_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Days:Q', title='Days'),
+                    y=alt.Y('Department:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Department:N', 'Days:Q']
+                ).properties(height=170)
+                st.altair_chart(ttf_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Learning & Performance</div>', unsafe_allow_html=True)
+        learn_col1, learn_col2 = st.columns(2)
+        
+        with learn_col1:
+            st.markdown("**Training Completion by Department**")
+            with st.container(border=True):
+                train_df = pd.DataFrame({
+                    'Department': ['Contact Centre', 'Network Ops', 'Sales', 'IT', 'Corporate'],
+                    'Completion': [88, 92, 94, 90, 96]
+                })
+                train_bar = alt.Chart(train_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Completion:Q', title='%'),
+                    y=alt.Y('Department:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Department:N', alt.Tooltip('Completion:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(train_bar, use_container_width=True)
+        
+        with learn_col2:
+            st.markdown("**Performance Rating Mix**")
+            with st.container(border=True):
+                perf_df = pd.DataFrame({
+                    'Rating': ['Exceeds', 'Meets', 'Below'],
+                    'Share': [18, 68, 14]
+                })
+                perf_arc = alt.Chart(perf_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Rating:N', legend=None, scale=alt.Scale(
+                        range=['#10B981', '#29B5E8', '#EF4444']
+                    )),
+                    tooltip=['Rating:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(perf_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Workforce Risk & Capacity</div>', unsafe_allow_html=True)
+        cap_col1, cap_col2 = st.columns(2)
+        
+        with cap_col1:
+            st.markdown("**Absence Rate by Department**")
+            with st.container(border=True):
+                abs_df = pd.DataFrame({
+                    'Department': ['Contact Centre', 'Network Ops', 'Sales', 'IT', 'Corporate'],
+                    'Absence': [4.2, 3.1, 2.8, 2.4, 1.9]
+                })
+                abs_bar = alt.Chart(abs_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Absence:Q', title='%'),
+                    y=alt.Y('Department:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Department:N', alt.Tooltip('Absence:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(abs_bar, use_container_width=True)
+        
+        with cap_col2:
+            st.markdown("**Span of Control**")
+            with st.container(border=True):
+                span_df = pd.DataFrame({
+                    'Layer': ['Exec', 'Senior Mgr', 'Mgr', 'Lead'],
+                    'Span': [5.2, 6.8, 8.1, 9.4]
+                })
+                span_line = alt.Chart(span_df).mark_line(point=True, color='#8B5CF6', strokeWidth=2).encode(
+                    x=alt.X('Layer:N', title=None),
+                    y=alt.Y('Span:Q', title='Direct reports'),
+                    tooltip=['Layer:N', alt.Tooltip('Span:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(span_line, use_container_width=True)
+
+    with tab_strategy:
+        st.markdown("""
+        <style>
+        @keyframes sf-chro-glow { 0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.25); } 50% { box-shadow: 0 0 26px rgba(59,130,246,0.45); } }
+        @keyframes sf-chro-sweep { 0% { transform: translateX(-100%); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+        .sf-chro-pulse { position: relative; overflow: hidden; border-radius: 14px; padding: 1.25rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border: 1px solid #93C5FD; animation: sf-chro-glow 3s ease-in-out infinite; }
+        .sf-chro-pulse::after { content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent); animation: sf-chro-sweep 3s linear infinite; }
+        .sf-chro-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .sf-chro-title { font-weight: 700; color: #1E3A8A; }
+        .sf-chro-tag { background: rgba(59,130,246,0.2); color: #1E3A8A; padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em; }
+        .sf-chro-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; position: relative; z-index: 1; }
+        .sf-chro-card { background: rgba(255,255,255,0.85); border-radius: 10px; padding: 0.75rem 0.85rem; border: 1px solid rgba(59,130,246,0.2); }
+        .sf-chro-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .sf-chro-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .sf-chro-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="sf-chro-pulse">
+            <div class="sf-chro-header">
+                <div class="sf-chro-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="sf-chro-tag">AI INSIGHTS</div>
+            </div>
+            <div class="sf-chro-grid">
+                <div class="sf-chro-card">
+                    <div class="sf-chro-label">Engagement</div>
+                    <div class="sf-chro-value">3.8/5</div>
+                    <div class="sf-chro-delta">Target 4.0</div>
+                </div>
+                <div class="sf-chro-card">
+                    <div class="sf-chro-label">Attrition</div>
+                    <div class="sf-chro-value">14%</div>
+                    <div class="sf-chro-delta">↓ 2% YoY</div>
+                </div>
+                <div class="sf-chro-card">
+                    <div class="sf-chro-label">Hiring Velocity</div>
+                    <div class="sf-chro-value">32d</div>
+                    <div class="sf-chro-delta">Time to fill</div>
+                </div>
+                <div class="sf-chro-card">
+                    <div class="sf-chro-label">Training</div>
+                    <div class="sf-chro-value">94%</div>
+                    <div class="sf-chro-delta">Completion</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        st.info("Engagement and eNPS continue to improve, but attrition remains elevated in contact centre roles. Hiring velocity is trending in the right direction while training completion is strong. Prioritize retention programs for high-attrition teams and accelerate internal mobility to close critical skills gaps.")
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2, sig_col3 = st.columns(3)
+        with sig_col1:
+            with st.container(border=True):
+                st.markdown("**Attrition Hotspots**")
+                st.caption("Contact Centre attrition remains the highest at 18% despite improved engagement.")
+        with sig_col2:
+            with st.container(border=True):
+                st.markdown("**Skills Gap Risk**")
+                st.caption("5G Core and AI/ML remain critical gaps with limited internal pipeline.")
+        with sig_col3:
+            with st.container(border=True):
+                st.markdown("**Mobility Lift**")
+                st.caption("Internal mobility up to 8.4% as mentoring and rotations expand.")
+        
+        st.markdown('<div class="section-header">AI‑Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        rec_col1, rec_col2, rec_col3 = st.columns(3)
+        with rec_col1:
+            with st.container(border=True):
+                st.markdown("**Targeted Retention**")
+                st.caption("Deploy retention packages for contact centre and high-performer cohorts.")
+        with rec_col2:
+            with st.container(border=True):
+                st.markdown("**Skills Acceleration**")
+                st.caption("Expand 5G and AI/ML bootcamps to certify 200 employees by Q2.")
+        with rec_col3:
+            with st.container(border=True):
+                st.markdown("**Manager Enablement**")
+                st.caption("Scale manager training to lift engagement by 0.2 points.")
+        
+        st.markdown('<div class="section-header">Strategic Priorities</div>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3)
         with col1:
             with st.container(border=True):
@@ -21548,7 +28420,7 @@ def render_vp_legal():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "⚖️ Legal Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -21658,7 +28530,205 @@ def render_vp_legal():
         </div>
         """, unsafe_allow_html=True)
         
-        # New: Legal Spend Trend and Risk Matrix
+        st.markdown('<div class="section-header">Contract Health Signals</div>', unsafe_allow_html=True)
+        health_col1, health_col2 = st.columns(2)
+        
+        with health_col1:
+            st.markdown("**Renewals by Risk Tier**")
+            with st.container(border=True):
+                risk_df = pd.DataFrame({
+                    'Tier': ['Low', 'Medium', 'High'],
+                    'Contracts': [24, 12, 6]
+                })
+                risk_bar = alt.Chart(risk_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Contracts:Q', title='Contracts'),
+                    y=alt.Y('Tier:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Tier:N', 'Contracts:Q']
+                ).properties(height=170)
+                st.altair_chart(risk_bar, use_container_width=True)
+        
+        with health_col2:
+            st.markdown("**Dispute Resolution Time**")
+            with st.container(border=True):
+                dispute_df = pd.DataFrame({
+                    'Stage': ['Intake', 'Review', 'Negotiation', 'Closure'],
+                    'Days': [5, 9, 14, 7]
+                })
+                dispute_bar = alt.Chart(dispute_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Days:Q', title='Days'),
+                    y=alt.Y('Stage:N', sort='-x', title=None),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Stage:N', 'Days:Q']
+                ).properties(height=170)
+                st.altair_chart(dispute_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Regulatory & Litigation Signals</div>', unsafe_allow_html=True)
+        reg_col1, reg_col2 = st.columns(2)
+        
+        with reg_col1:
+            st.markdown("**Regulatory Findings Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                findings_df = pd.DataFrame({
+                    'Month': months,
+                    'Findings': [6, 5, 7, 4, 3, 3]
+                })
+                findings_line = alt.Chart(findings_df).mark_line(point=True, color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Findings:Q', title='Findings'),
+                    tooltip=['Month:N', 'Findings:Q']
+                ).properties(height=170)
+                st.altair_chart(findings_line, use_container_width=True)
+        
+        with reg_col2:
+            st.markdown("**Litigation Mix**")
+            with st.container(border=True):
+                mix_df = pd.DataFrame({
+                    'Type': ['Contract', 'Employment', 'Regulatory', 'IP'],
+                    'Share': [42, 24, 20, 14]
+                })
+                mix_arc = alt.Chart(mix_df).mark_arc(innerRadius=55).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color(
+                        'Type:N',
+                        legend=alt.Legend(orient='bottom', title=None, direction='horizontal'),
+                        scale=alt.Scale(range=['#EF4444', '#3B82F6', '#F59E0B', '#8B5CF6'])
+                    ),
+                    tooltip=['Type:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=170)
+                st.altair_chart(mix_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Complaints & Privacy Signals</div>', unsafe_allow_html=True)
+        comp_col1, comp_col2 = st.columns(2)
+        
+        with comp_col1:
+            st.markdown("**Ombudsman Cases Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                omb_df = pd.DataFrame({
+                    'Month': months,
+                    'Cases': [9, 10, 8, 7, 8, 8]
+                })
+                omb_line = alt.Chart(omb_df).mark_line(point=True, color='#F59E0B', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Cases:Q', title='Cases'),
+                    tooltip=['Month:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(omb_line, use_container_width=True)
+        
+        with comp_col2:
+            st.markdown("**GDPR Request Mix**")
+            with st.container(border=True):
+                gdpr_df = pd.DataFrame({
+                    'Type': ['Access', 'Deletion', 'Portability', 'Correction'],
+                    'Requests': [12, 6, 4, 2]
+                })
+                gdpr_bar = alt.Chart(gdpr_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Requests:Q', title='Requests'),
+                    y=alt.Y('Type:N', sort='-x', title=None),
+                    color=alt.value('#29B5E8'),
+                    tooltip=['Type:N', 'Requests:Q']
+                ).properties(height=170)
+                st.altair_chart(gdpr_bar, use_container_width=True)
+        
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes legal-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 24px rgba(59,130,246,0.4); }
+        }
+        @keyframes legal-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .legal-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: legal-ops-glow 3s ease-in-out infinite;
+        }
+        .legal-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: legal-ops-sweep 3s linear infinite;
+        }
+        .legal-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .legal-ops-title { font-weight: 700; color: #1E3A8A; }
+        .legal-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .legal-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .legal-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .legal-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .legal-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .legal-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        </style>
+        <div class="legal-ops-pulse">
+            <div class="legal-ops-header">
+                <div class="legal-ops-title">⚖️ Legal Ops Pulse</div>
+                <div class="legal-ops-tag">LIVE OPS</div>
+            </div>
+            <div class="legal-ops-grid">
+                <div class="legal-ops-card">
+                    <div class="legal-ops-label">Active Matters</div>
+                    <div class="legal-ops-value">18</div>
+                    <div class="legal-ops-delta">Open disputes</div>
+                </div>
+                <div class="legal-ops-card">
+                    <div class="legal-ops-label">Risk Exposure</div>
+                    <div class="legal-ops-value">£420K</div>
+                    <div class="legal-ops-delta">MTD</div>
+                </div>
+                <div class="legal-ops-card">
+                    <div class="legal-ops-label">SLA Credits</div>
+                    <div class="legal-ops-value">£12.4K</div>
+                    <div class="legal-ops-delta">Liability</div>
+                </div>
+                <div class="legal-ops-card">
+                    <div class="legal-ops-label">Compliance</div>
+                    <div class="legal-ops-value">97.8%</div>
+                    <div class="legal-ops-delta">Ofcom</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
         spend_col, risk_col = st.columns(2)
         
         with spend_col:
@@ -21787,6 +28857,113 @@ def render_vp_legal():
                 </div>
                 """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Matter Lifecycle & SLA Performance</div>', unsafe_allow_html=True)
+        life_col1, life_col2 = st.columns(2)
+        
+        with life_col1:
+            st.markdown("**Matter Aging Buckets**")
+            with st.container(border=True):
+                aging_df = pd.DataFrame({
+                    'Bucket': ['0-30d', '31-60d', '61-90d', '90d+'],
+                    'Matters': [6, 5, 4, 3]
+                })
+                aging_bar = alt.Chart(aging_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Matters:Q', title='Open Matters'),
+                    y=alt.Y('Bucket:N', sort='-x', title=None),
+                    color=alt.value('#F97316'),
+                    tooltip=['Bucket:N', 'Matters:Q']
+                ).properties(height=170)
+                st.altair_chart(aging_bar, use_container_width=True)
+        
+        with life_col2:
+            st.markdown("**SLA Compliance Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                sla_df = pd.DataFrame({
+                    'Month': months,
+                    'Compliance': [96.8, 97.2, 97.6, 98.1, 97.9, 97.8]
+                })
+                sla_line = alt.Chart(sla_df).mark_line(point=True, color='#2563EB', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Compliance:Q', title='Compliance %', scale=alt.Scale(domain=[95, 100])),
+                    tooltip=['Month:N', alt.Tooltip('Compliance:Q', format='.1f')]
+                ).properties(height=170)
+                st.altair_chart(sla_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Workload & Resolution Flow</div>', unsafe_allow_html=True)
+        work_col1, work_col2 = st.columns(2)
+        
+        with work_col1:
+            st.markdown("**Case Volume by Practice**")
+            with st.container(border=True):
+                practice_df = pd.DataFrame({
+                    'Practice': ['Contracts', 'Employment', 'Regulatory', 'IP'],
+                    'Cases': [7, 5, 4, 2]
+                })
+                practice_bar = alt.Chart(practice_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Practice:N', title=None),
+                    y=alt.Y('Cases:Q', title='Cases'),
+                    color=alt.value('#10B981'),
+                    tooltip=['Practice:N', 'Cases:Q']
+                ).properties(height=170)
+                st.altair_chart(practice_bar, use_container_width=True)
+        
+        with work_col2:
+            st.markdown("**Settlement Pipeline (Weekly)**")
+            with st.container(border=True):
+                weeks = ['W1', 'W2', 'W3', 'W4', 'W5', 'W6']
+                settle_df = pd.DataFrame({
+                    'Week': weeks,
+                    'Open': [12, 12, 11, 10, 9, 9],
+                    'In Negotiation': [6, 7, 6, 6, 5, 4],
+                    'Closed': [2, 3, 4, 5, 6, 7]
+                })
+                settle_area = alt.Chart(settle_df).transform_fold(
+                    ['Open', 'In Negotiation', 'Closed'],
+                    as_=['Stage', 'Count']
+                ).mark_area(opacity=0.5).encode(
+                    x=alt.X('Week:N', sort=weeks, title=None),
+                    y=alt.Y('Count:Q', title='Matters'),
+                    color=alt.Color('Stage:N', scale=alt.Scale(range=['#F97316', '#60A5FA', '#22C55E'])),
+                    tooltip=['Stage:N', 'Count:Q']
+                ).properties(height=170)
+                st.altair_chart(settle_area, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Matter Aging & Counsel Mix</div>', unsafe_allow_html=True)
+        age_col, counsel_col = st.columns(2)
+        
+        with age_col:
+            st.markdown("**Matter Aging Buckets**")
+            with st.container(border=True):
+                aging_df = pd.DataFrame({
+                    'Bucket': ['0-30d', '31-60d', '61-90d', '90d+'],
+                    'Matters': [6, 5, 4, 3]
+                })
+                aging_bar = alt.Chart(aging_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Matters:Q', title='Matters'),
+                    y=alt.Y('Bucket:N', sort='-x', title=None),
+                    color=alt.value('#2563EB'),
+                    tooltip=['Bucket:N', 'Matters:Q']
+                ).properties(height=170)
+                st.altair_chart(aging_bar, use_container_width=True)
+        
+        with counsel_col:
+            st.markdown("**Outside Counsel Mix**")
+            with st.container(border=True):
+                counsel_df = pd.DataFrame({
+                    'Firm': ['Alpha', 'North & Co', 'Lexis', 'Kite'],
+                    'Share': [38, 26, 20, 16]
+                })
+                counsel_arc = alt.Chart(counsel_df).mark_arc(innerRadius=50).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color(
+                        'Firm:N',
+                        legend=alt.Legend(orient='bottom', title=None, direction='horizontal'),
+                        scale=alt.Scale(range=['#60A5FA', '#34D399', '#FBBF24', '#A78BFA'])
+                    ),
+                    tooltip=['Firm:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=190)
+                st.altair_chart(counsel_arc, use_container_width=True)
 
     with tab_strategy:
         st.markdown('<div class="section-header">VP Legal Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
@@ -21871,7 +29048,7 @@ def render_vp_product():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧭 Product Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -22105,8 +29282,407 @@ def render_vp_product():
                 </div>
                 """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Plan Performance Signals</div>', unsafe_allow_html=True)
+        perf_col1, perf_col2 = st.columns(2)
+        
+        with perf_col1:
+            st.markdown("**Subscriber Growth by Plan**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                growth_df = pd.DataFrame({
+                    'Month': months,
+                    'Unlimited 5G': [7.8, 8.1, 8.3, 8.4, 8.5, 8.7],
+                    'Essential 10GB': [5.9, 6.1, 6.2, 6.3, 6.3, 6.4],
+                    'SIM Only': [2.4, 2.5, 2.6, 2.7, 2.8, 2.9]
+                })
+                growth_line = alt.Chart(growth_df).transform_fold(
+                    ['Unlimited 5G', 'Essential 10GB', 'SIM Only'],
+                    as_=['Plan', 'Subscribers']
+                ).mark_line(point=True).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Subscribers:Q', title='Subscribers (M)'),
+                    color=alt.Color('Plan:N', scale=alt.Scale(range=['#29B5E8', '#10B981', '#F59E0B'])),
+                    tooltip=['Month:N', 'Plan:N', alt.Tooltip('Subscribers:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(growth_line, use_container_width=True)
+        
+        with perf_col2:
+            st.markdown("**Churn Risk by Plan**")
+            with st.container(border=True):
+                churn_df = pd.DataFrame({
+                    'Plan': ['Unlimited 5G', 'Essential 10GB', 'SIM Only', 'PAYG'],
+                    'Risk': [1.8, 2.6, 3.2, 4.4]
+                })
+                churn_bar = alt.Chart(churn_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Risk:Q', title='Risk %'),
+                    y=alt.Y('Plan:N', sort='-x', title=None),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Plan:N', alt.Tooltip('Risk:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(churn_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Value & Usage Signals</div>', unsafe_allow_html=True)
+        value_col1, value_col2 = st.columns(2)
+        
+        with value_col1:
+            st.markdown("**Add-on Attachment Rate**")
+            with st.container(border=True):
+                add_on_df = pd.DataFrame({
+                    'Add-on': ['Roaming', 'Streaming', 'Device Protect', 'Cloud'],
+                    'Attach': [22, 18, 15, 10]
+                })
+                add_on_bar = alt.Chart(add_on_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Add-on:N', title=None),
+                    y=alt.Y('Attach:Q', title='Attach %'),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Add-on:N', alt.Tooltip('Attach:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(add_on_bar, use_container_width=True)
+        
+        with value_col2:
+            st.markdown("**Data Utilization by Plan**")
+            with st.container(border=True):
+                util_df = pd.DataFrame({
+                    'Plan': ['Unlimited 5G', 'Essential 10GB', 'SIM Only', 'PAYG'],
+                    'Utilization': [78, 64, 58, 42]
+                })
+                util_bar = alt.Chart(util_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Utilization:Q', title='Utilization %'),
+                    y=alt.Y('Plan:N', sort='-x', title=None),
+                    color=alt.value('#14B8A6'),
+                    tooltip=['Plan:N', alt.Tooltip('Utilization:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(util_bar, use_container_width=True)
+        
 
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes product-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(59,130,246,0.2); }
+            50% { box-shadow: 0 0 22px rgba(59,130,246,0.4); }
+        }
+        @keyframes product-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .product-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%);
+            border: 1px solid #93C5FD;
+            animation: product-ops-glow 3s ease-in-out infinite;
+        }
+        .product-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: product-ops-sweep 3s linear infinite;
+        }
+        .product-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .product-ops-title { font-weight: 700; color: #1E3A8A; }
+        .product-ops-tag {
+            background: rgba(59,130,246,0.2);
+            color: #1E3A8A;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .product-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .product-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(59,130,246,0.2);
+        }
+        .product-ops-label { font-size: 0.7rem; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.06em; }
+        .product-ops-value { font-size: 1.35rem; font-weight: 700; color: #1E3A8A; }
+        .product-ops-delta { font-size: 0.75rem; color: #1E40AF; }
+        @media (max-width: 900px) { .product-ops-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="product-ops-pulse">
+            <div class="product-ops-header">
+                <div class="product-ops-title">🧭 Product Ops Pulse</div>
+                <div class="product-ops-tag">LIVE</div>
+            </div>
+            <div class="product-ops-grid">
+                <div class="product-ops-card">
+                    <div class="product-ops-label">Launches Q1</div>
+                    <div class="product-ops-value">6</div>
+                    <div class="product-ops-delta">2 in Feb</div>
+                </div>
+                <div class="product-ops-card">
+                    <div class="product-ops-label">Roadmap On-Track</div>
+                    <div class="product-ops-value">84%</div>
+                    <div class="product-ops-delta">+6% vs last qtr</div>
+                </div>
+                <div class="product-ops-card">
+                    <div class="product-ops-label">Active Price Tests</div>
+                    <div class="product-ops-value">5</div>
+                    <div class="product-ops-delta">2 enterprise</div>
+                </div>
+                <div class="product-ops-card">
+                    <div class="product-ops-label">Backlog Health</div>
+                    <div class="product-ops-value">92%</div>
+                    <div class="product-ops-delta">Low risk</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Launch & Roadmap Operations</div>', unsafe_allow_html=True)
+        road_col1, road_col2 = st.columns(2)
+        
+        with road_col1:
+            st.markdown("**Feature Readiness**")
+            with st.container(border=True):
+                readiness_df = pd.DataFrame({
+                    'Feature': ['Family Plan', '5G Bundles', 'IoT Starter', 'Biz Elite'],
+                    'Readiness': [78, 86, 64, 72]
+                })
+                readiness_bar = alt.Chart(readiness_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Readiness:Q', title='Readiness %'),
+                    y=alt.Y('Feature:N', sort='-x', title=None),
+                    color=alt.value('#3B82F6'),
+                    tooltip=['Feature:N', alt.Tooltip('Readiness:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(readiness_bar, use_container_width=True)
+        
+        with road_col2:
+            st.markdown("**Release Cadence (Monthly)**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                release_df = pd.DataFrame({
+                    'Month': months,
+                    'Releases': [2, 3, 2, 4, 3, 5]
+                })
+                release_line = alt.Chart(release_df).mark_line(point=True, color='#10B981', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Releases:Q', title='Releases'),
+                    tooltip=['Month:N', 'Releases:Q']
+                ).properties(height=180)
+                st.altair_chart(release_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Pricing & Experimentation</div>', unsafe_allow_html=True)
+        price_col1, price_col2 = st.columns(2)
+        
+        with price_col1:
+            st.markdown("**Promo Lift by Segment**")
+            with st.container(border=True):
+                lift_df = pd.DataFrame({
+                    'Segment': ['Consumer', 'Family', 'SMB', 'Enterprise'],
+                    'Lift': [12, 18, 9, 6]
+                })
+                lift_bar = alt.Chart(lift_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Segment:N', title=None),
+                    y=alt.Y('Lift:Q', title='Lift %'),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Segment:N', alt.Tooltip('Lift:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(lift_bar, use_container_width=True)
+        
+        with price_col2:
+            st.markdown("**Price Test Funnel**")
+            with st.container(border=True):
+                funnel_df = pd.DataFrame({
+                    'Week': ['W1', 'W2', 'W3', 'W4', 'W5', 'W6'],
+                    'Tested': [120, 115, 110, 108, 105, 104],
+                    'Adopted': [45, 48, 52, 50, 53, 55],
+                    'Rolled Back': [10, 9, 8, 7, 6, 6]
+                })
+                funnel_area = alt.Chart(funnel_df).transform_fold(
+                    ['Tested', 'Adopted', 'Rolled Back'],
+                    as_=['Stage', 'Count']
+                ).mark_area(opacity=0.5).encode(
+                    x=alt.X('Week:N', sort=['W1', 'W2', 'W3', 'W4', 'W5', 'W6'], title=None),
+                    y=alt.Y('Count:Q', title='Experiments'),
+                    color=alt.Color('Stage:N', scale=alt.Scale(range=['#60A5FA', '#22C55E', '#EF4444'])),
+                    tooltip=['Stage:N', 'Count:Q']
+                ).properties(height=180)
+                st.altair_chart(funnel_area, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Quality & Experience Signals</div>', unsafe_allow_html=True)
+        qual_col1, qual_col2 = st.columns(2)
+        
+        with qual_col1:
+            st.markdown("**NPS by Plan**")
+            with st.container(border=True):
+                nps_df = pd.DataFrame({
+                    'Plan': ['Unlimited 5G', 'Essential 10GB', 'SIM Only', 'PAYG'],
+                    'NPS': [42, 36, 31, 24]
+                })
+                nps_bar = alt.Chart(nps_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('NPS:Q', title='NPS'),
+                    y=alt.Y('Plan:N', sort='-x', title=None),
+                    color=alt.value('#8B5CF6'),
+                    tooltip=['Plan:N', 'NPS:Q']
+                ).properties(height=180)
+                st.altair_chart(nps_bar, use_container_width=True)
+        
+        with qual_col2:
+            st.markdown("**Defect Escape Rate**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                defect_df = pd.DataFrame({
+                    'Month': months,
+                    'Escape': [3.8, 3.4, 3.2, 2.9, 2.7, 2.6]
+                })
+                defect_line = alt.Chart(defect_df).mark_line(point=True, color='#EF4444', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Escape:Q', title='Rate %'),
+                    tooltip=['Month:N', alt.Tooltip('Escape:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(defect_line, use_container_width=True)
+    
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .prod-ai-pulse {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-radius: 16px;
+            border: 1px solid #BAE6FD;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .prod-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(41,181,232,0.18), transparent);
+            animation: prod-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes prod-ai-sweep {
+            0% { left: -120%; }
+            100% { left: 220%; }
+        }
+        .prod-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .prod-ai-title { font-weight: 700; color: #0C4A6E; font-size: 1.05rem; }
+        .prod-ai-tag { background: #0EA5E9; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .prod-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; position: relative; z-index: 1; }
+        .prod-ai-card { background: white; border-radius: 12px; border: 1px solid #E2E8F0; padding: 0.9rem 1rem; }
+        .prod-ai-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .prod-ai-value { font-size: 1.4rem; font-weight: 700; color: #0C4A6E; }
+        .prod-ai-sub { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .prod-ai-grid { grid-template-columns: 1fr; } }
+        </style>
+        <div class="prod-ai-pulse">
+            <div class="prod-ai-header">
+                <div class="prod-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="prod-ai-tag">AI LIVE</div>
+            </div>
+            <div class="prod-ai-grid">
+                <div class="prod-ai-card">
+                    <div class="prod-ai-label">Portfolio Health</div>
+                    <div class="prod-ai-value">84%</div>
+                    <div class="prod-ai-sub">Plans above target</div>
+                </div>
+                <div class="prod-ai-card">
+                    <div class="prod-ai-label">5G Migration</div>
+                    <div class="prod-ai-value">+8%</div>
+                    <div class="prod-ai-sub">MoM uplift</div>
+                </div>
+                <div class="prod-ai-card">
+                    <div class="prod-ai-label">Price Elasticity</div>
+                    <div class="prod-ai-value">1.12</div>
+                    <div class="prod-ai-sub">Low churn risk</div>
+                </div>
+                <div class="prod-ai-card">
+                    <div class="prod-ai-label">Launch Velocity</div>
+                    <div class="prod-ai-value">5.2/wk</div>
+                    <div class="prod-ai-sub">Best quarter</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Summary synthesized from plan performance, pricing, and adoption signals.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - **5G adoption** reached **42%**, with strongest growth in Unlimited 5G plans.
+            - **ARPU uplift** is tracking +£2.10 MoM, driven by add-on attachment.
+            - **Churn risk** remains elevated in PAYG; targeted migration offers recommended.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Unlimited 5G** contributes 33% of net adds
+                - **Streaming add-ons** lead attachment at 18%
+                - **Family plans** show highest NPS lift
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **PAYG churn** 4.4% with price sensitivity
+                - **SIM-only** NPS trails by 11 points
+                - **Release defects** above target in Dec
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **SMB promo lift** +9% in Q1
+                - **5G bundles** outperform targets by 6%
+                - **IoT starter** shows 12% adoption potential
+                """)
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Accelerate 5G migrations** using family plan incentives
+                - Expand targeted offers in high-churn regions
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Reprice PAYG** to reduce churn sensitivity
+                - Test add-on bundles to lift ARPU by £1.50
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Improve release quality** via staged rollouts
+                - Prioritize roadmap items with NPS impact
+                """)
+        
         st.markdown('<div class="section-header">VP Product Management Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -22189,7 +29765,7 @@ def render_vp_procurement():
     """, unsafe_allow_html=True)
 
     # Dashboard Tabs
-    tab_overview, tab_strategy = st.tabs(["📊 Overview & Analysis", "🎯 Strategy & Priorities"])
+    tab_overview, tab_ops, tab_strategy = st.tabs(["📊 Overview & Analysis", "🧾 Procurement Operations", "❄️ Snowflake Intelligence"])
 
     with tab_overview:
         
@@ -22424,8 +30000,768 @@ def render_vp_procurement():
                 </div>
                 """, unsafe_allow_html=True)
         
+        st.markdown('<div class="section-header">Supplier & Process Signals</div>', unsafe_allow_html=True)
+        sig_col1, sig_col2 = st.columns(2)
+        
+        with sig_col1:
+            st.markdown("**Supplier Performance Score**")
+            with st.container(border=True):
+                perf_df = pd.DataFrame({
+                    'Supplier': ['Ericsson', 'Nokia', 'Cisco', 'AWS'],
+                    'Score': [92, 88, 85, 90]
+                })
+                perf_bar = alt.Chart(perf_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Score:Q', title='Score'),
+                    y=alt.Y('Supplier:N', sort='-x', title=None),
+                    color=alt.value('#10B981'),
+                    tooltip=['Supplier:N', 'Score:Q']
+                ).properties(height=180)
+                st.altair_chart(perf_bar, use_container_width=True)
+        
+        with sig_col2:
+            st.markdown("**PO Cycle Time (Days)**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                cycle_df = pd.DataFrame({
+                    'Month': months,
+                    'Days': [12.4, 11.8, 11.2, 10.6, 10.2, 9.6]
+                })
+                cycle_line = alt.Chart(cycle_df).mark_line(point=True, color='#3B82F6', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Days:Q', title='Days'),
+                    tooltip=['Month:N', alt.Tooltip('Days:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(cycle_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Risk & Compliance Signals</div>', unsafe_allow_html=True)
+        risk_col1, risk_col2 = st.columns(2)
+        
+        with risk_col1:
+            st.markdown("**Contract Compliance Rate**")
+            with st.container(border=True):
+                comp_df = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                    'Compliance': [91, 92, 93, 94, 93, 94]
+                })
+                comp_line = alt.Chart(comp_df).mark_line(point=True, color='#14B8A6', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'], title=None),
+                    y=alt.Y('Compliance:Q', title='Compliance %', scale=alt.Scale(domain=[88, 100])),
+                    tooltip=['Month:N', alt.Tooltip('Compliance:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(comp_line, use_container_width=True)
+        
+        with risk_col2:
+            st.markdown("**Supplier Risk Tier Mix**")
+            with st.container(border=True):
+                risk_df = pd.DataFrame({
+                    'Tier': ['Tier 1', 'Tier 2', 'Tier 3'],
+                    'Share': [58, 28, 14]
+                })
+                risk_arc = alt.Chart(risk_df).mark_arc(innerRadius=50).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Tier:N', legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Tier:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=190)
+                st.altair_chart(risk_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Spend Variance & Concentration</div>', unsafe_allow_html=True)
+        var_col1, var_col2 = st.columns(2)
+        
+        with var_col1:
+            st.markdown("**Category Spend Variance**")
+            with st.container(border=True):
+                var_df = pd.DataFrame({
+                    'Category': ['Network', 'IT', 'Facilities', 'Services'],
+                    'Variance': [4.2, -1.6, 2.1, -0.8]
+                })
+                var_bar = alt.Chart(var_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Category:N', title=None),
+                    y=alt.Y('Variance:Q', title='Variance %'),
+                    color=alt.condition(
+                        alt.datum.Variance >= 0,
+                        alt.value('#EF4444'),
+                        alt.value('#10B981')
+                    ),
+                    tooltip=['Category:N', alt.Tooltip('Variance:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(var_bar, use_container_width=True)
+        
+        with var_col2:
+            st.markdown("**Vendor Concentration Index**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                hhi_df = pd.DataFrame({
+                    'Month': months,
+                    'HHI': [0.28, 0.29, 0.30, 0.31, 0.30, 0.29]
+                })
+                hhi_line = alt.Chart(hhi_df).mark_line(point=True, color='#6366F1', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('HHI:Q', title='HHI'),
+                    tooltip=['Month:N', alt.Tooltip('HHI:Q', format='.2f')]
+                ).properties(height=180)
+                st.altair_chart(hhi_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Invoice & Payment Accuracy</div>', unsafe_allow_html=True)
+        inv_col1, inv_col2 = st.columns(2)
+        
+        with inv_col1:
+            st.markdown("**Invoice Exception Rate**")
+            with st.container(border=True):
+                exc_df = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                    'Rate': [4.1, 3.8, 3.5, 3.2, 3.0, 2.8]
+                })
+                exc_line = alt.Chart(exc_df).mark_line(point=True, color='#F59E0B', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'], title=None),
+                    y=alt.Y('Rate:Q', title='Exception %'),
+                    tooltip=['Month:N', alt.Tooltip('Rate:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(exc_line, use_container_width=True)
+        
+        with inv_col2:
+            st.markdown("**Payment Timeliness**")
+            with st.container(border=True):
+                pay_df = pd.DataFrame({
+                    'Status': ['On Time', '1-5 Days', '6-15 Days', '15+ Days'],
+                    'Share': [72, 16, 8, 4]
+                })
+                pay_bar = alt.Chart(pay_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Share:Q', title='Share %'),
+                    y=alt.Y('Status:N', sort='-x', title=None),
+                    color=alt.value('#3B82F6'),
+                    tooltip=['Status:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(pay_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Diversity & Discount Signals</div>', unsafe_allow_html=True)
+        div_col1, div_col2 = st.columns(2)
+        
+        with div_col1:
+            st.markdown("**Supplier Diversity Mix**")
+            with st.container(border=True):
+                div_df = pd.DataFrame({
+                    'Type': ['SME', 'Minority-owned', 'Women-owned', 'Other'],
+                    'Share': [46, 18, 14, 22]
+                })
+                div_arc = alt.Chart(div_df).mark_arc(innerRadius=50).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Type:N', legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Type:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=190)
+                st.altair_chart(div_arc, use_container_width=True)
+        
+        with div_col2:
+            st.markdown("**Early Payment Discount Uptake**")
+            with st.container(border=True):
+                disc_df = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                    'Uptake': [22, 24, 26, 28, 29, 31]
+                })
+                disc_line = alt.Chart(disc_df).mark_line(point=True, color='#0EA5E9', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'], title=None),
+                    y=alt.Y('Uptake:Q', title='Uptake %'),
+                    tooltip=['Month:N', alt.Tooltip('Uptake:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(disc_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Budget & Forecast Signals</div>', unsafe_allow_html=True)
+        bud_col1, bud_col2 = st.columns(2)
+        
+        with bud_col1:
+            st.markdown("**Budget vs Actual Spend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                bud_df = pd.DataFrame({
+                    'Month': months,
+                    'Budget': [8.1, 8.0, 8.2, 8.1, 8.3, 8.4],
+                    'Actual': [8.2, 8.1, 8.3, 8.4, 8.5, 8.6]
+                })
+                bud_line = alt.Chart(bud_df).transform_fold(
+                    ['Budget', 'Actual'],
+                    as_=['Type', 'Value']
+                ).mark_line(point=True).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Value:Q', title='£M'),
+                    color=alt.Color('Type:N', scale=alt.Scale(range=['#10B981', '#EF4444'])),
+                    tooltip=['Month:N', 'Type:N', alt.Tooltip('Value:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(bud_line, use_container_width=True)
+        
+        with bud_col2:
+            st.markdown("**Forecast Accuracy**")
+            with st.container(border=True):
+                acc_df = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                    'Accuracy': [92, 93, 94, 95, 94, 95]
+                })
+                acc_bar = alt.Chart(acc_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Month:N', title=None, sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']),
+                    y=alt.Y('Accuracy:Q', title='Accuracy %'),
+                    color=alt.value('#10B981'),
+                    tooltip=['Month:N', alt.Tooltip('Accuracy:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(acc_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Supplier Diversity by Region</div>', unsafe_allow_html=True)
+        divr_col1, divr_col2 = st.columns(2)
+        
+        with divr_col1:
+            st.markdown("**Diversity Share by Region**")
+            with st.container(border=True):
+                region_df = pd.DataFrame({
+                    'Region': ['UK', 'EU', 'US', 'APAC'],
+                    'Diverse': [32, 28, 24, 26],
+                    'Non-Diverse': [68, 72, 76, 74]
+                })
+                region_long = region_df.melt('Region', var_name='Type', value_name='Share')
+                region_bar = alt.Chart(region_long).mark_bar().encode(
+                    x=alt.X('Region:N', title=None),
+                    y=alt.Y('Share:Q', title='Share %', stack='normalize'),
+                    color=alt.Color('Type:N', scale=alt.Scale(range=['#22C55E', '#CBD5F5']), legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Region:N', 'Type:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(region_bar, use_container_width=True)
+        
+        with divr_col2:
+            st.markdown("**Diverse Supplier Growth**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                div_growth_df = pd.DataFrame({
+                    'Month': months,
+                    'Suppliers': [82, 85, 88, 90, 92, 95]
+                })
+                div_growth_line = alt.Chart(div_growth_df).mark_line(point=True, color='#16A34A', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Suppliers:Q', title='Suppliers'),
+                    tooltip=['Month:N', 'Suppliers:Q']
+                ).properties(height=180)
+                st.altair_chart(div_growth_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Payment Terms Distribution</div>', unsafe_allow_html=True)
+        terms_col1, terms_col2 = st.columns(2)
+        
+        with terms_col1:
+            st.markdown("**Terms Mix**")
+            with st.container(border=True):
+                terms_df = pd.DataFrame({
+                    'Terms': ['Net 15', 'Net 30', 'Net 45', 'Net 60'],
+                    'Share': [18, 44, 26, 12]
+                })
+                terms_bar = alt.Chart(terms_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Share:Q', title='Share %'),
+                    y=alt.Y('Terms:N', sort='-x', title=None),
+                    color=alt.value('#0EA5E9'),
+                    tooltip=['Terms:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(terms_bar, use_container_width=True)
+        
+        with terms_col2:
+            st.markdown("**Average Days Payable**")
+            with st.container(border=True):
+                dpo_df = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+                    'DPO': [33, 34, 35, 36, 35, 36]
+                })
+                dpo_line = alt.Chart(dpo_df).mark_line(point=True, color='#2563EB', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'], title=None),
+                    y=alt.Y('DPO:Q', title='Days'),
+                    tooltip=['Month:N', 'DPO:Q']
+                ).properties(height=180)
+                st.altair_chart(dpo_line, use_container_width=True)
+        
 
+    with tab_ops:
+        st.markdown("""
+        <style>
+        @keyframes proc-ops-glow {
+            0%, 100% { box-shadow: 0 0 12px rgba(16,185,129,0.2); }
+            50% { box-shadow: 0 0 22px rgba(16,185,129,0.4); }
+        }
+        @keyframes proc-ops-sweep {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .proc-ops-pulse {
+            position: relative;
+            overflow: hidden;
+            border-radius: 14px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%);
+            border: 1px solid #86EFAC;
+            animation: proc-ops-glow 3s ease-in-out infinite;
+        }
+        .proc-ops-pulse::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: proc-ops-sweep 3s linear infinite;
+        }
+        .proc-ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .proc-ops-title { font-weight: 700; color: #065F46; }
+        .proc-ops-tag {
+            background: rgba(16,185,129,0.2);
+            color: #065F46;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+        .proc-ops-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+        .proc-ops-card {
+            background: rgba(255,255,255,0.85);
+            border-radius: 10px;
+            padding: 0.75rem 0.85rem;
+            border: 1px solid rgba(16,185,129,0.2);
+        }
+        .proc-ops-label { font-size: 0.7rem; color: #047857; text-transform: uppercase; letter-spacing: 0.06em; }
+        .proc-ops-value { font-size: 1.35rem; font-weight: 700; color: #065F46; }
+        .proc-ops-delta { font-size: 0.75rem; color: #047857; }
+        @media (max-width: 900px) { .proc-ops-grid { grid-template-columns: repeat(2, 1fr); } }
+        </style>
+        <div class="proc-ops-pulse">
+            <div class="proc-ops-header">
+                <div class="proc-ops-title">🧾 Procurement Ops Pulse</div>
+                <div class="proc-ops-tag">LIVE</div>
+            </div>
+            <div class="proc-ops-grid">
+                <div class="proc-ops-card">
+                    <div class="proc-ops-label">Approvals SLA</div>
+                    <div class="proc-ops-value">93%</div>
+                    <div class="proc-ops-delta">+4% MoM</div>
+                </div>
+                <div class="proc-ops-card">
+                    <div class="proc-ops-label">Pending PO Value</div>
+                    <div class="proc-ops-value">£2.4M</div>
+                    <div class="proc-ops-delta">42 requests</div>
+                </div>
+                <div class="proc-ops-card">
+                    <div class="proc-ops-label">Savings Realized</div>
+                    <div class="proc-ops-value">£1.6M</div>
+                    <div class="proc-ops-delta">YTD</div>
+                </div>
+                <div class="proc-ops-card">
+                    <div class="proc-ops-label">Emergency POs</div>
+                    <div class="proc-ops-value">8%</div>
+                    <div class="proc-ops-delta">Above target</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">Approval & Sourcing Flow</div>', unsafe_allow_html=True)
+        flow_col1, flow_col2 = st.columns(2)
+        
+        with flow_col1:
+            st.markdown("**Approval Backlog by Stage**")
+            with st.container(border=True):
+                backlog_df = pd.DataFrame({
+                    'Stage': ['Intake', 'Finance', 'Legal', 'Final'],
+                    'Count': [14, 12, 9, 7]
+                })
+                backlog_bar = alt.Chart(backlog_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Count:Q', title='Requests'),
+                    y=alt.Y('Stage:N', sort='-x', title=None),
+                    color=alt.value('#22C55E'),
+                    tooltip=['Stage:N', 'Count:Q']
+                ).properties(height=180)
+                st.altair_chart(backlog_bar, use_container_width=True)
+        
+        with flow_col2:
+            st.markdown("**Sourcing Cycle (Days)**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                sourcing_df = pd.DataFrame({
+                    'Month': months,
+                    'Days': [28, 26, 24, 23, 22, 21]
+                })
+                sourcing_line = alt.Chart(sourcing_df).mark_line(point=True, color='#059669', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Days:Q', title='Days'),
+                    tooltip=['Month:N', alt.Tooltip('Days:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(sourcing_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Vendor Performance & Risk Ops</div>', unsafe_allow_html=True)
+        ops_col1, ops_col2 = st.columns(2)
+        
+        with ops_col1:
+            st.markdown("**Vendor SLA Adherence**")
+            with st.container(border=True):
+                sla_df = pd.DataFrame({
+                    'Vendor': ['Ericsson', 'Nokia', 'Cisco', 'AWS'],
+                    'SLA': [96, 94, 92, 95]
+                })
+                sla_bar = alt.Chart(sla_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('SLA:Q', title='SLA %'),
+                    y=alt.Y('Vendor:N', sort='-x', title=None),
+                    color=alt.value('#3B82F6'),
+                    tooltip=['Vendor:N', alt.Tooltip('SLA:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(sla_bar, use_container_width=True)
+        
+        with ops_col2:
+            st.markdown("**Contract Renewal Risk (90 Days)**")
+            with st.container(border=True):
+                risk_df = pd.DataFrame({
+                    'Vendor': ['Ericsson', 'Nokia', 'Cisco', 'AWS'],
+                    'Risk': [72, 38, 44, 30]
+                })
+                risk_bar = alt.Chart(risk_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Vendor:N', title=None),
+                    y=alt.Y('Risk:Q', title='Risk %'),
+                    color=alt.value('#EF4444'),
+                    tooltip=['Vendor:N', alt.Tooltip('Risk:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(risk_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Savings Pipeline</div>', unsafe_allow_html=True)
+        save_col1, save_col2 = st.columns(2)
+        
+        with save_col1:
+            st.markdown("**Savings by Initiative**")
+            with st.container(border=True):
+                save_df = pd.DataFrame({
+                    'Initiative': ['Consolidation', 'Renegotiation', 'Volume', 'Process'],
+                    'Savings': [0.84, 0.62, 0.42, 0.22]
+                })
+                save_bar = alt.Chart(save_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Savings:Q', title='Savings (£M)'),
+                    y=alt.Y('Initiative:N', sort='-x', title=None),
+                    color=alt.value('#F59E0B'),
+                    tooltip=['Initiative:N', alt.Tooltip('Savings:Q', format='.2f')]
+                ).properties(height=180)
+                st.altair_chart(save_bar, use_container_width=True)
+        
+        with save_col2:
+            st.markdown("**Savings Run-Rate (Monthly)**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                run_df = pd.DataFrame({
+                    'Month': months,
+                    'Savings': [0.12, 0.16, 0.2, 0.22, 0.26, 0.3]
+                })
+                run_line = alt.Chart(run_df).mark_line(point=True, color='#F59E0B', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Savings:Q', title='£M'),
+                    tooltip=['Month:N', alt.Tooltip('Savings:Q', format='.2f')]
+                ).properties(height=180)
+                st.altair_chart(run_line, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Sourcing & Contract Ops</div>', unsafe_allow_html=True)
+        src_col1, src_col2 = st.columns(2)
+        
+        with src_col1:
+            st.markdown("**RFX Win Rate**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                win_df = pd.DataFrame({
+                    'Month': months,
+                    'WinRate': [48, 52, 55, 57, 60, 62]
+                })
+                win_line = alt.Chart(win_df).mark_line(point=True, color='#22C55E', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('WinRate:Q', title='Win %'),
+                    tooltip=['Month:N', alt.Tooltip('WinRate:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(win_line, use_container_width=True)
+        
+        with src_col2:
+            st.markdown("**Contract Coverage by Category**")
+            with st.container(border=True):
+                cov_df = pd.DataFrame({
+                    'Category': ['Network', 'IT', 'Facilities', 'Services'],
+                    'Coverage': [95, 92, 88, 86]
+                })
+                cov_bar = alt.Chart(cov_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Coverage:Q', title='Coverage %'),
+                    y=alt.Y('Category:N', sort='-x', title=None),
+                    color=alt.value('#0EA5E9'),
+                    tooltip=['Category:N', alt.Tooltip('Coverage:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(cov_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Quality & Compliance Ops</div>', unsafe_allow_html=True)
+        qc_col1, qc_col2 = st.columns(2)
+        
+        with qc_col1:
+            st.markdown("**Audit Findings Trend**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                audit_df = pd.DataFrame({
+                    'Month': months,
+                    'Findings': [9, 8, 10, 7, 6, 5]
+                })
+                audit_line = alt.Chart(audit_df).mark_line(point=True, color='#F97316', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Findings:Q', title='Findings'),
+                    tooltip=['Month:N', 'Findings:Q']
+                ).properties(height=180)
+                st.altair_chart(audit_line, use_container_width=True)
+        
+        with qc_col2:
+            st.markdown("**Invoice Exception Mix**")
+            with st.container(border=True):
+                exc_df = pd.DataFrame({
+                    'Type': ['Price', 'Quantity', 'PO Mismatch', 'Tax'],
+                    'Share': [34, 28, 22, 16]
+                })
+                exc_arc = alt.Chart(exc_df).mark_arc(innerRadius=50).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Type:N', legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Type:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=190)
+                st.altair_chart(exc_arc, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Contract Leakage Hotspots</div>', unsafe_allow_html=True)
+        leak_col1, leak_col2 = st.columns(2)
+        
+        with leak_col1:
+            st.markdown("**Leakage Heatmap**")
+            with st.container(border=True):
+                leak_df = pd.DataFrame({
+                    'Month': ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'] * 4,
+                    'Category': ['Network'] * 6 + ['IT'] * 6 + ['Facilities'] * 6 + ['Services'] * 6,
+                    'Leakage': [2.2, 2.4, 2.6, 2.1, 1.9, 1.7, 1.4, 1.5, 1.7, 1.3, 1.2, 1.1, 0.9, 1.1, 1.0, 0.8, 0.7, 0.6, 1.2, 1.3, 1.4, 1.1, 1.0, 0.9]
+                })
+                leak_heat = alt.Chart(leak_df).mark_rect().encode(
+                    x=alt.X('Month:N', title=None, sort=['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']),
+                    y=alt.Y('Category:N', title=None),
+                    color=alt.Color('Leakage:Q', scale=alt.Scale(scheme='oranges')),
+                    tooltip=['Category:N', 'Month:N', alt.Tooltip('Leakage:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(leak_heat, use_container_width=True)
+        
+        with leak_col2:
+            st.markdown("**Leakage by Category**")
+            with st.container(border=True):
+                leak_cat_df = pd.DataFrame({
+                    'Category': ['Network', 'IT', 'Facilities', 'Services'],
+                    'Leakage': [12.9, 8.2, 5.1, 7.0]
+                })
+                leak_bar = alt.Chart(leak_cat_df).mark_bar(cornerRadiusTopRight=6, cornerRadiusBottomRight=6).encode(
+                    x=alt.X('Leakage:Q', title='Leakage (£M)'),
+                    y=alt.Y('Category:N', sort='-x', title=None),
+                    color=alt.value('#F97316'),
+                    tooltip=['Category:N', alt.Tooltip('Leakage:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(leak_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Automation & Throughput</div>', unsafe_allow_html=True)
+        auto_col1, auto_col2 = st.columns(2)
+        
+        with auto_col1:
+            st.markdown("**PO Automation Rate**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                auto_df = pd.DataFrame({
+                    'Month': months,
+                    'Automation': [62, 64, 66, 69, 71, 73]
+                })
+                auto_line = alt.Chart(auto_df).mark_line(point=True, color='#22C55E', strokeWidth=2).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Automation:Q', title='Automation %'),
+                    tooltip=['Month:N', alt.Tooltip('Automation:Q', format='.0f')]
+                ).properties(height=180)
+                st.altair_chart(auto_line, use_container_width=True)
+        
+        with auto_col2:
+            st.markdown("**Requisition Throughput**")
+            with st.container(border=True):
+                thr_df = pd.DataFrame({
+                    'Week': ['W1', 'W2', 'W3', 'W4', 'W5', 'W6'],
+                    'Processed': [58, 62, 60, 65, 68, 72]
+                })
+                thr_bar = alt.Chart(thr_df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6).encode(
+                    x=alt.X('Week:N', title=None),
+                    y=alt.Y('Processed:Q', title='Requests'),
+                    color=alt.value('#6366F1'),
+                    tooltip=['Week:N', 'Processed:Q']
+                ).properties(height=180)
+                st.altair_chart(thr_bar, use_container_width=True)
+        
+        st.markdown('<div class="section-header">Savings vs Target</div>', unsafe_allow_html=True)
+        tgt_col1, tgt_col2 = st.columns(2)
+        
+        with tgt_col1:
+            st.markdown("**Cumulative Savings vs Target**")
+            with st.container(border=True):
+                months = ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan']
+                cum_df = pd.DataFrame({
+                    'Month': months,
+                    'Actual': [0.4, 0.7, 1.0, 1.3, 1.7, 2.1],
+                    'Target': [0.5, 0.8, 1.2, 1.6, 2.0, 2.5]
+                })
+                cum_line = alt.Chart(cum_df).transform_fold(
+                    ['Actual', 'Target'],
+                    as_=['Series', 'Value']
+                ).mark_line(point=True).encode(
+                    x=alt.X('Month:N', sort=months, title=None),
+                    y=alt.Y('Value:Q', title='£M'),
+                    color=alt.Color('Series:N', scale=alt.Scale(range=['#22C55E', '#F59E0B'])),
+                    tooltip=['Month:N', 'Series:N', alt.Tooltip('Value:Q', format='.1f')]
+                ).properties(height=180)
+                st.altair_chart(cum_line, use_container_width=True)
+        
+        with tgt_col2:
+            st.markdown("**Pipeline Confidence**")
+            with st.container(border=True):
+                conf_df = pd.DataFrame({
+                    'Stage': ['Identified', 'In Negotiation', 'Approved', 'Realized'],
+                    'Share': [35, 28, 22, 15]
+                })
+                conf_arc = alt.Chart(conf_df).mark_arc(innerRadius=50).encode(
+                    theta=alt.Theta('Share:Q', title=None),
+                    color=alt.Color('Stage:N', legend=alt.Legend(orient='bottom', title=None)),
+                    tooltip=['Stage:N', alt.Tooltip('Share:Q', format='.0f')]
+                ).properties(height=190)
+                st.altair_chart(conf_arc, use_container_width=True)
+    
     with tab_strategy:
+        st.markdown("""
+        <style>
+        .proc-ai-pulse {
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            border-radius: 16px;
+            border: 1px solid #BBF7D0;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .proc-ai-pulse::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34,197,94,0.18), transparent);
+            animation: proc-ai-sweep 4s ease-in-out infinite;
+        }
+        @keyframes proc-ai-sweep {
+            0% { left: -120%; }
+            100% { left: 220%; }
+        }
+        .proc-ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .proc-ai-title { font-weight: 700; color: #14532D; font-size: 1.05rem; }
+        .proc-ai-tag { background: #22C55E; color: white; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; }
+        .proc-ai-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; position: relative; z-index: 1; }
+        .proc-ai-card { background: white; border-radius: 12px; border: 1px solid #E2E8F0; padding: 0.9rem 1rem; }
+        .proc-ai-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+        .proc-ai-value { font-size: 1.4rem; font-weight: 700; color: #14532D; }
+        .proc-ai-sub { font-size: 0.8rem; color: #6B7280; margin-top: 0.2rem; }
+        @media (max-width: 900px) { .proc-ai-grid { grid-template-columns: 1fr; } }
+        </style>
+        <div class="proc-ai-pulse">
+            <div class="proc-ai-header">
+                <div class="proc-ai-title">❄️ Snowflake Intelligence Pulse</div>
+                <div class="proc-ai-tag">AI LIVE</div>
+            </div>
+            <div class="proc-ai-grid">
+                <div class="proc-ai-card">
+                    <div class="proc-ai-label">Spend Efficiency</div>
+                    <div class="proc-ai-value">92%</div>
+                    <div class="proc-ai-sub">On budget</div>
+                </div>
+                <div class="proc-ai-card">
+                    <div class="proc-ai-label">Savings Velocity</div>
+                    <div class="proc-ai-value">£0.30M</div>
+                    <div class="proc-ai-sub">Monthly run-rate</div>
+                </div>
+                <div class="proc-ai-card">
+                    <div class="proc-ai-label">Supplier Risk</div>
+                    <div class="proc-ai-value">Low</div>
+                    <div class="proc-ai-sub">Tier mix stable</div>
+                </div>
+                <div class="proc-ai-card">
+                    <div class="proc-ai-label">Approval SLA</div>
+                    <div class="proc-ai-value">93%</div>
+                    <div class="proc-ai-sub">Improving</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown('<div class="section-header">AI Executive Summary</div>', unsafe_allow_html=True)
+        if st.session_state.get('sf_highlights', True):
+            st.info("❄️ **Powered by Snowflake Cortex AI** — Summary synthesized from spend, supplier performance, and approval cycle data.")
+        
+        with st.container(border=True):
+            st.markdown("""
+            **Executive Summary (Q1 2026):**
+            - **Savings** tracking £2.1M identified, with consolidation driving the largest impact.
+            - **Approval SLA** improved to **93%**, reducing PO cycle time to 9.6 days.
+            - **Vendor risk** concentrated in two top renewals; proactive renegotiation recommended.
+            """)
+        
+        st.markdown('<div class="section-header">Signals & Insights</div>', unsafe_allow_html=True)
+        insight_cols = st.columns(3)
+        with insight_cols[0]:
+            st.markdown('<div class="section-header">Top Insights</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Network infra** remains 70% of spend
+                - **Sourcing cycle** dropped to 21 days
+                - **Top 5 vendors** hold 58% of spend
+                """)
+        with insight_cols[1]:
+            st.markdown('<div class="section-header">Risk Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Emergency POs** remain above 5% target
+                - **Ericsson renewal** has high exposure
+                - **Compliance** dip in Oct requires audit
+                """)
+        with insight_cols[2]:
+            st.markdown('<div class="section-header">Growth Signals</div>', unsafe_allow_html=True)
+            with st.container(border=True):
+                st.markdown("""
+                - **Supplier performance** improving QoQ
+                - **Volume discounts** unlocked in Q1
+                - **Contract renewals** provide negotiation leverage
+                """)
+        
+        st.markdown('<div class="section-header">AI-Powered Strategic Recommendations</div>', unsafe_allow_html=True)
+        action_cols = st.columns(3)
+        with action_cols[0]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Accelerate consolidation** across tier-2 vendors
+                - Target £0.4M savings gap by Q2
+                """)
+        with action_cols[1]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Reduce emergency POs** via demand forecasting
+                - Implement pre-approved spend thresholds
+                """)
+        with action_cols[2]:
+            with st.container(border=True):
+                st.markdown("""
+                - **Renegotiate top renewals** with SLA incentives
+                - Lock in multi-year discounts
+                """)
+        
         st.markdown('<div class="section-header">VP Procurement Strategic Priorities — Q1 2026</div>', unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -24610,6 +32946,10 @@ def main():
         {"name": "Network Alarms", "dashboard": "12_VP_Network_Operations", "label": "VP Network Operations"},
         {"name": "Capacity Utilization", "dashboard": "12_VP_Network_Operations", "label": "VP Network Operations"},
         {"name": "Fault Management", "dashboard": "12_VP_Network_Operations", "label": "VP Network Operations"},
+        {"name": "RF Optimization", "dashboard": "12_VP_Network_Operations", "label": "VP Network Operations"},
+        {"name": "Signal Quality (RSRP/RSRQ/SINR)", "dashboard": "12_VP_Network_Operations", "label": "VP Network Operations"},
+        {"name": "Handover Success", "dashboard": "12_VP_Network_Operations", "label": "VP Network Operations"},
+        {"name": "Call Drop Rate", "dashboard": "12_VP_Network_Operations", "label": "VP Network Operations"},
         
         # Alert Center
         {"name": "UK Network Map", "dashboard": "Alert_Center", "label": "Network Alert Center"},

@@ -2,7 +2,7 @@
 
 Persona-based demo scripts for the SnowTelco AI Intelligence Platform. Each script takes approximately **10 minutes** and is designed for a specific UK telecom executive role.
 
-Scripts are organized by **org chart hierarchy**: C-Suite executives first (01-10), then VP/Head level (11-19).
+Scripts are organized by **org chart hierarchy**: C-Suite executives first (01-10), then VP/Head level (11-27).
 
 ---
 
@@ -40,7 +40,7 @@ Scripts are organized by **org chart hierarchy**: C-Suite executives first (01-1
 | 09 | CDO_Data_Science | Chief Data Officer | Propensity scores, churn prediction, CLV, AI/ML |
 | 10 | CSO_Sustainability | Chief Sustainability Officer | ESG, carbon, energy, net zero progress |
 
-### VP & Head Level (11-24)
+### VP & Head Level (11-27)
 
 | # | Script | Role | Focus |
 |---|--------|------|-------|
@@ -214,5 +214,5 @@ Adapt these scripts for your specific demo:
 
 ---
 
-**Last Updated:** January 2026  
-**Version:** 3.3 (Added VP Legal, VP Product, VP Procurement; WOW moved to 00)
+**Last Updated:** February 2026  
+**Version:** 3.6 (Updated VP dashboards with AI-first Snowflake Intelligence tabs)
